@@ -1,1 +1,0 @@
-Esta es una prueba desde una rama remota creada por otro compañero.
