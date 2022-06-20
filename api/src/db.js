@@ -26,7 +26,7 @@ let sequelize = process.env.NODE_ENV === "production" ? new Sequelize({
   },
   ssl: true,
 }) : 
-  new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/medicapp`, {
+  new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/psicoapp`, {
     logging: false, // set to console.log to see the raw SQL queries
     native: false, // lets Sequelize know we can use pg-native for ~30% more speed
 });
@@ -51,11 +51,11 @@ sequelize.models = Object.fromEntries(capsEntries);
 
 // En sequelize.models están todos los modelos importados como propiedades
 // Para relacionarlos hacemos un destructuring
-const { Doctor, Patient } = sequelize.models;
+const { Psicologo, Paciente } = sequelize.models;
 // Aca vendrian las relaciones
 // Product.hasMany(Reviews);
-Doctor.belongsToMany(Patient, { through: 'doctor_patient' });
-Patient.belongsToMany(Doctor, { through: 'doctor_patient' });
+Psicologo.belongsToMany(Paciente, { through: 'psicologo_paciente' });
+Paciente.belongsToMany(Psicologo, { through: 'psicologo_paciente' });
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');

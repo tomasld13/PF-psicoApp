@@ -33,7 +33,7 @@ server.use((err, req, res, next) => {
 });
 
 server.get('/', (req, res) => {
-    res.send('Medic APi');
+    res.send('PsicoApp API');
 });
 
 server.use('/api', routes);

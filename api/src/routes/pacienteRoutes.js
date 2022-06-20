@@ -1,10 +1,10 @@
-const { Doctor } = require("../db")
+const { Paciente } = require("../db")
 const Router = require("express")
 
 const router = Router()
 
 router.get('/', (req, res, next) => {
-    Doctor.findAll()
+    Paciente.findAll()
      .then((users) => {
       res.send(users);
      })
@@ -13,7 +13,7 @@ router.get('/', (req, res, next) => {
    
 router.post('/', (req, res, next) => {
  const user = req.body;
- Doctor.create(user)
+ Paciente.create(user)
   .then((createdUser) => {
    res.send(createdUser);
   })
