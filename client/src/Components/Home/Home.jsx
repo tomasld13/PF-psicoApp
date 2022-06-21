@@ -7,6 +7,7 @@ export function Home() {
     <div>
       <h1>Medic App</h1>
       <h2>{palabra}</h2>
+      <p>eze</p>
     </div>
   )
 }
