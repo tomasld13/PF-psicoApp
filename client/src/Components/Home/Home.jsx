@@ -6,7 +6,7 @@ export function Home() {
   return (
     <div>
       <h1>Medic App</h1>
-      <h2>{palabra}</h2>
+      <h2>{palabra} apalacio</h2>
     </div>
   )
 }
