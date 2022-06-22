@@ -16,15 +16,15 @@ module.exports = (sequelize)=>{
             allowNull : false
         },
         telephone : {
-            type : DataTypes.INTEGER,
+            type : DataTypes.BIGINT,
             allowNull : false
         },
-        direccion : {
+        address : {
             type : DataTypes.STRING,
             allowNull : false
         },
         birth : {
-            type : DataTypes.DATEONLY,
+            type : DataTypes.STRING,
             allowNull : false
         }
     },{
