@@ -9,7 +9,7 @@ const bodyParser = require('body-parser');
 require('dotenv').config();
 require('./db.js');
 
-server.name = 'API';
+server.name = 'DB';
 console.log("hi");
 server.use(cors())
 server.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }));
