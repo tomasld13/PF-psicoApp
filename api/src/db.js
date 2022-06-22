@@ -56,11 +56,11 @@ const { Psicologo, Paciente, Usuario, Rol } = sequelize.models;
 // Product.hasMany(Reviews);
 
 //Usuario-Paciente
-Usuario.hasOne(Paciente, {
+Usuario.hasOne(Paciente,{foreignKey : 'fk_usuarioID', targetKey : 'id'}, {
   onDelete : 'CASCADE',
   onUpdate : 'CASCADE'
 });
-Paciente.belongsTo(Usuario)
+Paciente.belongsTo(Usuario, {foreignKey : 'fk_usuarioID', targetKey : 'id'});
 //Usuario-Psicologo
 Usuario.hasOne(Psicologo, {
   onDelete : 'CASCADE',
