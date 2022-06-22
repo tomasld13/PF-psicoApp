@@ -1,6 +1,6 @@
 const Router = require("express")
 const psicologoRoutes = require("./psicologoRoutes")
-const pacienteRoutes = require("./pacienteRoutes")
+const pacienteRoutes = require("./PacienteController/pacienteRoutes")
 const router = Router();
 
 router.use('/psicologo', psicologoRoutes);

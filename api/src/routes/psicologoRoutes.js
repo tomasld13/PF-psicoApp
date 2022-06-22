@@ -1,9 +1,9 @@
-const { Psicologo } = require("../db")
+const { Psicologo, User } = require("../db")
 const Router = require("express")
 
 const router = Router()
 
-router.get('/', (req, res, next) => {
+/* router.get('/', (req, res, next) => {
     Psicologo.findAll()
      .then((users) => {
       res.send(users);
@@ -19,5 +19,6 @@ router.post('/', (req, res, next) => {
   })
   .catch((error) => next(error));
 });
+ */
 
 module.exports = router;
