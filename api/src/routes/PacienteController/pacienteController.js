@@ -20,7 +20,7 @@ const postPaciente = async(req, res, next) => {
   try{
     const newUSuario =await Usuario.create({ name, lastname, email, telephone, address, birth });
     const newPaciente = await Paciente.create();
-    newPaciente.addUsuario(newUSuario.id);
+    newUSuario.setPaciente(newPaciente);
     console.log(newUSuario);
     res.send(newPaciente);
   }catch(error){
