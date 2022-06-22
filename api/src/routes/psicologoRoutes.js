@@ -20,7 +20,5 @@ router.post('/', (req, res, next) => {
   .catch((error) => next(error));
 });
  */
-const postPsicologo =(req,res)=>{
-  const {}
-}
+
 module.exports = router;

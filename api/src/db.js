@@ -2,7 +2,6 @@ require('dotenv').config();
 const { Sequelize } = require('sequelize');
 const fs = require('fs');
 const path = require('path');
-const Rol = require('./models/Rol');
 const {
   DB_USER, DB_PASSWORD, DB_HOST, DB_NAME
 } = process.env;
@@ -52,20 +51,20 @@ sequelize.models = Object.fromEntries(capsEntries);
 
 // En sequelize.models están todos los modelos importados como propiedades
 // Para relacionarlos hacemos un destructuring
-const { Psicologo, Paciente, Usuario } = sequelize.models;
+const { Psicologo, Paciente, Usuario, Rol } = sequelize.models;
 // Aca vendrian las relaciones
 // Product.hasMany(Reviews);
 
 //Usuario-Paciente
 Usuario.hasOne(Paciente, {
-  onDelete : CASCADE,
-  onUpdate : CASCADE
+  onDelete : 'CASCADE',
+  onUpdate : 'CASCADE'
 });
 Paciente.belongsTo(Usuario)
 //Usuario-Psicologo
 Usuario.hasOne(Psicologo, {
-  onDelete : CASCADE,
-  onUpdate : CASCADE
+  onDelete : 'CASCADE',
+  onUpdate : 'CASCADE'
 });
 Psicologo.belongsTo(Usuario);
 //Rol->Usuario

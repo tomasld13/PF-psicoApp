@@ -16,7 +16,7 @@ module.exports = (sequelize)=>{
             allowNull : false
         },
         telephone : {
-            type : DataTypes.NUMBER,
+            type : DataTypes.INTEGER,
             allowNull : false
         },
         direccion : {
