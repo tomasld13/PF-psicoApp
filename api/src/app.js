@@ -10,7 +10,7 @@ require('dotenv').config();
 require('./db.js');
 
 server.name = 'API';
-
+console.log("hi");
 server.use(cors())
 server.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }));
 server.use(bodyParser.json({ limit: '50mb' }));
@@ -33,7 +33,7 @@ server.use((err, req, res, next) => {
 });
 
 server.get('/', (req, res) => {
-    res.send('PsicoApp API');
+    res.send('Medic APi');
 });
 
 server.use('/api', routes);
