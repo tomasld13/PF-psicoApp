@@ -1,0 +1,48 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat';
+}
+
+.footer {
+    margin-top: 430px;
+    width: 100%;
+    padding: 40px 40%;
+    background-color: whitesmoke;
+    display: flex;
+}
+
+.footer div{
+    text-align: center;
+    color: #575989;
+
+}
+.col-2 {
+    margin-left: 20px;
+    flex-grow: 2;
+}
+.col-2 p {
+    margin-top: 20px;
+}
+
+.col-3 {
+    margin-left: 20px;
+}
+.col-3 a {
+    display: block;
+    padding: 10px 12px;
+    font-size: 20px;
+}
+.footer div h3{
+    font-weight: 200;
+    margin-bottom: 30px;
+    letter-spacing: 2px;
+}
+.col-1 a {
+    display: block;
+    text-decoration: none;
+    color: #575989;
+    margin-bottom: 10px;
+
+}
