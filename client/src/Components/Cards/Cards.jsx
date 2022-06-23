@@ -83,6 +83,7 @@ export default function Cards() {
   const [auxSwitchAlfa, setSwitchAlfa] = useState(true); 
   const [currentPage, setCurrentPage] = useState(0);
   const [firstIndex, setFirstIndex] = useState(0);
+  const [inputFind, setInputFind] = useState('');
 
   // Crea el indice siguiente para pasar al siguiente grupo de 6 psicologos
     const nextHandler = () => {
@@ -125,12 +126,19 @@ export default function Cards() {
     });
   }
 
+  const handlerChange = (e) => {
+    setInputFind(e.target.value);
+  }
+
   return (
     <section className={styles.section_cards}>
       <div className={styles.btn_container}>
         <div>
-          <input type="text" placeholder="Psicologo..."/>
-          <button>Buscar</button>
+          <input type="text" placeholder="Psicologo..." onChange={e => handlerChange(e)} value={inputFind}/>
+          <button onClick={() => {
+            const find = auxPsychologists.find(psycho => inputFind === psycho.nombre);
+            console.log(find);
+          }}>Buscar</button>
         </div>
         <button onClick={handlerClick}>Ordenar</button>
       </div>
