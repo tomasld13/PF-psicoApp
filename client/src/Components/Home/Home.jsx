@@ -7,11 +7,9 @@ export function Home() {
   const palabra = useSelector(state => state.palabra)
   return (
     <div>
-      <Nav />
       <h1>Psico App</h1>
       <Landing />
       <h2>{palabra}</h2>
-      
     </div>
   );
 }
