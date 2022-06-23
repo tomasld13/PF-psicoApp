@@ -51,7 +51,7 @@ sequelize.models = Object.fromEntries(capsEntries);
 
 // En sequelize.models están todos los modelos importados como propiedades
 // Para relacionarlos hacemos un destructuring
-const { Psicologo, Paciente, Usuario, Rol, Genero, MetodoPago, Factura, Detalle, Modalidad, Administrador } = sequelize.models;
+const { Psicologo, Paciente, Usuario, Rol, Genero, MetodoPago, Factura, Detalle, Modalidad, Administrador, Especialidades } = sequelize.models;
 // Aca vendrian las relaciones
 // Product.hasMany(Reviews);
 
@@ -62,11 +62,11 @@ Usuario.hasOne(Paciente,{foreignKey : 'fk_usuarioID', targetKey : 'id'}, {
 });
 Paciente.belongsTo(Usuario, {foreignKey : 'fk_usuarioID', targetKey : 'id'});
 //Usuario-Psicologo
-Usuario.hasOne(Psicologo, {
+Usuario.hasOne(Psicologo,{foreignKey : 'fk_usuarioID', targetKey : 'id'}, {
   onDelete : 'CASCADE',
   onUpdate : 'CASCADE'
 });
-Psicologo.belongsTo(Usuario);
+Psicologo.belongsTo(Usuario, {foreignKey : 'fk_usuarioID', targetKey : 'id'});
 //Rol->Usuario
 Rol.hasMany(Usuario);
 Usuario.belongsTo(Rol);
@@ -94,7 +94,9 @@ Usuario.hasOne(Administrador,{foreignKey : 'fk_usuarioID', targetKey : 'id'}, {
   onUpdate : 'CASCADE'
 });
 Administrador.belongsTo(Usuario, {foreignKey : 'fk_usuarioID', targetKey : 'id'});
-
+//Espcialidad->Psicologo
+Especialidades.hasMany(Psicologo);
+Psicologo.belongsTo(Especialidades);
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
   conn: sequelize,   // para importart la conexión { conn } = require('./db.js');
