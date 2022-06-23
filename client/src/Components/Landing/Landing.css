@@ -1,0 +1,35 @@
+* {
+    margin: 0%;
+    padding: 0%;
+    box-sizing: border-box;
+}
+
+.content {
+    display: flex;
+    width: 90%;
+    margin: auto;
+    height: 650px;
+    align-items: center;
+    justify-content: space-between;
+}
+.text-header {
+    width: 40%;
+    color: black;
+
+}
+
+.text-header h1 {
+    font-size: 40px;
+    color: black;
+}
+
+.text-header h2 {
+    margin-bottom: 20px;
+}
+
+.img-header {
+    width: 550px;
+    /* z-index: 10; */
+    position: relative;
+    
+}
