@@ -10,7 +10,7 @@ export function Home() {
       <h1>Psico App</h1>
       <Landing />
       <h2>{palabra}</h2>
-      <Footer />
+      
     </div>
   );
 }
