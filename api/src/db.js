@@ -51,7 +51,7 @@ sequelize.models = Object.fromEntries(capsEntries);
 
 // En sequelize.models están todos los modelos importados como propiedades
 // Para relacionarlos hacemos un destructuring
-const { Psicologo, Paciente, Usuario, Rol, Genero, MetodoPago, Factura, Detalle, Modalidad, Administrador, Especialidades, Horarios, Reviews } = sequelize.models;
+const { Psicologo, Paciente, Usuario, Rol, Genero, MetodoPago, Factura, Detalle, Modalidad, Administrador, Especialidades, Horarios, Reviews, HistoriasClinicas, Consulta } = sequelize.models;
 // Aca vendrian las relaciones
 // Product.hasMany(Reviews);
 
@@ -106,7 +106,17 @@ Psicologo.hasMany(Reviews, {foreignKey : 'fk_psicologoID', targetKey : 'id'});
 //Reviews->Paciente
 Reviews.belongsTo(Paciente, {foreignKey : 'fk_pacienteID', targetKey : 'id'});
 Paciente.hasMany(Reviews, {foreignKey : 'fk_pacienteID', targetKey : 'id'});
-
+//HistoriasClinicas->Paciente
+Paciente.hasOne(HistoriasClinicas,{foreignKey : 'fk_pacienteID', targetKey : 'id'}, {
+  onDelete : 'CASCADE',
+  onUpdate : 'CASCADE'});
+HistoriasClinicas.belongsTo(Paciente, {foreignKey : 'fk_pacienteID', targetKey : 'id'});
+//HistoriasClinicas->Psicologo
+HistoriasClinicas.belongsTo(Psicologo, {foreignKey : 'fk_psicologoID', targetKey : 'id'});
+Psicologo.hasMany(HistoriasClinicas, {foreignKey : 'fk_psicologoID', targetKey : 'id'});
+//HistoriasClinicas->Consulta
+HistoriasClinicas.hasMany(Consulta, {foreignKey : 'fk_historiaClinicaID', targetKey : 'id'});
+Consulta.belongsTo(HistoriasClinicas, {foreignKey : 'fk_historiaClinicaID', targetKey : 'id'});
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
   conn: sequelize,   // para importart la conexión { conn } = require('./db.js');
