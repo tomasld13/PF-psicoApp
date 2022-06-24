@@ -1,35 +1,43 @@
-const { Paciente, Usuario } = require("../../db");
+const { Paciente, Usuario, Rol, Genero, Ciudad } = require("../../db");
 
 
 const getPaciente = (req, res, next) => {
-  Paciente.findAll()
-    .then((users) => {
-      res.send(users);
+  Usuario.findAll({where : {rolId : 1}, include : [{model : Ciudad}]})
+    .then((patients) => {
+      res.send(patients);
     })
     .catch((error) => next(error));
 };
-const postPaciente = async(req, res, next) => {
-  const { name, lastname, email, telephone, address, birth, rol } = req.body;
-  try{
-    const newUSuario =await Usuario.create({ name, lastname, email, telephone, address, birth });
+const postPaciente = async (req, res, next) => {
+  const { name, lastname, email, telephone, address, birth, rol, gener, ciudad } = req.body;
+  try {
+    const newUSuario = await Usuario.create({ name, lastname, email, telephone, address, birth });
     const newPaciente = await Paciente.create();
+    const role = await Rol.findOne({where:{name:rol}});
+    const genero = await Genero.findOne({where:{genero:gener}});
+    const city = await Ciudad.findOne({where:{name:ciudad}});
+    
     newUSuario.setPaciente(newPaciente);
-    res.send(newPaciente);
-  }catch(error){
-    res.status(404).send({error})
+    newUSuario.setRol(role);
+    newUSuario.setGenero(genero);
+    newUSuario.setCiudad(city);
+   
+    res.send([newUSuario, newPaciente]);
+  } catch (error) {
+    res.status(404).send({ error: error.message })
   }
 }
 
-const getOnePacienteAndUsers = async(req, res, next) => {
+const getOnePacienteAndUsers = async (req, res, next) => {
   const { id } = req.params;
-  try{
-      const paciente= await Paciente.findByPk(id, {include: [Usuario]});
-      if(!paciente){
-          return res.status(404).send({error: "Paciente no encontrado"});
-      }
-      return res.send(paciente);
-  }catch(error){
-      res.status(404).send({error: error.message})
+  try {
+    const usuario = await Usuario.findByPk(id, { include: [Paciente] });
+    if (!usuario) {
+      return res.status(404).send({ error: "Paciente no encontrado" });
+    }
+    return res.send(usuario);
+  } catch (error) {
+    res.status(404).send({ error: error.message })
   }
 }
 module.exports = {
