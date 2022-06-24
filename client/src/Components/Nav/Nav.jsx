@@ -1,12 +1,12 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 
-export function Home() {
+export function Nav() {
   const palabra = useSelector(state => state.palabra)
   return (
     <div>
-      <h1>Psico App</h1>
-      <h2>{palabra}</h2>
+      Nav 
+      
     </div>
-  );
+  )
 }
