@@ -18,22 +18,20 @@ const postPsicologo = async (req, res, next) => {
     const { name, lastname, email, telephone, address, birth, rol, gener, ciudad, honorario, yearsExperience , especialidad} = req.body;
     try {
         const newUSuario = await Usuario.create({ name, lastname, email, telephone, address, birth });
-        const newPiscologo = await Psicologo.create({ honorario, yearsExperience });
+        const newPsicologo = await Psicologo.create({ honorario, yearsExperience });
         const role = await Rol.findOne({ where: { name: rol } });
         const genero = await Genero.findOne({ where: { genero: gener } });
         const city = await Ciudad.findOne({ where: { name: ciudad } });
         const espe = await Especialidades.findOne({where : {'especialidad' : especialidad}});
 
 
-        newUSuario.setPsicologo(newPiscologo);
+        newUSuario.setPsicologo(newPsicologo);
         newUSuario.setRol(role);
         newUSuario.setGenero(genero);
         newUSuario.setCiudad(city);
+        newPsicologo.setEspecialidade(espe);
         
-        
-        console.log(espe.toJSON());
-
-        res.status(200).send([newUSuario,newPiscologo]);
+        res.status(200).send([newUSuario,newPsicologo]);
     } catch (error) {
         res.status(404).send({ error: error.message })
     }
