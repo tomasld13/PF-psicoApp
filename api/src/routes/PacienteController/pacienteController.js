@@ -1,8 +1,12 @@
-const { Paciente, Usuario, Rol, Genero, Ciudad } = require("../../db");
+const { Paciente, Usuario, Rol, Genero, Ciudad, Provincia } = require("../../db");
 
 
 const getPaciente = (req, res, next) => {
-  Usuario.findAll({where : {rolId : 1}, include : [{model : Ciudad}]})
+  Usuario.findAll({where : {rolId : 1}, include: [{ model: Paciente, attributes: { exclude: ["fk_usuarioID", "fk_especialidadId"] } },
+  { model: Ciudad, include: { model: Provincia, attributes: ['name'] }, attributes: ['name'] },
+  { model: Genero, attributes: ["genero"] },
+  { model: Rol, attributes: ["name"] }]
+})
     .then((patients) => {
       res.send(patients);
     })
