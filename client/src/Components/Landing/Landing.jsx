@@ -2,7 +2,6 @@ import React from 'react'
 import './Landing.css'
 import img from './landing-image.png'
 
-
 function Landing() {
   return (
     <div className='main'>
