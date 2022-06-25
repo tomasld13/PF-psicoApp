@@ -1,4 +1,5 @@
 import Cards from "../Cards/Cards";
+import Questions from "../Questions/Questions.jsx"
 
 export default function Psychologists() {
   return (
@@ -13,8 +14,11 @@ export default function Psychologists() {
         <h2>Filter</h2>
         {/* <Filter /> */}
         <hr />
-        <h2>Questions</h2>
-        {/* <Questions /> */}
+
+        <>
+          {/* <Questions /> */}
+          <Questions/>
+        </>
     </>
   )
 }
