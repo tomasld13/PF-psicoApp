@@ -41,14 +41,14 @@ const postPsicologo = async (req, res, next) => {
 const getOnePsicologoAndUsers = async (req, res, next) => {
     const { id } = req.params;
     try {
-        const psicolgo = await Psicologo.findByPk(id, { include: [{model: Usuario, 
+        const psicologo = await Psicologo.findByPk(id, { include: [{model: Usuario, 
         include:[ { model: Ciudad, include: { model: Provincia, attributes: ['name'] }, attributes: ['name'] },
         { model: Genero, attributes: ["genero"] },
         { model: Rol, attributes: ["name"] }]  }] });
-        if (!psicolgo) {
-            return res.status(404).send({ error: "Paciente no encontrado" });
+        if (!psicologo) {
+            return res.status(404).send({ error: "Psicologo no encontrado" });
         }
-        return res.send(psicolgo);
+        return res.send(psicologo);
     } catch (error) {
         res.status(404).send({ error: error.message })
     }
