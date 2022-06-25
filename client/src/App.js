@@ -1,6 +1,6 @@
 import './App.css';
 import { Navigate, Route, Routes } from "react-router-dom";
-import CheckingAuth from './Components/CheckingAuth/CheckingAuth';
+import CheckingAuth from './Components/CheckingAuth/CheckingAuth.jsx';
 import PsicoApp from './Components/PsicoApp/PsicoApp';
 import AuthRoutes from './Components/AuthRoutes/AuthRoutes';
 import { useCheckAuth } from './hooks/useCheckAuth';

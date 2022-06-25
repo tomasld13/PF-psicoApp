@@ -82,7 +82,7 @@ function Nav() {
             ? button && <Button buttonStyle='btn--outline' onClick={onLogout}>Logout</Button>
             : button && <Link to='/auth/login'>
               {/* <Button buttonStyle='btn--outline'>Login</Button> */}
-              <button>Login</button>
+              <Button buttonStyle='btn--outline' link='/auth/login'>Ingresar</Button>
             </Link> 
           }
         </div>
