@@ -1,7 +1,7 @@
 const { Paciente, Usuario, Rol, Genero, Ciudad, Provincia } = require("../../db");
 
 
-const getPaciente = (req, res, next) => {
+const getPacientes = (req, res, next) => {
   Usuario.findAll({where : {rolId : 1}, include: [{ model: Paciente, attributes: { exclude: ["fk_usuarioID", "fk_especialidadId"] } },
   { model: Ciudad, include: { model: Provincia, attributes: ['name'] }, attributes: ['name'] },
   { model: Genero, attributes: ["genero"] },
@@ -48,7 +48,7 @@ const getOnePacienteAndUsers = async (req, res, next) => {
   }
 }
 module.exports = {
-  getPaciente,
+  getPacientes,
   postPaciente,
   getOnePacienteAndUsers
 }
