@@ -52,8 +52,46 @@ const getOnePsicologoAndUsers = async (req, res, next) => {
     }
 }
 
+const getPsicologosByProvincia = async (req, res, next) => {
+    const { provincia } = req.params
+    try {
+        const psicologos = await Usuario.findAll({
+            where: { rolId: 2 },
+            include: [{ model: Psicologo, include: { model: Especialidades, attributes: ['especialidad'] }, attributes: { exclude: ["fk_usuarioID", "especialidadeId"] } },
+            { model: Ciudad, include: { model: Provincia, attributes: ['name'] }, attributes: ['name'] },
+            { model: Genero, attributes: ["genero"] },
+            { model: Rol, attributes: ["name"] }]
+        })
+        const psicologosProvincia = psicologos.filter(p => p.ciudad.provincium.name === provincia)
+        if(!psicologosProvincia || psicologosProvincia.length === 0) return res.status(404).send("No se encontro ningun psicologo en esa provincia")
+        res.send(psicologosProvincia)
+    } catch (error) {
+        next(error)
+    }
+}
+
+const getPsicologosByCiudad = async (req, res, next) => {
+    const { ciudad } = req.params
+    try {
+        const psicologos = await Usuario.findAll({
+            where: { rolId: 2 },
+            include: [{ model: Psicologo, include: { model: Especialidades, attributes: ['especialidad'] }, attributes: { exclude: ["fk_usuarioID", "especialidadeId"] } },
+            { model: Ciudad, include: { model: Provincia, attributes: ['name'] }, attributes: ['name'] },
+            { model: Genero, attributes: ["genero"] },
+            { model: Rol, attributes: ["name"] }]
+        })
+        const psicologosCiudad = psicologos.filter(p => p.ciudad.name === ciudad)
+        if(!psicologosCiudad || psicologosCiudad.length === 0) return res.status(404).send("No se encontro ningun psicologo en esa Ciudad")
+        res.send(psicologosCiudad)
+    } catch (error) {
+        next(error)
+    }
+}
+
 module.exports = {
     getPsicologo,
     postPsicologo,
-    getOnePsicologoAndUsers
+    getOnePsicologoAndUsers,
+    getPsicologosByProvincia,
+    getPsicologosByCiudad
 }
