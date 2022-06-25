@@ -37,10 +37,10 @@ export default class Testimonials extends Component {
             <h3>Daniel Keystone</h3>
             <h4>Músico</h4>
             <p>
-             He intentado de encontrar un psicólogo ideal por años. 
-             Acá pude encontrar grandes especialistas! Es muy cómodo para mi
-             apuntar a mis problemas y caracteristicas y encontrar un psicologo. 
-             Muchas gracias PsicoApp!
+              He intentado de encontrar un psicólogo ideal por años. 
+              Acá pude encontrar grandes especialistas! Es muy cómodo para mi
+              apuntar a mis problemas y caracteristicas y encontrar un psicologo. 
+              Muchas gracias PsicoApp!
             </p>
           </div>
         </div>
