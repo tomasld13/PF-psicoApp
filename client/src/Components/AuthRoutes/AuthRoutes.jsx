@@ -6,8 +6,8 @@ export default function AuthRoutes() {
     return (
         <>
             <Routes>
-                <Route path='/auth/login' element={<Login/>} />
-                <Route path='/auth/register' element={<Register />} />
+                <Route path='/login' element={<Login/>} />
+                <Route path='/register' element={<Register />} />
             </Routes>
         </>
     );

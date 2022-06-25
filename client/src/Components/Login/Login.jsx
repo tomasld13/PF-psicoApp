@@ -44,6 +44,11 @@ export default function Login() {
                 <Link to='/auth/register'>
                     Crear una cuenta
                 </Link>
+                <div>
+                    <Link to='/'>
+                        Home
+                    </Link>
+                </div>
             </form>
         </>
     );

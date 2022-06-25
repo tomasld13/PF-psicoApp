@@ -15,14 +15,16 @@ function App() {
 
   return (
     <div className="App">
-      <Routes>
         {
           (status === 'authenticated') 
-          ? <Route path="/*" element={<PsicoApp/>}/>
-          : <Route path='/auth/*' element={<AuthRoutes/>} />
+          ? <Routes>
+            <Route path="/*" element={<PsicoApp/>}/>
+          </Routes>
+          : <Routes>
+              <Route path="/*" element={<PsicoApp/>}/>
+              <Route path='/auth/*' element={<AuthRoutes/>} />
+            </Routes>
         }
-        <Route path='/*' element={ <Navigate to='/auth/login'/>}/>
-      </Routes>
     </div>
   );
 }
