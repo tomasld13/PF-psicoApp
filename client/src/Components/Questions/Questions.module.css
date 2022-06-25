@@ -1,3 +1,10 @@
+:root {
+    --primary: #575989;
+    --secondary: #f0efff;
+    --darkgrey: #212329;
+    --white: #fff;
+}
+
 .content {
     display: flex;
     flex-direction: row;
@@ -23,4 +30,8 @@
 
 .contentQuestions {
     margin: 0 20px;
+}
+
+.content hr {
+    border-color: var(--secondary)
 }
