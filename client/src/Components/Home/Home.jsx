@@ -8,9 +8,7 @@ import Nav from '../Nav/Nav'
 export function Home() {
   return (
     <div>
-      <Nav />
       <Landing />
-      <Footer />
     </div>
   );
 }
