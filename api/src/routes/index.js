@@ -1,9 +1,9 @@
 const Router = require("express")
-const psicologoRoutes = require("./PsicologoController/psicologoRoutes")
-const pacienteRoutes = require("./PacienteController/pacienteRoutes")
-const ciudadesRoutes = require("./CiudadesController/ciudadesRoutes")
-const provinciasRoutes = require("./ProvinciasController/provinciaRoutes")
-const especialidadesRoutes = require("./EspecialidadesController/especialidadesRoutes")
+const psicologoRoutes = require("./PsicologoManager/psicologoRoutes")
+const pacienteRoutes = require("./PacienteManager/pacienteRoutes")
+const ciudadesRoutes = require("./CiudadesManager/ciudadesRoutes")
+const provinciasRoutes = require("./ProvinciasManager/provinciaRoutes")
+const especialidadesRoutes = require("./EspecialidadesManager/especialidadesRoutes")
 const router = Router();
 
 router.use('/psicologo', psicologoRoutes);
