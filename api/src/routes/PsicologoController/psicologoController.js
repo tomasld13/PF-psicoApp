@@ -2,7 +2,7 @@ const { Psicologo, Usuario, Paciente, Ciudad, Provincia, Genero, Rol, Especialid
 
 const getPsicologo = async (req, res, next) => {
     Usuario.findAll({
-        where: { rolId: 2 },
+        where: { rolId: 2},
         include: [{ model: Psicologo, include: { model: Especialidades, attributes: ['especialidad'] }, attributes: { exclude: ["fk_usuarioID", "especialidadeId"] } },
         { model: Ciudad, include: { model: Provincia, attributes: ['name'] }, attributes: ['name'] },
         { model: Genero, attributes: ["genero"] },
@@ -41,12 +41,14 @@ const postPsicologo = async (req, res, next) => {
 const getOnePsicologoAndUsers = async (req, res, next) => {
     const { id } = req.params;
     try {
-
-        const psicologo = await Psicologo.findByPk(id, { include: [Usuario] });
-        if (!psicologo) {
-            return res.status(404).send({ error: "Psicologo no encontrado" });
+        const psicolgo = await Psicologo.findByPk(id, { include: [{model: Usuario, 
+        include:[ { model: Ciudad, include: { model: Provincia, attributes: ['name'] }, attributes: ['name'] },
+        { model: Genero, attributes: ["genero"] },
+        { model: Rol, attributes: ["name"] }]  }] });
+        if (!psicolgo) {
+            return res.status(404).send({ error: "Paciente no encontrado" });
         }
-        return res.send(psicologo);
+        return res.send(psicolgo);
     } catch (error) {
         res.status(404).send({ error: error.message })
     }
@@ -88,10 +90,29 @@ const getPsicologosByCiudad = async (req, res, next) => {
     }
 }
 
+const getPsicologosByEspecialidad = async (req, res, next) => {
+    const { especialidad } = req.params
+    try {
+        const psicologos = await Usuario.findAll({
+            where: { rolId: 2 },
+            include: [{ model: Psicologo, include: { model: Especialidades, attributes: ['especialidad'] }, attributes: { exclude: ["fk_usuarioID", "especialidadeId"] } },
+            { model: Ciudad, include: { model: Provincia, attributes: ['name'] }, attributes: ['name'] },
+            { model: Genero, attributes: ["genero"] },
+            { model: Rol, attributes: ["name"] }]
+        })
+        const psicologosEspe = psicologos.filter(p => p.psicologo.especialidade.especialidad === especialidad)
+        if(!psicologosEspe || psicologosEspe.length === 0) return res.status(404).send("No se encontro ningun psicologo en esa especialidad")
+        res.send(psicologosEspe)
+    } catch (error) {
+        next(error)
+    }
+}
+
 module.exports = {
     getPsicologo,
     postPsicologo,
     getOnePsicologoAndUsers,
     getPsicologosByProvincia,
-    getPsicologosByCiudad
+    getPsicologosByCiudad,
+    getPsicologosByEspecialidad
 }
