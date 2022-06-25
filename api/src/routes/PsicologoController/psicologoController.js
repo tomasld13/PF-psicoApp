@@ -2,7 +2,7 @@ const { Psicologo, Usuario, Paciente, Ciudad, Provincia, Genero, Rol, Especialid
 
 const getPsicologo = async (req, res, next) => {
     Usuario.findAll({
-        where: { rolId: 2 },
+        where: { rolId: 2},
         include: [{ model: Psicologo, include: { model: Especialidades, attributes: ['especialidad'] }, attributes: { exclude: ["fk_usuarioID", "especialidadeId"] } },
         { model: Ciudad, include: { model: Provincia, attributes: ['name'] }, attributes: ['name'] },
         { model: Genero, attributes: ["genero"] },
