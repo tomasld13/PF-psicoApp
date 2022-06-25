@@ -23,7 +23,7 @@ export const Button = ({
     : SIZES[0] // si no tiene un tamaño, simplemente asigno el primero del arreglo.
 
     return (
-        <Link to='/' className='btn-mobile'>
+        <Link to='/' className={'btn-mobile'}>
             <button
             className={`btn ${checkButtonStyle} ${checkButtonSize}`}
             onClick={onClick}
