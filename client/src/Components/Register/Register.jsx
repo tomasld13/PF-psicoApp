@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from "react-router-dom";
 import { useForm } from "../../hooks/useForm";
 import { startCreatingUserWithEmailPassword } from '../../slice/auth/thunks.js';
+import Nav from "../Nav/Nav.jsx"
 
 const emailRegex = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
 
@@ -40,33 +41,35 @@ export default function Register() {
     }
 
     return (
-        <>
-            <h1>Crear cuenta</h1>
+    <>
+        <Nav/>
+        <div className="container mx-auto mt-auto bg-secundary rounded">
+            <h1 className="text-3xl py-5">Crear cuenta</h1>
             <form onSubmit={onSubmit}>
-                <div>
+                <div className="flex flex-col content-center items-center">
+                    <input className='border border-gray-300 my-2.5 px-3 py-1 rounded-lg shadow-sm focus:outline-none focus:border-primary' type="text" placeholder="Nombre completo" name="displayName" value={displayName} onChange={onInputChange}/>
                     {!!displayNameValid && formSubmitted ? <span style={{color:'red'}}>{displayNameValid}</span> : null}
-                    <input type="text" placeholder="Nombre completo" name="displayName" value={displayName} onChange={onInputChange}/>
                 </div>
-                <div>
+                <div className="flex flex-col content-center items-center">
+                    <input className='border border-gray-300 my-2.5 px-3 py-1 rounded-lg shadow-sm focus:outline-none focus:border-primary' type="email" placeholder="Email" name="email" value={email} onChange={onInputChange}/>
                     {!!emailValid && formSubmitted ? <span style={{color:'red'}}>{emailValid}</span> : null}
-                    <input type="email" placeholder="Email" name="email" value={email} onChange={onInputChange}/>
                 </div>
                 
-                <div>
+                <div className="flex flex-col content-center items-center">
+                    <input className='border border-gray-300 my-2.5 px-3 py-1 rounded-lg shadow-sm focus:outline-none focus:border-primary' type="password" placeholder="Contraseña" name="password" value={password} onChange={onInputChange}/>
                     {!!passwordValid && formSubmitted ? <span style={{color:'red'}}>{passwordValid}</span> : null}
-                    <input type="password" placeholder="Contraseña" name="password" value={password} onChange={onInputChange}/>
                 </div>
-                <div>
+                <div className="flex flex-col content-center items-center">
+                    <button className='bg-primary text-white border border-primary font-bold py-2 px-4 rounded hover:bg-white hover:text-primary my-2.5 h-12 ' disabled={isCheckingAuthentication}>Crear cuenta</button>
                     {!!errorMessage ? <span style={{color:'red'}}>{errorMessage}</span> : null}
-                    <button disabled={isCheckingAuthentication}>Crear cuenta</button>
                 </div>
-                <div>
-                    ¿Ya tienes cuenta?
-                    <Link to='/auth/login'>
-                        Ingresar
-                    </Link>
+                <div className="mt-2 pb-5">
+                    <p>
+                    ¿Ya tienes cuenta?<a href='/auth/login' className="hover:text-primary" > Ingresar</a>
+                    </p>
                 </div>
             </form>
-        </>
+        </div>
+    </>
     );
 }
