@@ -1,0 +1,143 @@
+:root {
+    --primary: #575989;
+    --secondary: #f0efff;
+    --darkgrey: #212329;
+    --white: #fff;
+}
+
+.main-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    justify-self: center;
+    width: 80%;
+    margin: 0 auto 3rem;
+    height: 98vh;
+    background-color: var(--white);
+}
+
+.main-content {
+    justify-self: start;
+    margin-left: 20px;
+    color: var(--darkgrey);
+    width: 80%;
+}
+
+.main-content h1 {
+    font-size: 3rem;
+    font-family: 'Tenor Sans';
+}
+
+.main-content p {
+    margin-top: 1rem;
+    font-size: 1.8rem;
+    font-family: 'Montserrat';
+}
+
+.main-btn {
+    font-size: 1.5rem;
+    background-color: var(--primary);
+    padding: 8px 20px;
+    border: none;
+    border-radius: 1rem;
+    color: var(--white);
+    margin-top: 2rem;
+    cursor: pointer;
+    position: relative;
+    transition: all .35s;
+    outline: none;
+}
+
+.main-btn a {
+    position: relative;
+    z-index: 2;
+    color: var(--white);
+    text-decoration: none;
+    font-family: 'Montserrat';
+}
+
+.main-btn:after {
+    position: absolute;
+    content: "";
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    transition: all .35s;
+    border-radius: 1rem;
+    background: var(--darkgrey);
+}
+
+.main-btn:hover {
+    color: var(--white);
+}
+
+.main-btn:hover:after {
+    width: 100%;
+}
+
+.main-img-container {
+    text-align: center;
+}
+
+#main-img {
+    height: 90%;
+    width: 80%;
+}
+
+/* Mobile responsive */
+
+@media screen and (max-width: 768px) {
+    .main-container {
+        display: grid;
+        grid-template-columns: auto;
+        align-items: center;
+        justify-self: center;
+        width: 90%;
+        margin: 0 auto;
+        height: 90vh;
+        background-color: var(--white);
+    }
+    .main-content {
+        justify-self: center;
+        color: var(--darkgrey);
+        width: 80%;
+        margin: 0;
+    }
+    .main-content h1 {
+        font-size: 2.5rem;
+    }
+    .main-content p {
+        margin-top: 1rem;
+        font-size: 1.5rem;
+    }
+
+    #main-img {
+        display: none;
+    }
+
+}
+
+@media screen and (max-width: 480px) {
+    .main-content {
+        text-align: center;
+    }
+
+    .main-content h1 {
+        font-size: 2.8rem;
+    }
+
+    .main-content p {
+        margin-top: 2rem;
+        font-size: 1.5rem;
+    }
+
+    .main-button {
+        padding: 12px 36px;
+        margin-top: 2.5rem;
+    }
+
+    #main-img {
+        display: none;
+    }
+}
