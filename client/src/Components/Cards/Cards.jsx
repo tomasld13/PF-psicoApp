@@ -1,80 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from 'react-redux';
+import { getPsicology, filterPsicology } from "../../slice/psico/thunks";
+import Card from "../Card/Card";
 import styles from '../Cards/cards.module.css';
 
-const auxPsychologists = [
-    {
-      id: 3,
-      nombre: 'Tomas',
-      experiencia: 10,
-      edad: 46
-    },
-    {
-        id: 1,
-        nombre: 'Alejandro',
-        experiencia: 4,
-        edad: 29
-    },
-    {
-        id: 2,
-        nombre: 'Miguel',
-        experiencia: 2,
-        edad: 25
-    },
-    {
-      id: 4,
-      nombre: 'Sandro',
-      experiencia: 2,
-      edad: 25
-    },
-    {
-      id: 5,
-      nombre: 'Sandra',
-      experiencia: 2,
-      edad: 25
-    },
-    {
-      id: 6,
-      nombre: 'Leon',
-      experiencia: 2,
-      edad: 25
-    },
-    {
-      id: 7,
-      nombre: 'Maria',
-      experiencia: 2,
-      edad: 25
-    },
-    {
-      id: 8,
-      nombre: 'Luis',
-      experiencia: 2,
-      edad: 25
-    },
-    {
-      id: 9,
-      nombre: 'Pablo',
-      experiencia: 2,
-      edad: 25
-    },
-    {
-      id: 10,
-      nombre: 'Will',
-      experiencia: 2,
-      edad: 25
-    },
-    {
-      id: 11,
-      nombre: 'Estefa',
-      experiencia: 2,
-      edad: 25
-    },
-    {
-      id: 12,
-      nombre: 'Nico',
-      experiencia: 2,
-      edad: 25
-    },
-];
 
 const itemsPerPage = 6;
 
@@ -85,13 +14,21 @@ export default function Cards() {
   const [firstIndex, setFirstIndex] = useState(0);
   const [inputFind, setInputFind] = useState('');
 
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getPsicology());
+  }, []);
+  
+  const { psychologists, spatiality } = useSelector(state => state.psicology)
+
   // Crea el indice siguiente para pasar al siguiente grupo de 6 psicologos
     const nextHandler = () => {
         const nextPage = currentPage + 1;
         
         const firstIndex = nextPage * itemsPerPage;
         
-        if(firstIndex >= auxPsychologists.length) return;
+        if(firstIndex >= psychologists.length) return;
         
         setFirstIndex(firstIndex);
         setCurrentPage(nextPage);
@@ -110,18 +47,19 @@ export default function Cards() {
     }
 
   const handlerClick = () => {
-    if(auxPsychologists.length === 0) alert('No hay psicologos');
+    if(psychologists.length === 0) alert('No hay psicologos');
     else
-    auxPsychologists.sort((a,b) => {
+    [...psychologists].sort((a,b) => {
       if (auxSwitchAlfa) {
         setSwitchAlfa(false);
-        if(a.nombre > b.nombre) return 1;
-        else if (a.nombre < b.nombre) return -1;
+        if(a.name > b.name) return 1;
+        else if (a.name < b.name) return -1;
+        
         return 0;
       }
       setSwitchAlfa(true);
-      if(a.nombre < b.nombre) return 1;
-      else if (a.nombre > b.nombre) return -1;
+      if(a.name < b.name) return 1;
+      else if (a.name > b.name) return -1;
       return 0;
     });
   }
@@ -130,36 +68,57 @@ export default function Cards() {
     setInputFind(e.target.value);
   }
 
+  const onChangeFilter = (e) => {
+    dispatch(filterPsicology(e.target.value));
+  }
+
   return (
     <section className={styles.section_cards}>
       <div className={styles.btn_container}>
         <div>
           <input type="text" placeholder="Psicologo..." onChange={e => handlerChange(e)} value={inputFind}/>
           <button onClick={() => {
-            const find = auxPsychologists.find(psycho => inputFind === psycho.nombre);
+            const find = psychologists.find(psycho => inputFind === psycho.name);
             console.log(find);
           }}>Buscar</button>
         </div>
         <button onClick={handlerClick}>Ordenar</button>
+        <div>
+          <select name="especialidad" id="especialidad" onChange={onChangeFilter}>
+            <option selected value="0"> Elige una especialidad </option>
+            <option value="Clinica">Psicologia Clinica</option>
+            <option value="Educacional">Psicologia Educacional</option>
+            <option value="Deportiva">Psicologia Deportiva</option>
+            <option value="Forense">Psicologia Forense</option>
+            <option value="Organizacional">Psicologia Organizacional</option>
+          </select>
+        </div>
       </div>
       <div>
         <h3>With what psycologists can help you?</h3>
         <div className={styles.cards_container}>
           {
-            auxPsychologists.length > 0 ? [...auxPsychologists].splice(
+            spatiality.length !== 0 ? [...spatiality].splice(
               firstIndex,itemsPerPage
             ).map(psycho => {
-              return <div key={psycho.id} className={styles.card}>
-                <h3>Nombre: {psycho.nombre}</h3>
-                <p>Edad: {psycho.edad}</p>
-                <p>Experiencia: {psycho.experiencia}</p>
-              </div>
+              return <Card key={psycho.id} 
+                      nombreCompleto={`${psycho.name} ${psycho.lastname}`}
+                      experiencia={psycho.psicologo.yearsExperience}
+                      especialidad={psycho.psicologo.especialidade.especialidad}
+                      ciudad={psycho.ciudad.name}/>
+            }) : psychologists.length > 0 ? [...psychologists].splice(
+              firstIndex,itemsPerPage
+            ).map(psycho => {
+              return <Card key={psycho.id} 
+                      nombreCompleto={`${psycho.name} ${psycho.lastname}`}
+                      experiencia={psycho.psicologo.yearsExperience}
+                      especialidad={psycho.psicologo.especialidade.especialidad}
+                      ciudad={psycho.ciudad.name}/>
             }) : (<div>
                   Loading...
                 </div>)
           }
         </div>
-        <button>Get started now</button>
         <div>
           <button onClick={prevHandler}>Prev</button>
           <button onClick={nextHandler}>Next</button>
