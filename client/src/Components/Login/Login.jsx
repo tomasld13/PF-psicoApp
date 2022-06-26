@@ -53,7 +53,7 @@ export default function Login() {
                 </a>
                 <div className="mt-2 pb-5 hover:text-primary">
                     <Link to='/'>
-                        Home
+                        regresar
                     </Link>
                 </div>
             </form>
