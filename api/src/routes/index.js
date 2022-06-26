@@ -5,6 +5,7 @@ const ciudadesRoutes = require("./CiudadesManager/ciudadesRoutes");
 const provinciasRoutes = require("./ProvinciasManager/provinciaRoutes");
 const especialidadesRoutes = require("./EspecialidadesManager/especialidadesRoutes");
 const AuthRoutes = require('./LoginManager/AuthRoutes');
+
 const router = Router();
 
 

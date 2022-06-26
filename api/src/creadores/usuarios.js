@@ -341,7 +341,7 @@ const generePsicologos = () => {
 		actual.setGenero(genero)
 		const number = Math.ceil(Math.random()*5)
 		const especialidad = await Especialidades.findOne({where:{id:number}})
-		actualPsicologo.setEspecialidade(especialidad)
+		actualPsicologo.setEspecialidades(especialidad)
 		const ciudadNumber = Math.ceil(Math.random()*1814)
 		const ciudad = await Ciudad.findByPk(ciudadNumber)
 		actual.setCiudad(ciudad)
