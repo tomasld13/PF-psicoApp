@@ -17,7 +17,7 @@ export default function Question({ nameQuestion, descQuestion}) {
     return (
     <div className={style.content}>
         <div className={ style.question }>
-            <h3>{ question }</h3><button onClick={(e)=>{ handleClick(e)}}>V</button>
+            <h3 className="text-lg">{ question }</h3><button onClick={(e)=>{ handleClick(e)}}>V</button>
         </div>
         {showQuestion?<p className={style.desc}>{descQuestion}</p>:<></>}
     </div>
