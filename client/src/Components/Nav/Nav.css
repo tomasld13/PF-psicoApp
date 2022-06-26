@@ -104,6 +104,7 @@
       text-align: center;
       padding: 2rem;
       width: 100%;
+      height: 50%;
       display: table;
     }
   
@@ -138,14 +139,15 @@
     .nav-links-mobile {
       display: block;
       text-align: center;
-      margin: 2rem auto;
+      margin: 3rem auto;
+      margin-bottom: 4rem;
       border-radius: 4px;
       width: 80%;
       text-decoration: none;
       font-size: 1.5rem;
       background-color: transparent;
       color: #fff;
-      padding: 14px 20px;
+      padding: 18px 20px;
       border: 1px solid #fff;
       transition: all 0.3s ease-out;
     }

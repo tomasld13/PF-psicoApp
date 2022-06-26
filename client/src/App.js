@@ -1,18 +1,30 @@
 import './App.css';
-import { Route, Routes } from "react-router-dom";
-import { Home } from "./Components/Home/Home.jsx";
-import Psychologists from './Components/Psychologists/Psychologists.jsx';
-import Nav from './Components/Nav/Nav.jsx'
-
+import { Navigate, Route, Routes } from "react-router-dom";
+import CheckingAuth from './Components/CheckingAuth/CheckingAuth.jsx';
+import PsicoApp from './Components/PsicoApp/PsicoApp';
+import AuthRoutes from './Components/AuthRoutes/AuthRoutes';
+import { useCheckAuth } from './hooks/useCheckAuth';
 
 function App() {
+  
+  const status = useCheckAuth();
+
+  if (status === 'checking') {
+    return <CheckingAuth />
+  }
+
   return (
     <div className="App">
-      <Routes>
-         <Route path="/" element={<Nav/>}/> 
-         <Route path="/" element={<Home/>}/>
-         <Route path='/psico' element={<Psychologists/>} />
-      </Routes>
+        {
+          (status === 'authenticated') 
+          ? <Routes>
+            <Route path="/*" element={<PsicoApp/>}/>
+          </Routes>
+          : <Routes>
+              <Route path="/*" element={<PsicoApp/>}/>
+              <Route path='/auth/*' element={<AuthRoutes/>} />
+            </Routes>
+        }
     </div>
   );
 }

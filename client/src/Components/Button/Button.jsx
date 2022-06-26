@@ -12,8 +12,11 @@ export const Button = ({
     type, 
     onClick, 
     buttonStyle, 
-    buttonSize
+    buttonSize,
+    link = "/"
 }) => {
+    //la props link representa la routa a la cual se quiere ser redirigido
+
     const checkButtonStyle = STYLES.includes(buttonStyle) 
     ? buttonStyle 
     : STYLES[0] // si no tiene estilo por default aplica btn--primary
@@ -23,7 +26,7 @@ export const Button = ({
     : SIZES[0] // si no tiene un tamaño, simplemente asigno el primero del arreglo.
 
     return (
-        <Link to='/' className='btn-mobile'>
+        <Link to={link} className={'btn-mobile'}>
             <button
             className={`btn ${checkButtonStyle} ${checkButtonSize}`}
             onClick={onClick}

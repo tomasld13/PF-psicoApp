@@ -1,20 +1,24 @@
 import Cards from "../Cards/Cards";
+import Questions from "../Questions/Questions.jsx"
+import RatingPsychologists from "../RatingPsycologists/RatingPsycologists.jsx"
 
 export default function Psychologists() {
   return (
     <>
-        <h1>Psicologos</h1>
-        <hr />
-        <h2>ClientsFeedback</h2>
-        {/* <ClientsFeedback /> */}
+        <h2 className="text-3xl">Mejores Psicologos</h2>
+        <RatingPsychologists/>
+        {/* <Clientes con Mayor Raiting /> */}
         <hr />
         <Cards />
         <hr />
         <h2>Filter</h2>
         {/* <Filter /> */}
         <hr />
-        <h2>Questions</h2>
-        {/* <Questions /> */}
+
+        <>
+          {/* <Questions /> */}
+          <Questions/>
+        </>
     </>
   )
 }

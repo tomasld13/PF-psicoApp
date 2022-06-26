@@ -1,16 +1,17 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
-import Footer from '../Footer/Footer.jsx';
+import Features from '../Features/Features.jsx';
 import Landing from '../Landing/Landing.jsx';
-import Nav from '../Nav/Nav'
-
+import Testimonials from '../Testimonials/Testimonials.jsx';
 
 export function Home() {
   return (
     <div>
-      <Nav />
       <Landing />
-      <Footer />
+      <h2>¿En qué aspectos trabaja la psicología?</h2>
+      <Features />
+      <h2>Testimonios de nuestros clientes</h2>
+      <Testimonials />
+
     </div>
   );
 }

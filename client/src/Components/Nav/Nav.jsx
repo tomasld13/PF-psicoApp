@@ -1,15 +1,27 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> frontend
 import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Button } from '../Button/Button';
-import { Link } from 'react-router-dom';
+import { Link, Route } from 'react-router-dom';
 import './Nav.css';
+import { startLogout } from '../../slice/auth/thunks';
 
 function Nav() {
   const [click, setClick] = useState(false);
   const [button, setButton] = useState(true);
 
+  const {displayName, status} = useSelector(state => state.auth);
   const handleClick = () => setClick(!click);
   const closeMobileMenu = () => setClick(false);
+
+  const dispatch = useDispatch();
+
+  const onLogout = () => {
+    dispatch(startLogout());
+  }
 
   const showButton = () => {
     if (window.innerWidth <= 960) {
@@ -28,6 +40,9 @@ function Nav() {
           <Link to='/' className='navbar-logo' onClick={closeMobileMenu}>
             PSICOAPP
           </Link>
+          {
+            status === 'authenticated' ? <h3>Hola {displayName}</h3> : null
+          }
           <div className='menu-icon' onClick={handleClick}>
             <i className={click ? 'fas fa-times' : 'fas fa-bars'} />
           </div>
@@ -58,7 +73,7 @@ function Nav() {
 
             <li>
               <Link
-                to='/'
+                to='/auth/login'
                 className='nav-links-mobile'
                 onClick={closeMobileMenu}
               >
@@ -66,13 +81,21 @@ function Nav() {
               </Link>
             </li>
           </ul>
-          {button && <Button buttonStyle='btn--outline'>Registrarse</Button>}
+          {
+            status === 'authenticated'
+            ? button && <Button buttonStyle='btn--outline' onClick={onLogout}>Logout</Button>
+            : button && <Link to='/auth/login'>
+              {/* <Button buttonStyle='btn--outline'>Login</Button> */}
+              <Button buttonStyle='btn--outline' link='/auth/login'>Ingresar</Button>
+            </Link> 
+          }
         </div>
       </nav>
     </>
   );
 }
 
+<<<<<<< HEAD
 export default Nav;
 =======
 import React from 'react'
@@ -102,3 +125,6 @@ export default function Nav() {
   )
 }
 >>>>>>> 28f3463a3af476dae47b0ad29834f1acd38307d9
+=======
+export default Nav;
+>>>>>>> frontend
