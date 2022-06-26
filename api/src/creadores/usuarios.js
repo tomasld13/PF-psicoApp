@@ -1,5 +1,5 @@
 const {Psicologo, Paciente, Usuario, Especialidades, Rol, Genero, Ciudad} = require("../db")
-
+const bcrypt = require('bcryptjs');
 let psicologos = [
 	{
 		"name": "Lucas Bridges",
@@ -330,7 +330,7 @@ const generePsicologos = () => {
             telephone: p.telephone,
             address: p.address,
             birth: p.birth,
-			password : p.password
+			password : bcrypt.hashSync(p.password, 10)
         })
         const actualPsicologo = await Psicologo.create({yearsExperience: 10, honorario: 10})
 		actual.setPsicologo(actualPsicologo)
@@ -357,7 +357,7 @@ const generePacientes = () => {
             telephone: p.telephone,
             address: p.address,
             birth: p.birth,
-			password : p.password
+			password : bcrypt.hashSync(p.password, 10)
         })
         const actualPaciente = await Paciente.create()
 		actual.setPaciente(actualPaciente)
