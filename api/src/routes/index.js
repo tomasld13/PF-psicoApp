@@ -3,7 +3,7 @@ const psicologoRoutes = require("./PsicologoManager/psicologoRoutes")
 const pacienteRoutes = require("./PacienteManager/pacienteRoutes")
 const ciudadesRoutes = require("./CiudadesManager/ciudadesRoutes")
 const provinciasRoutes = require("./ProvinciasManager/provinciaRoutes")
-const especialidadesRoutes = require("./EspecialidadesManager/especialidadesRoutes")
+const especialidadesRoutes = require("./EspecialidadesManager/EspecialidadesRoutes")
 const router = Router();
 
 router.use('/psicologo', psicologoRoutes);
