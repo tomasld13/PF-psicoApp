@@ -51,11 +51,82 @@ sequelize.models = Object.fromEntries(capsEntries);
 
 // En sequelize.models están todos los modelos importados como propiedades
 // Para relacionarlos hacemos un destructuring
-const { Psicologo, Paciente } = sequelize.models;
+const { Psicologo, Paciente, Usuario, Rol, Genero, MetodoPago, Factura, Detalle, Modalidad, Administrador, Especialidades, Horarios, Reviews, HistoriasClinicas, Consulta, Provincia, Ciudad, Servicio } = sequelize.models;
 // Aca vendrian las relaciones
 // Product.hasMany(Reviews);
-Psicologo.belongsToMany(Paciente, { through: 'psicologo_paciente' });
-Paciente.belongsToMany(Psicologo, { through: 'psicologo_paciente' });
+
+//Usuario-Paciente
+Usuario.hasOne(Paciente,{foreignKey : 'fk_usuarioID', targetKey : 'id'}, {
+  onDelete : 'CASCADE',
+  onUpdate : 'CASCADE'
+});
+Paciente.belongsTo(Usuario, {foreignKey : 'fk_usuarioID', targetKey : 'id'});
+//Usuario-Psicologo
+Usuario.hasOne(Psicologo,{foreignKey : 'fk_usuarioID', targetKey : 'id'}, {
+  onDelete : 'CASCADE',
+  onUpdate : 'CASCADE'
+});
+Psicologo.belongsTo(Usuario, {foreignKey : 'fk_usuarioID', targetKey : 'id'});
+//Rol->Usuario
+Rol.hasMany(Usuario);
+Usuario.belongsTo(Rol);
+//Genero->Usuario
+Genero.hasMany(Usuario);
+Usuario.belongsTo(Genero)
+//MetodoPago->Factura
+MetodoPago.hasMany(Factura)
+Factura.belongsTo(MetodoPago)
+//Paciente->Factura
+Paciente.hasMany(Factura)
+Factura.belongsTo(Paciente)
+//Facturas->Detalle
+Factura.hasMany(Detalle)
+Detalle.belongsTo(Factura)
+//Modalidad->Detalle
+Modalidad.hasMany(Detalle)
+Detalle.belongsTo(Modalidad)
+//Psicologo->Detalle
+Psicologo.hasMany(Detalle)
+Detalle.belongsTo(Psicologo)
+//Usuario->Administrador
+Usuario.hasOne(Administrador,{foreignKey : 'fk_usuarioID', targetKey : 'id'}, {
+  onDelete : 'CASCADE',
+  onUpdate : 'CASCADE'
+});
+Administrador.belongsTo(Usuario, {foreignKey : 'fk_usuarioID', targetKey : 'id'});
+//Espcialidad->Psicologo
+Especialidades.hasMany(Psicologo);
+Psicologo.belongsTo(Especialidades);
+//Horario->Psicologo
+Horarios.belongsToMany(Psicologo, {through : 'Horario_Psicologo'});
+Psicologo.belongsToMany(Horarios, {through : 'Horario_Psicologo'});
+//Reviews->Psicologo
+Reviews.belongsTo(Psicologo, {foreignKey : 'fk_psicologoID', targetKey : 'id'});
+Psicologo.hasMany(Reviews, {foreignKey : 'fk_psicologoID', targetKey : 'id'});
+//Reviews->Paciente
+Reviews.belongsTo(Paciente, {foreignKey : 'fk_pacienteID', targetKey : 'id'});
+Paciente.hasMany(Reviews, {foreignKey : 'fk_pacienteID', targetKey : 'id'});
+//HistoriasClinicas->Paciente
+Paciente.hasOne(HistoriasClinicas,{foreignKey : 'fk_pacienteID', targetKey : 'id'}, {
+  onDelete : 'CASCADE',
+  onUpdate : 'CASCADE'});
+HistoriasClinicas.belongsTo(Paciente, {foreignKey : 'fk_pacienteID', targetKey : 'id'});
+//HistoriasClinicas->Psicologo
+HistoriasClinicas.belongsTo(Psicologo, {foreignKey : 'fk_psicologoID', targetKey : 'id'});
+Psicologo.hasMany(HistoriasClinicas, {foreignKey : 'fk_psicologoID', targetKey : 'id'});
+//HistoriasClinicas->Consulta
+HistoriasClinicas.hasMany(Consulta, {foreignKey : 'fk_historiaClinicaID', targetKey : 'id'});
+Consulta.belongsTo(HistoriasClinicas, {foreignKey : 'fk_historiaClinicaID', targetKey : 'id'});
+//Provincias Ciudades
+Provincia.hasMany(Ciudad);
+Ciudad.belongsTo(Provincia)
+//Ciudades -> Usuarios
+Ciudad.hasMany(Usuario);
+Usuario.belongsTo(Ciudad);
+
+//Servicio-Detalle
+Servicio.hasMany(Detalle);
+Detalle.belongsTo(Servicio);
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
