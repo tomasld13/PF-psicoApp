@@ -33,6 +33,7 @@ function Footer() {
           </div>
           <div class='footer-link-items'>
             <h2>Contactanos</h2>
+            <Link to='/contacto'>Formulario</Link>
             <Link to='/'>Telefono:</Link>
             <Link to='/'>+54 9 11 51467589</Link>
             <Link to='/'>Correo:</Link>

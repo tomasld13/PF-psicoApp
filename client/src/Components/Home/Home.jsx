@@ -11,7 +11,6 @@ export function Home() {
       <Features />
       <h2>Testimonios de nuestros clientes</h2>
       <Testimonials />
-
     </div>
   );
 }

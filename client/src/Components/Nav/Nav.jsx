@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> frontend
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button } from '../Button/Button';
@@ -63,7 +59,7 @@ function Nav() {
             </li>
             <li className='nav-item'>
               <Link
-                to='/'
+                to='/contacto'
                 className='nav-links'
                 onClick={closeMobileMenu}
               >
@@ -95,36 +91,4 @@ function Nav() {
   );
 }
 
-<<<<<<< HEAD
 export default Nav;
-=======
-import React from 'react'
-import style from './nav.module.css'
-
-export default function Nav() {
-  return (
-    <div className={style.content}>
-      <>
-        <h2>PsicoApp</h2>
-      </>
-      
-      <>      
-        <ul>
-          <li>Sobre nostros</li>
-          <li>For Psychologists</li>
-          <li>For Business</li>
-          <li>Blog</li>
-        </ul>
-      </>
-
-      <>
-        <button>Registrar</button>
-        <button>Iniciar sesión</button>
-      </>
-    </div>
-  )
-}
->>>>>>> 28f3463a3af476dae47b0ad29834f1acd38307d9
-=======
-export default Nav;
->>>>>>> frontend
