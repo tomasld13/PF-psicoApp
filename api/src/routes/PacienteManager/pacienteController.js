@@ -1,4 +1,5 @@
 const { Paciente, Usuario, Rol, Genero, Ciudad, Provincia } = require("../../db");
+const bcrypt = require('bcryptjs');
 
 
 const getPacientes = (req, res, next) => {
@@ -13,9 +14,10 @@ const getPacientes = (req, res, next) => {
     .catch((error) => next(error));
 };
 const postPaciente = async (req, res, next) => {
-  const { name, lastname, email, telephone, address, birth, rol, gener, ciudad } = req.body;
+  const { name, lastname, email, telephone, address, birth, rol, gener, ciudad, password } = req.body;
+  
   try {
-    const newUSuario = await Usuario.create({ name, lastname, email, telephone, address, birth });
+    const newUSuario = await Usuario.create({ name, lastname, email, telephone, address, birth, password : bcrypt.hashSync(password, 10) });
     const newPaciente = await Paciente.create();
     const role = await Rol.findOne({where:{name:rol}});
     const genero = await Genero.findOne({where:{genero:gener}});
