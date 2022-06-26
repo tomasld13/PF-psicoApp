@@ -95,8 +95,8 @@ Usuario.hasOne(Administrador,{foreignKey : 'fk_usuarioID', targetKey : 'id'}, {
 });
 Administrador.belongsTo(Usuario, {foreignKey : 'fk_usuarioID', targetKey : 'id'});
 //Espcialidad->Psicologo
-Especialidades.hasMany(Psicologo);
-Psicologo.belongsTo(Especialidades);
+Especialidades.belongsToMany(Psicologo, {through : 'Psicologo_Especialidades'});
+Psicologo.belongsToMany(Especialidades, {through : 'Psicologo_Especialidades'});
 //Horario->Psicologo
 Horarios.belongsToMany(Psicologo, {through : 'Horario_Psicologo'});
 Psicologo.belongsToMany(Horarios, {through : 'Horario_Psicologo'});
