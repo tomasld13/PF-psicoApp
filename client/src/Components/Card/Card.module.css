@@ -1,0 +1,10 @@
+.content {
+    border: 2px solid black;
+    width: 30%;
+    height: 100%;
+    color: #000;
+
+    display: flex;
+    align-items: center;    
+    flex-direction: column;
+}

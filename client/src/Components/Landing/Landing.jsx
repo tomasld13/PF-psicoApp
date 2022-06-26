@@ -10,7 +10,7 @@ function Landing() {
             <h1>Inicia una sesión con un psicólogo licenciado</h1>
             <p>Comienza online o cara a cara con uno 
             de nuestros especialistas licenciados</p>
-            <button className='main-btn'><a href="#">Buscar psicólogo</a></button>
+            <button className='main-btn'><a href="/psico">Buscar psicólogo</a></button>
         </div>
        <div className="main-img-container">
           <img src={img} alt='Imagen no encontrada' id='main-img'></img>
