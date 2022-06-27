@@ -1,7 +1,8 @@
 const { Paciente, Usuario, Rol, Genero, Ciudad, Provincia } = require("../../db");
+const bcrypt = require('bcryptjs');
 
 
-const getPaciente = (req, res, next) => {
+const getPacientes = (req, res, next) => {
   Usuario.findAll({where : {rolId : 1}, include: [{ model: Paciente, attributes: { exclude: ["fk_usuarioID", "fk_especialidadId"] } },
   { model: Ciudad, include: { model: Provincia, attributes: ['name'] }, attributes: ['name'] },
   { model: Genero, attributes: ["genero"] },
@@ -13,9 +14,10 @@ const getPaciente = (req, res, next) => {
     .catch((error) => next(error));
 };
 const postPaciente = async (req, res, next) => {
-  const { name, lastname, email, telephone, address, birth, rol, gener, ciudad } = req.body;
+  const { name, lastname, email, telephone, address, birth, rol, gener, ciudad, password } = req.body;
+  
   try {
-    const newUSuario = await Usuario.create({ name, lastname, email, telephone, address, birth });
+    const newUSuario = await Usuario.create({ name, lastname, email, telephone, address, birth, password : bcrypt.hashSync(password, 10) });
     const newPaciente = await Paciente.create();
     const role = await Rol.findOne({where:{name:rol}});
     const genero = await Genero.findOne({where:{genero:gener}});
@@ -48,7 +50,7 @@ const getOnePacienteAndUsers = async (req, res, next) => {
   }
 }
 module.exports = {
-  getPaciente,
+  getPacientes,
   postPaciente,
   getOnePacienteAndUsers
 }
