@@ -5,6 +5,9 @@ import ContactInfoItem from './ContactInfoItem'
 import styled from 'styled-components'
 import Nav from '../Nav/Nav'
 import Footer from '../Footer/Footer'
+import Map from './Map'
+import SectionTitle from '../SectionTitle/SectionTitle'
+import ScrollToTop from '../ScrollToTop/ScrollToTop'
 
 
 const ContactSectionStyle = styled.div`
@@ -57,9 +60,10 @@ const ContactSectionStyle = styled.div`
 function ContactSection() {
   return (
     <>
-    <Nav/>
+    <ScrollToTop />
     <ContactSectionStyle>
         <div className="contact-container">
+          <SectionTitle heading='contactanos' subheading='' />
             <div className="contactSection-wrapper">
 
                 <div className="contact-left">
@@ -81,7 +85,7 @@ function ContactSection() {
             </div> 
         </div>
     </ContactSectionStyle>
-    <Footer />
+    <Map />
     </>
   )
 }
