@@ -5,7 +5,7 @@ import { FirebaseAuth } from "../firebase/config";
 import { login, logout } from "../slice/auth/authSlice";
 
 export const useCheckAuth = () => {
-    const {status} = useSelector(state => state.auth);
+    const {status} = useSelector(state => state.auth.authFirebase);
     const dispatch = useDispatch();
 
     useEffect(() => {

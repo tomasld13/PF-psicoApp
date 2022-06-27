@@ -9,7 +9,7 @@ function Nav() {
   const [click, setClick] = useState(false);
   const [button, setButton] = useState(true);
 
-  const {displayName, status} = useSelector(state => state.auth);
+  const {displayName, status} = useSelector(state => state.auth.authFirebase);
   const handleClick = () => setClick(!click);
   const closeMobileMenu = () => setClick(false);
 
@@ -59,7 +59,7 @@ function Nav() {
             </li>
             <li className='nav-item'>
               <Link
-                to='/'
+                to='/contacto'
                 className='nav-links'
                 onClick={closeMobileMenu}
               >

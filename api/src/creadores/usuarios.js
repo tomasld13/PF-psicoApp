@@ -1,5 +1,5 @@
 const {Psicologo, Paciente, Usuario, Especialidades, Rol, Genero, Ciudad} = require("../db")
-
+const bcrypt = require('bcryptjs');
 let psicologos = [
 	{
 		"name": "Lucas Bridges",
@@ -7,7 +7,8 @@ let psicologos = [
 		"lastname": "Stewart Stein",
 		"telephone": 1133445566,
 		"address": "Ap #336-9930 Lobortis Rd.",
-		"birth": "2023/36/24"
+		"birth": "2023/36/24",
+		"password" : "123456789"
 	},
 	{
 		"name": "Adrian Guerra",
@@ -15,7 +16,8 @@ let psicologos = [
 		"lastname": "Idola Schwartz",
 		"telephone": 1133445566,
 		"address": "Ap #638-5964 Est/Rd.",
-		"birth": "2021/23/12"
+		"birth": "2021/23/12",
+		"password" : "123456789"
 	},
 	{
 		"name": "Hector Stephens",
@@ -23,7 +25,8 @@ let psicologos = [
 		"lastname": "Kerry Brennan",
 		"telephone": 1133445566,
 		"address": "930-3702 Massa. Road",
-		"birth": "2022/50/08"
+		"birth": "2022/50/08",
+		"password" : "123456789"
 	},
 	{
 		"name": "Talon Harper",
@@ -31,7 +34,8 @@ let psicologos = [
 		"lastname": "Michael Chen",
 		"telephone":1133445566,
 		"address": "Ap #653-8569 Laoreet Rd.",
-		"birth": "2022/14/24"
+		"birth": "2022/14/24",
+		"password" : "123456789"
 	},
 	{
 		"name": "Kasimir Mcguire",
@@ -39,7 +43,8 @@ let psicologos = [
 		"lastname": "Macon Mcleod",
 		"telephone": 1133445566,
 		"address": "926-1212 Purus Ave",
-		"birth": "2021/50/15"
+		"birth": "2021/50/15",
+		"password" : "123456789"
 	},
 	{
 		"name": "Carol Stafford",
@@ -47,7 +52,8 @@ let psicologos = [
 		"lastname": "Ralph Roberson",
 		"telephone": 1133445566,
 		"address": "Ap #730-7194 Lectus St.",
-		"birth": "2003/44/01"
+		"birth": "2003/44/01",
+		"password" : "123456789"
 	},
 	{
 		"name": "Inez Johnston",
@@ -55,7 +61,8 @@ let psicologos = [
 		"lastname": "Jacob Bishop",
 		"telephone": 1133445566,
 		"address": "Ap #340-4256 Vitae, Rd.",
-		"birth": "2002/46/03"
+		"birth": "2002/46/03",
+		"password" : "123456789"
 	},
 	{
 		"name": "Alfonso Raymond",
@@ -63,7 +70,8 @@ let psicologos = [
 		"lastname": "Hakeem Flores",
 		"telephone": 1133445566,
 		"address": "440-3788 Erat, Avenue",
-		"birth": "2019/05/13"
+		"birth": "2019/05/13",
+		"password" : "123456789"
 	},
 	{
 		"name": "Finn Nixon",
@@ -71,7 +79,8 @@ let psicologos = [
 		"lastname": "Jana Nelson",
 		"telephone": 1133445566,
 		"address": "Ap #740-5332 Curabitur Road",
-		"birth": "2001/41/21"
+		"birth": "2001/41/21",
+		"password" : "123456789"
 	},
 	{
 		"name": "Blythe Fitzgerald",
@@ -79,7 +88,8 @@ let psicologos = [
 		"lastname": "Connor Perez",
 		"telephone": 1164632737,
 		"address": "Ap #932-7481 Donec Road",
-		"birth": "2015/44/07"
+		"birth": "2015/44/07",
+		"password" : "123456789"
 	},
 	{
 		"name": "Neville Odom",
@@ -87,7 +97,8 @@ let psicologos = [
 		"lastname": "Ignacia Workman",
 		"telephone": 1133445566,
 		"address": "896-9537 Lectus Rd.",
-		"birth": "2015/55/17"
+		"birth": "2015/55/17",
+		"password" : "123456789"
 	},
 	{
 		"name": "Dominic Smith",
@@ -95,7 +106,8 @@ let psicologos = [
 		"lastname": "Fuller Richardson",
 		"telephone": 1133445566,
 		"address": "P.O. Box 156, 8525 Dui Avenue",
-		"birth": "2017/02/11"
+		"birth": "2017/02/11",
+		"password" : "123456789"
 	},
 	{
 		"name": "Leonard Ballard",
@@ -103,7 +115,8 @@ let psicologos = [
 		"lastname": "Palmer Alvarez",
 		"telephone": 1133445566,
 		"address": "914-5733 Sit Street",
-		"birth": "2007/44/10"
+		"birth": "2007/44/10",
+		"password" : "123456789"
 	},
 	{
 		"name": "Shea Torres",
@@ -111,7 +124,8 @@ let psicologos = [
 		"lastname": "Len Black",
 		"telephone": 1133445566,
 		"address": "Ap #594-6552 Pharetra Rd.",
-		"birth": "2009/19/28"
+		"birth": "2009/19/28",
+		"password" : "123456789"
 	},
 	{
 		"name": "Octavia Donovan",
@@ -119,7 +133,8 @@ let psicologos = [
 		"lastname": "Dean Rutledge",
 		"telephone": 1133445566,
 		"address": "Ap #658-5072 Rutrum, Ave",
-		"birth": "2015/04/11"
+		"birth": "2015/04/11",
+		"password" : "123456789"
 	}
 ]
 
@@ -130,7 +145,8 @@ let pacientes = [
 		"lastname": "Yuli Craft",
 		"telephone": 1133445566,
 		"address": "270-1598 Mollis Street",
-		"birth": "2022/04/17"
+		"birth": "2022/04/17",
+		"password" : "123456789"
 	},
 	{
 		"name": "Kylee Morse",
@@ -138,7 +154,8 @@ let pacientes = [
 		"lastname": "Priscilla Key",
 		"telephone": 1133445566,
 		"address": "Ap #114-8067 Tincidunt/Road",
-		"birth": "2022/52/06"
+		"birth": "2022/52/06",
+		"password" : "123456789"
 	},
 	{
 		"name": "Brock Ballard",
@@ -146,7 +163,8 @@ let pacientes = [
 		"lastname": "Patrick Valencia",
 		"telephone": 1133445566,
 		"address": "6512 Dolor. Ave",
-		"birth": "2023/53/23"
+		"birth": "2023/53/23",
+		"password" : "123456789"
 	},
 	{
 		"name": "Colorado George",
@@ -154,7 +172,8 @@ let pacientes = [
 		"lastname": "Lara Glenn",
 		"telephone": 1133445566,
 		"address": "Ap #584-690 Ac Road",
-		"birth": "2021/43/01"
+		"birth": "2021/43/01",
+		"password" : "123456789"
 	},
 	{
 		"name": "Adara Conley",
@@ -162,7 +181,8 @@ let pacientes = [
 		"lastname": "Roth Macdonald",
 		"telephone": 1133445566,
 		"address": "P.O. Box 711/7412 A Street",
-		"birth": "2021/28/24"
+		"birth": "2021/28/24",
+		"password" : "123456789"
 	},
 	{
 		"name": "Xyla Dalton",
@@ -170,7 +190,8 @@ let pacientes = [
 		"lastname": "Destiny Kidd",
 		"telephone": 1133445566,
 		"address": "5349 Lectus St.",
-		"birth": "2001/22/01"
+		"birth": "2001/22/01",
+		"password" : "123456789"
 	},
 	{
 		"name": "Jameson Beck",
@@ -178,7 +199,8 @@ let pacientes = [
 		"lastname": "Aquila Powell",
 		"telephone": 1133445566,
 		"address": "196-379 Maecenas Avenue",
-		"birth": "2022/57/28"
+		"birth": "2022/57/28",
+		"password" : "123456789"
 	},
 	{
 		"name": "Germaine Simpson",
@@ -186,7 +208,8 @@ let pacientes = [
 		"lastname": "Gabriel Newton",
 		"telephone": 1133445566,
 		"address": "Ap #200-1684 Ac Av.",
-		"birth": "2011/25/25"
+		"birth": "2011/25/25",
+		"password" : "123456789"
 	},
 	{
 		"name": "Noble Valencia",
@@ -194,7 +217,8 @@ let pacientes = [
 		"lastname": "Zeus Blackburn",
 		"telephone": 1133445566,
 		"address": "515-7884 Penatibus Rd.",
-		"birth": "2005/47/08"
+		"birth": "2005/47/08",
+		"password" : "123456789"
 	},
 	{
 		"name": "Autumn Beach",
@@ -202,7 +226,8 @@ let pacientes = [
 		"lastname": "Sylvester Suarez",
 		"telephone": 1133445566,
 		"address": "Ap #106-6406 Etiam Av.",
-		"birth": "2008/56/30"
+		"birth": "2008/56/30",
+		"password" : "123456789"
 	},
 	{
 		"name": "Brenden Madden",
@@ -210,7 +235,8 @@ let pacientes = [
 		"lastname": "Zenia Hughes",
 		"telephone": 1133445566,
 		"address": "2579 Ridiculus Rd.",
-		"birth": "2003/32/02"
+		"birth": "2003/32/02",
+		"password" : "123456789"
 	},
 	{
 		"name": "Marsden Evans",
@@ -218,7 +244,8 @@ let pacientes = [
 		"lastname": "Mohammad Weber",
 		"telephone": 1133445566,
 		"address": "P.O. Box 676, 536 Dictum St.",
-		"birth": "2005/39/21"
+		"birth": "2005/39/21",
+		"password" : "123456789"
 	},
 	{
 		"name": "Ishmael Fisher",
@@ -226,7 +253,8 @@ let pacientes = [
 		"lastname": "Yoshi Guy",
 		"telephone": 1133445566,
 		"address": "Ap #261-7944 Sit Rd.",
-		"birth": "2012/42/29"
+		"birth": "2012/42/29",
+		"password" : "123456789"
 	},
 	{
 		"name": "Cade Wade",
@@ -234,7 +262,8 @@ let pacientes = [
 		"lastname": "Ahmed Frazier",
 		"telephone": 1133445566,
 		"address": "Ap #863-7698 Integer Rd.",
-		"birth": "2017/48/22"
+		"birth": "2017/48/22",
+		"password" : "123456789"
 	},
 	{
 		"name": "Hiroko Graham",
@@ -242,7 +271,8 @@ let pacientes = [
 		"lastname": "August Lang",
 		"telephone": 1133445566,
 		"address": "P.O. Box 982, 719 Euismod Ave",
-		"birth": "2023/51/30"
+		"birth": "2023/51/30",
+		"password" : "123456789"
 	},
 	{
 		"name": "Oprah Ewing",
@@ -250,7 +280,8 @@ let pacientes = [
 		"lastname": "Wyoming Dillard",
 		"telephone": 1133445566,
 		"address": "P.O. Box 247, 1076 Cursus Av.",
-		"birth": "2015/33/05"
+		"birth": "2015/33/05",
+		"password" : "123456789"
 	},
 	{
 		"name": "Baker Mullins",
@@ -258,7 +289,8 @@ let pacientes = [
 		"lastname": "Noelle Good",
 		"telephone": 1133445566,
 		"address": "363-9407 Mattis. Street",
-		"birth": "2017/56/06"
+		"birth": "2017/56/06",
+		"password" : "123456789"
 	},
 	{
 		"name": "Hiroko Page",
@@ -266,7 +298,8 @@ let pacientes = [
 		"lastname": "Marsden Odom",
 		"telephone": 1133445566,
 		"address": "653-315 Cursus Road",
-		"birth": "2001/47/20"
+		"birth": "2001/47/20",
+		"password" : "123456789"
 	},
 	{
 		"name": "Lacota Dillard",
@@ -274,7 +307,8 @@ let pacientes = [
 		"lastname": "Yetta Hooper",
 		"telephone": 1133445566,
 		"address": "893-1214 Nascetur Rd.",
-		"birth": "2017/27/04"
+		"birth": "2017/27/04",
+		"password" : "123456789"
 	},
 	{
 		"name": "Jerry Sexton",
@@ -282,7 +316,8 @@ let pacientes = [
 		"lastname": "Bertha Macdonald",
 		"telephone": 1133445566,
 		"address": "276-514 Ut St.",
-		"birth": "2019/22/05"
+		"birth": "2019/22/05",
+		"password" : "123456789"
 	},
 ]
 
@@ -295,6 +330,7 @@ const generePsicologos = () => {
             telephone: p.telephone,
             address: p.address,
             birth: p.birth,
+			password : bcrypt.hashSync(p.password, 10)
         })
         const actualPsicologo = await Psicologo.create({yearsExperience: 10, honorario: 10})
 		actual.setPsicologo(actualPsicologo)
@@ -305,7 +341,7 @@ const generePsicologos = () => {
 		actual.setGenero(genero)
 		const number = Math.ceil(Math.random()*5)
 		const especialidad = await Especialidades.findOne({where:{id:number}})
-		actualPsicologo.setEspecialidade(especialidad)
+		actualPsicologo.setEspecialidades(especialidad)
 		const ciudadNumber = Math.ceil(Math.random()*1814)
 		const ciudad = await Ciudad.findByPk(ciudadNumber)
 		actual.setCiudad(ciudad)
@@ -321,6 +357,7 @@ const generePacientes = () => {
             telephone: p.telephone,
             address: p.address,
             birth: p.birth,
+			password : bcrypt.hashSync(p.password, 10)
         })
         const actualPaciente = await Paciente.create()
 		actual.setPaciente(actualPaciente)

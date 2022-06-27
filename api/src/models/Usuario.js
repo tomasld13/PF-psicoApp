@@ -7,11 +7,21 @@ module.exports = (sequelize)=>{
             type : DataTypes.STRING,
             allowNull : false
         },
+        avatar : {
+            type : DataTypes.STRING,
+            allowNull : true
+        }
+        ,
         lastname : {
             type : DataTypes.STRING,
             allowNull : false
         },
         email : {
+            type : DataTypes.STRING,
+            allowNull : false,
+            unique : true
+        },
+        password : {
             type : DataTypes.STRING,
             allowNull : false
         },
@@ -26,6 +36,10 @@ module.exports = (sequelize)=>{
         birth : {
             type : DataTypes.STRING,
             allowNull : false
+        },
+        state : {
+            type : DataTypes.BOOLEAN,
+            defaultValue : true
         }
     },{
         timestamps : false

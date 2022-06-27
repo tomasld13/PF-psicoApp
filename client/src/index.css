@@ -177,3 +177,13 @@ img {
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body::-webkit-scrollbar{
+  width: 10px;
+  background:  grey;
+}
+body::-webkit-scrollbar-thumb{
+  background: rgba(255, 255, 255, .6);
+  border-radius: 10px;
+  border-right: 2px solid grey;
+}
