@@ -5,6 +5,7 @@ import PsicoApp from './Components/PsicoApp/PsicoApp';
 import AuthRoutes from './Components/AuthRoutes/AuthRoutes';
 import { useCheckAuth } from './hooks/useCheckAuth';
 import ContactSection from './Components/Contact/ContactSection';
+import ScrollToTop from './Components/ScrollToTop/ScrollToTop';
 
 function App() {
   

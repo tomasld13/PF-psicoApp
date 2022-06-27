@@ -65,7 +65,12 @@ export default function Cards() {
     <section className={styles.section_cards}>
       <div className={styles.btn_container}>
         <div>
-          <input type="text" placeholder="Psicologo..." onChange={e => handlerChange(e)} value={inputFind}/>
+          <input 
+          type="text" 
+          placeholder="Psicologo..." 
+          onChange={e => handlerChange(e)} 
+          value={inputFind}
+          />
           <button onClick={() => {
             const find = psychologists.find(psycho => inputFind === psycho.name);
             console.log(find);
