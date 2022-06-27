@@ -1,5 +1,5 @@
 import { signInWithGoogle, registerUserWithEmailPassword, loginWithEmailPassword, logoutFirebase } from '../../firebase/providers.js';
-import { checkingCredentials, logout, login, loginBack } from './authSlice.js';
+import { checkingCredentials, logout, login, loginBack, logoutBack } from './authSlice.js';
 
 export const startGoogleSignIn = () => {
     return async (dispatch) => {
@@ -22,7 +22,7 @@ export const startCreatingUserWithEmailPassword = (paciente) => {
     //console.log(JSON.stringify(paciente));
     return async (dispatch) => {
         dispatch( checkingCredentials() );
-
+        dispatch( logout() );
         // Acá se haría la peticion al backend para registrar el usuario
         // const {ok, uid, photoURL, errorMessage} = await registerUserWithEmailPassword({email, password, displayName});
         try {
@@ -39,14 +39,14 @@ export const startCreatingUserWithEmailPassword = (paciente) => {
 
             if (data.error) {
                 console.log(data);
-                return dispatch(logout(data.error));
+                return dispatch(logoutBack(data.error));
 
             }
-            dispatch( loginBack(data));
+            dispatch(loginBack(data));
 
         } catch (error) {
             console.log(error);
-            dispatch(logout(error));
+            dispatch(logoutBack(error));
         }
     } 
 }
@@ -71,5 +71,6 @@ export const startLogout = () => {
         await logoutFirebase();
 
         dispatch(logout());
+        dispatch(logoutBack());
     }
 }

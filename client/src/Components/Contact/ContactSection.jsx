@@ -60,7 +60,6 @@ const ContactSectionStyle = styled.div`
 function ContactSection() {
   return (
     <>
-    <Nav/>
     <ScrollToTop />
     <ContactSectionStyle>
         <div className="contact-container">
@@ -87,7 +86,6 @@ function ContactSection() {
         </div>
     </ContactSectionStyle>
     <Map />
-    <Footer />
     </>
   )
 }
