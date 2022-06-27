@@ -65,7 +65,12 @@ export default function Cards() {
     <section className={styles.section_cards}>
       <div className={styles.btn_container}>
         <div>
-          <input type="text" placeholder="Psicologo..." onChange={e => handlerChange(e)} value={inputFind}/>
+          <input 
+          type="text" 
+          placeholder="Psicologo..." 
+          onChange={e => handlerChange(e)} 
+          value={inputFind}
+          />
           <button onClick={() => {
             const find = psychologists.find(psycho => inputFind === psycho.name);
             console.log(find);
@@ -98,7 +103,7 @@ export default function Cards() {
               return <Card key={psycho.id} 
                       nombreCompleto={`${psycho.name} ${psycho.lastname}`}
                       experiencia={psycho.psicologo.yearsExperience}
-                      especialidad={psycho.psicologo.especialidade.especialidad}
+                      especialidad={psycho.psicologo.especialidades[0].especialidad}
                       ciudad={psycho.ciudad.name}/>
             }) : psychologists.length > 0 ? [...psychologists].splice(
               firstIndex,itemsPerPage
@@ -106,7 +111,7 @@ export default function Cards() {
               return <Card key={psycho.id} 
                       nombreCompleto={`${psycho.name} ${psycho.lastname}`}
                       experiencia={psycho.psicologo.yearsExperience}
-                      especialidad={psycho.psicologo.especialidade.especialidad}
+                      especialidad={psycho.psicologo.especialidades[0].especialidad}
                       ciudad={psycho.ciudad.name}/>
             }) : (<div>
                   Loading...
