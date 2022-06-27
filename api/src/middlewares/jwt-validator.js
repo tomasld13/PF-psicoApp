@@ -12,10 +12,10 @@ const validarJWT = async (req = request, res = response, next) => {
   }
 
   try {
-    const { uid } = jwt.verify(token, process.env.SECRETORPRIVATEKEY);
-
+    const { id } = jwt.verify(token, process.env.SECRETORPRIVATEKEY);
+    console.log(id);
     // leer el usuario que corresponde al uid
-    const user = await Usuario.findByPk(uid, {
+    const user = await Usuario.findByPk(id, {
       include: {
         model: Rol,
         attributes: ["name"],
