@@ -1,0 +1,37 @@
+:root {
+    --primary: #575989;
+    --secondary: #f0efff;
+    --darkgrey: #212329;
+    --white: #fff;
+}
+
+.content {
+    display: flex;
+    flex-direction: row;
+    width: 90vw;
+    justify-content: center;
+    margin: auto;
+}
+
+.img01, .img02 {
+    width: 12vw;
+    margin: 50px 0;
+}
+
+.img02 {
+    display: flex;
+    align-items: flex-end;
+}
+
+
+.img01 img, .img02 img{
+    width: 100%;
+}
+
+.contentQuestions {
+    margin: 0 20px;
+}
+
+.content hr {
+    border-color: var(--secondary)
+}
