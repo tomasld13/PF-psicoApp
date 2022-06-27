@@ -1,4 +1,5 @@
 import { Navigate, Route, Routes } from "react-router-dom";
+import ContactSection from "../Contact/ContactSection";
 import Footer from "../Footer/Footer";
 import { Home } from "../Home/Home";
 import Nav from "../Nav/Nav";
@@ -13,6 +14,7 @@ export default function PsicoApp() {
             <Routes>
                 <Route path="/" element={<Home/>}/>
                 <Route path='/psico' element={<Psychologists/>} />
+                <Route path='/contacto' element={ <ContactSection/>} />
                 <Route path="/*" element={ <Navigate to="/" /> } />
             </Routes>
             <Footer/>

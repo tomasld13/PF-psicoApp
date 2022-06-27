@@ -7,9 +7,9 @@ export function Home() {
   return (
     <div>
       <Landing />
-      <h2>¿En qué aspectos trabaja la psicología?</h2>
+      <h2 className="text-3xl py-2.5">¿En qué aspectos trabaja la psicología?</h2>
       <Features />
-      <h2>Testimonios de nuestros clientes</h2>
+      <h2 className="text-3xl py-2.5">Testimonios de nuestros clientes</h2>
       <Testimonials />
     </div>
   );
