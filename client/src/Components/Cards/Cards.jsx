@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import { getPsicology, filterPsicology } from "../../slice/psico/thunks";
+import { getPsicology, filterPsicology, sortByName } from "../../slice/psico/thunks";
 import Card from "../Card/Card";
 import styles from '../Cards/cards.module.css';
 
@@ -13,6 +13,7 @@ export default function Cards() {
   const [currentPage, setCurrentPage] = useState(0);
   const [firstIndex, setFirstIndex] = useState(0);
   const [inputFind, setInputFind] = useState('');
+  const [sort, setSort] = useState('');
 
   const dispatch = useDispatch();
 
@@ -46,22 +47,10 @@ export default function Cards() {
         setCurrentPage(prevPage);
     }
 
-  const handlerClick = () => {
-    if(psychologists.length === 0) alert('No hay psicologos');
-    else
-    [...psychologists].sort((a,b) => {
-      if (auxSwitchAlfa) {
-        setSwitchAlfa(false);
-        if(a.name > b.name) return 1;
-        else if (a.name < b.name) return -1;
-        
-        return 0;
-      }
-      setSwitchAlfa(true);
-      if(a.name < b.name) return 1;
-      else if (a.name > b.name) return -1;
-      return 0;
-    });
+  const handlerClick = (e) => {
+    dispatch(sortByName(e.target.value));
+    setCurrentPage(0);
+    setSort(e.target.value);
   }
 
   const handlerChange = (e) => {
@@ -82,7 +71,12 @@ export default function Cards() {
             console.log(find);
           }}>Buscar</button>
         </div>
-        <button onClick={handlerClick}>Ordenar</button>
+        <select name="especialidad" id="especialidad" onChange={handlerClick}>
+            <option selected value="0"> Orden... </option>
+            <option value="asc">asc</option>
+            <option value="desc">desc</option>
+        </select>
+        {/* <button onClick={handlerClick}>Ordenar</button> */}
         <div>
           <select name="especialidad" id="especialidad" onChange={onChangeFilter}>
             <option selected value="0"> Elige una especialidad </option>

@@ -1,4 +1,4 @@
-import { getPsychos, filterSpatiality } from './psicologySlice.js';
+import { getPsychos, filterSpatiality, sortByNamePsycho } from './psicologySlice.js';
 
 export const getPsicology = () => {
     return async (dispatch) => {
@@ -25,7 +25,7 @@ export const filterPsicology = (spatiality) => {
                 getPsicology();
                 return dispatch(filterSpatiality([]));
             }
-            
+
             const response = await fetch(`http://localhost:3001/api/psicologo/especialidad/Psicologia ${spatiality}`);
 
             const data = await response.json();
@@ -35,5 +35,11 @@ export const filterPsicology = (spatiality) => {
         } catch (error) {
             return error
         }
+    }
+}
+
+export const sortByName = (sort) => {
+    return (dispatch) => {
+        dispatch(sortByNamePsycho(sort));
     }
 }
