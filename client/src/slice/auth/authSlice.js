@@ -3,34 +3,65 @@ import { createSlice } from "@reduxjs/toolkit";
 export const authSlice = createSlice({
     name: 'auth',
     initialState: {
-        status: 'checking',
-        uid: null,
-        email: null,
-        displayName: null,
-        photoURL: null,
-        errorMessage: null,
+        authFirebase: {
+            status: 'checking',
+            uid: null,
+            email: null,
+            displayName: null,
+            photoURL: null,
+            errorMessage: null,
+        },
+        authBack: {
+            status: 'checking',
+            id: null,
+            name: null,
+            lastname: null,
+            email: null,
+            telephone: null,
+            address: null,
+            birth: null,
+            rolId: null,
+            generoId: null,
+            ciudadId: null,
+            errorMessage: null,
+        }
     },
     reducers: {
         login: (state, {payload}) => {
-            state.status = 'authenticated'
-            state.uid = payload.uid;
-            state.email = payload.email;
-            state.displayName = payload.displayName;
-            state.photoURL = payload.photoURL;
-            state.errorMessage = null;
+            state.authFirebase.status = 'authenticated'
+            state.authFirebase.uid = payload.uid;
+            state.authFirebase.email = payload.email;
+            state.authFirebase.displayName = payload.displayName;
+            state.authFirebase.photoURL = payload.photoURL;
+            state.authFirebase.errorMessage = null;
         },
         logout: (state, {payload}) => {
-            state.status = 'no-authenticated'
-            state.uid = null;
-            state.email = null;
-            state.displayName = null;
-            state.photoURL = null;
-            state.errorMessage = payload?.errorMessage;
+            state.authFirebase.status = 'no-authenticated'
+            state.authFirebase.uid = null;
+            state.authFirebase.email = null;
+            state.authFirebase.displayName = null;
+            state.authFirebase.photoURL = null;
+            state.authFirebase.errorMessage = payload?.errorMessage;
         },
         checkingCredentials: (state) => {
-            state.status = 'checking';
+            state.authFirebase.status = 'checking';
+            state.authBack.status = 'checking';
+        },
+        loginBack: (state, {payload}) => {
+            state.authBack.status = 'checking';
+            state.authBack.id = payload.id;
+            state.authBack.name = payload.name;
+            state.authBack.lastname = payload.lastname;
+            state.authBack.email = payload.email;
+            state.authBack.telephone = payload.telephone;
+            state.authBack.address = payload.address;
+            state.authBack.birth = payload.birth;
+            state.authBack.rolId = payload.rolId;
+            state.authBack.generoId = payload.generoId;
+            state.authBack.ciudadId = payload.ciudadId;
+            state.authBack.errorMessage = null;
         },
     }
 });
 
-export const {login, logout, checkingCredentials} = authSlice.actions; 
+export const {login, logout, checkingCredentials, loginBack} = authSlice.actions; 
