@@ -16,13 +16,17 @@ export const startGoogleSignIn = () => {
 
 export const startCreatingUserWithEmailPassword = (paciente) => {
 
+    paciente.name = paciente.displayName;
+    delete paciente.displayName;
+
+    console.log(JSON.stringify(paciente));
     return async (dispatch) => {
         dispatch( checkingCredentials() );
 
         // Acá se haría la peticion al backend para registrar el usuario
         // const {ok, uid, photoURL, errorMessage} = await registerUserWithEmailPassword({email, password, displayName});
         try {
-            console.log(paciente);
+            
             const result = await fetch('http://localhost:3001/api/paciente', {
                 method: 'POST',
                 body: JSON.stringify(paciente),
@@ -34,12 +38,11 @@ export const startCreatingUserWithEmailPassword = (paciente) => {
             const data = await result.json();
 
             if (data.error) {
-                // console.log(data);
+                console.log(data);
                 return dispatch(logout(data.error));
 
             }
-            console.log(data);
-            // dispatch( loginBack(data));
+            dispatch( loginBack(data));
 
         } catch (error) {
             console.log(error);

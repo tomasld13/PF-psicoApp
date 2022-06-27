@@ -22,26 +22,26 @@ const formData = {
     email: '',
     password: '',
     displayName: '',
-    lastName: '',
+    lastname: '',
     telephone: '',
     address: '',
     birth: '',
     rol:'',
     gener: '',
-    city: '',
+    ciudad: '',
 }
 
 const formValidations = {
     email: [ (value) => emailRegex.test(value), 'El correo no es valido'],
     password: [ (value) => value.length >= 6, 'El password debe tener mas de 6 letras'],
     displayName: [ (value) => value.length >= 1, 'El nombre es obligatorio'],
-    lastName: [ (value) => value.length >= 1, 'El apellido es obligatorio'],
+    lastname: [ (value) => value.length >= 1, 'El apellido es obligatorio'],
     telephone: [ (value) => value.length >= 1, 'El numero de telefono es obligatorio'],
     address: [ (value) => value.length >= 1, 'La dirección es obligatorio'],
     birth: [ (value) => value.length >= 1, 'La fecha de nacimiento es obligatorio'],
     rol: [ (value) => value !== "0", 'El rol es obligatorio'],
     gener: [ (value) => value !== "0", 'El genero es obligatorio'],
-    city: [ (value) => value.length >= 1, 'La ciudad es obligatoria'],
+    ciudad: [ (value) => value.length >= 1, 'La ciudad es obligatoria'],
 }
 
 export default function Register() {
@@ -53,9 +53,9 @@ export default function Register() {
     const isCheckingAuthentication = useMemo(() => status === 'checking', [status]);
 
     const { displayName, email, password, onInputChange, formState,
-            isFormValid, displayNameValid, emailValid, passwordValid, lastName, lastNameValid,
+            isFormValid, displayNameValid, emailValid, passwordValid, lastname, lastNameValid,
             telephone, telephoneValid, address, addressValid, birth, birthValid, rol, rolValid,
-            gener, generValid, city, cityValid} = useForm(formData, formValidations);
+            gener, generValid, ciudad, cityValid} = useForm(formData, formValidations);
 
 
     const onSubmit = (e) => {
@@ -78,7 +78,7 @@ export default function Register() {
                     {!!displayNameValid && formSubmitted ? <span style={{color:'red'}}>{displayNameValid}</span> : null}
                 </div>
                 <div className="flex flex-col content-center items-center">
-                    <input className='border border-gray-300 my-2.5 px-3 py-1 rounded-lg shadow-sm focus:outline-none focus:border-primary' type="text" placeholder="Apellido" name="lastName" value={lastName} onChange={onInputChange}/>
+                    <input className='border border-gray-300 my-2.5 px-3 py-1 rounded-lg shadow-sm focus:outline-none focus:border-primary' type="text" placeholder="Apellido" name="lastname" value={lastname} onChange={onInputChange}/>
                     {!!displayNameValid && formSubmitted ? <span style={{color:'red'}}>{lastNameValid}</span> : null}
                 </div>
                 <div className="flex flex-col content-center items-center">
@@ -123,7 +123,7 @@ export default function Register() {
 
 
                 <div className="flex flex-col content-center items-center">
-                    <input className='border border-gray-300 my-2.5 px-3 py-1 rounded-lg shadow-sm focus:outline-none focus:border-primary' type="text" placeholder="Ciudad"  name="city" value={city} onChange={onInputChange}/>
+                    <input className='border border-gray-300 my-2.5 px-3 py-1 rounded-lg shadow-sm focus:outline-none focus:border-primary' type="text" placeholder="Ciudad"  name="ciudad" value={ciudad} onChange={onInputChange}/>
                     {!!cityValid && formSubmitted ? <span style={{color:'red'}}>{cityValid}</span> : null}
                 </div>
 
