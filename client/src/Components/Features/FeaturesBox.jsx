@@ -7,7 +7,7 @@ function FeaturesBox(props) {
         <img src={props.image} alt="" />
       </div>
       <div className="s-b-text">
-        <h4> {props.title} </h4>
+        <h4 className="text-xl py-2.5"> {props.title} </h4>
       </div>
     </div>
   )
