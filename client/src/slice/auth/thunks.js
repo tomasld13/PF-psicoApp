@@ -19,7 +19,7 @@ export const startCreatingUserWithEmailPassword = (paciente) => {
     paciente.name = paciente.displayName;
     delete paciente.displayName;
 
-    console.log(JSON.stringify(paciente));
+    //console.log(JSON.stringify(paciente));
     return async (dispatch) => {
         dispatch( checkingCredentials() );
 
