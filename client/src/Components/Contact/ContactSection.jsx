@@ -60,7 +60,6 @@ const ContactSectionStyle = styled.div`
 function ContactSection() {
   return (
     <>
-    <Nav/>
     <ScrollToTop />
     <ContactSectionStyle>
         <div className="contact-container">
@@ -69,11 +68,11 @@ function ContactSection() {
 
                 <div className="contact-left">
                     <ContactInfoItem 
-                    icon={<MdLocalPhone />}
+                    icon={<MdLocalPhone size='2rem'/>}
                     text='+54 9 11 54236789'
                     />
                     <ContactInfoItem 
-                    icon={<MdEmail /> }
+                    icon={<MdEmail size='2rem' /> }
                     text= 'soporte@psicoapp.com'
                     />
                     <ContactInfoItem 
@@ -87,7 +86,6 @@ function ContactSection() {
         </div>
     </ContactSectionStyle>
     <Map />
-    <Footer />
     </>
   )
 }

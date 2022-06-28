@@ -4,12 +4,14 @@ import { Button } from '../Button/Button';
 import { Link, Route } from 'react-router-dom';
 import './Nav.css';
 import { startLogout } from '../../slice/auth/thunks';
+import logoImage from './logo.png'
 
 function Nav() {
   const [click, setClick] = useState(false);
   const [button, setButton] = useState(true);
 
   const {displayName, status} = useSelector(state => state.auth.authFirebase);
+  const storeAuthBack = useSelector(state => state.auth.authBack);
   const handleClick = () => setClick(!click);
   const closeMobileMenu = () => setClick(false);
 
@@ -34,10 +36,10 @@ function Nav() {
       <nav className='navbar'>
         <div className='navbar-container'>
           <Link to='/' className='navbar-logo' onClick={closeMobileMenu}>
-            PSICOAPP
+            <img src={logoImage} alt="logo image" />
           </Link>
           {
-            status === 'authenticated' ? <h3>Hola {displayName}</h3> : null
+            status === 'authenticated' || storeAuthBack.status === 'authenticated' ? <h3>Hola {!displayName ? storeAuthBack.name : displayName}</h3> : null
           }
           <div className='menu-icon' onClick={handleClick}>
             <i className={click ? 'fas fa-times' : 'fas fa-bars'} />
@@ -78,7 +80,7 @@ function Nav() {
             </li>
           </ul>
           {
-            status === 'authenticated'
+            status === 'authenticated' || storeAuthBack.status === 'authenticated'
             ? button && <Button buttonStyle='btn--outline' onClick={onLogout}>Logout</Button>
             : button && <Link to='/auth/login'>
               {/* <Button buttonStyle='btn--outline'>Login</Button> */}
