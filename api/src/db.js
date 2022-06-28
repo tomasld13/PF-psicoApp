@@ -2,6 +2,7 @@ require('dotenv').config();
 const { Sequelize } = require('sequelize');
 const fs = require('fs');
 const path = require('path');
+const { time } = require('console');
 const {
   DB_USER, DB_PASSWORD, DB_HOST, DB_NAME
 } = process.env;
@@ -51,7 +52,7 @@ sequelize.models = Object.fromEntries(capsEntries);
 
 // En sequelize.models están todos los modelos importados como propiedades
 // Para relacionarlos hacemos un destructuring
-const { Psicologo, Paciente, Usuario, Rol, Genero, MetodoPago, Factura, Detalle, Modalidad, Administrador, Especialidades, Horarios, Reviews, HistoriasClinicas, Consulta, Provincia, Ciudad, Servicio } = sequelize.models;
+const { Psicologo, Paciente, Usuario, Rol, Genero, MetodoPago, Factura, Detalle, Modalidad, Administrador, Especialidades, Horarios, Reviews, HistoriasClinicas, Consulta, Provincia, Ciudad, Servicio, Precio } = sequelize.models;
 // Aca vendrian las relaciones
 // Product.hasMany(Reviews);
 
@@ -95,8 +96,8 @@ Usuario.hasOne(Administrador,{foreignKey : 'fk_usuarioID', targetKey : 'id'}, {
 });
 Administrador.belongsTo(Usuario, {foreignKey : 'fk_usuarioID', targetKey : 'id'});
 //Espcialidad->Psicologo
-Especialidades.belongsToMany(Psicologo, {through : 'Psicologo_Especialidades'});
-Psicologo.belongsToMany(Especialidades, {through : 'Psicologo_Especialidades'});
+Especialidades.belongsToMany(Psicologo, {through : 'Psicologo_Especialidades', timestamps : false});
+Psicologo.belongsToMany(Especialidades, {through : 'Psicologo_Especialidades', timestamps : false});
 //Horario->Psicologo
 Horarios.belongsToMany(Psicologo, {through : 'Horario_Psicologo'});
 Psicologo.belongsToMany(Horarios, {through : 'Horario_Psicologo'});
@@ -128,6 +129,12 @@ Usuario.belongsTo(Ciudad);
 Servicio.hasMany(Detalle);
 Detalle.belongsTo(Servicio);
 
+//Servicio-Psicologo
+Servicio.belongsToMany(Psicologo, {through : 'psicologo_servicio', timestamps : false});
+Psicologo.belongsToMany(Servicio, {through : 'psicologo_servicio', timestamps : false});
+//Precio-Servicio
+Precio.belongsToMany(Servicio, {through : 'servicio_precio', timestamps : false});
+Servicio.belongsToMany(Precio, {through : 'servicio_precio', timestamps : false});
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
   conn: sequelize,   // para importart la conexión { conn } = require('./db.js');

@@ -332,7 +332,7 @@ const generePsicologos = () => {
             birth: p.birth,
 			password : bcrypt.hashSync(p.password, 10)
         })
-        const actualPsicologo = await Psicologo.create({yearsExperience: 10, honorario: 10})
+        const actualPsicologo = await Psicologo.create({yearsExperience: 10})
 		actual.setPsicologo(actualPsicologo)
 		const rol = await Rol.findOne({where:{id:2}})
 		actual.setRol(rol)
