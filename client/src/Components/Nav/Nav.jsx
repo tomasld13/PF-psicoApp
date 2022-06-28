@@ -4,6 +4,7 @@ import { Button } from '../Button/Button';
 import { Link, Route } from 'react-router-dom';
 import './Nav.css';
 import { startLogout } from '../../slice/auth/thunks';
+import logoImage from './logo.png'
 
 function Nav() {
   const [click, setClick] = useState(false);
@@ -35,7 +36,7 @@ function Nav() {
       <nav className='navbar'>
         <div className='navbar-container'>
           <Link to='/' className='navbar-logo' onClick={closeMobileMenu}>
-            PSICOAPP
+            <img src={logoImage} alt="logo image" />
           </Link>
           {
             status === 'authenticated' || storeAuthBack.status === 'authenticated' ? <h3>Hola {!displayName ? `${storeAuthBack.name} ${storeAuthBack.lastname}` : displayName}</h3> : null
