@@ -1,0 +1,23 @@
+
+
+.content  {
+    display: flex;
+    flex-direction: column;
+    width: 60vw;
+    padding: 10px 0;
+}
+
+.question {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+}
+
+.desc {
+    padding-top: 0px;
+    margin:0;
+    text-align: start;
+}
+
+

@@ -1,4 +1,4 @@
-const {Usuario} = require('../models/Usuario');
+const {Usuario} = require('../db');
 const verficarEmail = async (email = "") => {
     const user = await Usuario.findOne({
       where: {
@@ -10,6 +10,7 @@ const verficarEmail = async (email = "") => {
     }
   };
   const verificarId = async (id = "") => {
+    console.log("ESTOY EN EL VERIFICAR ID: ", id)
     const user = await Usuario.findByPk(id);
     if (!user) {
       throw new Error(`No existe el usuario con el id ${id}`);

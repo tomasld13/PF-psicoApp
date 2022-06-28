@@ -1,12 +1,20 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
+import Features from '../Features/Features.jsx';
+import Landing from '../Landing/Landing.jsx';
+import SubSectionHome from '../SubSectionHome/SubSectionHome.jsx';
+import Questions from "../Questions/Questions.jsx"
+import Testimonials from '../Testimonials/Testimonials.jsx';
 
 export function Home() {
-  const palabra = useSelector(state => state.palabra)
   return (
     <div>
-      <h1>Psico App</h1>
-      <h2>{palabra}</h2>
+      <Landing />
+      <SubSectionHome />
+      <h2 className="text-3xl py-2.5">¿En qué aspectos trabaja la psicología?</h2>
+      <Features />
+      <Questions />
+      <h2 className="text-3xl py-2.5">Testimonios de nuestros clientes</h2>
+      <Testimonials />
     </div>
   );
 }
