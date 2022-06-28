@@ -6,10 +6,7 @@ const { esAdminRol } = require("../../middlewares/validarAdmin");
 const { verficarEmail , verificarId} = require("../../helpers/db-validators");
 const validarJWT = require("../../middlewares/jwt-validator");
 const validarCampos = require("../../middlewares/validar-campos");
-<<<<<<< HEAD
-=======
 
->>>>>>> frontend
 
 const router = Router()
 //Tar los pacientes
