@@ -22,6 +22,8 @@
     color: #575989;
     justify-self: start;
     margin-left: 20px;
+    margin-top: 2rem;
+    width: 20%;
     cursor: pointer;
     text-decoration: none;
     font-size: 2rem;
@@ -118,7 +120,8 @@
       position: absolute;
       top: 0;
       left: 0;
-      transform: translate(25%, 50%);
+      width: 40%;
+      transform: translate(20%, -20%);
     }
   
     .menu-icon {
