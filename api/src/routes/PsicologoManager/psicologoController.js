@@ -100,7 +100,7 @@ const getPsicologosByEspecialidad = async (req, res, next) => {
             { model: Genero, attributes: ["genero"] },
             { model: Rol, attributes: ["name"] }]
         })
-        const psicologosEspe = psicologos.filter(p => p.psicologo.especialidade.especialidad === especialidad)
+        const psicologosEspe = psicologos.filter(p => p.psicologo.especialidades[0].especialidad === especialidad)
         if(!psicologosEspe || psicologosEspe.length === 0) return res.status(404).send("No se encontro ningun psicologo en esa especialidad")
         res.send(psicologosEspe)
     } catch (error) {

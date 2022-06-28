@@ -1,17 +1,21 @@
 import React from 'react'
 import './Landing.css'
+import img from './landing-image.png'
 
 function Landing() {
   return (
-    <div className='content'>
-        <div className="text-header">
-        <h1>Inicia una sesión con un psicólogo licenciado</h1>
-        <h2>Comienza online o cara a cara con uno de nuestros especialistas licenciados</h2>
-        <button><a href="#">Buscar psicólogo</a></button>
+    <div className='main'>
+      <div className="main-container">
+      <div className="main-content">
+            <h1>Inicia una sesión con un psicólogo licenciado</h1>
+            <p>Comienza online o cara a cara con uno 
+            de nuestros especialistas licenciados</p>
+            <button className='main-btn'><a href="/psico">Buscar psicólogo</a></button>
         </div>
-       <div className="img-header">
-        <img src='./img/landing-image.png'></img>
+       <div className="main-img-container">
+          <img src={img} alt='Imagen no encontrada' id='main-img'></img>
        </div>
+      </div>
     </div>
   )
 }
