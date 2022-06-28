@@ -7,8 +7,7 @@ const getModalidades = require("./src/creadores/modalidad.js");
 const getEspecialidades = require('./src/creadores/especialidades');
 const getProvincias = require("./src/creadores/provincias")
 const getCiudades = require("./src/creadores/ciudades")
-const {generePacientes, generePsicologos} = require("./src/creadores/usuarios")
-const getServicios = require("./src/creadores/servicios")
+const {generePacientes, generePsicologos, generarAdmin} = require("./src/creadores/usuarios")
 require('dotenv').config();
 
 conn.sync({force: true, logging: false}).then(async () => {
@@ -21,9 +20,9 @@ conn.sync({force: true, logging: false}).then(async () => {
     getEspecialidades();
     await getProvincias();
     await getCiudades();
-    generePacientes()
-    generePsicologos()
-    getServicios()
+    generePacientes();
+    generePsicologos();
+    generarAdmin();
     console.log(`App is listening on port ${process.env.PORT}!`);
   });
 })

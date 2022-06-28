@@ -5,6 +5,8 @@ const ciudadesRoutes = require("./CiudadesManager/ciudadesRoutes");
 const provinciasRoutes = require("./ProvinciasManager/provinciaRoutes");
 const especialidadesRoutes = require("./EspecialidadesManager/especialidadesRoutes");
 const AuthRoutes = require('./LoginManager/AuthRoutes');
+const AdministradorRoutes = require('./AdminManager/AdminRoutes')
+const { route } = require("./PacienteManager/pacienteRoutes");
 
 const router = Router();
 
@@ -13,6 +15,7 @@ router.use('/auth', AuthRoutes)
 router.use('/psicologo', psicologoRoutes);
 router.use('/paciente', pacienteRoutes);
 router.use('/ciudades', ciudadesRoutes);
-router.use('/provincias', provinciasRoutes)
-router.use('/especialidades', especialidadesRoutes)
+router.use('/provincias', provinciasRoutes);
+router.use('/especialidades', especialidadesRoutes);
+router.use('/administrador', AdministradorRoutes)
 module.exports = router;

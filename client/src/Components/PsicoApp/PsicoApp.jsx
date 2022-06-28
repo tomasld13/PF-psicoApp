@@ -1,0 +1,23 @@
+import { Navigate, Route, Routes } from "react-router-dom";
+import ContactSection from "../Contact/ContactSection";
+import Footer from "../Footer/Footer";
+import { Home } from "../Home/Home";
+import Nav from "../Nav/Nav";
+import Psychologists from "../Psychologists/Psychologists";
+import ScrollToTop from "../ScrollToTop/ScrollToTop";
+
+export default function PsicoApp() {
+    return (
+        <>
+            <Nav/>
+            <ScrollToTop />
+            <Routes>
+                <Route path="/" element={<Home/>}/>
+                <Route path='/psico' element={<Psychologists/>} />
+                <Route path='/contacto' element={ <ContactSection/>} />
+                <Route path="/*" element={ <Navigate to="/" /> } />
+            </Routes>
+            <Footer/>
+        </>
+    );
+}
