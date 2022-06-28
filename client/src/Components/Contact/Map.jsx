@@ -48,7 +48,7 @@ function Map() {
         <div className="card-container">
             <div className="map__card">
                 <h3 className="map__card__heading">
-                    Nuestras oficiales están acá!
+                    Nuestras oficinas están acá!
                 </h3>
                 <p>Buenos Aires, Argentina</p>
                 <a href="https://www.google.com/search?q=buenos+aires+google+maps&oq=buenos+aires+google+maps&aqs=chrome..69i57.3095j0j1&sourceid=chrome&ie=UTF-8#" 

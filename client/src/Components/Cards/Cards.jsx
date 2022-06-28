@@ -74,14 +74,14 @@ export default function Cards() {
           }}>Buscar</button>
         </div>
         <select className='border border-gray-300 my-2.5 px-3 py-1 rounded-lg shadow-sm focus:outline-none focus:border-primary' name="especialidad" id="especialidad" onChange={handlerClick}>
-            <option selected value="0"> Orden... </option>
+            <option selected disabled value=" "> Orden... </option>
             <option value="asc">asc</option>
             <option value="desc">desc</option>
         </select>
         {/* <button onClick={handlerClick}>Ordenar</button> */}
         <div>
           <select className='border border-gray-300 my-2.5 px-3 py-1 rounded-lg shadow-sm focus:outline-none focus:border-primary' name="especialidad" id="especialidad" onChange={onChangeFilter}>
-            <option selected value="0"> Elige una especialidad </option>
+            <option selected disabled value=" "> Elige una especialidad </option>
             <option value="Clinica">Psicologia Clinica</option>
             <option value="Educacional">Psicologia Educacional</option>
             <option value="Deportiva">Psicologia Deportiva</option>

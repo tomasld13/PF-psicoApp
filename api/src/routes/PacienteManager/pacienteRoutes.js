@@ -1,10 +1,12 @@
 
 const Router = require("express");
-const { getPacientes, postPaciente, getOnePacienteAndUsers } = require("./pacienteController");
+const { getPacientes, postPaciente, getOnePacienteAndUsers, deletePaciente } = require("./pacienteController");
 const {check} = require('express-validator');
+const { esAdminRol } = require("../../middlewares/validarAdmin");
 const { verficarEmail , verificarId} = require("../../helpers/db-validators");
 const validarJWT = require("../../middlewares/jwt-validator");
 const validarCampos = require("../../middlewares/validar-campos");
+
 
 const router = Router()
 //Tar los pacientes
@@ -23,5 +25,10 @@ router.get('/:id',[
     check('id').custom(verificarId),
 
 ], getOnePacienteAndUsers);
-
+router.delete('/:id',[
+    validarJWT,
+    esAdminRol,
+    check('id', 'No es un is valido').custom(verificarId),
+    validarCampos
+],deletePaciente)
 module.exports = router;

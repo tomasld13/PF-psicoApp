@@ -1,6 +1,7 @@
 import React from 'react'
 import { Button } from '../Button/Button'
 import { Link } from 'react-router-dom'
+import logoImage from '../Nav/logo.png'
 import './Footer.css'
 
 function Footer() {
@@ -54,7 +55,7 @@ function Footer() {
         <div class='social-media-wrap'>
           <div class='footer-logo'>
             <Link to='/' className='social-logo'>
-              PSICOAPP
+              <img src={logoImage} alt="logo image" width='250rem' />
             </Link>
           </div>
           <small class='website-rights'>PSICOAPP © 2020</small>

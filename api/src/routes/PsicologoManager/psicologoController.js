@@ -1,9 +1,10 @@
-const { Psicologo, Usuario, Paciente, Ciudad, Provincia, Genero, Rol, Especialidades } = require("../../db");
+const { Psicologo, Usuario, Paciente, Ciudad, Provincia, Genero, Rol, Especialidades, Servicio, Precio } = require("../../db");
+const bcrypt = require('bcryptjs');
 
 const getPsicologo = async (req, res, next) => {
     Usuario.findAll({
         where: { rolId: 2},
-        include: [{ model: Psicologo, include: { model: Especialidades, attributes: ['especialidad'] }, attributes: { exclude: ["fk_usuarioID", "especialidadeId"] } },
+        include: [{ model: Psicologo, include: [{ model: Especialidades, attributes: ['especialidad']}, {model: Servicio, include: [{model: Precio, attributes: ['costo']}] }], attributes: { exclude: ["fk_usuarioID", "especialidadeId"] } },
         { model: Ciudad, include: { model: Provincia, attributes: ['name'] }, attributes: ['name'] },
         { model: Genero, attributes: ["genero"] },
         { model: Rol, attributes: ["name"] }]
@@ -15,10 +16,10 @@ const getPsicologo = async (req, res, next) => {
 }
 
 const postPsicologo = async (req, res, next) => {
-    const { name, lastname, email, telephone, address, birth, rol, gener, ciudad, honorario, yearsExperience , especialidad} = req.body;
+    const { name, lastname, email, telephone, address, birth, rol, gener, ciudad, yearsExperience , especialidad, password} = req.body;
     try {
-        const newUSuario = await Usuario.create({ name, lastname, email, telephone, address, birth });
-        const newPsicologo = await Psicologo.create({ honorario, yearsExperience });
+        const newUSuario = await Usuario.create({ name, lastname, email, telephone, address, birth, password: bcrypt.hashSync(password, 10) });
+        const newPsicologo = await Psicologo.create({ yearsExperience });
         const role = await Rol.findOne({ where: { name: rol } });
         const genero = await Genero.findOne({ where: { genero: gener } });
         const city = await Ciudad.findOne({ where: { name: ciudad } });
@@ -29,13 +30,32 @@ const postPsicologo = async (req, res, next) => {
         newUSuario.setRol(role);
         newUSuario.setGenero(genero);
         newUSuario.setCiudad(city);
-        newPsicologo.setEspecialidade(espe);
+        newPsicologo.setEspecialidades(espe);
         
         res.status(200).send([newUSuario,newPsicologo]);
     } catch (error) {
         res.status(404).send({ error: error.message })
     }
 
+}
+
+const postServicioPsicologo = async (req, res, next) => {
+    const { id } = req.params;
+    const { servicio, precio } = req.body;
+    try {
+        const psicologo = await Psicologo.findByPk(id);
+        if (!psicologo) {
+            return res.status(404).send({ error: "Psicologo no encontrado" });
+        }
+        const newServicio = await Servicio.findOne({ where: {servicio : servicio}});
+        if(!newServicio) return res.status(404).send({ error: "Servicio no encontrado" });
+        const newPrecio = await Precio.create({ costo: precio });
+        newServicio.setPrecios(newPrecio);
+        psicologo.addServicio(newServicio);
+        res.send([newServicio, newPrecio]);
+    } catch (error) {
+        res.status(404).send({ error: error.message })
+    }
 }
 
 const getOnePsicologoAndUsers = async (req, res, next) => {
@@ -114,5 +134,6 @@ module.exports = {
     getOnePsicologoAndUsers,
     getPsicologosByProvincia,
     getPsicologosByCiudad,
-    getPsicologosByEspecialidad
+    getPsicologosByEspecialidad,
+    postServicioPsicologo
 }

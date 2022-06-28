@@ -7,10 +7,6 @@ module.exports = (sequelize) => {
     yearsExperience: {
       type: DataTypes.INTEGER,
       allowNull: false,
-    },
-    honorario: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
     }
   },
     

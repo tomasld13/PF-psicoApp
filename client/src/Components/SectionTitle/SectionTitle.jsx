@@ -9,14 +9,14 @@ const SectionTitleStyle = styled.div`
   }
   h2 {
     font-family: 'Tenor-Sans';
-    font-size: 3rem;
+    font-size: 2rem;
     margin-top: 0.5rem;
     text-transform: uppercase;
   }
   @media only screen and (max-width: 768px) {
     text-align: center;
     p {
-      font-size: 1.2rem;
+      font-size: 2rem;
     }
     h2 {
       font-size: 2.3rem;
