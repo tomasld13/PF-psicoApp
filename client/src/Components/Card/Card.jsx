@@ -1,8 +1,9 @@
 import React from 'react'
 import style from "./Card.module.css"
 import img from "../Testimonials/face1.jpg"
+import { Link, Navigate } from "react-router-dom";
 
-export default function Card({nombreCompleto, experiencia, especialidad, ciudad}) {
+export default function Card({nombreCompleto, experiencia, especialidad, ciudad, id}) {
 
   return (
     <div 
@@ -11,9 +12,11 @@ export default function Card({nombreCompleto, experiencia, especialidad, ciudad}
     >
         <div className='flex justify-around items-center'>
             <img className='rounded-full w-1/2' src={img}/>
-            <div>
+            <div> 
+                <Link to={`/psico/${id}`}>
                 <h2 className='text-lg font-bold md:text-2xl'>{nombreCompleto?nombreCompleto.split(" ")[0]:nombreCompleto}</h2>
                 <h2 className='text-lg font-bold md:text-2xl'>{nombreCompleto?nombreCompleto.split(" ")[2]:nombreCompleto}</h2>
+                </Link>
             </div>
         </div>
         <input className='py-2.5' type="range" />
