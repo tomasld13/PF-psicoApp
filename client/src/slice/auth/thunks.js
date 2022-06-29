@@ -16,7 +16,6 @@ export const startGoogleSignIn = () => {
 
 export const startCreatingUserWithEmailPasswordPatient = (paciente) => {
 
-    console.log(paciente);
     return async (dispatch) => {
         dispatch( checkingCredentials() );
         dispatch( logout() );
@@ -69,15 +68,31 @@ export const startCreatingUserWithEmailPasswordPsycho = (paciente) => {
 
 export const startLoginWithEmailPassword = (email, password) => {
 
+    const login = {email,password};
+
     return async (dispatch) => {
         dispatch( checkingCredentials() );
+        dispatch( logout() );
 
-        // Acá se haría la peticion al backend para la autenticacion
-        const {ok, uid, displayName, photoURL, errorMessage} = await loginWithEmailPassword(email, password);
+        const result = await fetch('http://localhost:3001/api/auth/login', {
+            method: 'POST',
+            body: JSON.stringify(login),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
 
-        if(!ok) return dispatch(logout({errorMessage}));
+        if (!result.ok) {
+            dispatch(errorRegisterBack('Usuario / Password no son correctos'));
+            return dispatch(logoutBack());
+        }
 
-        dispatch( login({email, uid, displayName, photoURL}));
+        const data = await result.json();
+
+        localStorage.setItem('paciente', JSON.stringify(data.user));
+
+        dispatch(loginBack(data.user));
+
     }
 }
 
