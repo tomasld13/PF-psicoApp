@@ -9,7 +9,8 @@ import img3 from '../Testimonials/face3.jpg'
 export default class Testimonials extends Component {
   render() {
     return (
-      <Carousel
+      <div name='testimonios'>
+      <Carousel 
         showArrows={true}
         infiniteLoop={true}
         showThumbs={false}
@@ -60,6 +61,7 @@ export default class Testimonials extends Component {
           </div>
         </div>
       </Carousel>
+    </div>
     );
   }
 }

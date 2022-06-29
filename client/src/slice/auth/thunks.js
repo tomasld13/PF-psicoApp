@@ -83,6 +83,7 @@ export const startLoginWithEmailPassword = (email, password) => {
         });
 
         if (!result.ok) {
+            dispatch(errorRegisterBack('Usuario / Password no son correctos'));
             return dispatch(logoutBack());
         }
 
