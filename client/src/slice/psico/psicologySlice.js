@@ -8,11 +8,15 @@ export const psicologySlice = createSlice({
         spatiality: [],
         sortPsycho: [],
         copyPsycho: [],
+        pychoId:[],
     },
     reducers: {
         getPsychos: (state, {payload}) => {
             state.psychologists = payload
             state.sortPsycho = payload
+        },
+        getPsychoByID: (state, {payload}) => {
+            state.pychoId = payload
         },
         filterSpatiality: (state, {payload}) => {
             state.spatiality = payload
@@ -58,4 +62,4 @@ export const psicologySlice = createSlice({
     },
 });
 
-export const {getPsychos, filterSpatiality, sortByNamePsycho} = psicologySlice.actions; 
+export const {getPsychos, filterSpatiality, sortByNamePsycho, getPsychoByID} = psicologySlice.actions; 

@@ -103,8 +103,9 @@ export default function Cards() {
             spatiality.length !== 0 ? [...spatiality].splice(
               firstIndex,itemsPerPage
             ).map(psycho => {
+              
               return <Card 
-                      id={psycho.id}
+                      id={psycho.psicologo.id}
                       key={psycho.id} 
                       nombreCompleto={`${psycho.name} ${psycho.lastname}`}
                       experiencia={psycho.psicologo.yearsExperience}
@@ -114,7 +115,7 @@ export default function Cards() {
               firstIndex,itemsPerPage
             ).map(psycho => {
               return <Card
-                      id={psycho.id}
+                      id={psycho.psicologo.id}
                       key={psycho.id} 
                       nombreCompleto={`${psycho.name} ${psycho.lastname}`}
                       experiencia={psycho.psicologo.yearsExperience}
