@@ -88,7 +88,7 @@ function Nav() {
           {
             status === 'authenticated' || storeAuthBack.status === 'authenticated'
             ? button && <Button buttonStyle='btn--outline' onClick={onLogout}>Logout</Button>
-            : button && <a path='/auth/login'>
+            : button && <a href='/auth/login'>
               {/* <Button buttonStyle='btn--outline'>Login</Button> */}
               <Button buttonStyle='btn--outline' link='/auth/login'>Ingresar</Button>
             </a> 
