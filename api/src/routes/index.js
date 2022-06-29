@@ -3,9 +3,10 @@ const psicologoRoutes = require("./PsicologoManager/psicologoRoutes");
 const pacienteRoutes = require("./PacienteManager/pacienteRoutes");
 const ciudadesRoutes = require("./CiudadesManager/ciudadesRoutes");
 const provinciasRoutes = require("./ProvinciasManager/provinciaRoutes");
-const especialidadesRoutes = require("./EspecialidadesManager/especialidadesRoutes");
+const especialidadesRoutes = require("./EspecialidadesManager/EspecialidadesRoutes");
 const AuthRoutes = require('./LoginManager/AuthRoutes');
-
+const horariosRoutes = require("./HorariosManager/horariosRoutes")
+const diaRoutes = require("./DiaManager/diaRoutes")
 const router = Router();
 
 
@@ -15,4 +16,6 @@ router.use('/paciente', pacienteRoutes);
 router.use('/ciudades', ciudadesRoutes);
 router.use('/provincias', provinciasRoutes)
 router.use('/especialidades', especialidadesRoutes)
+router.use("/dia", diaRoutes)
+router.use("/horarios", horariosRoutes)
 module.exports = router;

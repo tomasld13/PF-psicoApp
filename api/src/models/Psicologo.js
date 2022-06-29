@@ -8,9 +8,14 @@ module.exports = (sequelize) => {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    honorario: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
+    inicioHorario: {
+      type: DataTypes.TIME
+    },
+    finHorario: {
+      type: DataTypes.TIME
+    },
+    intervaloSesion: {
+      type: DataTypes.INTEGER
     }
   },
     

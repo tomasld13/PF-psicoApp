@@ -1,9 +1,9 @@
-const { Psicologo, Usuario, Paciente, Ciudad, Provincia, Genero, Rol, Especialidades } = require("../../db");
+const { Psicologo, Usuario, Paciente, Ciudad, Provincia, Genero, Rol, Especialidades, Horarios } = require("../../db");
 
 const getPsicologo = async (req, res, next) => {
     Usuario.findAll({
         where: { rolId: 2},
-        include: [{ model: Psicologo, include: { model: Especialidades, attributes: ['especialidad'] }, attributes: { exclude: ["fk_usuarioID", "especialidadeId"] } },
+        include: [{ model: Psicologo, include: [{ model: Especialidades, attributes: ['especialidad'] }, {model: Horarios, includes: {model: Paciente}}], attributes: { exclude: ["fk_usuarioID", "especialidadeId"] } },
         { model: Ciudad, include: { model: Provincia, attributes: ['name'] }, attributes: ['name'] },
         { model: Genero, attributes: ["genero"] },
         { model: Rol, attributes: ["name"] }]

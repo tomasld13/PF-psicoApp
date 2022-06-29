@@ -51,7 +51,7 @@ sequelize.models = Object.fromEntries(capsEntries);
 
 // En sequelize.models están todos los modelos importados como propiedades
 // Para relacionarlos hacemos un destructuring
-const { Psicologo, Paciente, Usuario, Rol, Genero, MetodoPago, Factura, Detalle, Modalidad, Administrador, Especialidades, Horarios, Reviews, HistoriasClinicas, Consulta, Provincia, Ciudad, Servicio } = sequelize.models;
+const { Psicologo, Paciente, Usuario, Rol, Genero, MetodoPago, Factura, Detalle, Modalidad, Administrador, Especialidades, Horarios, Reviews, HistoriasClinicas, Consulta, Provincia, Ciudad, Servicio, Dia } = sequelize.models;
 // Aca vendrian las relaciones
 // Product.hasMany(Reviews);
 
@@ -98,8 +98,17 @@ Administrador.belongsTo(Usuario, {foreignKey : 'fk_usuarioID', targetKey : 'id'}
 Especialidades.belongsToMany(Psicologo, {through : 'Psicologo_Especialidades'});
 Psicologo.belongsToMany(Especialidades, {through : 'Psicologo_Especialidades'});
 //Horario->Psicologo
-Horarios.belongsToMany(Psicologo, {through : 'Horario_Psicologo'});
-Psicologo.belongsToMany(Horarios, {through : 'Horario_Psicologo'});
+Horarios.belongsTo(Psicologo)
+Psicologo.hasMany(Horarios)
+//Dia->Psicologo
+Dia.belongsToMany(Psicologo, {through : 'Dia_Psicologo'});
+Psicologo.belongsToMany(Dia, {through : 'Dia_Psicologo'});
+//Horario->Paciente
+Horarios.belongsTo(Paciente)
+Paciente.hasMany(Horarios)
+//Dia->Horario
+Horarios.belongsTo(Dia)
+Dia.hasMany(Horarios)
 //Reviews->Psicologo
 Reviews.belongsTo(Psicologo, {foreignKey : 'fk_psicologoID', targetKey : 'id'});
 Psicologo.hasMany(Reviews, {foreignKey : 'fk_psicologoID', targetKey : 'id'});
