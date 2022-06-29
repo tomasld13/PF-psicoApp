@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getPsicology, filterPsicology, sortByName } from "../../slice/psico/thunks";
 import Card from "../Card/Card";
 import styles from '../Cards/cards.module.css';
-
+import Loading from '../Loading/Loading.jsx'
 
 const itemsPerPage = 6;
 
@@ -28,7 +28,9 @@ export default function Cards() {
         const nextPage = currentPage + 1;
         
         const firstIndex = nextPage * itemsPerPage;
-        
+        if (spatiality.length !==0 ) {
+          if(firstIndex >= spatiality.length) return;
+        }
         if(firstIndex >= psychologists.length) return;
         
         setFirstIndex(firstIndex);
@@ -62,7 +64,7 @@ export default function Cards() {
   }
 
   return (
-    <section className={styles.section_cards}>
+    <section /*className={styles.section_cards}*/ className="flex justify-around">
       <div className={styles.btn_container}>
 
         <div className="flex flex-col content-center items-center">
@@ -81,7 +83,7 @@ export default function Cards() {
         {/* <button onClick={handlerClick}>Ordenar</button> */}
         <div>
           <select className='border border-gray-300 my-2.5 px-3 py-1 rounded-lg shadow-sm focus:outline-none focus:border-primary' name="especialidad" id="especialidad" onChange={onChangeFilter}>
-            <option selected disabled value=" "> Elige una especialidad </option>
+            <option selected value=" "> Elige una especialidad </option>
             <option value="Clinica">Psicologia Clinica</option>
             <option value="Educacional">Psicologia Educacional</option>
             <option value="Deportiva">Psicologia Deportiva</option>
@@ -111,12 +113,13 @@ export default function Cards() {
                       especialidad={psycho.psicologo.especialidades[0].especialidad}
                       ciudad={psycho.ciudad.name}/>
             }) : (<div>
-                  Loading...
+                  <Loading/>
                 </div>)
           }
         </div>
         <div>
           <button className='bg-primary text-white border border-primary font-bold py-2 px-4 rounded hover:bg-white hover:text-primary my-2.5 mx-2.5 h-10' onClick={prevHandler}>Prev</button>
+          <input className="bg-white text-primary border border-primary font-bold py-2 px-2 text-center rounded my-2.5 mx-2.5 h-10 w-10" value={ (currentPage + 1) }/>
           <button className='bg-primary text-white border border-primary font-bold py-2 px-4 rounded hover:bg-white hover:text-primary my-2.5 mx-2.5 h-10' onClick={nextHandler}>Next</button>
         </div>
       </div>
