@@ -25,8 +25,7 @@ const login = async(req,res = response)=>{
         
 
         //Verificar la contraseña
-        console.log("User: ",user.password);
-        console.log("Body: ",bcrypt.hashSync(password));
+        
         
         const validPassword = bcrypt.compareSync(password, user.password);
         
