@@ -1,6 +1,10 @@
+import Loading from "../Loading/Loading.jsx"
 
 export default function CheckingAuth() {
     return (
-        <h1>Loading...</h1>
+        
+        <div className="mt-200 bg-red w-screen h-screen absolute flex items-center" >
+            <Loading/>
+        </div>
     );
 }

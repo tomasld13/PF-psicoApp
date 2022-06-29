@@ -1,5 +1,6 @@
 .section_cards {
     display: flex;
+    justify-content: space-around;
 }
 
 .btn_container {
