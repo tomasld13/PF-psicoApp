@@ -2,6 +2,7 @@ import React from 'react'
 import { Button } from '../Button/Button'
 import { Link } from 'react-router-dom'
 import logoImage from '../Nav/logo.png'
+// import { Link, animateScroll as scroll} from 'react-scroll'
 import './Footer.css'
 
 function Footer() {
@@ -18,22 +19,25 @@ function Footer() {
             <div className="input-areas">
                 <form>
                     <input type="email" name='email' placeholder='Su email...' className="footer-input" />
-                    <Button buttonStyle='btn--outline'>Suscribite</Button>
+                    <Button type='submit' buttonStyle='btn--outline'>Suscribite</Button>
+                    <div className="form-container">
+                    <input type="checkbox"/> <p>Si, estoy de acuerdo en recibir novedades de PsicoApp.</p>
+                    </div>
                 </form>
             </div>
         </section>
         <div class='footer-links'>
         <div className='footer-link-wrapper'>
           <div class='footer-link-items'>
-            <h2>Nosotros</h2>
+            <h2>NOSOTROS</h2>
             <Link to='/sign-up'>Cómo funciona</Link>
-            <Link to='/'>Testimonios</Link>
+            <Link to='testimonios' smooth={true} offset={50} duration={500} >Testimonios</Link>
             <Link to='/'>Psicólogos</Link>
-            <Link to='/'>Blog</Link>
+            <Link to='pricing' smooth={true} offset={50} duration={500}>Precios</Link>
             <Link to='/'>Términos de servicio</Link>
           </div>
           <div class='footer-link-items'>
-            <h2>Contactanos</h2>
+            <h2>CONTACTANOS</h2>
             <Link to='/contacto'>Formulario</Link>
             <Link to='/'>Telefono:</Link>
             <Link to='/'>+54 9 11 51467589</Link>
@@ -43,7 +47,7 @@ function Footer() {
         </div>
         <div className='footer-link-wrapper'>
           <div class='footer-link-items'>
-            <h2>Social</h2>
+            <h2>SOCIAL</h2>
             <Link to='/'>Instagram</Link>
             <Link to='/'>Facebook</Link>
             <Link to='/'>Youtube</Link>

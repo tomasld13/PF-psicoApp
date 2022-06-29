@@ -6,7 +6,7 @@ import img02 from "./img-questions-02-removebg-preview.png"
 
 export default function Questions() {
   return (
-    <div className={style.content}>
+    <div name='questions' className={style.content}>
       <div className={style.img01}><img src={img01} /></div>
       <div className={style.contentQuestions}>
       <SectionTitle subheading='Preguntas Frecuentes' heading='' />
