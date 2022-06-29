@@ -7,6 +7,9 @@ const especialidadesRoutes = require("./EspecialidadesManager/EspecialidadesRout
 const AuthRoutes = require('./LoginManager/AuthRoutes');
 const horariosRoutes = require("./HorariosManager/horariosRoutes")
 const diaRoutes = require("./DiaManager/diaRoutes")
+const AdministradorRoutes = require('./AdminManager/AdminRoutes')
+const { route } = require("./PacienteManager/pacienteRoutes");
+
 const router = Router();
 
 
@@ -18,4 +21,6 @@ router.use('/provincias', provinciasRoutes)
 router.use('/especialidades', especialidadesRoutes)
 router.use("/dia", diaRoutes)
 router.use("/horarios", horariosRoutes)
+router.use('/administrador', AdministradorRoutes)
+
 module.exports = router;

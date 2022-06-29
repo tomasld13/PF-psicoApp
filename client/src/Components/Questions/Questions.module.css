@@ -6,11 +6,16 @@
 }
 
 .content {
+    background-color: var(--secondary);
+    border-radius: 2rem;
     display: flex;
     flex-direction: row;
-    width: 90vw;
+    width: 100%;
+    height: 30rem;
     justify-content: center;
+    font-family: 'Montserrat';
     margin: auto;
+    margin-bottom: 10rem;
 }
 
 .img01, .img02 {
@@ -34,4 +39,10 @@
 
 .content hr {
     border-color: var(--secondary)
+}
+
+@media screen and (max-width: 960px) {
+    .content {
+    height: 100%;
+    }
 }

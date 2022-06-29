@@ -26,7 +26,7 @@ const ItemStyles = styled.div`
 
 
 function ContactInfoItem({
-    icon = <MdPlace />,
+    icon = <MdPlace size='2rem' />,
     text = 'this is an info',
 }) {
   return (

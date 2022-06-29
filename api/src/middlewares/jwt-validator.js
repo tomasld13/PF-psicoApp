@@ -13,14 +13,20 @@ const validarJWT = async (req = request, res = response, next) => {
 
   try {
     const { id } = jwt.verify(token, process.env.SECRETORPRIVATEKEY);
-    console.log(id);
+
+    
     // leer el usuario que corresponde al uid
+
+    console.log("ESTOY EN EL JWT Validator",id);
+    // leer el usuario que corresponde al id
+
     const user = await Usuario.findByPk(id, {
       include: {
         model: Rol,
         attributes: ["name"],
       },
     });
+    console.log("ESTOY EN EL JWT Validator",user.toJSON())
 
     if (!user) {
       return res.status(401).json({
