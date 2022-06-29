@@ -39,7 +39,7 @@ function Nav() {
             <img src={logoImage} alt="logo image" />
           </Link>
           {
-            status === 'authenticated' || storeAuthBack.status === 'authenticated' ? <h3>Hola {!displayName ? storeAuthBack.name : displayName}</h3> : null
+            status === 'authenticated' || storeAuthBack.status === 'authenticated' ? <h3>Hola {!displayName ? `${storeAuthBack.name} ${storeAuthBack.lastname}` : displayName}</h3> : null
           }
           <div className='menu-icon' onClick={handleClick}>
             <i className={click ? 'fas fa-times' : 'fas fa-bars'} />
@@ -75,7 +75,7 @@ function Nav() {
                 className='nav-links-mobile'
                 onClick={closeMobileMenu}
               >
-                Registrarse
+                Ingresar
               </Link>
             </li>
           </ul>
