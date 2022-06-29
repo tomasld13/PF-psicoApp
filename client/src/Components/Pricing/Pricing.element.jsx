@@ -6,7 +6,7 @@ export const PricingSection = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background: #f0efff;
+  background: #fff;
   border-radius: 2rem;
 `;
 
