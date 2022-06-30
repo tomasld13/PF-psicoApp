@@ -11,12 +11,16 @@ mercadopago.configure({
 })
 
 //ruta que genera la URL a mercado pago
-const getMP = async (req, res) => {
+const postMP = async (req, res) => {
     try {
-    const data = req.body;
-    const items = [ 
-        {servicio: data.servicio, precio: data.precio, quantity: 1}, 
-    ]
+    // const data = req.body;
+    // const items = [ 
+    //     {servicio: data.servicio, precio: data.precio, quantity: 1}, 
+    // ]
+    const id_orden = 1;
+       const items = [
+        {servicio: "Sesion personal", precio: 1500, quantity: 1},
+       ] 
     const items_md = items.map(item => ({
         title: item.servicio,
         quantity: item.quantity,
@@ -37,7 +41,7 @@ const getMP = async (req, res) => {
                 }
             ],
         },
-        external_reference: "external_reference_1234",
+        external_reference:`${id_orden}`,
         installments: 3,
         statement_descriptor: "Test",
         shipments: {
@@ -73,5 +77,5 @@ const getMP = async (req, res) => {
 }
 
 module.exports = {
-    getMP
+    postMP
 }
