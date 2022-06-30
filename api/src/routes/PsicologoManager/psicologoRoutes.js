@@ -15,7 +15,6 @@ check('name','Nombre requerido').not().isEmpty(),
 check('password','La contraseña debe ser minimo de 6 characteres').isLength({min : 6})],
 postPsicologo);
 router.get('/:id',[
-    validarJWT,
     validarCampos,
     check('id').custom(verificarId),
 

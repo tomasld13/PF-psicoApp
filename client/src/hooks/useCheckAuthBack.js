@@ -6,7 +6,7 @@ export const useCheckAuthBack = () => {
     const pacienteStorage = (localStorage.getItem('paciente')) ? JSON.parse( localStorage.getItem('paciente') ) : {};
     
     const dispatch = useDispatch();
-        if( !pacienteStorage.name ) return dispatch(logoutBack()); 
+        if( !pacienteStorage.user?.name && !pacienteStorage.token) return dispatch(logoutBack()); 
 
         dispatch(loginBack(pacienteStorage));
 

@@ -21,7 +21,7 @@ export default function Cards() {
 
   
   const { psychologists, spatiality } = useSelector(state => state.psicology)
-
+  console.log(psychologists)
   // Crea el indice siguiente para pasar al siguiente grupo de 6 psicologos
     const nextHandler = () => {
         const nextPage = currentPage + 1;
