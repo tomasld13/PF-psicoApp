@@ -23,8 +23,9 @@ export const authSlice = createSlice({
             rolId: null,
             generoId: null,
             ciudadId: null,
-            errorMessage: null,
-        }
+            error: null,
+        },
+        error: ''
     },
     reducers: {
         login: (state, {payload}) => {
@@ -49,17 +50,16 @@ export const authSlice = createSlice({
         },
         loginBack: (state, {payload}) => {
             state.authBack.status = 'authenticated';
-            state.authBack.id = payload[0] ? payload[0].id : 2;
-            state.authBack.name = payload[0].name;
-            state.authBack.lastname = payload[0].lastname;
-            state.authBack.email = payload[0].email;
-            state.authBack.telephone = payload[0].telephone;
-            state.authBack.address = payload[0].address;
-            state.authBack.birth = payload[0].birth;
-            state.authBack.rolId = payload[0].rolId;
-            state.authBack.generoId = payload[0].generoId;
-            state.authBack.ciudadId = payload[0].ciudadId;
-            state.authBack.errorMessage = null;
+            state.authBack.id = payload.id;
+            state.authBack.name = payload.name;
+            state.authBack.lastname = payload.lastname;
+            state.authBack.email = payload.email;
+            state.authBack.telephone = payload.telephone;
+            state.authBack.address = payload.address;
+            state.authBack.birth = payload.birth;
+            state.authBack.rolId = payload.rolId;
+            state.authBack.generoId = payload.generoId;
+            state.authBack.ciudadId = payload.ciudadId;
         },
         logoutBack: (state, {payload}) => {
             state.authBack.status = 'no-authenticated';
@@ -73,9 +73,11 @@ export const authSlice = createSlice({
             state.authBack.rolId = null;
             state.authBack.generoId = null;
             state.authBack.ciudadId = null;
-            state.authBack.errorMessage = payload?.error;
         },
+        errorRegisterBack: (state, {payload}) => {
+            state.error = payload;
+        }
     }
 });
 
-export const {login, logout, checkingCredentials, loginBack, logoutBack} = authSlice.actions; 
+export const {login, logout, checkingCredentials, loginBack, logoutBack, errorRegisterBack} = authSlice.actions; 
