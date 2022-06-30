@@ -3,7 +3,7 @@ const { postMP } = require("./mercadopagoController");
 
 const router = Router()
 
-router.get('/', postMP);
+router.post('/', postMP);
 
 
 module.exports = router;

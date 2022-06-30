@@ -11,16 +11,12 @@ mercadopago.configure({
 })
 
 //ruta que genera la URL a mercado pago
-const postMP = async (req, res) => {
-    try {
-    // const data = req.body;
-    // const items = [ 
-    //     {servicio: data.servicio, precio: data.precio, quantity: 1}, 
-    // ]
+const postMP = (req, res) => {
+    const data = req.body;
+    const items = [ 
+        {servicio: data.servicio, precio: data.precio, quantity: 1}, 
+    ]
     const id_orden = 1;
-       const items = [
-        {servicio: "Sesion personal", precio: 1500, quantity: 1},
-       ] 
     const items_md = items.map(item => ({
         title: item.servicio,
         quantity: item.quantity,
@@ -67,13 +63,13 @@ const postMP = async (req, res) => {
     mercadopago.preferences.create(preference)
     .then(function (response) {
         console.log("respondio");
-        global.id = response.body.id;
+        global.id = response.body.init_point;
         console.log(response.body);
         res.json({id: global.id});
+    }).catch(error =>{
+        console.log(error);
+        res.status(400).send({error: error});
     })
-    } catch (error) {
-        console.log(error)
-    }
 }
 
 module.exports = {
