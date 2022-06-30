@@ -18,8 +18,8 @@ conn.sync({force: true, logging: false}).then(async () => {
     getMetodos();
     getModalidades();
     getEspecialidades();
-    await getProvincias();
-    await getCiudades();
+    //await getProvincias();
+    //await getCiudades();
     generePacientes();
     generePsicologos();
     generarAdmin();

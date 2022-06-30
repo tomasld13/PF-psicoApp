@@ -1,10 +1,10 @@
-const { Psicologo, Usuario, Paciente, Ciudad, Provincia, Genero, Rol, Especialidades, Servicio, Precio, Horarios } = require("../../db");
+const { Psicologo, Usuario, Paciente, Ciudad, Provincia, Genero, Rol, Especialidades, Servicio, Dia, Precio, Horarios } = require("../../db");
 const bcrypt = require('bcryptjs');
 
 const getPsicologo = async (req, res, next) => {
     Usuario.findAll({
         where: { rolId: 2},
-        include: [{ model: Psicologo, include: [{ model: Especialidades, attributes: ['especialidad']}, {model: Servicio, include: [{model: Precio, attributes: ['costo']}] }, {model: Horarios, includes: {model: Paciente}}], attributes: { exclude: ["fk_usuarioID", "especialidadeId"] } },
+        include: [{ model: Psicologo, include: [{ model: Especialidades, attributes: ['especialidad']}, {model: Servicio, include: [{model: Precio, attributes: ['costo']}] }], attributes: { exclude: ["fk_usuarioID", "especialidadeId"] } },
         { model: Ciudad, include: { model: Provincia, attributes: ['name'] }, attributes: ['name'] },
         { model: Genero, attributes: ["genero"] },
         { model: Rol, attributes: ["name"] }]
@@ -64,7 +64,7 @@ const getOnePsicologoAndUsers = async (req, res, next) => {
         const psicologo = await Psicologo.findByPk(id, { include: [{model: Usuario, 
         include:[ { model: Ciudad, include: { model: Provincia, attributes: ['name'] }, attributes: ['name'] },
         { model: Genero, attributes: ["genero"] },
-        { model: Rol, attributes: ["name"] }]  }] });
+        { model: Rol, attributes: ["name"] }]  }, {model: Dia, include: {model:Horarios}}] });
         if (!psicologo) {
             return res.status(404).send({ error: "Psicologo no encontrado" });
         }
