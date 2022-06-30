@@ -5,6 +5,7 @@ import { Link, animateScroll as scroll } from 'react-scroll'
 import './Nav.css';
 import { startLogout } from '../../slice/auth/thunks';
 import logoImage from './logo.png'
+import Dropdown from './Dropdown';
 
 function Nav() {
   const [click, setClick] = useState(false);
@@ -12,6 +13,7 @@ function Nav() {
 
   const {displayName, status} = useSelector(state => state.auth.authFirebase);
   const storeAuthBack = useSelector(state => state.auth.authBack);
+  
   const handleClick = () => setClick(!click);
   const closeMobileMenu = () => setClick(false);
 
@@ -87,7 +89,7 @@ function Nav() {
           </ul>
           {
             status === 'authenticated' || storeAuthBack.status === 'authenticated'
-            ? button && <Button buttonStyle='btn--outline' onClick={onLogout}>Logout</Button>
+            ?  button && <Dropdown >Logout</Dropdown>
             : button && <a href='/auth/login'>
               {/* <Button buttonStyle='btn--outline'>Login</Button> */}
               <Button buttonStyle='btn--outline' link='/auth/login'>Ingresar</Button>
