@@ -5,6 +5,7 @@ import { Home } from "../Home/Home";
 import Nav from "../Nav/Nav";
 import Psychologists from "../Psychologists/Psychologists";
 import ScrollToTop from "../ScrollToTop/ScrollToTop";
+import PsicoDetails from "../PsicoDetails/PsicoDetails.jsx"
 
 export default function PsicoApp() {
     return (
@@ -14,6 +15,7 @@ export default function PsicoApp() {
             <Routes>
                 <Route path="/" element={<Home/>}/>
                 <Route path='/psico' element={<Psychologists/>} />
+                <Route path='/psico/:id' element={<PsicoDetails/>} />
                 <Route path='/contacto' element={ <ContactSection/>} />
                 <Route path="/*" element={ <Navigate to="/" /> } />
             </Routes>

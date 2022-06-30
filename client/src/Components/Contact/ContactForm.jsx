@@ -74,7 +74,7 @@ function ContactForm() {
                     />
                 </label>
             </div>
-            <Button type='submit'>Enviar</Button>
+            <button type='submit' className="bg-primary text-white border border-primary font-bold py-2  px-4 rounded hover:bg-white hover:text-primary my-2.5 mx-2.5 h-14" >Enviar</button>
     </FormStyle>
   </>
   )

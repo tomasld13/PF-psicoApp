@@ -7,11 +7,8 @@ export default function Psychologists() {
         <h2 className="text-3xl">Mejores Psicologos</h2>
         <RatingPsychologists/>
         {/* <Clientes con Mayor Raiting /> */}
-        <hr />
-        <Cards />
-        <hr />
-        <h2>Filter</h2>
-        {/* <Filter /> */}
+        <hr/>
+        <Cards/>
         <hr />
     </>
   )

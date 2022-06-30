@@ -8,6 +8,7 @@ const AuthRoutes = require('./LoginManager/AuthRoutes');
 const horariosRoutes = require("./HorariosManager/horariosRoutes")
 const diaRoutes = require("./DiaManager/diaRoutes")
 const AdministradorRoutes = require('./AdminManager/AdminRoutes')
+const mercadopagoRoutes = require('./Mercadopago/mercadopagoRoutes');
 const { route } = require("./PacienteManager/pacienteRoutes");
 
 const router = Router();
@@ -22,5 +23,5 @@ router.use('/especialidades', especialidadesRoutes)
 router.use("/dia", diaRoutes)
 router.use("/horarios", horariosRoutes)
 router.use('/administrador', AdministradorRoutes)
-
+router.use('/mercadopago', mercadopagoRoutes)
 module.exports = router;
