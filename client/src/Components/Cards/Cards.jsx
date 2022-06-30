@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getPsicology, filterPsicology, sortByName } from "../../slice/psico/thunks";
 import Card from "../Card/Card";
 import styles from '../Cards/cards.module.css';
-
+import Loading from '../Loading/Loading.jsx'
 
 const itemsPerPage = 6;
 
@@ -22,13 +22,15 @@ export default function Cards() {
   }, []);
   
   const { psychologists, spatiality } = useSelector(state => state.psicology)
-
+  console.log(psychologists)
   // Crea el indice siguiente para pasar al siguiente grupo de 6 psicologos
     const nextHandler = () => {
         const nextPage = currentPage + 1;
         
         const firstIndex = nextPage * itemsPerPage;
-        
+        if (spatiality.length !==0 ) {
+          if(firstIndex >= spatiality.length) return;
+        }
         if(firstIndex >= psychologists.length) return;
         
         setFirstIndex(firstIndex);
@@ -62,8 +64,11 @@ export default function Cards() {
   }
 
   return (
-    <section className={styles.section_cards}>
-      <div className={styles.btn_container}>
+    <section /*className={styles.section_cards}*/ className="flex justify-around">
+      <div 
+      //className={styles.btn_container}
+      className="container my-16 ml-2.5 py-10 w-64 px-2.5 bg-secundary border border-primary rounded-lg"
+      >
 
         <div className="flex flex-col content-center items-center">
           <input className='border border-gray-300 my-2.5 px-3 py-1 rounded-lg shadow-sm focus:outline-none focus:border-primary' type="text" placeholder="Psicologo..." onChange={e => handlerChange(e)} value={inputFind}/>
@@ -90,6 +95,7 @@ export default function Cards() {
           </select>
         </div>
       </div>
+
       <div>
         <h3 className="text-3xl py-2.5">Cuales Psicologos pueden ayudarte?</h3>
         <div className={styles.cards_container}>
@@ -97,7 +103,10 @@ export default function Cards() {
             spatiality.length !== 0 ? [...spatiality].splice(
               firstIndex,itemsPerPage
             ).map(psycho => {
-              return <Card key={psycho.id} 
+              
+              return <Card 
+                      id={psycho.psicologo.id}
+                      key={psycho.id} 
                       nombreCompleto={`${psycho.name} ${psycho.lastname}`}
                       experiencia={psycho.psicologo.yearsExperience}
                       especialidad={psycho.psicologo.especialidades[0].especialidad}
@@ -105,18 +114,21 @@ export default function Cards() {
             }) : psychologists.length > 0 ? [...psychologists].splice(
               firstIndex,itemsPerPage
             ).map(psycho => {
-              return <Card key={psycho.id} 
+              return <Card
+                      id={psycho.psicologo.id}
+                      key={psycho.id} 
                       nombreCompleto={`${psycho.name} ${psycho.lastname}`}
                       experiencia={psycho.psicologo.yearsExperience}
                       especialidad={psycho.psicologo.especialidades[0].especialidad}
                       ciudad={psycho.ciudad.name}/>
             }) : (<div>
-                  Loading...
+                  <Loading/>
                 </div>)
           }
         </div>
         <div>
           <button className='bg-primary text-white border border-primary font-bold py-2 px-4 rounded hover:bg-white hover:text-primary my-2.5 mx-2.5 h-10' onClick={prevHandler}>Prev</button>
+          <input className="bg-white text-primary border border-primary font-bold py-2 px-2 text-center rounded my-2.5 mx-2.5 h-10 w-10" value={ (currentPage + 1) }/>
           <button className='bg-primary text-white border border-primary font-bold py-2 px-4 rounded hover:bg-white hover:text-primary my-2.5 mx-2.5 h-10' onClick={nextHandler}>Next</button>
         </div>
       </div>
