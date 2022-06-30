@@ -8,7 +8,7 @@ const AuthRoutes = require('./LoginManager/AuthRoutes');
 const horariosRoutes = require("./HorariosManager/horariosRoutes")
 const diaRoutes = require("./DiaManager/diaRoutes")
 const AdministradorRoutes = require('./AdminManager/AdminRoutes')
-const mercadopagoRoutes = require('./Mercadopago/mercadopagoRoutes');
+const mercadopagoRoutes = require('./MercadoPago/mercadopagoRoutes');
 const { route } = require("./PacienteManager/pacienteRoutes");
 
 const router = Router();

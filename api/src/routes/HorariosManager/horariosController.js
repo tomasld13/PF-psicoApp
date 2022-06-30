@@ -2,7 +2,6 @@ const { Psicologo, Paciente, Horarios, Dia } = require("../../db");
 
 const getHorariosPsicologo = async (req, res, next) => {
     const { id } = req.params;
-    console.log(id)
     try {
         const psicologo = await Psicologo.findByPk(id, {include: {model: Dia, include:{model: Horarios, include: {model: Paciente}}}})
         if(!psicologo) return res.status(404).send({ error: "Psicologo no encontrado" });
@@ -14,12 +13,11 @@ const getHorariosPsicologo = async (req, res, next) => {
 
 const getHorariosPaciente = async (req, res, next) => {
     const { id } = req.params;
-    console.log(id)
     try {
         const paciente = await Paciente.findByPk(id)
         if(!paciente) return res.status(404).send({ error: "Paciente no encontrado" });
         let dias = await Dia.findAll({include:{model: Horarios}})
-        let diasPaciente = dias.filter(d => d.horarios.filter(h => {if(h.pacienteID == id) diasPaciente.push(h)}))
+        let diasPaciente = dias.filter(d => d.horarios.filter(h => h.pacienteID === id))
         return res.send({paciente, diasPaciente})
     } catch (error) {
         next(error)
@@ -54,7 +52,6 @@ const updateHorario = async(req, res, next) => {
     //Formato Time: "time": "22:15:00"
     try {
         if(!newDate){
-            console.log("Hola")
             const psicologo = await Psicologo.findByPk(id)
             if(!psicologo) return res.status(404).send({ error: "Psicologo no encontrado" });
             const horario = await Horarios.findByPk(horarioID)
@@ -63,7 +60,6 @@ const updateHorario = async(req, res, next) => {
             const psicologoRes = await Psicologo.findByPk(id, {include: {model: Dia, include:{model: Horarios, include: {model: Paciente}}}})
             return res.send(psicologoRes)
         }else{
-            console.log("chau")
             const psicologo = await Psicologo.findByPk(id)
             if(!psicologo) return res.status(404).send({ error: "Psicologo no encontrado" });
             let dia = await Dia.findOne({where:{fecha:newDate}})
