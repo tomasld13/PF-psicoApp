@@ -66,13 +66,13 @@ function ContactSection() {
           <SectionTitle heading='contactanos' subheading='' />
             <div className="contactSection-wrapper">
 
-                <div className="contact-left">
+                <div className="contact-left text-lg text-white font-bold">
                     <ContactInfoItem 
-                    icon={<MdLocalPhone />}
+                    icon={<MdLocalPhone size='2rem'/>}
                     text='+54 9 11 54236789'
                     />
                     <ContactInfoItem 
-                    icon={<MdEmail /> }
+                    icon={<MdEmail size='2rem' /> }
                     text= 'soporte@psicoapp.com'
                     />
                     <ContactInfoItem 
