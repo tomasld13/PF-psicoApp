@@ -1,4 +1,5 @@
-import { getPsychos, filterSpatiality, sortByNamePsycho } from './psicologySlice.js';
+import { async } from '@firebase/util';
+import { getPsychos, filterSpatiality, sortByNamePsycho, getPsychoByID } from './psicologySlice.js';
 
 export const getPsicology = () => {
     return async (dispatch) => {
@@ -41,5 +42,19 @@ export const filterPsicology = (spatiality) => {
 export const sortByName = (sort) => {
     return (dispatch) => {
         dispatch(sortByNamePsycho(sort));
+    }
+}
+
+export const getPsychologyID = (id) => {//Consigue Psicologos por ID
+    return async (dispatch)=> {
+        try {
+            const response = await fetch(`http://localhost:3001/api/psicologo/${id}`);
+            const data = await response.json();
+            console.log(data,"Thunks")
+            dispatch(getPsychoByID(data))
+            
+        } catch (error) {
+            return (error)           
+        }
     }
 }
