@@ -88,10 +88,10 @@ export const startLoginWithEmailPassword = (email, password) => {
         }
 
         const data = await result.json();
+        console.log(data)
+        localStorage.setItem('paciente', JSON.stringify(data));
 
-        localStorage.setItem('paciente', JSON.stringify(data.user));
-
-        dispatch(loginBack(data.user));
+        dispatch(loginBack(data));
 
     }
 }

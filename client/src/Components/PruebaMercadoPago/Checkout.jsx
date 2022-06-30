@@ -1,23 +1,24 @@
 import React from 'react'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 
-export default function Checkout({servicio, data}) {
+
+export default function Checkout() {
+    const { pychoId } = useSelector(state => state.psicology)
+    console.log(pychoId, "here puto")
     return (
         <div>
-            <form id='form1'>
+            <form>
                 <h4>Checkout</h4>
-                <div>
-                    {servicio.map((item, index) => {
-                        return (
-                            <div key={index}>
-                                <p>{item.servicio}</p>
-                                <p>{'$' + item.precio}</p>
-                                <button><a href="https://www.mercadopago.com.pe/checkout/v1/redirect?pref_id=1150565020-6a969fa2-0e4a-44ce-9e17-20cb7dea3590">pagar</a></button>
-                            </div>    
-                        )
-                    })}
-                </div>
-
+                {pychoId ? pychoId.map((item, index) => {
+                    console.log(item.servicios)
+                    return (
+                        <div key={item.id}>
+                            <p>{item.servicios[index]?.servicio}</p>
+                            <p>{item.servicios[index]?.precios.costo}</p>
+                        </div>
+                    )
+                }): null}
             </form>
         </div>
     )

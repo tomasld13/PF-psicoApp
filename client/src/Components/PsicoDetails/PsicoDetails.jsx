@@ -5,11 +5,11 @@ import { getPsychologyID } from "../../slice/psico/thunks";
 import Prueba from "../PruebaMercadoPago/Prueba";
 
 export default function PsicoDetails() {
-
+    const params = useParams();
     const dispatch = useDispatch();
 
     useEffect(() => {
-      dispatch(getPsychologyID(1));
+      dispatch(getPsychologyID(params.id));
     }, []);
     return (
         <div className="container flex ">

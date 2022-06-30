@@ -1,5 +1,6 @@
 import { async } from '@firebase/util';
-import { getPsychos, filterSpatiality, sortByNamePsycho, getPsychoByID } from './psicologySlice.js';
+import { getPsychos, filterSpatiality, sortByNamePsycho, getPsychoByID, postMercadopago  } from './psicologySlice.js';
+import axios from 'axios';
 
 export const getPsicology = () => {
     return async (dispatch) => {
@@ -50,7 +51,6 @@ export const getPsychologyID = (id) => {//Consigue Psicologos por ID
         try {
             const response = await fetch(`http://localhost:3001/api/psicologo/${id}`);
             const data = await response.json();
-            console.log(data,"Thunks")
             dispatch(getPsychoByID(data))
             
         } catch (error) {
@@ -58,3 +58,15 @@ export const getPsychologyID = (id) => {//Consigue Psicologos por ID
         }
     }
 }
+
+export const postMP = (data) => {
+    return async (dispatch) => {
+        try {
+            const resp = await axios.post('http://localhost:3001/api/mercadopago', data);
+            dispatch(postMercadopago(resp.data));
+        } catch (error) {
+            return (error)
+        }
+    }
+}
+
