@@ -6,19 +6,21 @@ const SectionTitleStyle = styled.div`
   p {
     font-family: 'Montserrat';
     font-size: 2rem;
+    margin-top: 2rem;
   }
-  h2 {
-    font-family: 'Tenor-Sans';
-    font-size: 2rem;
-    margin-top: 0.5rem;
-    text-transform: uppercase;
+  h1 {
+  color: black;
+  font-size: 48px;
+  font-family: 'Montserrat';
+  margin-top: 5rem;
+  margin-bottom: 3rem;
   }
   @media only screen and (max-width: 768px) {
     text-align: center;
     p {
       font-size: 2rem;
     }
-    h2 {
+    h1 {
       font-size: 2.3rem;
     }
   }
@@ -31,7 +33,7 @@ export default function SectionTitle({
   return (
     <SectionTitleStyle className="section-title">
       <p>{subheading}</p>
-      <h2>{heading}</h2>
+      <h1>{heading}</h1>
     </SectionTitleStyle>
   );
 }
