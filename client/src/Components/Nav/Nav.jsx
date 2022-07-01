@@ -61,6 +61,17 @@ function Nav() {
               </Link>
             </li>
             <li className='nav-item'>
+              <Link 
+              smooth={true}
+              offset={50} 
+              duration={700}
+              to='questions' 
+              className='nav-links' 
+              onClick={closeMobileMenu}>
+                Preguntas Frecuentes
+              </Link>
+            </li>
+            <li className='nav-item'>
               <a
                 href='/'
                 className='nav-links'
