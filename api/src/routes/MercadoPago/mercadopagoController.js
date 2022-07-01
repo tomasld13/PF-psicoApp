@@ -1,4 +1,4 @@
-const { Factura } = require("../../db")
+const { Factura, Paciente, MetodoPago } = require("../../db")
 const server = require('express').Router();
 
 //SDK de MercadoPago
@@ -17,7 +17,7 @@ const postMP = (req, res) => {
     const items = [ 
         {servicio: data.servicio, precio: data.precio, quantity: 1}, 
     ]
-    const id_orden = 1;
+    const external_reference = data.id;
     const items_md = items.map(item => ({
         title: item.servicio,
         quantity: item.quantity,
@@ -38,7 +38,7 @@ const postMP = (req, res) => {
                 }
             ],
         },
-        external_reference:`${id_orden}`,
+        external_reference: `${external_reference}`,
         installments: 3,
         statement_descriptor: "Test",
         shipments: {
@@ -87,43 +87,30 @@ const getPago = (req, res) => {
 }
 
 //ruta que recibe la informacion del pago
-const getPayments = (req, res) => {
-    console.log("EN LA RUTA PAGOS", req)
+const getPayments = async (req, res) => {
+    try {
+         // console.log("EN LA RUTA PAGOS", req)
     const payment_id = req.query.payment_id;
     const payment_status = req.query.status;
-    const external_reference = req.query.external_reference;
     const merchant_order_id = req.query.merchant_order_id;
-    console.log("EXTERNAL REFERENCE", external_reference);
+    const external_reference = req.query.external_reference;
 
-    
-    //Aqui edito el status de mi factura
-    // Factura.findByPk(external_reference)
-    // .then((factura) => {
-    //     factura.payment_id = payment_id;
-    //     factura.payment_status = payment_status;
-    //     factura.merchant_order_id = merchant_order_id;
-    //     factura.status = "paid";
-    //     console.info("Factura actualizada");
-    //     factura.save()
-        Factura.create({
+    const factura = await Factura.create({
             payment_id: payment_id,
             payment_status: payment_status,
             merchant_order_id: merchant_order_id,
-            status: "paid"
-        })
-        .then((_) => {
-            console.info("redirect success")
+            status: "paid"})
+    const paciente = await Paciente.findByPk(Number(external_reference));
+    paciente.setFacturas(factura);
+    const metodoPago = await MetodoPago.findByPk(1);
+    factura.setMetodoPago(metodoPago);
+
+            console.info("redirect success");
             res.redirect("http://localhost:3000");
-    }).catch((error) => {
+    } catch (error) {
         console.error("error al actualizar la factura", error);
         return res.redirect(`http://localhost:3000/?error${error}&where=al+buscar`);
-    })
-
-// }).catch((error) => {
-//     console.error("error al buscar la factura", error);
-//     return res.redirect(`http://localhost:3000/?error${error}&where=al+buscar`);
-// })
-
+    }
 }
 
 module.exports = {
