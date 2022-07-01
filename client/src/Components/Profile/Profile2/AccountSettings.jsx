@@ -30,6 +30,24 @@ function AccountSettings() {
           placeholder="nombre@gmail.com"
         />
       </FormControl>
+      <FormControl id="passwordUser">
+        <FormLabel>Contraseña</FormLabel>
+        <Input
+          focusBorderColor="brand.blue"
+          type="password"
+          placeholder="ContraseñaDelUser"
+        />
+      </FormControl>
+
+      <FormControl id="confPasswordUser">
+        <FormLabel>Confirmar Contraseña</FormLabel>
+        <Input
+          focusBorderColor="brand.blue"
+          type="password"
+          placeholder="ContraseñaDelUser"
+        />
+      </FormControl>
+      
       <FormControl id="city">
         <FormLabel>Ciudad</FormLabel>
         <Select focusBorderColor="brand.blue" placeholder="Select city">

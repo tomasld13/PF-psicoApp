@@ -49,6 +49,7 @@
   
   .nav-item {
     height: 80px;
+    cursor: pointer;
   }
   
   .nav-links {
