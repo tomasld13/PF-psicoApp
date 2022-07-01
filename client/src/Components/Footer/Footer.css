@@ -48,7 +48,13 @@
     max-width: 1000px;
     display: flex;
     justify-content: center;
+    cursor: pointer;
 }
+
+.footer-link-items h2 {
+    cursor: initial;
+}
+
 
 .form-container {
     display: flex;

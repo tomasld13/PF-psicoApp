@@ -23,5 +23,6 @@ router.use('/especialidades', especialidadesRoutes)
 router.use("/dia", diaRoutes)
 router.use("/horarios", horariosRoutes)
 router.use('/administrador', AdministradorRoutes)
+
 router.use('/mercadopago', mercadopagoRoutes)
 module.exports = router;

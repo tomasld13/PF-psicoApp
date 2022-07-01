@@ -1,4 +1,4 @@
-const { Paciente, Usuario, Rol, Genero, Ciudad, Provincia } = require("../../db");
+const { Paciente, Usuario, Rol, Genero, Ciudad, Provincia, Factura } = require("../../db");
 const bcrypt = require('bcryptjs');
 
 
@@ -39,7 +39,7 @@ const getOnePacienteAndUsers = async (req, res, next) => {
   const { id } = req.params;
   try {
     const paciente = await Usuario.findByPk(id,{
-       include: [{ model: Paciente, attributes: { exclude: ["fk_usuarioID", "fk_especialidadId"] } },
+       include: [{ model: Paciente, include: { model: Factura, attributes: ["id", "status", "payment_id", "payment_status", "metodoPagoId"] }, attributes: { exclude: ["fk_usuarioID", "fk_especialidadId"] } },
       { model: Ciudad, include: { model: Provincia, attributes: ['name'] }, attributes: ['name'] },
       { model: Genero, attributes: ["genero"] },
       { model: Rol, attributes: ["name"] }]
