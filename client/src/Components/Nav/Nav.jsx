@@ -41,7 +41,9 @@ function Nav() {
             <img src={logoImage} alt="logo image" />
           </a>
           {
-            status === 'authenticated' || storeAuthBack.status === 'authenticated' ? <h3>Hola {!displayName ? storeAuthBack.name : displayName}</h3> : null
+            status === 'authenticated' || storeAuthBack.status === 'authenticated' 
+            ? <div className='text-user'>Hola, {!displayName ? storeAuthBack.name : displayName}!</div> 
+            : null
           }
           <div className='menu-icon' onClick={handleClick}>
             <i className={click ? 'fas fa-times' : 'fas fa-bars'} />

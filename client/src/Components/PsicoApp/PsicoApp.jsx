@@ -6,6 +6,10 @@ import Nav from "../Nav/Nav";
 import Psychologists from "../Psychologists/Psychologists";
 import ScrollToTop from "../ScrollToTop/ScrollToTop";
 import PsicoDetails from "../PsicoDetails/PsicoDetails.jsx"
+import { ChakraProvider } from "@chakra-ui/react";
+import { theme } from '../Profile/Helpers/index'
+import Main from "../Profile/Main";
+import Cover from '../Profile/Cover'
 
 export default function PsicoApp() {
     return (
@@ -19,6 +23,10 @@ export default function PsicoApp() {
                 <Route path='/contacto' element={ <ContactSection/>} />
                 <Route path="/*" element={ <Navigate to="/" /> } />
             </Routes>
+            <ChakraProvider theme={theme}>
+                <Cover />
+                <Main />
+            </ChakraProvider>
             <Footer/>
         </>
     );
