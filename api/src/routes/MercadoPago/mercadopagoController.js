@@ -3,6 +3,7 @@ const server = require('express').Router();
 
 //SDK de MercadoPago
 const mercadopago = require('mercadopago');
+const e = require("express");
 const {ACCESS_TOKEN} = process.env;
 require("dotenv").config();
 
@@ -25,9 +26,9 @@ const postMP = (req, res) => {
     let preference = {
         items: items_md,
         back_urls: {
-            success: "https://www.mercadopago.com",
-            failure: "https://www.mercadopago.com",
-            pending: "https://www.mercadopago.com"
+            success: "http://localhost:3001/api/mercadopago/pagos",
+            failure: "http://localhost:3001/api/mercadopago/pagos",
+            pending: "http://localhost:3001/api/mercadopago/pagos"
         },
         auto_return: "approved",
         payment_methods: {
@@ -72,6 +73,60 @@ const postMP = (req, res) => {
     })
 }
 
+const getPago = (req, res) => {
+    const { id } = req.params;
+    mercadopago.preferences.get(id)
+    .then(function (response) {
+        console.log(response.body);
+        res.json(response.body);
+    }).catch(error =>{
+        console.log(error);
+        res.status(400).send({error: error});
+    }
+    )
+}
+
+//ruta que recibe la informacion del pago
+const getPayments = (req, res) => {
+    console.log("EN LA RUTA PAGOS", req)
+    const payment_id = req.query.payment_id;
+    const payment_status = req.query.status;
+    const external_reference = req.query.external_reference;
+    const merchant_order_id = req.query.merchant_order_id;
+    console.log("EXTERNAL REFERENCE", external_reference);
+
+    
+    //Aqui edito el status de mi factura
+    // Factura.findByPk(external_reference)
+    // .then((factura) => {
+    //     factura.payment_id = payment_id;
+    //     factura.payment_status = payment_status;
+    //     factura.merchant_order_id = merchant_order_id;
+    //     factura.status = "paid";
+    //     console.info("Factura actualizada");
+    //     factura.save()
+        Factura.create({
+            payment_id: payment_id,
+            payment_status: payment_status,
+            merchant_order_id: merchant_order_id,
+            status: "paid"
+        })
+        .then((_) => {
+            console.info("redirect success")
+            res.redirect("http://localhost:3000");
+    }).catch((error) => {
+        console.error("error al actualizar la factura", error);
+        return res.redirect(`http://localhost:3000/?error${error}&where=al+buscar`);
+    })
+
+// }).catch((error) => {
+//     console.error("error al buscar la factura", error);
+//     return res.redirect(`http://localhost:3000/?error${error}&where=al+buscar`);
+// })
+
+}
+
 module.exports = {
-    postMP
+    postMP,
+    getPayments
 }
