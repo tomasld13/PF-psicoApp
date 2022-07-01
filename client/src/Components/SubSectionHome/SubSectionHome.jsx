@@ -30,7 +30,7 @@ const SubsectionItemStyles = styled.div`
 function SubSectionHome() {
   return (
     <SubsectionItemStyles>
-    <div className="subsection-container">
+    <div name='about' className="subsection-container">
         <div className="subsection__allitems">
             <SubSectionItem 
             icon={<GiWorld size='2rem'/>}
