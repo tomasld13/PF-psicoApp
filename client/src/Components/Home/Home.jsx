@@ -13,11 +13,9 @@ export function Home() {
       <Landing />
       <SubSectionHome />
       <About />
-      <h2 className="text-3xl py-2.5">¿En qué aspectos trabaja la psicología?</h2>
       <Features />
       <Pricing />
       <Questions />
-      <h2 className="text-3xl py-2.5">Testimonios de nuestros clientes</h2>
       <Testimonials />
     </div>
   );

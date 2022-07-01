@@ -44,5 +44,12 @@
 @media screen and (max-width: 960px) {
     .content {
     height: 100%;
+    width: 90%;
     }
+    .content hr {
+        border-color: var(--secondary);
+        display: flex;
+        align-items: center;
+    }
+    
 }

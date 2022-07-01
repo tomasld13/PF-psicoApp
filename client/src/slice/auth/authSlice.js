@@ -24,6 +24,7 @@ export const authSlice = createSlice({
             generoId: null,
             ciudadId: null,
             error: null,
+            token: null
         },
         error: ''
     },
@@ -50,16 +51,17 @@ export const authSlice = createSlice({
         },
         loginBack: (state, {payload}) => {
             state.authBack.status = 'authenticated';
-            state.authBack.id = payload.id;
-            state.authBack.name = payload.name;
-            state.authBack.lastname = payload.lastname;
-            state.authBack.email = payload.email;
-            state.authBack.telephone = payload.telephone;
-            state.authBack.address = payload.address;
-            state.authBack.birth = payload.birth;
-            state.authBack.rolId = payload.rolId;
-            state.authBack.generoId = payload.generoId;
-            state.authBack.ciudadId = payload.ciudadId;
+            state.authBack.id = payload.user.id;
+            state.authBack.name = payload.user.name;
+            state.authBack.lastname = payload.user.lastname;
+            state.authBack.email = payload.user.email;
+            state.authBack.telephone = payload.user.telephone;
+            state.authBack.address = payload.user.address;
+            state.authBack.birth = payload.user.birth;
+            state.authBack.rolId = payload.user.rolId;
+            state.authBack.generoId = payload.user.generoId;
+            state.authBack.ciudadId = payload.user.ciudadId;
+            state.authBack.token = payload.token; 
         },
         logoutBack: (state, {payload}) => {
             state.authBack.status = 'no-authenticated';
@@ -73,6 +75,7 @@ export const authSlice = createSlice({
             state.authBack.rolId = null;
             state.authBack.generoId = null;
             state.authBack.ciudadId = null;
+            state.authBack.token = null;
         },
         errorRegisterBack: (state, {payload}) => {
             state.error = payload;
