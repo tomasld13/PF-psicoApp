@@ -16,16 +16,14 @@ const getPsicologo = async (req, res, next) => {
 }
 
 const postPsicologo = async (req, res, next) => {
-    const { name, lastname, email, telephone, address, birth, rol, gener, ciudad, yearsExperience , especialidad, password} = req.body;
+    const { name, lastname, email, telephone, address, birth, rol, gener, ciudad, yearsExperience , especialidad, password, inicioHorario, finHorario, intervaloSesion} = req.body;
     try {
         const newUSuario = await Usuario.create({ name, lastname, email, telephone, address, birth, password: bcrypt.hashSync(password, 10) });
-        const newPsicologo = await Psicologo.create({ yearsExperience });
+        const newPsicologo = await Psicologo.create({ yearsExperience, inicioHorario, finHorario, intervaloSesion, });
         const role = await Rol.findOne({ where: { name: rol } });
         const genero = await Genero.findOne({ where: { genero: gener } });
         const city = await Ciudad.findOne({ where: { name: ciudad } });
-        const espe = await Especialidades.findOne({where : {'especialidad' : especialidad}});
-
-
+        const espe = await Especialidades.findOne({where : {especialidad: especialidad}});
         newUSuario.setPsicologo(newPsicologo);
         newUSuario.setRol(role);
         newUSuario.setGenero(genero);
