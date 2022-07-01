@@ -11,8 +11,9 @@ const SubsectionItemStyles = styled.div`
     gap: 10rem; 
     margin-bottom: 2rem;
     justify-content: space-between;
+    align-self: center;
     margin-top: -15rem;
-    width: 70%;
+    width: 90%;
   }
   @media only screen and (max-width: 768px) {
     .subsection__allitems {
