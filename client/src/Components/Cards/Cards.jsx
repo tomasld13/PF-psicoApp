@@ -13,16 +13,18 @@ export default function Cards() {
   const [currentPage, setCurrentPage] = useState(0);
   const [firstIndex, setFirstIndex] = useState(0);
   const [inputFind, setInputFind] = useState('');
+  const [find, setFind] = useState([]);
   const [sort, setSort] = useState('');
 
   const dispatch = useDispatch();
+
 
   useEffect(() => {
     dispatch(getPsicology());
   }, []);
   
   const { psychologists, spatiality } = useSelector(state => state.psicology)
-  console.log(psychologists)
+  //console.log(psychologists)
   // Crea el indice siguiente para pasar al siguiente grupo de 6 psicologos
     const nextHandler = () => {
         const nextPage = currentPage + 1;
@@ -63,6 +65,10 @@ export default function Cards() {
     dispatch(filterPsicology(e.target.value));
   }
 
+  const cleanFind = () => {
+    setFind([])
+  }
+
   return (
     <section /*className={styles.section_cards}*/ className="flex justify-around">
       <div 
@@ -72,11 +78,14 @@ export default function Cards() {
 
         <div className="flex flex-col content-center items-center">
           <input className='border border-gray-300 my-2.5 px-3 py-1 rounded-lg shadow-sm focus:outline-none focus:border-primary' type="text" placeholder="Psicologo..." onChange={e => handlerChange(e)} value={inputFind}/>
-          <button className='bg-primary text-white border border-primary font-bold py-2 px-4 rounded hover:bg-white hover:text-primary my-2.5 h-9' onClick={() => {
-
-            const find = psychologists.find(psycho => inputFind === psycho.name);
-            console.log(find);
+          <button className='bg-primary text-white border border-primary font-bold py-2 px-4 rounded hover:bg-white hover:text-primary my-2.5 h-9' onClick={(e) => {
+            handlerChange(e)
+            const findInput = psychologists.filter(psycho => {
+              return psycho.name.toLowerCase().includes(inputFind.toLowerCase()) || psycho.lastname.toLowerCase().includes(inputFind.toLowerCase())
+            });
+            setFind(findInput)
           }}>Buscar</button>
+          <button onClick={() => cleanFind()}>X</button>
         </div>
         <select className='border border-gray-300 my-2.5 px-3 py-1 rounded-lg shadow-sm focus:outline-none focus:border-primary' name="especialidad" id="especialidad" onChange={handlerClick}>
             <option selected disabled value=" "> Orden... </option>
@@ -100,6 +109,17 @@ export default function Cards() {
         <h3 className="text-3xl py-2.5">Cuales Psicologos pueden ayudarte?</h3>
         <div className={styles.cards_container}>
           {
+            find.length > 0 ? [...find].splice(
+              firstIndex,itemsPerPage
+            ).map(psycho => {
+              return <Card
+                      id={psycho.psicologo.id}
+                      key={psycho.id} 
+                      nombreCompleto={`${psycho.name} ${psycho.lastname}`}
+                      experiencia={psycho.psicologo.yearsExperience}
+                      especialidad={psycho.psicologo.especialidades[0].especialidad}
+                      ciudad={psycho.ciudad.name}/>
+            }) :
             spatiality.length !== 0 ? [...spatiality].splice(
               firstIndex,itemsPerPage
             ).map(psycho => {
@@ -121,7 +141,8 @@ export default function Cards() {
                       experiencia={psycho.psicologo.yearsExperience}
                       especialidad={psycho.psicologo.especialidades[0].especialidad}
                       ciudad={psycho.ciudad.name}/>
-            }) : (<div>
+            }) :
+                (<div>
                   <Loading/>
                 </div>)
           }
