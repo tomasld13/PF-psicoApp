@@ -5,15 +5,10 @@ const ciudadesRoutes = require("./CiudadesManager/ciudadesRoutes");
 const provinciasRoutes = require("./ProvinciasManager/provinciaRoutes");
 const especialidadesRoutes = require("./EspecialidadesManager/EspecialidadesRoutes");
 const AuthRoutes = require('./LoginManager/AuthRoutes');
-<<<<<<< HEAD
-const AdministradorRoutes = require("./AdminManager/AdminRoutes")
-const mercadopagoRoutes = require('./Mercadopago/mercadopagoRoutes');
-=======
 const horariosRoutes = require("./HorariosManager/horariosRoutes")
 const diaRoutes = require("./DiaManager/diaRoutes")
 const AdministradorRoutes = require('./AdminManager/AdminRoutes')
 const mercadopagoRoutes = require('./MercadoPago/mercadopagoRoutes');
->>>>>>> frontend
 const { route } = require("./PacienteManager/pacienteRoutes");
 
 const router = Router();
