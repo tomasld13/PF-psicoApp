@@ -10,10 +10,26 @@ const getCiudades = require("./src/creadores/ciudades")
 const getServicios = require("./src/creadores/servicios")
 const {generePacientes, generePsicologos, generarAdmin} = require("./src/creadores/usuarios")
 require('dotenv').config();
+const socketController = require('./src/routes/SocketManager/socketController')
+
+const http = require('http');
+
+const socketServer = http.createServer(server);
+const socketIO = require('socket.io');
+const io = socketIO(socketServer,{
+  cors: {
+    origin: "*",
+    methods: ["GET", "POST"]
+  }
+});
+const sockets = ()=>{
+  io.on('connection',(socket)=> socketController(socket, io))
+}
+
 
 conn.sync({force: true, logging: false}).then(async () => {
   console.log('Base de datos conectada! :D');
-  server.listen(process.env.PORT, async function () {
+  socketServer.listen(process.env.PORT, async function () {
     getRoles();
     getGeneros();
     getMetodos();
@@ -27,5 +43,7 @@ conn.sync({force: true, logging: false}).then(async () => {
     getServicios();
     console.log(`App is listening on port ${process.env.PORT}!`);
   });
+  sockets();
 })
 .catch((err) => console.error(err));
+module.exports = io;

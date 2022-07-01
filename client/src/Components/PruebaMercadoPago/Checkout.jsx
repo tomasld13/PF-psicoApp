@@ -12,7 +12,7 @@ export default function Checkout() {
     const { pychoId } = useSelector(state => state.psicology)
     const {id} = useSelector(state=>state.auth.authBack)
     const linkPago = useSelector (state=>state.psicology.initPoint.id)
-    //console.log(id, "ID del paciente")
+    console.log(id, "ID del paciente")
     console.log(linkPago);
     useEffect(()=>{      
     }, [])
@@ -28,7 +28,7 @@ export default function Checkout() {
         e.preventDefault();
         //console.log(service," ", Number(price))
         setResponse(dispatch(postMP({
-            //id: id,
+            id: id,
             servicio: service,
             precio: Number(price)
         })))
@@ -39,6 +39,7 @@ export default function Checkout() {
             <form>
                 <h4>Checkout</h4>
                 <select onChange={e=> handleOnChange(e)}>
+                <option selected disabled>Seleccione un servicio</option>
                 {pychoId ? pychoId.servicios?.map((item, index) => {
                     {/* console.log("Hola perro")
                     console.log(item.servicio)

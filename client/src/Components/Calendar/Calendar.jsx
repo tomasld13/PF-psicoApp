@@ -62,124 +62,134 @@ let psicologo = {
 }
 
 export const Calendar = () => {
-
-
+    
     const psychologist = useSelector(state => state.psicology.pychoId);
 
-    const [startDate, setStartDate] = useState(psicologoDias[0]);
+    const [startDate, setStartDate] = useState(new Date().setMonth(7));
     const [startTime, setStartTime] = useState(new Date().setHours(8,0));
     const [excludes, setExcludes] = useState([]);
-
     const dispatch = useDispatch();
 
-
-    useEffect(() => {
-        setExcludes(getTimeExcludes(startDate));
-        dispatch(getPsychologyID('15'));
-    },[startDate, startTime])
-
-    let psicologoDias = psychologist.dia.map(m => {
-        let dia = m.fecha.split("-")
-        return new Date(dia[0],dia[1]-1,dia[2])
-    });
-
-    const getMonth = (month) => {
-        switch(month){
-        case "Jan":
-            return 1
-        case "Feb":
-            return 2
-        case "Mar":
-            return 3
-        case "Apr":
-            return 4
-        case "May":
-            return 5
-        case "Jun":
-            return 6
-        case "Jul":
-            return 7
-        case "Aug":
-            return 8
-        case "Sep":
-            return 9
-        case "Oct":
-            return 10
-        case "Nov":
-            return 11
-        default:
-            return 12                       
-        }
-    }
-
-    let [maxH, maxM] = psicologo.finHorario.split(":")
-    maxH = parseInt(maxH)
-    maxM = parseInt(maxM)
-    let max = new Date()
-    max = max.setHours(maxH,maxM)
-    let min = new Date()
-    let [minH, minM] = psicologo.inicioHorario.split(":")
-    maxH = parseInt(minH)
-    maxM = parseInt(minM)
-    min = min.setHours(minH,minM)
-
-    const getTimeExcludes = (startDate) => {
-        const dayPsico = psicologo.dia.filter(d => {
-        let dia = d.fecha.split("-")
-        return new Date(dia[0],dia[1]-1,dia[2]).toString().slice(0,10) === startDate.toString().slice(0,10)})
-        const horarios = dayPsico[0].horarios.map(h => {
-        let d = new Date()
-        let [hora, minutes] = h.hora.split(":")
-        d.setHours(parseInt(hora),parseInt(minutes))
-        return d
-        })
-        return horarios
-    }
-
-    const enviarDatosAlBack = () => {
-        let d = postDates()
-        // dispatch(postHorario({date:d[0], time:d[1]}));
-        console.log(d);
-    }
-
-    
-    const postDates = () => {
-        let date = startDate.toString().split(" ")
-        let mes = getMonth(date[1]) <= 10 ? ("0" + getMonth(date[1])) : getMonth([date[1]])
-        date = date[3] + "-" + mes + "-" + date[2]
-        let time = startTime.toString().split(" ")
-        time = time[4]
-        return {date, time}
-    }
     console.log(psychologist);
-    enviarDatosAlBack();
-    return (
-        <div className='flex'>
-        <DatePicker
-        selected={startDate}
-        onChange={(date) => {setStartDate(date)}}
-        includeDates={psicologoDias}
-        showWeekNumbers
-        minDate={new Date()}
-        monthsShown={2}
-        dateFormat="yyyy/MM/dd"
-        withPortal
-        inline
-        />
-        <DatePicker
-        selected={startTime}
-        excludeTimes={excludes}
-        onChange={(date) => setStartTime(date)}
-        showTimeSelect
-        showTimeSelectOnly
-        timeIntervals={psicologo.intervaloSesion}
-        timeCaption="Time"
-        dateFormat="hh:mm aa"
-        minTime={min}
-        maxTime={max}
-        withPortal
-        inline
-        />
-        </div>
-    );
+    useEffect(() => {
+        // setExcludes(getTimeExcludes(startDate));
+        dispatch(getPsychologyID('15'));
+    },[]);
+
+
+    if (false) {
+        
+        let psicologoDias = psychologist.dia?.map(m => { // listo
+            let dia = m.fecha.split("-")
+            return new Date(dia[0],dia[1]-1,dia[2])
+        });
+    
+        console.log(psicologoDias[0]);
+    
+    
+    
+        const getMonth = (month) => { //listo
+            switch(month){
+            case "Jan":
+                return 1
+            case "Feb":
+                return 2
+            case "Mar":
+                return 3
+            case "Apr":
+                return 4
+            case "May":
+                return 5
+            case "Jun":
+                return 6
+            case "Jul":
+                return 7
+            case "Aug":
+                return 8
+            case "Sep":
+                return 9
+            case "Oct":
+                return 10
+            case "Nov":
+                return 11
+            default:
+                return 12                       
+            }
+        }
+    
+        let [maxH, maxM] = psychologist.finHorario.split(":") //listo
+        maxH = parseInt(maxH)
+        maxM = parseInt(maxM)
+        let max = new Date()
+        max = max.setHours(maxH,maxM)
+        let min = new Date()
+        let [minH, minM] = psychologist.inicioHorario.split(":")
+        maxH = parseInt(minH)
+        maxM = parseInt(minM)
+        min = min.setHours(minH,minM)
+    
+        const getTimeExcludes = (startDate) => {
+            const dayPsico = psychologist.dia.filter(d => {
+            let dia = d.fecha.split("-")
+            return new Date(dia[0],dia[1]-1,dia[2]).toString().slice(0,10) === startDate.toString().slice(0,10)})
+            const horarios = dayPsico[0].horarios.map(h => {
+            let d = new Date()
+            let [hora, minutes] = h.hora.split(":")
+            d.setHours(parseInt(hora),parseInt(minutes))
+            return d
+            })
+            return horarios;
+        }
+    
+        const enviarDatosAlBack = () => {
+            let d = postDates()
+            // dispatch(postHorario({date:d[0], time:d[1]}));
+            // console.log(d);
+        }
+    
+        
+        const postDates = () => {
+            let date = startDate.toString().split(" ")
+            let mes = getMonth(date[1]) <= 10 ? ("0" + getMonth(date[1])) : getMonth([date[1]])
+            date = date[3] + "-" + mes + "-" + date[2]
+            let time = startTime.toString().split(" ")
+            time = time[4]
+            return {date, time}
+        }
+        // console.log(psychologist);
+        enviarDatosAlBack();
+        return (
+            <div className='flex'>
+            <DatePicker
+            selected={startDate}
+            onChange={(date) => {setStartDate(date)}}
+            includeDates={psicologoDias}
+            showWeekNumbers
+            minDate={new Date()}
+            monthsShown={2}
+            dateFormat="yyyy/MM/dd"
+            withPortal
+            inline
+            />
+            <DatePicker
+            selected={startTime}
+            excludeTimes={excludes}
+            onChange={(date) => setStartTime(date)}
+            showTimeSelect
+            showTimeSelectOnly
+            timeIntervals={psicologo.intervaloSesion}
+            timeCaption="Time"
+            dateFormat="hh:mm aa"
+            minTime={min}
+            maxTime={max}
+            withPortal
+            inline
+            />
+            </div>
+        );
+    } else {
+        return (
+            <div>loading</div>
+        )
+    }
 }
