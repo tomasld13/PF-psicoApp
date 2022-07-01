@@ -39,7 +39,7 @@ conn.sync({force: true, logging: false}).then(async () => {
     await getCiudades();
     generePacientes();
     generePsicologos();
-    generarAdmin();
+    await generarAdmin();
     getServicios();
     console.log(`App is listening on port ${process.env.PORT}!`);
   });
