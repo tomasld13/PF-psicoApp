@@ -11,8 +11,9 @@ const SubsectionItemStyles = styled.div`
     gap: 10rem; 
     margin-bottom: 2rem;
     justify-content: space-between;
+    align-self: center;
     margin-top: -15rem;
-    width: 70%;
+    width: 90%;
   }
   @media only screen and (max-width: 768px) {
     .subsection__allitems {
@@ -30,7 +31,7 @@ const SubsectionItemStyles = styled.div`
 function SubSectionHome() {
   return (
     <SubsectionItemStyles>
-    <div className="subsection-container">
+    <div name='about' className="subsection-container">
         <div className="subsection__allitems">
             <SubSectionItem 
             icon={<GiWorld size='2rem'/>}
