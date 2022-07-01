@@ -5,12 +5,11 @@ import { useDispatch, useSelector } from 'react-redux'
 
 export default function Checkout() {
     const { pychoId } = useSelector(state => state.psicology)
-    console.log(pychoId, "here puto")
     return (
         <div>
             <form>
                 <h4>Checkout</h4>
-                {/* {pychoId ? pychoId.servicios.map((item, index) => {
+                {pychoId ? pychoId.servicios?.map((item, index) => {
                     console.log(item.servicios)
                     return (
                         <div key={item.id}>
