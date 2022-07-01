@@ -1,4 +1,4 @@
-const { Psicologo, Usuario, Paciente, Ciudad, Provincia, Genero, Rol, Especialidades, Servicio, Precio } = require("../../db");
+const { Psicologo, Usuario, Paciente, Ciudad, Provincia, Genero, Rol, Especialidades, Servicio, Dia, Precio, Horarios } = require("../../db");
 const bcrypt = require('bcryptjs');
 
 const getPsicologo = async (req, res, next) => {
@@ -64,7 +64,8 @@ const getOnePsicologoAndUsers = async (req, res, next) => {
         const psicologo = await Psicologo.findByPk(id, { include: [{model: Usuario, 
         include:[ { model: Ciudad, include: { model: Provincia, attributes: ['name'] }, attributes: ['name'] },
         { model: Genero, attributes: ["genero"] },
-        { model: Rol, attributes: ["name"] }]  }, { model: Especialidades, attributes: ['especialidad']},  {model: Servicio, include: [{model: Precio, attributes: ['costo']}] }]});
+        { model: Rol, attributes: ["name"] }]  }, { model: Especialidades, attributes: ['especialidad']},  {model: Servicio, include: [{model: Precio, attributes: ['costo']}] },
+        {model: Dia, include: {model:Horarios}}]});
         if (!psicologo) {
             return res.status(404).send({ error: "Psicologo no encontrado" });
         }
