@@ -8,7 +8,7 @@ export const psicologySlice = createSlice({
         spatiality: [],
         sortPsycho: [],
         copyPsycho: [],
-        pychoId:[],
+        pychoId: {},
         initPoint: []
     },
     reducers: {

@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import DatePicker from "react-datepicker"
 import "react-datepicker/dist/react-datepicker.css"
-
+import { useSelector, useDispatch } from 'react-redux';
+import { getPsychologyID } from '../../slice/psico/thunks.js';
 
 let psicologo = {
     "id": 16,
@@ -10,7 +11,7 @@ let psicologo = {
     "fk_usuarioID": 37,
     "inicioHorario": "08:00:00",
     "finHorario": "16:00:00",
-    "intervaloSesion": 30,
+    "intervaloSesion": 60,
     "dia": [
         {
             "id": 1,
@@ -57,99 +58,30 @@ let psicologo = {
             }
             ]
         },
-        {
-            "id": 3,
-            "fecha": "2022-07-01",
-            "Dia_Psicologo": {
-            "createdAt": "2022-06-28T23:03:51.252Z",
-            "updatedAt": "2022-06-28T23:03:51.252Z",
-            "diumId": 2,
-            "psicologoId": 16
-            },
-            "horarios": [
-            {
-                "id": 4,
-                "hora": "11:00:00",
-                "psicologoId": 16,
-                "pacienteId": 21,
-                "diumId": 2
-            },
-            {
-                "id": 3,
-                "hora": "13:00:00",
-                "psicologoId": 16,
-                "pacienteId": 21,
-                "diumId": 2
-            }
-            ]
-        },
-        {
-            "id": 5,
-            "fecha": "2022-07-04",
-            "Dia_Psicologo": {
-            "createdAt": "2022-06-28T23:03:51.252Z",
-            "updatedAt": "2022-06-28T23:03:51.252Z",
-            "diumId": 2,
-            "psicologoId": 16
-            },
-            "horarios": [
-            {
-                "id": 2,
-                "hora": "08:00:00",
-                "psicologoId": 16,
-                "pacienteId": 21,
-                "diumId": 2
-            },
-            {
-                "id": 3,
-                "hora": "09:00:00",
-                "psicologoId": 16,
-                "pacienteId": 21,
-                "diumId": 2
-            }
-            ]
-        },
-        {
-            "id": 6,
-            "fecha": "2022-07-06",
-            "Dia_Psicologo": {
-            "createdAt": "2022-06-28T23:03:51.252Z",
-            "updatedAt": "2022-06-28T23:03:51.252Z",
-            "diumId": 2,
-            "psicologoId": 16
-            },
-            "horarios": [
-            {
-                "id": 2,
-                "hora": "14:00:00",
-                "psicologoId": 16,
-                "pacienteId": 21,
-                "diumId": 2
-            },
-            {
-                "id": 3,
-                "hora": "15:00:00",
-                "psicologoId": 16,
-                "pacienteId": 21,
-                "diumId": 2
-            }
-            ]
-        }
     ]
 }
 
-let psicologoDias = psicologo.dia.map(m => {
-    let dia = m.fecha.split("-")
-    return new Date(dia[0],dia[1]-1,dia[2])
-})
 export const Calendar = () => {
+
+
+    const psychologist = useSelector(state => state.psicology.pychoId);
+
     const [startDate, setStartDate] = useState(psicologoDias[0]);
     const [startTime, setStartTime] = useState(new Date().setHours(8,0));
-    const [excludes, setExcludes] = useState([])
+    const [excludes, setExcludes] = useState([]);
+
+    const dispatch = useDispatch();
+
 
     useEffect(() => {
-        setExcludes(getTimeExcludes(startDate))
+        setExcludes(getTimeExcludes(startDate));
+        dispatch(getPsychologyID('15'));
     },[startDate, startTime])
+
+    let psicologoDias = psychologist.dia.map(m => {
+        let dia = m.fecha.split("-")
+        return new Date(dia[0],dia[1]-1,dia[2])
+    });
 
     const getMonth = (month) => {
         switch(month){
@@ -204,20 +136,23 @@ export const Calendar = () => {
         return horarios
     }
 
-    /*enviarDatosAlBack(){
+    const enviarDatosAlBack = () => {
         let d = postDates()
-        dispatch(postHorario({date:d[0], time:d[1]}))
-    }*/
+        // dispatch(postHorario({date:d[0], time:d[1]}));
+        console.log(d);
+    }
 
+    
     const postDates = () => {
         let date = startDate.toString().split(" ")
         let mes = getMonth(date[1]) <= 10 ? ("0" + getMonth(date[1])) : getMonth([date[1]])
         date = date[3] + "-" + mes + "-" + date[2]
         let time = startTime.toString().split(" ")
         time = time[4]
-        return [date, time]
+        return {date, time}
     }
-
+    console.log(psychologist);
+    enviarDatosAlBack();
     return (
         <div className='flex'>
         <DatePicker
@@ -229,7 +164,7 @@ export const Calendar = () => {
         monthsShown={2}
         dateFormat="yyyy/MM/dd"
         withPortal
-        //inline
+        inline
         />
         <DatePicker
         selected={startTime}
@@ -243,7 +178,7 @@ export const Calendar = () => {
         minTime={min}
         maxTime={max}
         withPortal
-        //inline
+        inline
         />
         </div>
     );
