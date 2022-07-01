@@ -44,10 +44,10 @@ function Footer() {
           <div class='footer-link-items'>
             <h2>CONTACTANOS</h2>
             <a href='/contacto'>Formulario</a>
-            <p>Telefono:</p>
-            <p>+54 9 11 51467589</p>
-            <p>Correo:</p>
-            <p>soporte@psicoapp.com</p>
+            <a>Telefono:</a>
+            <a>+54 9 11 51467589</a>
+            <a>Correo:</a>
+            <a>soporte@psicoapp.com</a>
           </div>
         </div>
         <div className='footer-link-wrapper'>

@@ -5,11 +5,13 @@ import './Testimonials.css'
 import img1 from '../Testimonials/face1.jpg'
 import img2 from '../Testimonials/face2.jpg'
 import img3 from '../Testimonials/face3.jpg'
+import SectionTitle from "../SectionTitle/SectionTitle";
 
 export default class Testimonials extends Component {
   render() {
     return (
       <div name='testimonios'>
+        <SectionTitle heading="TESTIMONIOS DE NUESTROS CLIENTES" subheading=""/>
       <Carousel 
         showArrows={true}
         infiniteLoop={true}
@@ -53,9 +55,9 @@ export default class Testimonials extends Component {
             <h4>Profesora de Inglés</h4>
             <p>
               Nunca habia asistido a un psicologo antes. He tenido dificultades en el 
-              trabajo, con mi pareja y sinceramente, no tenia ganas de vivir. 
-              Entonces decidí probar un servicio psicologico. Literalmente, despues de un año pudiendo
-              decir que salvo mi vida y mi relacion! Me encanta el servicio 
+              trabajo y con mi pareja. 
+              Entonces decidí probar un servicio psicologico. Y luego de un año puedo
+              decir que salvó mi vida y mi relacion! Me encanta el servicio 
               y realmente lo recomiendo. 
             </p>
           </div>

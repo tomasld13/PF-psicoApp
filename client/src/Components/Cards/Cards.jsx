@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { getPsicology, filterPsicology, sortByName } from "../../slice/psico/thunks";
 import Card from "../Card/Card";
+import { Button } from '../Button/Button'
 import styles from '../Cards/cards.module.css';
 import Loading from '../Loading/Loading.jsx'
 
@@ -18,10 +19,10 @@ export default function Cards() {
 
   const dispatch = useDispatch();
 
-
   useEffect(() => {
     dispatch(getPsicology());
   }, []);
+
   
   const { psychologists, spatiality } = useSelector(state => state.psicology)
   //console.log(psychologists)
@@ -69,6 +70,17 @@ export default function Cards() {
     setFind([])
   }
 
+  const handleRemove = (e) => {
+    e.preventDefault()
+    dispatch(getPsicology())
+    setSort('')
+    setInputFind('')
+  }
+
+  useEffect(() => {
+    dispatch(getPsicology());
+  }, []);
+
   return (
     <section /*className={styles.section_cards}*/ className="flex justify-around">
       <div 
@@ -87,14 +99,20 @@ export default function Cards() {
           }}>Buscar</button>
           <button onClick={() => cleanFind()}>X</button>
         </div>
-        <select className='border border-gray-300 my-2.5 px-3 py-1 rounded-lg shadow-sm focus:outline-none focus:border-primary' name="especialidad" id="especialidad" onChange={handlerClick}>
+        <select className='border border-gray-300 my-2.5 px-3 py-1 rounded-lg shadow-sm focus:outline-none focus:border-primary' 
+        name="especialidad" 
+        id="especialidad" 
+        onChange={handlerClick}>
             <option selected disabled value=" "> Orden... </option>
             <option value="asc">asc</option>
             <option value="desc">desc</option>
         </select>
         {/* <button onClick={handlerClick}>Ordenar</button> */}
         <div>
-          <select className='border border-gray-300 my-2.5 px-3 py-1 rounded-lg shadow-sm focus:outline-none focus:border-primary' name="especialidad" id="especialidad" onChange={onChangeFilter}>
+          <select className='border border-gray-300 my-2.5 px-3 py-1 rounded-lg shadow-sm focus:outline-none focus:border-primary' 
+          name="especialidad" 
+          id="especialidad" 
+          onChange={onChangeFilter}>
             <option selected disabled value=" "> Elige una especialidad </option>
             <option value="Clinica">Psicologia Clinica</option>
             <option value="Educacional">Psicologia Educacional</option>
@@ -103,6 +121,7 @@ export default function Cards() {
             <option value="Organizacional">Psicologia Organizacional</option>
           </select>
         </div>
+        <Button onClick={handleRemove}>Limpiar filtros</Button>
       </div>
 
       <div>
