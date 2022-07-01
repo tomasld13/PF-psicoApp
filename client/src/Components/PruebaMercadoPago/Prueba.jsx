@@ -6,8 +6,8 @@ import axios from 'axios'
 export default function Prueba() {
     const [data, setData] = useState('')
     return (
-        <div> 
+        <> 
             <Checkout /> 
-        </div>
+        </>
     )
 }
