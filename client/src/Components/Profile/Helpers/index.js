@@ -3,6 +3,8 @@ import { extendTheme } from '@chakra-ui/react'
 export const theme = extendTheme({
   colors: {
     brand: {
+      primary: '#575989',
+      secondary: '#f0efff',
       blue: '#4164e3',
       cadet: '#8998a8',
       dark: '#243156',
@@ -21,9 +23,9 @@ export const theme = extendTheme({
         solid: {
           p: '6',
           color: 'white',
-          bg: 'brand.blue',
+          bg: 'brand.primary',
           _hover: { bg: 'brand.blue' },
-          _active: { bg: 'brand.blue' },
+          _active: { bg: 'brand.secondary' },
           _focus: { boxShadow: 'none' },
         },
         outline: {
