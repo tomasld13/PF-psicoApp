@@ -10,7 +10,7 @@ export default function Checkout() {
         <div>
             <form>
                 <h4>Checkout</h4>
-                {pychoId ? pychoId.map((item, index) => {
+                {/* {pychoId ? pychoId.servicios.map((item, index) => {
                     console.log(item.servicios)
                     return (
                         <div key={item.id}>
@@ -18,7 +18,7 @@ export default function Checkout() {
                             <p>{item.servicios[index]?.precios.costo}</p>
                         </div>
                     )
-                }): null}
+                }): null} */}
             </form>
         </div>
     )
