@@ -42,7 +42,7 @@ function Nav() {
           </a>
           {
             status === 'authenticated' || storeAuthBack.status === 'authenticated' 
-            ? <div className='text-user'>Hola, {!displayName ? storeAuthBack.name : displayName}!</div> 
+            ? <div className='text-user text-black text-3xl'>Hola, {!displayName ? storeAuthBack.name : displayName}!</div> 
             : null
           }
           <div className='menu-icon' onClick={handleClick}>
