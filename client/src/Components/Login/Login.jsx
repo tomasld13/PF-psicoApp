@@ -8,7 +8,8 @@ import Nav from "../Nav/Nav.jsx"
 
 export default function Login() {
 
-    const {status, errorMessage} = useSelector(state => state.auth);
+    const { status } = useSelector(state => state.auth.authBack);
+    const errorMessage = useSelector(state => state.auth.error);
 
     const dispatch = useDispatch();
 
@@ -41,7 +42,7 @@ export default function Login() {
                 </div>
                 <input className='border border-gray-300 my-2.5 px-3 py-1 rounded-lg shadow-sm focus:outline-none focus:border-primary' type="password" placeholder="Contraseña" name="password" value={password} onChange={onInputChange}/>
                 <div className="flex flex-col items-center">
-                    {!!errorMessage ? <span style={{color:'red'}}>{errorMessage}</span> : null}
+                    {errorMessage !== '' ? <span style={{color:'red'}}>{errorMessage}</span> : null}
                     <button className='bg-primary text-white border border-primary font-bold py-2 px-4 rounded hover:bg-white hover:text-primary my-2.5 h-12 ' disabled={isAuthenticating}>Iniciar Sesión</button>
                     <div>
                     

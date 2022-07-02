@@ -8,10 +8,12 @@ import featureImage4 from './img/home-09.jpg'
 import featureImage5 from './img/home-10.jpg'
 
 import './Features.css'
+import SectionTitle from '../SectionTitle/SectionTitle';
 
 function Features() {
   return (
     <div id='features'>
+      <SectionTitle heading='¿En qué aspectos trabaja la psicología?' subheading=''/>
         <div className="features-container">
             <FeaturesBox image={featureImage} title='Problemas de autoestima'/> 
             <FeaturesBox image={featureImage1} title='Problemas con relaciones personales'/> 

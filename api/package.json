@@ -20,10 +20,12 @@
     "express-validator": "^6.14.2",
     "ioredis": "^4.19.2",
     "jsonwebtoken": "^8.5.1",
+    "mercadopago": "^1.5.13",
     "morgan": "^1.10.0",
-    "nodemon": "^2.0.16",
+    "nodemon": "^2.0.18",
     "pg": "^8.5.1",
-    "sequelize": "^6.3.5"
+    "sequelize": "^6.3.5",
+    "socket.io": "^4.5.1"
   },
   "devDependencies": {
     "chai": "^4.2.0",

@@ -1,4 +1,4 @@
-const {Psicologo, Paciente, Usuario, Especialidades, Rol, Genero, Ciudad} = require("../db")
+const {Psicologo, Paciente, Usuario, Especialidades, Rol, Genero, Ciudad, Administrador} = require("../db")
 const bcrypt = require('bcryptjs');
 let psicologos = [
 	{
@@ -319,7 +319,16 @@ let pacientes = [
 		"birth": "2019/22/05",
 		"password" : "123456789"
 	},
-]
+];
+const administrador = {
+	"name": "Lucas Bridges",
+	"email": "lbridges@aol.com",
+	"lastname": "Stewart Stein",
+	"telephone": 1133445566,
+	"address": "Ap #336-9930 Lobortis Rd.",
+	"birth": "2023/36/24",
+	"password" : "123456789"
+};
 
 const generePsicologos = () => {
     psicologos.map(p => async function(){
@@ -332,7 +341,7 @@ const generePsicologos = () => {
             birth: p.birth,
 			password : bcrypt.hashSync(p.password, 10)
         })
-        const actualPsicologo = await Psicologo.create({yearsExperience: 10, honorario: 10})
+        const actualPsicologo = await Psicologo.create({yearsExperience: 10})
 		actual.setPsicologo(actualPsicologo)
 		const rol = await Rol.findOne({where:{id:2}})
 		actual.setRol(rol)
@@ -370,9 +379,31 @@ const generePacientes = () => {
 		const ciudad = await Ciudad.findByPk(ciudadNumber)
 		actual.setCiudad(ciudad)
     }())
+};
+const generarAdmin = async()=>{
+	const actual = await Usuario.create({
+		name: administrador.name,
+		email: administrador.email,
+		lastname: administrador.lastname,
+		telephone: administrador.telephone,
+		address: administrador.address,
+		birth: administrador.birth,
+		password : bcrypt.hashSync(administrador.password, 10)
+	})
+	const actualAdministrador = await Administrador.create()
+	actual.setAdministrador(actualAdministrador)
+	const rol = await Rol.findOne({where:{id:3}})
+	actual.setRol(rol)
+	const generoNumber = Math.ceil(Math.random()*3)
+	const genero = await Genero.findOne({where:{id:generoNumber}})
+	actual.setGenero(genero)
+	const ciudadNumber = Math.ceil(Math.random()*1814)
+	const ciudad = await Ciudad.findByPk(ciudadNumber)
+	actual.setCiudad(ciudad)
 }
 
 module.exports = {
     generePsicologos,
-    generePacientes
+    generePacientes,
+	generarAdmin
 }

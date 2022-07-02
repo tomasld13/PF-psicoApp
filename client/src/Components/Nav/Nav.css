@@ -22,6 +22,8 @@
     color: #575989;
     justify-self: start;
     margin-left: 20px;
+    margin-top: 2rem;
+    width: 20%;
     cursor: pointer;
     text-decoration: none;
     font-size: 2rem;
@@ -47,6 +49,7 @@
   
   .nav-item {
     height: 80px;
+    cursor: pointer;
   }
   
   .nav-links {
@@ -73,6 +76,16 @@
   
   .menu-icon {
     display: none;
+  }
+
+.text-user {
+    color: black;
+    font-size: 30px;
+    margin-top: 3.5rem;
+    margin-left: 9rem;
+    width: 25%;
+    font-family: 'Montserrat';
+    margin-bottom: 24px;
   }
   
   @media screen and (max-width: 960px) {
@@ -118,7 +131,14 @@
       position: absolute;
       top: 0;
       left: 0;
-      transform: translate(25%, 50%);
+      width: 40%;
+      transform: translate(20%, -20%);
+    }
+
+    .text-user {
+      font-size: 20px;
+      width: fit-content;
+      margin-top: -1rem;
     }
   
     .menu-icon {

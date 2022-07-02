@@ -6,6 +6,12 @@ const morgan = require("morgan")
 const cors = require("cors")
 const bodyParser = require('body-parser');
 
+
+const path = require('path');
+const publicPath = path.resolve(__dirname, './public');
+server.use('/',express.static(publicPath));
+
+
 require('dotenv').config();
 require('./db.js');
 

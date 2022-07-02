@@ -2,11 +2,7 @@ const {DataTypes} = require('sequelize');
 
 module.exports = (sequelize)=>{
     sequelize.define('horarios',{
-        fecha : {
-            type : DataTypes.DATE,
-            allowNull : false
-        },
-        horario: {
+        hora : {
             type : DataTypes.TIME,
             allowNull : false
         }

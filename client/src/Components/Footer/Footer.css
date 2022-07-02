@@ -48,6 +48,22 @@
     max-width: 1000px;
     display: flex;
     justify-content: center;
+    cursor: pointer;
+}
+
+.footer-link-items h2 {
+    cursor: initial;
+}
+
+
+.form-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin: 1rem 0;
+    font-size: 0.8rem;
+    font-family: 'Montserrat';
 }
 
 .footer-link-wrapper {

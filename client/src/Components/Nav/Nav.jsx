@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button } from '../Button/Button';
-import { Link, Route } from 'react-router-dom';
+import { Link, animateScroll as scroll } from 'react-scroll'
 import './Nav.css';
 import { startLogout } from '../../slice/auth/thunks';
+import logoImage from './logo.png'
+import Dropdown from './Dropdown';
 
 function Nav() {
   const [click, setClick] = useState(false);
@@ -11,6 +13,7 @@ function Nav() {
 
   const {displayName, status} = useSelector(state => state.auth.authFirebase);
   const storeAuthBack = useSelector(state => state.auth.authBack);
+  
   const handleClick = () => setClick(!click);
   const closeMobileMenu = () => setClick(false);
 
@@ -34,57 +37,76 @@ function Nav() {
     <>
       <nav className='navbar'>
         <div className='navbar-container'>
-          <Link to='/' className='navbar-logo' onClick={closeMobileMenu}>
-            PSICOAPP
-          </Link>
+          <a href='/' className='navbar-logo' onClick={closeMobileMenu}>
+            <img src={logoImage} alt="logo image" />
+          </a>
           {
-            status === 'authenticated' || storeAuthBack.status === 'authenticated' ? <h3>Hola {!displayName ? storeAuthBack.name : displayName}</h3> : null
+            status === 'authenticated' || storeAuthBack.status === 'authenticated' 
+            ? <div className='text-user'>Hola, {!displayName ? storeAuthBack.name : displayName}!</div> 
+            : null
           }
           <div className='menu-icon' onClick={handleClick}>
             <i className={click ? 'fas fa-times' : 'fas fa-bars'} />
           </div>
           <ul className={click ? 'nav-menu active' : 'nav-menu'}>
             <li className='nav-item'>
-              <Link to='/' className='nav-links' onClick={closeMobileMenu}>
+              <Link 
+              smooth={true}
+              offset={50} 
+              duration={700}
+              to='about' 
+              className='nav-links' 
+              onClick={closeMobileMenu}>
                 Nosotros
               </Link>
             </li>
             <li className='nav-item'>
-              <Link
-                to='/'
+              <Link 
+              smooth={true}
+              offset={50} 
+              duration={700}
+              to='questions' 
+              className='nav-links' 
+              onClick={closeMobileMenu}>
+                Preguntas Frecuentes
+              </Link>
+            </li>
+            <li className='nav-item'>
+              <a
+                href='/'
                 className='nav-links'
                 onClick={closeMobileMenu}
               >
                 Para Psicólogos
-              </Link>
+              </a>
             </li>
             <li className='nav-item'>
-              <Link
-                to='/contacto'
+              <a
+                href='/contacto'
                 className='nav-links'
                 onClick={closeMobileMenu}
               >
                 Contacto
-              </Link>
+              </a>
             </li>
 
             <li>
-              <Link
-                to='/auth/login'
+              <a
+                href='/auth/login'
                 className='nav-links-mobile'
                 onClick={closeMobileMenu}
               >
                 Registrarse
-              </Link>
+              </a>
             </li>
           </ul>
           {
             status === 'authenticated' || storeAuthBack.status === 'authenticated'
-            ? button && <Button buttonStyle='btn--outline' onClick={onLogout}>Logout</Button>
-            : button && <Link to='/auth/login'>
+            ?  button && <Dropdown >Logout</Dropdown>
+            : button && <a href='/auth/login'>
               {/* <Button buttonStyle='btn--outline'>Login</Button> */}
               <Button buttonStyle='btn--outline' link='/auth/login'>Ingresar</Button>
-            </Link> 
+            </a> 
           }
         </div>
       </nav>
