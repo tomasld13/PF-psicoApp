@@ -6,7 +6,7 @@ const ItemStyles = styled.div`
   text-align: center ;
   .subsectionItem_icon {
     svg {
-        width: 21rem;
+        width: 100%;
     }
   } 
     .subsectionItem_title {

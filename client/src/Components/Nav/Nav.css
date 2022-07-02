@@ -49,6 +49,7 @@
   
   .nav-item {
     height: 80px;
+    cursor: pointer;
   }
   
   .nav-links {
@@ -75,6 +76,16 @@
   
   .menu-icon {
     display: none;
+  }
+
+.text-user {
+    color: black;
+    font-size: 30px;
+    margin-top: 3.5rem;
+    margin-left: 9rem;
+    width: 25%;
+    font-family: 'Montserrat';
+    margin-bottom: 24px;
   }
   
   @media screen and (max-width: 960px) {
@@ -122,6 +133,12 @@
       left: 0;
       width: 40%;
       transform: translate(20%, -20%);
+    }
+
+    .text-user {
+      font-size: 20px;
+      width: fit-content;
+      margin-top: -1rem;
     }
   
     .menu-icon {
