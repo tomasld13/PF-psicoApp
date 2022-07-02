@@ -36,7 +36,7 @@ export default function Checkout() {
 
     return (
         <div>
-            <form>
+            <form className='container flex flex-col'>
                 <h4>Checkout</h4>
                 <select onChange={e=> handleOnChange(e)}>
                 <option selected disabled>Seleccione un servicio</option>
@@ -53,7 +53,7 @@ export default function Checkout() {
                 </select>
                 <button className='h-10 py-2.5 bg-primary text-white font-bold' onClick={e=>{handleOnClick(e)}}>Hacer Pago</button>
             </form>
-            { linkPago ? <button><a href={`${linkPago}`}> Confirmar </a></button>: null }
+            { linkPago ? <button className='h-10 py-2.5 bg-green text-white font-bold'><a href={`${linkPago}`}> Confirmar </a></button>: null }
         </div>
     )
 }
