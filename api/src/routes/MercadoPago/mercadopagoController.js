@@ -17,7 +17,7 @@ const postMP = (req, res) => {
     const items = [ 
         {servicio: data.servicio, precio: data.precio, quantity: 1}, 
     ]
-    const external_reference = data.id;
+    const external_reference = data.id + "*" + data.hora + "*" + data.fecha;
     const items_md = items.map(item => ({
         title: item.servicio,
         quantity: item.quantity,
@@ -38,7 +38,7 @@ const postMP = (req, res) => {
                 }
             ],
         },
-        external_reference: `${external_reference}`,
+        external_reference: external_reference,
         installments: 3,
         statement_descriptor: "Test",
         shipments: {
@@ -104,7 +104,6 @@ const getPayments = async (req, res) => {
     paciente.setFacturas(factura);
     const metodoPago = await MetodoPago.findByPk(1);
     factura.setMetodoPago(metodoPago);
-
             console.info("redirect success");
             res.redirect("http://localhost:3000");
     } catch (error) {
