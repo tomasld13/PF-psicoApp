@@ -41,7 +41,9 @@ function Nav() {
             <img src={logoImage} alt="logo image" />
           </a>
           {
-            status === 'authenticated' || storeAuthBack.status === 'authenticated' ? <h3>Hola {!displayName ? storeAuthBack.name : displayName}</h3> : null
+            status === 'authenticated' || storeAuthBack.status === 'authenticated' 
+            ? <div className='text-user'>Hola, {!displayName ? storeAuthBack.name : displayName}!</div> 
+            : null
           }
           <div className='menu-icon' onClick={handleClick}>
             <i className={click ? 'fas fa-times' : 'fas fa-bars'} />
@@ -56,6 +58,17 @@ function Nav() {
               className='nav-links' 
               onClick={closeMobileMenu}>
                 Nosotros
+              </Link>
+            </li>
+            <li className='nav-item'>
+              <Link 
+              smooth={true}
+              offset={50} 
+              duration={700}
+              to='questions' 
+              className='nav-links' 
+              onClick={closeMobileMenu}>
+                Preguntas Frecuentes
               </Link>
             </li>
             <li className='nav-item'>
