@@ -33,7 +33,9 @@ export default function Checkout() {
         setResponse(dispatch(postMP({
             id: id,
             servicio: service,
-            precio: Number(price)
+            precio: Number(price),
+            hora: "14:30:10",
+            fecha: "2020-05-05",
         })))
     }
 

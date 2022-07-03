@@ -5,6 +5,7 @@ import Card from "../Card/Card";
 import { Button } from '../Button/Button'
 import styles from '../Cards/cards.module.css';
 import Loading from '../Loading/Loading.jsx'
+import SectionTitle from '../SectionTitle/SectionTitle'
 
 const itemsPerPage = 6;
 
@@ -109,6 +110,16 @@ export default function Cards() {
         </select>
         {/* <button onClick={handlerClick}>Ordenar</button> */}
         <div>
+          <div>
+          <select className='border border-gray-300 my-2.5 px-3 py-1 rounded-lg shadow-sm focus:outline-none focus:border-primary' 
+        name="especialidad" 
+        id="especialidad" 
+        onChange={handlerClick}>
+            <option selected disabled value=" "> Género </option>
+            <option value="masculino">Hombre</option>
+            <option value="femenino">Mujer</option>
+        </select>
+          </div>
           <select className='border border-gray-300 my-2.5 px-3 py-1 rounded-lg shadow-sm focus:outline-none focus:border-primary' 
           name="especialidad" 
           id="especialidad" 
@@ -125,7 +136,7 @@ export default function Cards() {
       </div>
 
       <div>
-        <h3 className="text-3xl py-2.5">Cuales Psicologos pueden ayudarte?</h3>
+        <SectionTitle heading='¿Cuál psicólogo puede ayudarte?' subheading=""/>
         <div className={styles.cards_container}>
           {
             find.length > 0 ? [...find].splice(

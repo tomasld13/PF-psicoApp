@@ -13,7 +13,7 @@ function Footer() {
                 información de los mejores psicólogos
             </p>
             <p className="footer-subscription-text">
-                Podes cancelar la suscripción cuando desees.
+                Podes cancelar la suscripción desde tu perfíl.
             </p>
             <div className="input-areas">
                 <form>
