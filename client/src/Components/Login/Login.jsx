@@ -33,7 +33,6 @@ export default function Login() {
 
     return (
     <>
-        <Nav/>
         <div className='container mx-auto mt-auto bg-secundary rounded'>
             <h1 className='text-3xl py-5'>Iniciar Sesion</h1>
             <form onSubmit={handlerSubmit}>

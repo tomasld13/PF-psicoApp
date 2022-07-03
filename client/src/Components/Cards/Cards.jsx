@@ -158,8 +158,8 @@ export default function Cards() {
                       key={psycho.id} 
                       nombreCompleto={`${psycho.name} ${psycho.lastname}`}
                       experiencia={psycho.psicologo.yearsExperience}
-                      especialidad={psycho.psicologo.especialidades[0].especialidad}
-                      ciudad={psycho.ciudad.name}/>
+                      especialidad={psycho.psicologo.especialidades[0]?.especialidad}
+                      ciudad={psycho.ciudad?.name}/>
             }) :
                 (<div>
                   <Loading/>

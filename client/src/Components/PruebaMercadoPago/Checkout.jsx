@@ -1,19 +1,22 @@
-import React from 'react'
-import { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { postMP } from '../../slice/psico/thunks.js';
 
 export default function Checkout() {
     const [service, setService] = useState("");
     const [price, setPrice] = useState("");
     const [response , setResponse] = useState("");
+
+    const { rolId } = useSelector(state => state.auth.authBack);
+
     const dispatch = useDispatch();
 
     const { pychoId } = useSelector(state => state.psicology)
     const {id} = useSelector(state=>state.auth.authBack)
     const linkPago = useSelector (state=>state.psicology.initPoint.id)
-    console.log(id, "ID del paciente")
-    console.log(linkPago);
+    // console.log(id, "ID del paciente")
+    // console.log(linkPago);
     useEffect(()=>{      
     }, [])
 
@@ -51,7 +54,16 @@ export default function Checkout() {
                 
                 ): <></>}
                 </select>
-                <button className='h-10 py-2.5 bg-primary text-white font-bold' onClick={e=>{handleOnClick(e)}}>Hacer Pago</button>
+                {
+                    rolId ? (
+                        <button className='h-10 py-2.5 bg-primary text-white font-bold' onClick={e=>{handleOnClick(e)}}>Hacer Pago</button>
+                    ) : (
+                        <Link to='/auth/login'>
+                            <button className='h-10 py-2.5 bg-primary text-white font-bold'>Hacer Pago</button>
+                        </Link>
+                    )
+                }
+                
             </form>
             { linkPago ? <button><a href={`${linkPago}`}> Confirmar </a></button>: null }
         </div>

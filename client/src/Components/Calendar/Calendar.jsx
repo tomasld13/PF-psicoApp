@@ -1,94 +1,29 @@
 import { useEffect, useState } from 'react';
-import DatePicker from "react-datepicker"
-import "react-datepicker/dist/react-datepicker.css"
+import { Link } from 'react-router-dom';
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import { useSelector, useDispatch } from 'react-redux';
-import { getPsychologyID } from '../../slice/psico/thunks.js';
+import { getPsychologyID, agendarCita, updateCalendar } from '../../slice/psico/thunks.js';
+import Loading from '../Loading/Loading.jsx';
 
-let psicologo = {
-    "id": 16,
-    "yearsExperience": 10,
-    "honorario": 20,
-    "fk_usuarioID": 37,
-    "inicioHorario": "08:00:00",
-    "finHorario": "16:00:00",
-    "intervaloSesion": 60,
-    "dia": [
-        {
-            "id": 1,
-            "fecha": "2022-06-29",
-            "Dia_Psicologo": {
-            "createdAt": "2022-06-28T23:03:51.142Z",
-            "updatedAt": "2022-06-28T23:03:51.142Z",
-            "diumId": 1,
-            "psicologoId": 16
-            },
-            "horarios": [
-            {
-                "id": 1,
-                "hora": "10:00:00",
-                "psicologoId": 16,
-                "pacienteId": 21,
-                "diumId": 1
-            }
-            ]
-        },
-        {
-            "id": 2,
-            "fecha": "2022-06-30",
-            "Dia_Psicologo": {
-            "createdAt": "2022-06-28T23:03:51.252Z",
-            "updatedAt": "2022-06-28T23:03:51.252Z",
-            "diumId": 2,
-            "psicologoId": 16
-            },
-            "horarios": [
-            {
-                "id": 2,
-                "hora": "13:00:00",
-                "psicologoId": 16,
-                "pacienteId": 21,
-                "diumId": 2
-            },
-            {
-                "id": 3,
-                "hora": "12:00:00",
-                "psicologoId": 16,
-                "pacienteId": 21,
-                "diumId": 2
-            }
-            ]
-        },
-    ]
-}
-
-export const Calendar = () => {
+export const Calendar = ({idPsycho}) => {
     
     const psychologist = useSelector(state => state.psicology.pychoId);
+    const { rolId } = useSelector(state => state.auth.authBack);
 
-    const [startDate, setStartDate] = useState(new Date().setMonth(7));
+    const [startDate, setStartDate] = useState(psychologist.id ? psychologist.formatoDias[0] : new Date());
     const [startTime, setStartTime] = useState(new Date().setHours(8,0));
     const [excludes, setExcludes] = useState([]);
     const dispatch = useDispatch();
 
-    console.log(psychologist);
     useEffect(() => {
-        // setExcludes(getTimeExcludes(startDate));
-        dispatch(getPsychologyID('15'));
-    },[]);
-
-
-    if (false) {
-        
-        let psicologoDias = psychologist.dia?.map(m => { // listo
-            let dia = m.fecha.split("-")
-            return new Date(dia[0],dia[1]-1,dia[2])
-        });
+        if (psychologist.id) {
+            setExcludes(getTimeExcludes(startDate));
+        }
+        dispatch(getPsychologyID(idPsycho));
+    },[startDate, startTime]);
     
-        console.log(psicologoDias[0]);
-    
-    
-    
-        const getMonth = (month) => { //listo
+        const getMonth = (month) => {
             switch(month){
             case "Jan":
                 return 1
@@ -117,79 +52,87 @@ export const Calendar = () => {
             }
         }
     
-        let [maxH, maxM] = psychologist.finHorario.split(":") //listo
-        maxH = parseInt(maxH)
-        maxM = parseInt(maxM)
-        let max = new Date()
-        max = max.setHours(maxH,maxM)
-        let min = new Date()
-        let [minH, minM] = psychologist.inicioHorario.split(":")
-        maxH = parseInt(minH)
-        maxM = parseInt(minM)
-        min = min.setHours(minH,minM)
-    
         const getTimeExcludes = (startDate) => {
             const dayPsico = psychologist.dia.filter(d => {
-            let dia = d.fecha.split("-")
-            return new Date(dia[0],dia[1]-1,dia[2]).toString().slice(0,10) === startDate.toString().slice(0,10)})
-            const horarios = dayPsico[0].horarios.map(h => {
-            let d = new Date()
-            let [hora, minutes] = h.hora.split(":")
-            d.setHours(parseInt(hora),parseInt(minutes))
-            return d
-            })
+                let dia = d.fecha.split("-");
+                return new Date(dia[0],dia[1]-1,dia[2]).toString().slice(0,10) === new Date(startDate).toString().slice(0,10)
+            });
+
+
+            const horarios = dayPsico[0]?.horarios.map(h => {
+                let d = new Date();
+                let [hora, minutes] = h.hora.split(":");
+                d.setHours(parseInt(hora),parseInt(minutes));
+                return d;
+            });
+
             return horarios;
         }
     
         const enviarDatosAlBack = () => {
-            let d = postDates()
-            // dispatch(postHorario({date:d[0], time:d[1]}));
-            // console.log(d);
+            let dateTime = postDates();
+            dispatch(agendarCita(idPsycho,dateTime));
+            setStartTime(new Date().setHours(8,0));
         }
     
         
         const postDates = () => {
-            let date = startDate.toString().split(" ")
-            let mes = getMonth(date[1]) <= 10 ? ("0" + getMonth(date[1])) : getMonth([date[1]])
-            date = date[3] + "-" + mes + "-" + date[2]
-            let time = startTime.toString().split(" ")
-            time = time[4]
-            return {date, time}
+            let date = startDate.toString().split(" ");
+            let mes = getMonth(date[1]) <= 10 ? ("0" + getMonth(date[1])) : getMonth([date[1]]);
+            date = date[3] + "-" + mes + "-" + date[2];
+
+            let time = startTime.toString().split(" ");
+            time = time[4];
+
+            return {date, time};
         }
-        // console.log(psychologist);
-        enviarDatosAlBack();
+
         return (
-            <div className='flex'>
-            <DatePicker
-            selected={startDate}
-            onChange={(date) => {setStartDate(date)}}
-            includeDates={psicologoDias}
-            showWeekNumbers
-            minDate={new Date()}
-            monthsShown={2}
-            dateFormat="yyyy/MM/dd"
-            withPortal
-            inline
-            />
-            <DatePicker
-            selected={startTime}
-            excludeTimes={excludes}
-            onChange={(date) => setStartTime(date)}
-            showTimeSelect
-            showTimeSelectOnly
-            timeIntervals={psicologo.intervaloSesion}
-            timeCaption="Time"
-            dateFormat="hh:mm aa"
-            minTime={min}
-            maxTime={max}
-            withPortal
-            inline
-            />
-            </div>
+            <>
+                {
+                    psychologist.formatoHorarios?.min 
+                    ? <div className='flex'>
+                    <DatePicker
+                    selected={startDate}
+                    onChange={(date) => {setStartDate(date)}}
+                    includeDates={psychologist.formatoDias}
+                    showWeekNumbers
+                    minDate={new Date()}
+                    monthsShown={2}
+                    dateFormat="yyyy/MM/dd"
+                    withPortal
+                    inline
+                    />
+                    <DatePicker
+                    selected={startTime}
+                    excludeTimes={excludes}
+                    onChange={(date) => setStartTime(date)}
+                    showTimeSelect
+                    showTimeSelectOnly
+                    timeIntervals={psychologist.intervaloSesion}
+                    timeCaption="Time"
+                    dateFormat="hh:mm aa"
+                    minTime={psychologist.formatoHorarios.min}
+                    maxTime={psychologist.formatoHorarios.max}
+                    withPortal
+                    inline
+                    />
+                    {
+                        rolId ? (
+                            <div>
+                                <button onClick={enviarDatosAlBack}>Agendar cita</button>
+                            </div>
+                        ) : <Link to='/auth/login'>
+                            <div>
+                                <button>Agendar cita</button>
+                            </div>
+                        </Link>
+                    }
+                    
+                </div> : <div>
+                    <Loading/>
+                </div>
+                }
+            </>
         );
-    } else {
-        return (
-            <div>loading</div>
-        )
-    }
 }

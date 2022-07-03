@@ -51,12 +51,15 @@ export const getPsychologyID = (id) => {//Consigue Psicologos por ID
         try {
             const response = await fetch(`http://localhost:3001/api/psicologo/${id}`);
             const data = await response.json();
-
+            
             const dias = getDiasPsicologos(data.dia);
+            
             const horarios = minMaxTime(data.finHorario, data.inicioHorario);
-            console.log(horarios);
+
             data.formatoDias = dias;
-            dispatch(getPsychoByID(data))
+            data.formatoHorarios = horarios;
+
+            dispatch(getPsychoByID(data));
             
         } catch (error) {
             return (error)           
@@ -71,46 +74,55 @@ const getDiasPsicologos = (dias) => {
     });
 }
 
-const getMonth = (month) => {
-    switch(month){
-    case "Jan":
-        return 1
-    case "Feb":
-        return 2
-    case "Mar":
-        return 3
-    case "Apr":
-        return 4
-    case "May":
-        return 5
-    case "Jun":
-        return 6
-    case "Jul":
-        return 7
-    case "Aug":
-        return 8
-    case "Sep":
-        return 9
-    case "Oct":
-        return 10
-    case "Nov":
-        return 11
-    default:
-        return 12                       
+const minMaxTime = (finHorario, inicioHorario) => {
+    let [maxH, maxM] = finHorario.split(":");
+    maxH = parseInt(maxH);
+    maxM = parseInt(maxM);
+    let max = new Date();
+    max = max.setHours(maxH,maxM);
+    let min = new Date();
+    let [minH, minM] = inicioHorario.split(":");
+    maxH = parseInt(minH);
+    maxM = parseInt(minM);
+    min = min.setHours(minH,minM);
+
+    return {min, max}
+}
+
+export const agendarCita = (idPsicologo, diaHora) => {
+
+    return async () => {
+        try {
+            const rs = await fetch(`http://localhost:3001/api/horarios/psicologo/${idPsicologo}`,{
+                method: 'POST',
+                body: JSON.stringify(diaHora),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+
+            if (rs.ok) {
+                alert('Se agendo la cita con exito');
+            }
+
+        } catch (error) {
+            return error
+        }
     }
 }
 
-const minMaxTime = (finHorario, inicioHorario) => {
-    let [maxH, maxM] = finHorario.split(":")
-    maxH = parseInt(maxH)
-    maxM = parseInt(maxM)
-    let max = new Date()
-    max = max.setHours(maxH,maxM)
-    let min = new Date()
-    let [minH, minM] = inicioHorario.split(":")
-    maxH = parseInt(minH)
-    maxM = parseInt(minM)
-    min = min.setHours(minH,minM)
+export const updateCalendar = (idPsicologo) => {
+
+    return async () => {
+        try {
+            const rs = await fetch(`http://localhost:3001/api/horarios/psicologo/${idPsicologo}`);
+
+            const rsData = await rs.json();
+            // console.log(rsData);
+        } catch (error) {
+            return error
+        }
+    }
 }
 
 export const postMP = (data) => {

@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { animateScroll as scroll } from 'react-scroll';
 import { Button } from '../Button/Button';
-import { Link, animateScroll as scroll } from 'react-scroll'
 import './Nav.css';
 import { startLogout } from '../../slice/auth/thunks';
 import logoImage from './logo.png'
@@ -37,9 +38,12 @@ function Nav() {
     <>
       <nav className='navbar'>
         <div className='navbar-container'>
-          <a href='/' className='navbar-logo' onClick={closeMobileMenu}>
+          <Link to='/' onClick={closeMobileMenu} className='navbar-logo'>
             <img src={logoImage} alt="logo image" />
-          </a>
+          </Link>
+          {/* <a className='navbar-logo' onClick={closeMobileMenu}>
+            
+          </a> */}
           {
             status === 'authenticated' || storeAuthBack.status === 'authenticated' ? <h3>Hola {!displayName ? storeAuthBack.name : displayName}</h3> : null
           }
@@ -52,39 +56,39 @@ function Nav() {
               smooth={true}
               offset={50} 
               duration={700}
-              to='about' 
+              to='/about' 
               className='nav-links' 
               onClick={closeMobileMenu}>
                 Nosotros
               </Link>
             </li>
             <li className='nav-item'>
-              <a
-                href='/'
+              <Link
+                to='/'
                 className='nav-links'
                 onClick={closeMobileMenu}
               >
                 Para Psicólogos
-              </a>
+              </Link>
             </li>
             <li className='nav-item'>
-              <a
-                href='/contacto'
+              <Link
+                to='/contacto'
                 className='nav-links'
                 onClick={closeMobileMenu}
               >
                 Contacto
-              </a>
+              </Link>
             </li>
 
             <li>
-              <a
-                href='/auth/login'
+              <Link
+                to='/auth/login'
                 className='nav-links-mobile'
                 onClick={closeMobileMenu}
               >
                 Registrarse
-              </a>
+              </Link>
             </li>
           </ul>
           {
