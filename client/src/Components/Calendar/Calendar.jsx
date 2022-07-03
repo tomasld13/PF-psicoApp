@@ -86,8 +86,10 @@ export const Calendar = ({idPsycho}) => {
             return {date, time};
         }
 
+        console.log(psychologist);
         return (
             <>
+                <h1>CALENDARIO</h1>
                 {
                     psychologist.formatoHorarios?.min 
                     ? <div className='flex'>
@@ -122,18 +124,6 @@ export const Calendar = ({idPsycho}) => {
                     withPortal
                     // inline
                     />
-                    {
-                        // rolId ? (
-                        //     <div>
-                        //         <button onClick={enviarDatosAlBack}>Agendar cita</button>
-                        //     </div>
-                        // ) : <Link to='/auth/login'>
-                        //     <div>
-                        //         <button>Agendar cita</button>
-                        //     </div>
-                        // </Link>
-                    }
-                    
                 </div> : <div>
                     <Loading/>
                 </div>

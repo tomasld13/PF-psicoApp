@@ -54,7 +54,7 @@ export const getPsychologyID = (id) => {//Consigue Psicologos por ID
             
             const dias = getDiasPsicologos(data.dia);
             
-            const horarios = minMaxTime(data.finHorario, data.inicioHorario);
+            const horarios = minMaxTime(data.finHorario , data.inicioHorario);
 
             data.formatoDias = dias;
             data.formatoHorarios = horarios;
