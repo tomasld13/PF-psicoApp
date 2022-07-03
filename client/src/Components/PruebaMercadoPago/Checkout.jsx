@@ -3,12 +3,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { postMP } from '../../slice/psico/thunks.js';
 
-export default function Checkout() {
+export default function Checkout({idpsycho}) {
     const [service, setService] = useState("");
     const [price, setPrice] = useState("");
     const [response , setResponse] = useState("");
 
     const { rolId } = useSelector(state => state.auth.authBack);
+    const {date, time} = useSelector(state => state.psicology.calendar);
+
 
     const dispatch = useDispatch();
 
@@ -34,9 +36,10 @@ export default function Checkout() {
             id: id,
             servicio: service,
             precio: Number(price),
-            hora: "14:30:10",
-            fecha: "2020-05-05",
-        })))
+            hora: time,
+            fecha: date,
+            psicoId: idpsycho
+        })));
     }
 
     return (

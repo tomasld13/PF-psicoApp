@@ -9,7 +9,8 @@ export const psicologySlice = createSlice({
         sortPsycho: [],
         copyPsycho: [],
         pychoId: {},
-        initPoint: []
+        initPoint: [],
+        calendar: {},
     },
     reducers: {
         getPsychos: (state, {payload}) => {
@@ -62,8 +63,11 @@ export const psicologySlice = createSlice({
         },
         postMercadopago: (state, {payload}) => {
             state.initPoint = payload
+        },
+        calendar: (state, {payload}) => {
+            state.calendar = payload
         }
     },
 });
 
-export const {getPsychos, filterSpatiality, sortByNamePsycho, getPsychoByID, postMercadopago} = psicologySlice.actions; 
+export const {getPsychos, filterSpatiality, sortByNamePsycho, getPsychoByID, postMercadopago, calendar} = psicologySlice.actions; 

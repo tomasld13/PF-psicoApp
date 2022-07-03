@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useSelector, useDispatch } from 'react-redux';
-import { getPsychologyID, agendarCita, updateCalendar } from '../../slice/psico/thunks.js';
+import { getPsychologyID, postDateTime } from '../../slice/psico/thunks.js';
 import Loading from '../Loading/Loading.jsx';
 
 export const Calendar = ({idPsycho}) => {
@@ -69,11 +69,10 @@ export const Calendar = ({idPsycho}) => {
             return horarios;
         }
     
-        const enviarDatosAlBack = () => {
-            let dateTime = postDates();
-            dispatch(agendarCita(idPsycho,dateTime));
-            setStartTime(new Date().setHours(8,0));
-        }
+        // const enviarDatosAlBack = () => {
+        //     let dateTime = postDates();
+        //     dispatch(postDateTime());
+        // }
     
         
         const postDates = () => {
@@ -94,19 +93,25 @@ export const Calendar = ({idPsycho}) => {
                     ? <div className='flex'>
                     <DatePicker
                     selected={startDate}
-                    onChange={(date) => {setStartDate(date)}}
+                    onChange={(date) => {
+                        setStartDate(date);
+                        dispatch(postDateTime(postDates()));
+                    }}
                     includeDates={psychologist.formatoDias}
                     showWeekNumbers
                     minDate={new Date()}
                     monthsShown={2}
                     dateFormat="yyyy/MM/dd"
                     withPortal
-                    inline
+                    // inline
                     />
                     <DatePicker
                     selected={startTime}
                     excludeTimes={excludes}
-                    onChange={(date) => setStartTime(date)}
+                    onChange={(date) => {
+                        setStartTime(date);
+                        dispatch(postDateTime(postDates()));
+                    }}
                     showTimeSelect
                     showTimeSelectOnly
                     timeIntervals={psychologist.intervaloSesion}
@@ -115,18 +120,18 @@ export const Calendar = ({idPsycho}) => {
                     minTime={psychologist.formatoHorarios.min}
                     maxTime={psychologist.formatoHorarios.max}
                     withPortal
-                    inline
+                    // inline
                     />
                     {
-                        rolId ? (
-                            <div>
-                                <button onClick={enviarDatosAlBack}>Agendar cita</button>
-                            </div>
-                        ) : <Link to='/auth/login'>
-                            <div>
-                                <button>Agendar cita</button>
-                            </div>
-                        </Link>
+                        // rolId ? (
+                        //     <div>
+                        //         <button onClick={enviarDatosAlBack}>Agendar cita</button>
+                        //     </div>
+                        // ) : <Link to='/auth/login'>
+                        //     <div>
+                        //         <button>Agendar cita</button>
+                        //     </div>
+                        // </Link>
                     }
                     
                 </div> : <div>

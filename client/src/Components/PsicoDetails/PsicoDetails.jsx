@@ -25,7 +25,7 @@ export default function PsicoDetails() {
                 <div className="container h-80 bg-red"><Calendar idPsycho={id}/></div>
                 <div className="container bg-blue"> <Pricing /> </div>
                 <button className="bg-primary text-white border border-primary font-bold py-2 px-4 rounded hover:bg-white hover:text-primary my-2.5 h-9">Agendar cita</button>
-                <Prueba />
+                <Prueba idPsycho={id}/>
             </div>
         </div>
     );

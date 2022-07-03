@@ -1,5 +1,5 @@
 import { async } from '@firebase/util';
-import { getPsychos, filterSpatiality, sortByNamePsycho, getPsychoByID, postMercadopago  } from './psicologySlice.js';
+import { getPsychos, filterSpatiality, sortByNamePsycho, getPsychoByID, postMercadopago, calendar  } from './psicologySlice.js';
 import axios from 'axios';
 
 export const getPsicology = () => {
@@ -111,17 +111,9 @@ export const agendarCita = (idPsicologo, diaHora) => {
     }
 }
 
-export const updateCalendar = (idPsicologo) => {
-
-    return async () => {
-        try {
-            const rs = await fetch(`http://localhost:3001/api/horarios/psicologo/${idPsicologo}`);
-
-            const rsData = await rs.json();
-            // console.log(rsData);
-        } catch (error) {
-            return error
-        }
+export const postDateTime = (dateTime) => {
+    return (dispatch) => {
+        dispatch(calendar(dateTime));
     }
 }
 
