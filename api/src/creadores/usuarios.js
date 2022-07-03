@@ -1,4 +1,4 @@
-const {Psicologo, Paciente, Usuario, Especialidades, Rol, Genero, Ciudad, Administrador} = require("../db")
+const {Psicologo, Paciente, Usuario, Especialidades, Rol, Genero, Ciudad, Administrador, Dia, Horarios} = require("../db")
 const bcrypt = require('bcryptjs');
 let psicologos = [
 	{
@@ -329,6 +329,13 @@ const administrador = {
 	"birth": "2023/36/24",
 	"password" : "123456789"
 };
+let dia = 4
+const fechas = []
+const findes = [10,17,24,31,9,16,23,30]
+while(dia < 31){
+	if(!findes.includes(dia)) fechas.push({fecha:`2022-07-${dia >= 10 ? dia : "0" + dia}`})
+	dia++
+}
 
 const generePsicologos = () => {
     psicologos.map(p => async function(){
@@ -342,6 +349,8 @@ const generePsicologos = () => {
 			password : bcrypt.hashSync(p.password, 10)
         })
         const actualPsicologo = await Psicologo.create({yearsExperience: 10})
+		const dias = await Dia.bulkCreate(fechas)
+		dias.map(async (d) => await actualPsicologo.addDia(d))
 		actual.setPsicologo(actualPsicologo)
 		const rol = await Rol.findOne({where:{id:2}})
 		actual.setRol(rol)
