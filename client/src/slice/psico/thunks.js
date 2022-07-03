@@ -1,5 +1,5 @@
 import { async } from '@firebase/util';
-import { getPsychos, filterSpatiality, sortByNamePsycho, getPsychoByID, postMercadopago, calendar  } from './psicologySlice.js';
+import { getPsychos, filterSpatiality, sortByNamePsycho, getPsychoByID, postMercadopago, calendar, getProvinciasSelect, getCiudadesSelect  } from './psicologySlice.js';
 import axios from 'axios';
 
 export const getPsicology = () => {
@@ -128,3 +128,39 @@ export const postMP = (data) => {
     }
 }
 
+export const getProvincias = () => {
+    return async (dispatch) => {
+        const provincias = [];
+        try {
+            const resp = await fetch('http://localhost:3001/api/provincias');
+            const data = await resp.json();
+
+            for (const iterator of data) {
+                provincias.push({id: iterator.id, name: iterator.name});
+            }
+            
+            dispatch(getProvinciasSelect(provincias));
+        } catch (error) {
+            return error;
+        }
+    }
+}
+
+export const getCiudades = (id) => {
+    return async (dispatch) => {
+        try {
+            const resp = await fetch(`http://localhost:3001/api/provincias/${id}`);
+            const data = await resp.json();
+
+            dispatch(getCiudadesSelect(data.ciudads));
+        } catch (error) {
+            
+        }
+    }
+}
+
+export const cleanCiudades = () => {
+    return (dispatch) => {
+        dispatch(getCiudadesSelect([]));
+    }
+}
