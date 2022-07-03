@@ -132,7 +132,7 @@ export default function Cards() {
             <option value="Organizacional">Psicologia Organizacional</option>
           </select>
         </div>
-        <Button onClick={handleRemove}>Limpiar filtros</Button>
+        <Button onClick={() => handleRemove()}>Limpiar filtros</Button>
       </div>
 
       <div>

@@ -1,4 +1,5 @@
 import { useState, useRef } from 'react'
+import { useSelector } from 'react-redux' 
 import imagetemplate from '../../Profile/team-male.jpg'
 import {
   Avatar,
@@ -24,6 +25,8 @@ function Profile() {
 
   const { isOpen, onOpen, onClose } = useDisclosure()
   const profileImage = useRef(null)
+
+  const { name } = useSelector(state=>state.auth.authBack)
 
   const openChooseImage = () => {
     profileImage.current.click()
@@ -91,7 +94,7 @@ function Profile() {
       </Modal>
       <VStack spacing={1}>
         <Heading as="h3" fontSize="xl" color="brand.dark">
-          Nombre
+          {name}
         </Heading>
         <Text color="brand.gray" fontSize="sm">
           Paciente

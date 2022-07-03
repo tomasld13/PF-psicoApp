@@ -1,9 +1,13 @@
 import { useMemo, useState} from "react";
+import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from "../../hooks/useForm";
 import { startCreatingUserWithEmailPasswordPatient } from '../../slice/auth/thunks.js';
+import Swal from "sweetalert2";
 
 const emailRegex = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+
+
 
 const formData = {
     email: '',
@@ -36,6 +40,8 @@ export const RegisterPatient = ({rol}) => {
     formData.rol = rol;
 
     const dispatch = useDispatch();
+    const navigate = useNavigate();
+
     const [formSubmitted, setFormSubmitted] = useState(false);
 
     const { status } = useSelector(state => state.auth.authBack);
@@ -103,7 +109,18 @@ export const RegisterPatient = ({rol}) => {
                     {!!ciudadValid && formSubmitted ? <span style={{color:'red'}}>{ciudadValid}</span> : null}
                 </div>
                 <div className="flex flex-col content-center items-center">
-                    <button className='bg-primary text-white border border-primary font-bold py-2 px-4 rounded hover:bg-white hover:text-primary my-2.5 h-12 ' disabled={isCheckingAuthentication}>Crear cuenta</button>
+                    <button 
+                    className='bg-primary text-white border border-primary font-bold py-2 px-4 rounded hover:bg-white hover:text-primary my-2.5 h-12 ' 
+                    disabled={isCheckingAuthentication}
+                    onClick={() => {
+                        Swal.fire(
+                            'La cuenta fue creada exitosamente',
+                            'Ya puedes iniciar sesión',
+                            'success'
+                        )
+                        navigate('/')
+                    }}
+                    >Crear cuenta</button>
                     {errorRegister !== '' ? <span style={{color:'red'}}>{errorRegister}</span> : null}
                 </div>
             </form>
