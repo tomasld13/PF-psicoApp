@@ -151,7 +151,9 @@ export default function Cards() {
             <option value="Organizacional">Psicologia Organizacional</option>
           </select>
         </div>
+
         <button className="bg-primary text-white border border-primary font-bold py-2 px-4 rounded hover:bg-white hover:text-primary my-2.5 mx-2.5 h-10" onClick={(e)=>handleRemove(e)}>Limpiar filtros</button>
+
       </div>
 
       <div>
