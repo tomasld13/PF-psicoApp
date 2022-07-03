@@ -13,6 +13,8 @@ require('dotenv').config();
 
 
 
+
+
 conn.sync({force: true, logging: false}).then(async () => {
   console.log('Base de datos conectada! :D');
   socketServer.listen(process.env.PORT, async function () {
@@ -30,6 +32,7 @@ conn.sync({force: true, logging: false}).then(async () => {
     console.log(`App is listening on port ${process.env.PORT}!`);
     configurarSockets();
   });
+
   
 })
 .catch((err) => console.error(err));
