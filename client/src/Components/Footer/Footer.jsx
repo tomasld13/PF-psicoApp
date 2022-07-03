@@ -2,6 +2,7 @@ import React from 'react'
 import { Button } from '../Button/Button'
 import logoImage from '../Nav/logo.png'
 import { Link, animateScroll as scroll} from 'react-scroll'
+import Swal from 'sweetalert2'
 import './Footer.css'
 
 function Footer() {
@@ -18,7 +19,15 @@ function Footer() {
             <div className="input-areas">
                 <form>
                     <input type="email" name='email' placeholder='Su email...' className="footer-input" />
-                    <Button type='submit' buttonStyle='btn--outline'>Suscribite</Button>
+                    <Button type='submit' buttonStyle='btn--outline'
+                    onClick={() => 
+                    Swal.fire(
+                      '¡Gracias por suscribirte!',
+                      '',
+                      'success'
+                    )
+                    }
+                    >Suscribite</Button>
                     <div className="form-container">
                     <input type="checkbox"/> <p>Si, estoy de acuerdo en recibir novedades de PsicoApp.</p>
                     </div>
