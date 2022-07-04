@@ -346,7 +346,7 @@ const generePsicologos = async () => {
 			await s.setPrecios(p)
 		})
     psicologos.map(p => async function(){
-        const actual = await Usuario.create({
+        const actualPS = await Usuario.create({
             name: p.name,
             email: p.email,
             lastname: p.lastname,
@@ -358,12 +358,12 @@ const generePsicologos = async () => {
         const actualPsicologo = await Psicologo.create({yearsExperience: 10, inicioHorario: "08:00:00", finHorario: "16:00:00", intervaloSesion: 60})
 		const dias = await Dia.bulkCreate(fechas)
 		dias.map(async (d) => await actualPsicologo.addDia(d))
-		actual.setPsicologo(actualPsicologo)
+		actualPS.setPsicologo(actualPsicologo)
 		const rol = await Rol.findOne({where:{id:2}})
-		actual.setRol(rol)
+		actualPS.setRol(rol)
 		const generoNumber = Math.ceil(Math.random()*3)
 		const genero = await Genero.findOne({where:{id:generoNumber}})
-		actual.setGenero(genero)
+		actualPS.setGenero(genero)
 		const number = Math.ceil(Math.random()*5)
 		const especialidad = await Especialidades.findOne({where:{id:number}})
 		actualPsicologo.setEspecialidades(especialidad)
@@ -372,13 +372,13 @@ const generePsicologos = async () => {
 		servicios.map(async s => {
 			await actualPsicologo.addServicios(s)
 		})
-		actual.setCiudad(ciudad)
+		actualPS.setCiudad(ciudad)
     }())
 }
 
 const generePacientes = () => {
     pacientes.map(p => async function(){
-        const actual = await Usuario.create({
+        const actualP = await Usuario.create({
             name: p.name,
             email: p.email,
             lastname: p.lastname,
@@ -388,15 +388,15 @@ const generePacientes = () => {
 			password : bcrypt.hashSync(p.password, 10)
         })
         const actualPaciente = await Paciente.create()
-		actual.setPaciente(actualPaciente)
+		actualP.setPaciente(actualPaciente)
 		const rol = await Rol.findOne({where:{id:1}})
-		actual.setRol(rol)
+		actualP.setRol(rol)
 		const generoNumber = Math.ceil(Math.random()*3)
 		const genero = await Genero.findOne({where:{id:generoNumber}})
-		actual.setGenero(genero)
+		actualP.setGenero(genero)
 		const ciudadNumber = Math.ceil(Math.random()*4142)
 		const ciudad = await Ciudad.findByPk(ciudadNumber)
-		actual.setCiudad(ciudad)
+		actualP.setCiudad(ciudad)
     }())
 };
 const generarAdmin = async()=>{

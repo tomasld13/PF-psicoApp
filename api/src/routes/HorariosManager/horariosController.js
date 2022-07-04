@@ -17,7 +17,7 @@ const getHorariosPaciente = async (req, res, next) => {
         const paciente = await Paciente.findByPk(id)
         if(!paciente) return res.status(404).send({ error: "Paciente no encontrado" });
         let dias = await Dia.findAll({include:{model: Horarios}})
-        let diasPaciente = dias.filter(d => d.horarios.filter(h => h.pacienteID === id))
+        let diasPaciente = dias.map(d => d.horarios.filter(h => h.pacienteID === id))
         return res.send({paciente, diasPaciente})
     } catch (error) {
         next(error)
