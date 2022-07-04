@@ -195,7 +195,7 @@ export default function Cards() {
                       nombreCompleto={`${psycho.name} ${psycho.lastname}`}
                       experiencia={psycho.psicologo.yearsExperience}
                       especialidad={psycho.psicologo.especialidades[0].especialidad}
-                      ciudad={psycho.ciudad.name}/>
+                      ciudad={psycho.ciudad?.name}/>
             }) : psychologists.length > 0 ? [...psychologists].splice(
               firstIndex,itemsPerPage
             ).map(psycho => {
@@ -204,8 +204,8 @@ export default function Cards() {
                       key={psycho.id} 
                       nombreCompleto={`${psycho.name} ${psycho.lastname}`}
                       experiencia={psycho.psicologo.yearsExperience}
-                      especialidad={psycho.psicologo.especialidades[0].especialidad}
-                      ciudad={psycho.ciudad.name}/>
+                      especialidad={psycho.psicologo.especialidades[0]?.especialidad}
+                      ciudad={psycho.ciudad?.name}/>
             }) :
                 (<div>
                   <Loading/>

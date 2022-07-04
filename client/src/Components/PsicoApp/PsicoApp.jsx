@@ -6,6 +6,7 @@ import Nav from "../Nav/Nav";
 import Psychologists from "../Psychologists/Psychologists";
 import ScrollToTop from "../ScrollToTop/ScrollToTop";
 import PsicoDetails from "../PsicoDetails/PsicoDetails.jsx"
+import { Calendar } from "../Calendar/Calendar";
 import { ChakraProvider } from "@chakra-ui/react";
 import { theme } from '../Profile/Helpers/index'
 import Main from "../Profile/Main";
@@ -20,6 +21,7 @@ export default function PsicoApp() {
             <ScrollToTop />
             <Routes>
                 <Route path="/" element={<Home/>}/>
+                <Route path="/calendar" element={<Calendar />}/>
                 <Route path='/psico' element={<Psychologists/>} />
                 <Route path='/psico/:id' element={
                     <ChakraProvider theme={theme}>

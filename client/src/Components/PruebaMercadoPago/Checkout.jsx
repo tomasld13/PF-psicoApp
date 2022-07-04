@@ -1,13 +1,19 @@
-import React from 'react'
-import { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { postMP } from '../../slice/psico/thunks.js';
 import { Grid, } from '@chakra-ui/react' 
+import { Calendar } from '../Calendar/Calendar.jsx';
 
-export default function Checkout() {
+export default function Checkout({idpsycho}) {
     const [service, setService] = useState("");
     const [price, setPrice] = useState("");
     const [response , setResponse] = useState("");
+
+    const { rolId } = useSelector(state => state.auth.authBack);
+    const {date, time} = useSelector(state => state.psicology.calendar);
+
+
     const dispatch = useDispatch();
 
     const { pychoId } = useSelector(state => state.psicology)
@@ -30,9 +36,10 @@ export default function Checkout() {
             id: id,
             servicio: service,
             precio: Number(price),
-            hora: "14:30:10",
-            fecha: "2020-05-05",
-        })))
+            hora: time,
+            fecha: date,
+            psicoId: idpsycho
+        })));
     }
 
     return (
@@ -42,7 +49,7 @@ export default function Checkout() {
             gap={6}
             >
                 <div className='h-80 bg-primary'>
-                    Calendario
+                    <Calendar/>
                 </div>
 
                 <div>
@@ -58,7 +65,15 @@ export default function Checkout() {
                         
                         ): <></>}
                         </select>
+                        {
+                    rolId ? (
                         <button className='h-10 py-2.5 bg-primary text-white font-bold' onClick={e=>{handleOnClick(e)}}>Hacer Pago</button>
+                    ) : (
+                        <Link to='/auth/login'>
+                            <button className='h-10 py-2.5 bg-primary text-white font-bold'>Hacer Pago</button>
+                        </Link>
+                    )
+                }
                     </form>
                     { linkPago ? <button className='h-10 py-2.5 bg-green text-white font-bold'><a href={`${linkPago}`}> Confirmar </a></button>: null }
                 </div>
