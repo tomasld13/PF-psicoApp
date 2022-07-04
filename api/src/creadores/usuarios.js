@@ -1,4 +1,4 @@
-const {Psicologo, Paciente, Usuario, Especialidades, Rol, Genero, Ciudad, Administrador, Dia, Horarios} = require("../db")
+const {Psicologo, Paciente, Usuario, Especialidades, Rol, Genero, Ciudad, Administrador, Dia, Servicio, Precio} = require("../db")
 const bcrypt = require('bcryptjs');
 let psicologos = [
 	{
@@ -337,7 +337,14 @@ while(dia < 31){
 	dia++
 }
 
-const generePsicologos = () => {
+const generePsicologos = async () => {
+	const servicios = await Servicio.findAll();
+		let preciosServicios = 1000
+		servicios.map(async s => {
+			preciosServicios= preciosServicios + 500
+			const p = await Precio.create({costo: preciosServicios})
+			await s.setPrecios(p)
+		})
     psicologos.map(p => async function(){
         const actual = await Usuario.create({
             name: p.name,
@@ -348,7 +355,7 @@ const generePsicologos = () => {
             birth: p.birth,
 			password : bcrypt.hashSync(p.password, 10)
         })
-        const actualPsicologo = await Psicologo.create({yearsExperience: 10})
+        const actualPsicologo = await Psicologo.create({yearsExperience: 10, inicioHorario: "08:00:00", finHorario: "16:00:00", intervaloSesion: 60})
 		const dias = await Dia.bulkCreate(fechas)
 		dias.map(async (d) => await actualPsicologo.addDia(d))
 		actual.setPsicologo(actualPsicologo)
@@ -360,8 +367,11 @@ const generePsicologos = () => {
 		const number = Math.ceil(Math.random()*5)
 		const especialidad = await Especialidades.findOne({where:{id:number}})
 		actualPsicologo.setEspecialidades(especialidad)
-		const ciudadNumber = Math.ceil(Math.random()*1814)
+		const ciudadNumber = Math.ceil(Math.random()*4142)
 		const ciudad = await Ciudad.findByPk(ciudadNumber)
+		servicios.map(async s => {
+			await actualPsicologo.addServicios(s)
+		})
 		actual.setCiudad(ciudad)
     }())
 }
@@ -384,7 +394,7 @@ const generePacientes = () => {
 		const generoNumber = Math.ceil(Math.random()*3)
 		const genero = await Genero.findOne({where:{id:generoNumber}})
 		actual.setGenero(genero)
-		const ciudadNumber = Math.ceil(Math.random()*1814)
+		const ciudadNumber = Math.ceil(Math.random()*4142)
 		const ciudad = await Ciudad.findByPk(ciudadNumber)
 		actual.setCiudad(ciudad)
     }())
@@ -406,7 +416,7 @@ const generarAdmin = async()=>{
 	const generoNumber = Math.ceil(Math.random()*3)
 	const genero = await Genero.findOne({where:{id:generoNumber}})
 	actual.setGenero(genero)
-	const ciudadNumber = Math.ceil(Math.random()*1814)
+	const ciudadNumber = Math.ceil(Math.random()*4142)
 	const ciudad = await Ciudad.findByPk(ciudadNumber)
 	actual.setCiudad(ciudad)
 }
