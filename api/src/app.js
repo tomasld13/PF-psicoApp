@@ -5,6 +5,15 @@ const cookieParser = require("cookie-parser")
 const morgan = require("morgan")
 const cors = require("cors")
 const bodyParser = require('body-parser');
+const http = require('http');
+const Sockets = require('./routes/SocketManager/Sockets')
+const path = require('path');
+const publicPath = path.resolve(__dirname, './public');
+server.use('/',express.static(publicPath));
+
+
+
+
 
 require('dotenv').config();
 require('./db.js');
@@ -38,4 +47,21 @@ server.get('/', (req, res) => {
 
 server.use('/api', routes);
 
-module.exports = server;
+const socketServer = http.createServer(server);
+const socketIO = require('socket.io');
+const io = socketIO(socketServer,{
+  cors: {
+    origin: "*",
+    methods: ["GET", "POST"]
+  }
+});
+function configurarSockets() {
+  new Sockets( io );
+}
+
+
+
+module.exports = {
+  socketServer,
+  configurarSockets
+};

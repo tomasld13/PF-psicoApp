@@ -1,0 +1,55 @@
+:root {
+    --primary: #575989;
+    --secondary: #f0efff;
+    --darkgrey: #212329;
+    --white: #fff;
+}
+
+.content {
+    background-color: var(--secondary);
+    border-radius: 2rem;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    font-family: 'Montserrat';
+    margin: auto;
+    margin-bottom: 10rem;
+}
+
+.img01, .img02 {
+    width: 12vw;
+    margin: 50px 0;
+}
+
+.img02 {
+    display: flex;
+    align-items: flex-end;
+}
+
+
+.img01 img, .img02 img{
+    width: 100%;
+}
+
+.contentQuestions {
+    margin: 0 20px;
+}
+
+.content hr {
+    border-color: var(--secondary)
+}
+
+@media screen and (max-width: 960px) {
+    .content {
+    height: 100%;
+    width: 90%;
+    }
+    .content hr {
+        border-color: var(--secondary);
+        display: flex;
+        align-items: center;
+    }
+    
+}
