@@ -21,6 +21,7 @@ export const Calendar = ({idPsycho}) => {
             setExcludes(getTimeExcludes(startDate));
         }
         dispatch(getPsychologyID(idPsycho));
+        dispatch(postDateTime(postDates()))
     },[startDate, startTime]);
     
         const getMonth = (month) => {
@@ -110,10 +111,7 @@ export const Calendar = ({idPsycho}) => {
                     <DatePicker
                     selected={startTime}
                     excludeTimes={excludes}
-                    onChange={(date) => {
-                        setStartTime(date);
-                        dispatch(postDateTime(postDates()));
-                    }}
+                    onChange={(date) => setStartTime(date)}
                     showTimeSelect
                     showTimeSelectOnly
                     timeIntervals={psychologist.intervaloSesion}

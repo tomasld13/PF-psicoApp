@@ -1,4 +1,4 @@
-const { Factura, Paciente, MetodoPago, Psicologo, Dia, Horarios } = require("../../db")
+const { Factura, Paciente, MetodoPago, Psicologo, Dia, Horarios, Usuario } = require("../../db")
 const server = require('express').Router();
 
 //SDK de MercadoPago
@@ -12,7 +12,7 @@ mercadopago.configure({
 })
 
 //ruta que genera la URL a mercado pago
-const postMP = (req, res) => {
+const postMP = async (req, res) => {
     const data = req.body;
     const items = [ 
         {servicio: data.servicio, precio: data.precio, quantity: 1}, 
@@ -60,12 +60,13 @@ const postMP = (req, res) => {
     //     picture_url: data.precio,
     //     });
     // }
-
+    const paciente = await Usuario.findByPk(Number(data.id));
     mercadopago.preferences.create(preference)
     .then(function (response) {
         console.log("respondio");
         global.id = response.body.init_point;
-        console.log(response.body);
+        // console.log(response.body);
+        console.log(paciente)
         res.json({id: global.id});
     }).catch(error =>{
         console.log(error);
@@ -100,17 +101,18 @@ const getPayments = async (req, res) => {
             payment_status: payment_status,
             merchant_order_id: merchant_order_id,
             status: "paid"})
-    const psicologo = await Psicologo.findByPk(psicoId)
+    const psicologo = await Psicologo.findByPk(Number(psicoId))
     const dia = await Dia.findOne({where:{fecha:fecha}})
     const horario = await Horarios.create({hora:hora})
-    const paciente = await Paciente.findByPk(Number(id));
+    const usuario = await Usuario.findByPk(Number(id), {include: {model: Paciente}});
+    const paciente = await Paciente.findByPk(usuario.paciente.id)
     horario.setPaciente(paciente)
     horario.setPsicologo(psicologo)
     dia.addHorarios(horario)
     psicologo.addDia(dia)
-    paciente.setFacturas(factura);
     const metodoPago = await MetodoPago.findByPk(1);
     factura.setMetodoPago(metodoPago);
+    await paciente.setFacturas(factura);
             console.info("redirect success");
             res.redirect("http://localhost:3000");
     } catch (error) {

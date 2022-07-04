@@ -1,5 +1,5 @@
 import { Box, Tab, TabList, TabPanel, TabPanels, Tabs } from '@chakra-ui/react'
-
+import { useParams } from 'react-router-dom'
 import Informacion from './Informacion.jsx'
 import Checkout from '../../PruebaMercadoPago/Checkout'
 // import Actions from './Actions'
@@ -8,7 +8,7 @@ import Checkout from '../../PruebaMercadoPago/Checkout'
 
 const Content = () => {
   const tabs = ['Información','Agendar cita',/* 'Notificaciones'*/]
-
+  const {id} = useParams()
   return (
     <Box
       as="main"
@@ -47,7 +47,7 @@ const Content = () => {
             <Informacion />
           </TabPanel>
           <TabPanel>
-            <Checkout />
+            <Checkout idpsycho={id}/>
           </TabPanel>
           <TabPanel>
             {/* <Notificationes /> */}
