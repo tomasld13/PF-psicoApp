@@ -20,7 +20,7 @@ export const startCreatingUserWithEmailPasswordPatient = (paciente) => {
         dispatch( checkingCredentials() );
         dispatch( logout() );
 
-            const result = await fetch('http://localhost:3001/api/paciente', {
+            const result = await fetch(`${process.env.REACT_APP_API}/api/paciente`, {
                 method: 'POST',
                 body: JSON.stringify(paciente),
                 headers: {
@@ -47,7 +47,7 @@ export const startCreatingUserWithEmailPasswordPsycho = (psycho) => {
         dispatch( checkingCredentials() );
         dispatch( logout() );
 
-            const result = await fetch('http://localhost:3001/api/psicologo', {
+            const result = await fetch(`${process.env.REACT_APP_API}/api/psicologo`, {
                 method: 'POST',
                 body: JSON.stringify(psycho),
                 headers: {
@@ -76,7 +76,7 @@ export const startLoginWithEmailPassword = (email, password) => {
         dispatch( checkingCredentials() );
         dispatch( logout() );
 
-        const result = await fetch('http://localhost:3001/api/auth/login', {
+        const result = await fetch(`${process.env.REACT_APP_API}/api/auth/login`, {
             method: 'POST',
             body: JSON.stringify(login),
             headers: {
