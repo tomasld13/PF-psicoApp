@@ -1,4 +1,4 @@
-const { Factura, Paciente, MetodoPago, Psicologo, Dia, Horarios } = require("../../db")
+const { Factura, Paciente, MetodoPago, Psicologo, Dia, Horarios, Usuario } = require("../../db")
 const server = require('express').Router();
 
 //SDK de MercadoPago
@@ -100,17 +100,18 @@ const getPayments = async (req, res) => {
             payment_status: payment_status,
             merchant_order_id: merchant_order_id,
             status: "paid"})
-    const psicologo = await Psicologo.findByPk(psicoId)
+    const psicologo = await Psicologo.findByPk(Number(psicoId))
     const dia = await Dia.findOne({where:{fecha:fecha}})
     const horario = await Horarios.create({hora:hora})
-    const paciente = await Paciente.findByPk(Number(id));
+    const usuario = await Usuario.findByPk(Number(id), {include: {model: Paciente}});
+    const paciente = await Paciente.findByPk(usuario.paciente.id)
     horario.setPaciente(paciente)
     horario.setPsicologo(psicologo)
     dia.addHorarios(horario)
     psicologo.addDia(dia)
-    paciente.setFacturas(factura);
     const metodoPago = await MetodoPago.findByPk(1);
     factura.setMetodoPago(metodoPago);
+    await paciente.setFacturas(factura);
             console.info("redirect success");
             res.redirect("http://localhost:3000");
     } catch (error) {

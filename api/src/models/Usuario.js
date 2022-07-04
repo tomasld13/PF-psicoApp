@@ -40,6 +40,10 @@ module.exports = (sequelize)=>{
         state : {
             type : DataTypes.BOOLEAN,
             defaultValue : true
+        },
+        online : {
+            type : DataTypes.BOOLEAN,
+            defaultValue : false
         }
     },{
         timestamps : false

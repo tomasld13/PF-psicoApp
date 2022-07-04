@@ -1,10 +1,10 @@
 import { useEffect, useMemo, useState} from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import { Navigate, Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useForm } from "../../hooks/useForm";
 import { startCreatingUserWithEmailPasswordPsycho } from '../../slice/auth/thunks.js';
 import { getProvincias, getCiudades, cleanCiudades } from '../../slice/psico/thunks.js';
-
+import Swal from "sweetalert2";
 const emailRegex = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
 
 const formData = {
@@ -59,7 +59,7 @@ export const RegisterPsycho = ({rol}) => {
     const ciudades = useSelector(state => state.psicology.ciudades);
 
     const isCheckingAuthentication = useMemo(() => status === 'checking', [status]);
-
+    const navigate = useNavigate();
     const { name, email, password, onInputChange, formState,
             isFormValid, nameValid, emailValid, passwordValid, lastname, lastnameValid,
             telephone, telephoneValid, address, addressValid, birth, birthValid,
@@ -75,6 +75,11 @@ export const RegisterPsycho = ({rol}) => {
         if(!isFormValid) return;
 
         dispatch( startCreatingUserWithEmailPasswordPsycho(formState) );
+        Swal.fire(
+            'La cuenta fue creada exitosamente',
+            'success'
+        )
+        navigate('/')
     }
 
     useEffect(() => {
