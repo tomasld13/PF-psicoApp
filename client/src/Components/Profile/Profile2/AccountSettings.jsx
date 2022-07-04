@@ -1,66 +1,147 @@
-import { FormControl, FormLabel, Grid, Input, Select } from '@chakra-ui/react'
+import { FormControl, FormLabel, Grid, Input, Select, FormErrorMessage, FormHelperText, Button } from '@chakra-ui/react'
 import { useSelector } from 'react-redux'
+import { useState } from 'react'
+import Swal from "sweetalert2";
+
+function validate(input) {
+  let errors = {}
+ 
+    if(!input.name) {
+      errors.name = 'El nombre es requerido'
+    } else if (!/^[a-zA-ZÑñÁáÉéÍíÓóÚúÜü\s]+$/.test(input.name)) {
+      errors.name = 'El nombre no debe ser numérico'
+    } else if (!input.lastname) {
+      errors.lastname = 'El apellido es requerido'
+    } else if(!/^[a-zA-ZÑñÁáÉéÍíÓóÚúÜü\s]+$/.test(input.lastname)) {
+      errors.lastname = 'El apellido no debe ser numérico'
+    } else if(!input.telephone) {
+      errors.telephone = 'El numero debe ser del siguiente formato: +5412345678901'
+    } else if(!/^\+54\d{11}$/.test(input.telephone)) {
+      errors.telephone = 'El número es inválido'
+    } else if (!input.email) {
+      errors.email = 'El correo es requerido'
+    } else if (!/^(?:(?:00)?549?)?0?(?:11|[2368]\d)(?:(?=\d{0,2}15)\d{2})??\d{8}$/.test(input.email)) {
+      errors.email = 'Inserte un correo válido'
+    }
+    return errors;
+}
+
 
 function AccountSettings() {
 
+
+  const [errors, setErrors] = useState({})
+
   const { name, lastname, email, telephone, address } = useSelector(state=>state.auth.authBack)
 
+  const [input, setInput] = useState({
+    name: '',
+    lastname: '',
+    email: '',
+    telephone: '',
+  })
+
+    function handleInputChange(e) {
+      setInput({
+        ...input,
+        [e.target.name]: e.target.value,
+      })
+    setErrors(
+      validate({
+        ...input,
+        [e.target.name]: e.target.value,
+      })
+    )
+  }
+
+
+    // function handleSubmit(e) {
+    //   e.preventDefault();
+
+    //   if(input.name === '' || input.lastname === '' || input.email === '' 
+    //   || input.telephone === '') {
+    //     return Swal.fire(
+    //       'Debe de completar los campos',
+    //       '',
+    //       'error'
+    //     )
+    //   } 
+    // }
+    
   return (
     <Grid
       templateColumns={{ base: 'repeat(1, 1fr)', md: 'repeat(2, 1fr)' }}
       gap={6}
-    >
-      <FormControl id="firstName">
+    >    
+    <form>
+    
+      <FormControl 
+      isRequired
+      id="firstName"
+      >
         <FormLabel>Nombre</FormLabel>
         <Input 
         focusBorderColor="brand.blue" 
         type="text" 
+        name='name'
+        value={input.name}
         placeholder={name}
+        onChange={(e) => handleInputChange(e)}
         ></Input>
+         {errors.name && <p className="e">{errors.name}</p>}  
       </FormControl>
-      <FormControl id="lastName">
+
+      <FormControl 
+      isRequired 
+      id="lastname"
+      >
         <FormLabel>Apellido</FormLabel>
-        <Input focusBorderColor="brand.blue" type="text" placeholder={lastname} />
+        <Input 
+        focusBorderColor="brand.blue" 
+        type="text" 
+        name='lastname'
+        value={input.lastname}
+        placeholder={lastname} 
+        onChange={(e) => handleInputChange(e)}
+        ></Input>
+      {errors.lastname && <p className="e">{errors.lastname}</p>} 
       </FormControl>
-      <FormControl id="phoneNumber">
+
+      <FormControl 
+      isRequired 
+      id="phoneNumber">
         <FormLabel>Numero de telefono</FormLabel>
         <Input
           focusBorderColor="brand.blue"
-          type="tel"
+          value={input.telephone}
+          name='telephone'
+          type="phone"
           placeholder={telephone}
+          onChange={(e) => handleInputChange(e)}
         />
       </FormControl>
-      <FormControl id="emailAddress">
+      {errors.telephone && <p className="e">{errors.telephone}</p>} 
+
+      <FormControl 
+      isRequired 
+      id="email">
         <FormLabel>Email</FormLabel>
         <Input
           focusBorderColor="brand.blue"
           type="email"
+          value={input.email}
+          name='email'
           placeholder={email}
+          onChange={(e) => handleInputChange(e)}
         />
+ {errors.email && <p className="e">{errors.email}</p>} 
       </FormControl>
-      <FormControl id="passwordUser">
-        <FormLabel>Contraseña</FormLabel>
-        <Input
-          focusBorderColor="brand.blue"
-          type="password"
-          placeholder="ContraseñaDelUser"
-        />
-      </FormControl>
-
-      <FormControl id="confPasswordUser">
-        <FormLabel>Confirmar Contraseña</FormLabel>
-        <Input
-          focusBorderColor="brand.blue"
-          type="password"
-          placeholder="ContraseñaDelUser"
-        />
-      </FormControl>
-      
+            
       <FormControl id="address">
         <FormLabel>Dirección</FormLabel>
         <Input
           focusBorderColor="brand.blue"
-          type="password"
+          type="text"
           placeholder={address}
         />
       </FormControl>
@@ -72,6 +153,7 @@ function AccountSettings() {
           </option>
         </Select>
       </FormControl>
+  </form>
     </Grid>
   )
 }
