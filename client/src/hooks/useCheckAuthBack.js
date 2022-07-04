@@ -3,10 +3,10 @@ import { loginBack, logoutBack } from "../slice/auth/authSlice";
 
 export const useCheckAuthBack = () => {
     const storeAuthBack = useSelector(state => state.auth.authBack);
-    const pacienteStorage = (localStorage.getItem('paciente')) ? JSON.parse( localStorage.getItem('paciente') ) : {};
+    const pacienteStorage = (localStorage.getItem('usuario')) ? JSON.parse( localStorage.getItem('usuario') ) : {};
     
     const dispatch = useDispatch();
-        if( !pacienteStorage.user?.name && !pacienteStorage.token) return dispatch(logoutBack()); 
+        if( !pacienteStorage.user?.name && !pacienteStorage.name) return dispatch(logoutBack()); 
 
         dispatch(loginBack(pacienteStorage));
 
