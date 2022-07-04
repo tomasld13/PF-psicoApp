@@ -6,7 +6,7 @@ export const getPsicology = () => {
     return async (dispatch) => {
 
         try {
-            const response = await fetch('http://localhost:3001/api/psicologo');
+            const response = await fetch(`${process.env.REACT_APP_API}/api/psicologo`);
 
             const dataPsico = await response.json();
 
@@ -28,7 +28,7 @@ export const filterPsicology = (spatiality) => {
                 return dispatch(filterSpatiality([]));
             }
 
-            const response = await fetch(`http://localhost:3001/api/psicologo/especialidad/Psicologia ${spatiality}`);
+            const response = await fetch(`${process.env.REACT_APP_API}/api/psicologo/especialidad/Psicologia ${spatiality}`);
 
             const data = await response.json();
 
@@ -49,7 +49,7 @@ export const sortByName = (sort) => {
 export const getPsychologyID = (id) => {//Consigue Psicologos por ID
     return async (dispatch)=> {
         try {
-            const response = await fetch(`http://localhost:3001/api/psicologo/${id}`);
+            const response = await fetch(`${process.env.REACT_APP_API}/api/psicologo/${id}`);
             const data = await response.json();
             
             const dias = getDiasPsicologos(data.dia);
@@ -93,7 +93,7 @@ export const agendarCita = (idPsicologo, diaHora) => {
 
     return async () => {
         try {
-            const rs = await fetch(`http://localhost:3001/api/horarios/psicologo/${idPsicologo}`,{
+            const rs = await fetch(`${process.env.REACT_APP_API}/api/horarios/psicologo/${idPsicologo}`,{
                 method: 'POST',
                 body: JSON.stringify(diaHora),
                 headers: {
@@ -120,7 +120,7 @@ export const postDateTime = (dateTime) => {
 export const postMP = (data) => {
     return async (dispatch) => {
         try {
-            const resp = await axios.post('http://localhost:3001/api/mercadopago', data);
+            const resp = await axios.post(`${process.env.REACT_APP_API}/api/mercadopago`, data);
             dispatch(postMercadopago(resp.data));
         } catch (error) {
             return (error)
@@ -132,7 +132,7 @@ export const getProvincias = () => {
     return async (dispatch) => {
         const provincias = [];
         try {
-            const resp = await fetch('http://localhost:3001/api/provincias');
+            const resp = await fetch(`${process.env.REACT_APP_API}/api/provincias`);
             const data = await resp.json();
 
             for (const iterator of data) {
@@ -149,7 +149,7 @@ export const getProvincias = () => {
 export const getCiudades = (id) => {
     return async (dispatch) => {
         try {
-            const resp = await fetch(`http://localhost:3001/api/provincias/${id}`);
+            const resp = await fetch(`${process.env.REACT_APP_API}/api/provincias/${id}`);
             const data = await resp.json();
 
             dispatch(getCiudadesSelect(data.ciudads));
