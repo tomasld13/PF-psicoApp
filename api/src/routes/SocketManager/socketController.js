@@ -1,10 +1,42 @@
-const { Socket } = require('socket.io');
-const io = require('../../../index')
+const {Psicologo, Paciente, Mensaje} = require('../../db');
+const Usuario = require('../../models/Usuario');
 
-const socketController = (socket = new Socket(), io) => {
-    socket.on('chat message', (msg) => {
-        io.emit('chat message', msg);
-    })
+
+
+
+const getUsuarios = async(id) => {
+
+    const usuarios=await Usuario.findAll({
+        where: { rolId: 1, state : true }, include: [{ model: Paciente, where, attributes: { exclude: ["fk_usuarioID", "fk_especialidadId"] } },
+        { model: Ciudad, include: { model: Provincia, attributes: ['name'] }, attributes: ['name'] },
+        { model: Genero, attributes: ["genero"] },
+        { model: Rol, attributes: ["name"] }]
+      });
+        
+
+    return usuarios;
 }
 
-module.exports = socketController;
+const grabarMensaje = async( payload ) => {
+    
+    try {
+        
+        const mensaje = new Mensaje( payload );
+        await mensaje.save();
+
+        return mensaje;
+
+    } catch (error) {
+        console.log(error);
+        return false;
+    }
+
+}
+
+
+module.exports = {
+    
+    getUsuarios,
+    grabarMensaje
+}
+

@@ -44,6 +44,8 @@ const getOnePacienteAndUsers = async (req, res, next) => {
       { model: Genero, attributes: ["genero"] },
       { model: Rol, attributes: ["name"] }]
     });
+    console.log(paciente)
+    console.log(paciente.paciente)
     if (!paciente) {
       return res.status(404).send({ error: "Paciente no encontrado" });
     }

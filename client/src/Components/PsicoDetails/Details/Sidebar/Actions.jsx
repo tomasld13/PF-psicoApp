@@ -1,5 +1,4 @@
 import { useEffect, useRef } from 'react'
-import { useSelector } from 'react-redux'
 import {
   Button,
   Input,
@@ -10,11 +9,8 @@ import {
 } from '@chakra-ui/react'
 
 export default function Actions() {
-
-  const { token } = useSelector(state=>state.auth.authBack)
- 
-  const { hasCopied, onCopy } = useClipboard({token})
-
+  const value = '42164214612'
+  const { hasCopied, onCopy } = useClipboard(value)
 
   const profileUrl = useRef(null)
 
@@ -35,7 +31,7 @@ export default function Actions() {
           ref={profileUrl}
           type="url"
           color="brand.blue"
-          value={token}
+          value={value}
           userSelect="all"
           isReadOnly
           _focus={{ borderColor: 'brand.blue' }}

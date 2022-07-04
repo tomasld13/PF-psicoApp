@@ -24,14 +24,11 @@ const postPsicologo = async (req, res, next) => {
         const genero = await Genero.findOne({ where: { genero: gener } });
         const city = await Ciudad.findOne({ where: { name: ciudad } });
         const espe = await Especialidades.findOne({where : {'especialidad' : especialidad}});
-
-
         newUSuario.setPsicologo(newPsicologo);
         newUSuario.setRol(role);
         newUSuario.setGenero(genero);
         newUSuario.setCiudad(city);
         newPsicologo.setEspecialidades(espe);
-        
         res.status(200).send([newUSuario,newPsicologo]);
     } catch (error) {
         res.status(404).send({ error: error.message })
@@ -47,8 +44,8 @@ const postServicioPsicologo = async (req, res, next) => {
         if (!psicologo) {
             return res.status(404).send({ error: "Psicologo no encontrado" });
         }
-        const newServicio = await Servicio.findOne({ where: {servicio : servicio}});
-        if(!newServicio) return res.status(404).send({ error: "Servicio no encontrado" });
+        const newServicio = await Servicio.create({servicio : servicio});
+        //if(!newServicio) return res.status(404).send({ error: "Servicio no encontrado" });
         const newPrecio = await Precio.create({ costo: precio });
         newServicio.setPrecios(newPrecio);
         psicologo.addServicio(newServicio);
@@ -147,6 +144,24 @@ const getPsicologosByGenero = async (req, res, next) => {
     }
 }
 
+const updatePsicologo = async (req, res, next) => {
+    const {id} = req.params
+    const {intervaloSesion, inicioHorario, finHorario, yearsExperience} = req.body
+    try {
+        const psicologo = await Psicologo.findByPk(id)
+        if (!psicologo) {
+            return res.status(404).send({ error: "Psicologo no encontrado" });
+        }
+        if(typeof intervaloSesion === "number") await psicologo.update({intervaloSesion: intervaloSesion})
+        if(inicioHorario && inicioHorario.length > 1) await psicologo.update({inicioHorario: inicioHorario})
+        if(finHorario && finHorario.length > 1) await psicologo.update({finHorario: finHorario})
+        if(typeof yearsExperience === "number") await psicologo.update({yearsExperience: yearsExperience})
+        res.send(psicologo)
+    } catch (error) {
+        next(error)
+    }
+}
+
 module.exports = {
     getPsicologo,
     postPsicologo,
@@ -155,5 +170,6 @@ module.exports = {
     getPsicologosByCiudad,
     getPsicologosByEspecialidad,
     postServicioPsicologo,
-    getPsicologosByGenero
+    getPsicologosByGenero,
+    updatePsicologo
 }
