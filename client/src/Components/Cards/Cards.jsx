@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import { getPsicology, filterPsicology, sortByName } from "../../slice/psico/thunks";
+import { getPsicology, filterPsicology, sortByName, sortByExp } from "../../slice/psico/thunks";
 import Card from "../Card/Card";
 import { Button } from '../Button/Button'
 import styles from '../Cards/cards.module.css';
@@ -20,6 +20,7 @@ export default function Cards() {
 
   //const [inputGender,setInputGender] = useState('')
   const [gender, setGender] = useState([]);
+  
 
   const dispatch = useDispatch();
 
@@ -62,6 +63,12 @@ export default function Cards() {
     setSort(e.target.value);
   }
 
+  const handlerClickExp = (e) => {
+    dispatch(sortByExp(e.target.value));
+    setCurrentPage(0);
+
+  }
+
   const handlerChange = (e) => {
     setInputFind(e.target.value);
   }
@@ -90,6 +97,7 @@ export default function Cards() {
     document.getElementById("orden").value= " "
     document.getElementById("genero").value= " "
     document.getElementById("especialidad").value= " "
+    document.getElementById("exp").value= " "
   }
 
   useEffect(() => {
@@ -119,9 +127,18 @@ export default function Cards() {
         id="orden" 
         onChange={handlerClick}>
             <option selected disabled value=" "> Orden... </option>
-            <option value="asc">asc</option>
-            <option value="desc">desc</option>
+            <option value="asc">Ascendente</option>
+            <option value="desc">Descendente</option>
         </select>
+
+        <select className='border border-gray-300 my-2.5 px-3 py-1 rounded-lg shadow-sm focus:outline-none focus:border-primary' 
+        name="experiencia" 
+        id="exp" 
+        onChange={handlerClickExp}>
+            <option selected disabled value=" "> Experiencia </option>
+            <option value="asc">Ascendente</option>
+            <option value="desc">Descendente</option>
+        </select>  
         {/* <button onClick={handlerClick}>Ordenar</button> */}
         <div>
           <div>
@@ -140,7 +157,7 @@ export default function Cards() {
             <option value="1">Hombre</option>
             <option value="2">Mujer</option>
             <option value="3">No Binario</option>
-        </select>
+          </select>
           </div>
           <select className='border border-gray-300 my-2.5 px-3 py-1 rounded-lg shadow-sm focus:outline-none focus:border-primary' 
           name="especialidad" 
