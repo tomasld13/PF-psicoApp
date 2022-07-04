@@ -63,10 +63,13 @@ export const RegisterPatient = ({rol}) => {
     const onSubmit = (e) => {
         e.preventDefault();
         setFormSubmitted(true);
-
         if(!isFormValid) return;
-
         dispatch( startCreatingUserWithEmailPasswordPatient(formState) );
+        Swal.fire(
+            'La cuenta fue creada exitosamente',
+            'success'
+        )
+        navigate('/')
     }
     
     useEffect(() => {
@@ -76,7 +79,6 @@ export const RegisterPatient = ({rol}) => {
     const validarProvincia = (e) => {
         dispatch(cleanCiudades());
         setIdProvincia(e.target.value);
-
         if (e.target.value === '0') return;
         dispatch(getCiudades(e.target.value));
     }
@@ -155,14 +157,7 @@ export const RegisterPatient = ({rol}) => {
                     <button 
                     className='bg-primary text-white border border-primary font-bold py-2 px-4 rounded hover:bg-white hover:text-primary my-2.5 h-12 ' 
                     disabled={isCheckingAuthentication}
-                    onClick={() => {
-                        Swal.fire(
-                            'La cuenta fue creada exitosamente',
-                            'Ya puedes iniciar sesión',
-                            'success'
-                        )
-                        navigate('/')
-                    }}
+                    type="submit"
                     >Crear cuenta</button>
                     {errorRegister !== '' ? <span style={{color:'red'}}>{errorRegister}</span> : null}
                 </div>

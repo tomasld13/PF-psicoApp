@@ -12,7 +12,7 @@ export default function Checkout({idpsycho}) {
 
     const { rolId } = useSelector(state => state.auth.authBack);
     const {date, time} = useSelector(state => state.psicology.calendar);
-
+    console.log(date,time, "hola")
 
     const dispatch = useDispatch();
 
@@ -28,7 +28,7 @@ export default function Checkout({idpsycho}) {
         setService(servicio);
         setPrice(precio);
     }
-
+    console.log(id)
     function handleOnClick(e){
         e.preventDefault();
         //console.log(service," ", Number(price))
@@ -58,9 +58,9 @@ export default function Checkout({idpsycho}) {
                         <select className='my-2' onChange={e=> handleOnChange(e)}>
                         <option selected disabled>Seleccione un servicio</option>
                         {pychoId ? pychoId.servicios?.map((item, index) => {
-                            {return (     
+                            return (     
                                     <option value={`${item.servicio},${item.precios[0].costo}`}>{`${item.servicio} $${item.precios[0].costo}`}</option>
-                            )}
+                            )
                         }
                         
                         ): <></>}

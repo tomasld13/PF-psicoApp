@@ -87,6 +87,9 @@ export default function Cards() {
     setInputFind('')
     setFind([])
     setGender([])
+    document.getElementById("orden").value= " "
+    document.getElementById("genero").value= " "
+    document.getElementById("especialidad").value= " "
   }
 
   useEffect(() => {
@@ -113,7 +116,7 @@ export default function Cards() {
         </div>
         <select className='border border-gray-300 my-2.5 px-3 py-1 rounded-lg shadow-sm focus:outline-none focus:border-primary' 
         name="especialidad" 
-        id="especialidad" 
+        id="orden" 
         onChange={handlerClick}>
             <option selected disabled value=" "> Orden... </option>
             <option value="asc">asc</option>
@@ -124,7 +127,7 @@ export default function Cards() {
           <div>
           <select className='border border-gray-300 my-2.5 px-3 py-1 rounded-lg shadow-sm focus:outline-none focus:border-primary' 
         name="especialidad" 
-        id="especialidad" 
+        id="genero" 
         onChange={(e)=>{
             console.log(e.target.value, "target value", `${e.target.value}`)
             const iGender = psychologists.filter(psycho => {
