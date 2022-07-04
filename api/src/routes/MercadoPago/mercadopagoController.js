@@ -1,5 +1,5 @@
 const { Factura, Paciente, MetodoPago, Psicologo, Dia, Horarios, Usuario } = require("../../db")
-const {DB_HOST, URL_FRONT} = process.env;
+const {URL_BACK, URL_FRONT} = process.env;
 const server = require('express').Router();
 
 //SDK de MercadoPago
@@ -27,9 +27,9 @@ const postMP = (req, res) => {
     let preference = {
         items: items_md,
         back_urls: {
-            success: `${DB_HOST === "localhost" ? "http://localhost:3001": DB_HOST}/api/mercadopago/pagos`,
-            failure: `${DB_HOST === "localhost" ? "http://localhost:3001": DB_HOST}/api/mercadopago/pagos`,
-            pending: `${DB_HOST === "localhost" ? "http://localhost:3001": DB_HOST}/api/mercadopago/pagos`
+            success: `${URL_BACK === "localhost" ? "http://localhost:3001": URL_BACK}/api/mercadopago/pagos`,
+            failure: `${URL_BACK === "localhost" ? "http://localhost:3001": URL_BACK}/api/mercadopago/pagos`,
+            pending: `${URL_BACK === "localhost" ? "http://localhost:3001": URL_BACK}/api/mercadopago/pagos`
         },
         auto_return: "approved",
         payment_methods: {
