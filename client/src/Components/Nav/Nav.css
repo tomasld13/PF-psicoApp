@@ -22,7 +22,7 @@
     color: #575989;
     justify-self: start;
     margin-left: 20px;
-    margin-top: 2rem;
+    /* margin-top: 2rem; */
     width: 20%;
     cursor: pointer;
     text-decoration: none;
@@ -79,13 +79,13 @@
   }
 
 .text-user {
-    color: black;
+    /* color: black;
     font-size: 30px;
     margin-top: 3.5rem;
-    margin-left: 9rem;
-    width: 25%;
+    margin-left: 9rem; */
+    /* width: 25%; */
     font-family: 'Montserrat';
-    margin-bottom: 24px;
+    /* margin-bottom: 24px; */
   }
   
   @media screen and (max-width: 960px) {
