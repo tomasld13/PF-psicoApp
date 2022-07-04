@@ -1,6 +1,10 @@
 import { FormControl, FormLabel, Grid, Input, Select } from '@chakra-ui/react'
+import { useSelector } from 'react-redux'
 
 function AccountSettings() {
+
+  const { name, lastname, email, telephone, address } = useSelector(state=>state.auth.authBack)
+
   return (
     <Grid
       templateColumns={{ base: 'repeat(1, 1fr)', md: 'repeat(2, 1fr)' }}
@@ -8,18 +12,22 @@ function AccountSettings() {
     >
       <FormControl id="firstName">
         <FormLabel>Nombre</FormLabel>
-        <Input focusBorderColor="brand.blue" type="text" placeholder="Nombre" />
+        <Input 
+        focusBorderColor="brand.blue" 
+        type="text" 
+        placeholder={name}
+        ></Input>
       </FormControl>
       <FormControl id="lastName">
         <FormLabel>Apellido</FormLabel>
-        <Input focusBorderColor="brand.blue" type="text" placeholder="Apellido" />
+        <Input focusBorderColor="brand.blue" type="text" placeholder={lastname} />
       </FormControl>
       <FormControl id="phoneNumber">
         <FormLabel>Numero de telefono</FormLabel>
         <Input
           focusBorderColor="brand.blue"
           type="tel"
-          placeholder="+54 9 11 15468965"
+          placeholder={telephone}
         />
       </FormControl>
       <FormControl id="emailAddress">
@@ -27,7 +35,7 @@ function AccountSettings() {
         <Input
           focusBorderColor="brand.blue"
           type="email"
-          placeholder="nombre@gmail.com"
+          placeholder={email}
         />
       </FormControl>
       <FormControl id="passwordUser">
@@ -48,19 +56,13 @@ function AccountSettings() {
         />
       </FormControl>
       
-      <FormControl id="city">
-        <FormLabel>Ciudad</FormLabel>
-        <Select focusBorderColor="brand.blue" placeholder="Select city">
-          <option value="buenosaires">Buenos Aires</option>
-          <option value="mendoza">Mendoza</option>
-          <option value="cordoba">Ciudad de Córdoba</option>
-          <option value="caba" selected>
-            Capital Federal
-          </option>
-          <option value="rosario">Rosario</option>
-          <option value="laplata">La Plata</option>
-          <option value="salta">Salta</option>
-        </Select>
+      <FormControl id="address">
+        <FormLabel>Dirección</FormLabel>
+        <Input
+          focusBorderColor="brand.blue"
+          type="password"
+          placeholder={address}
+        />
       </FormControl>
       <FormControl id="country">
         <FormLabel>País</FormLabel>
@@ -68,8 +70,6 @@ function AccountSettings() {
           <option value="argentina" selected>
             Argentina
           </option>
-          <option value="colombia">Colombia</option>
-          <option value="venezuela">Venezuela</option>
         </Select>
       </FormControl>
     </Grid>

@@ -102,7 +102,7 @@ export const Calendar = ({idPsycho}) => {
                     includeDates={psychologist.formatoDias}
                     showWeekNumbers
                     minDate={new Date()}
-                    monthsShown={2}
+                    monthsShown={1}
                     dateFormat="yyyy/MM/dd"
                     withPortal
                     // inline
