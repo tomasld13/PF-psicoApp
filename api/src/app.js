@@ -15,12 +15,6 @@ server.use('/',express.static(publicPath));
 
 
 
-
-const path = require('path');
-const publicPath = path.resolve(__dirname, './public');
-server.use('/',express.static(publicPath));
-
-
 require('dotenv').config();
 require('./db.js');
 

@@ -44,8 +44,8 @@ const postServicioPsicologo = async (req, res, next) => {
         if (!psicologo) {
             return res.status(404).send({ error: "Psicologo no encontrado" });
         }
-        const newServicio = await Servicio.findOne({ where: {servicio : servicio}});
-        if(!newServicio) return res.status(404).send({ error: "Servicio no encontrado" });
+        const newServicio = await Servicio.create({servicio : servicio});
+        //if(!newServicio) return res.status(404).send({ error: "Servicio no encontrado" });
         const newPrecio = await Precio.create({ costo: precio });
         newServicio.setPrecios(newPrecio);
         psicologo.addServicio(newServicio);

@@ -25,10 +25,10 @@ conn.sync({force: true, logging: false}).then(async () => {
     getEspecialidades();
     await getProvincias();
     await getCiudades();
+    await getServicios();
     generePacientes();
     generePsicologos();
     await generarAdmin();
-    getServicios();
     console.log(`App is listening on port ${process.env.PORT}!`);
     configurarSockets();
   });
