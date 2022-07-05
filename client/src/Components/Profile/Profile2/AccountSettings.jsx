@@ -20,7 +20,7 @@ function validate(input) {
       errors.telephone = 'El número es inválido'
     } else if (!input.email) {
       errors.email = 'El correo es requerido'
-    } else if (!/^(?:(?:00)?549?)?0?(?:11|[2368]\d)(?:(?=\d{0,2}15)\d{2})??\d{8}$/.test(input.email)) {
+    } else if (!/^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i.test(input.email)) {
       errors.email = 'Inserte un correo válido'
     }
     return errors;
@@ -67,6 +67,8 @@ function AccountSettings() {
     //     )
     //   } 
     // }
+
+    const isEnabled = !errors.name && !errors.lastname && !errors.telephone && !errors.email
     
   return (
     <Grid
@@ -154,6 +156,7 @@ function AccountSettings() {
         </Select>
       </FormControl>
   </form>
+  <Button disabled={!isEnabled}>Actualizar</Button>
     </Grid>
   )
 }

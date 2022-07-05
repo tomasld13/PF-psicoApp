@@ -1,7 +1,7 @@
 import { Box, Tab, TabList, TabPanel, TabPanels, Tabs } from '@chakra-ui/react'
 
 import AccountSettings from './AccountSettings'
-import Actions from './Actions'
+// import Actions from './Actions'
 import Favorites from './Favorites'
 import Notificationes from './Notificationes'
 
@@ -54,7 +54,7 @@ const Content = () => {
         </TabPanels>
       </Tabs>
 
-      <Actions />
+      {/* <Actions /> */}
     </Box>
   )
 }
