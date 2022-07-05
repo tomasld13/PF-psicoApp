@@ -26,14 +26,8 @@
     "react-scroll": "^1.8.7",
     "react-toastify": "^9.0.5",
     "styled-components": "^5.3.5",
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> frontend
     "sweetalert2": "^11.4.19",
     "web-vitals": "^2.1.4"
-=======
->>>>>>> e0eb4525a6d5c60ff897e0a748e01231be1ae3d0
   },
   "scripts": {
     "start": "react-scripts start",
