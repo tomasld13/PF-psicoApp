@@ -146,7 +146,7 @@ Psicologo.belongsToMany(Servicio, {through : 'psicologo_servicio', timestamps : 
 Precio.belongsToMany(Servicio, {through : 'servicio_precio', timestamps : false});
 Servicio.belongsToMany(Precio, {through : 'servicio_precio', timestamps : false});
 //Usuario-Usuario/Mensaje
-Mensaje.belongsTo(Usuario, { foreignKey: 'de', targetKey: 'id', as: 'msjRecibido' });
+Mensaje.belongsTo(Usuario, { foreignKey: 'de', targetKey: 'id', as: 'msjRecibido' });//mode: Mensaje. 
 Mensaje.belongsTo(Usuario, { foreignKey: 'para', targetKey: 'id', as: 'msjEnviado' });
 
 module.exports = {
