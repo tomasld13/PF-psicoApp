@@ -20,7 +20,7 @@ export const startCreatingUserWithEmailPasswordPatient = (paciente) => {
         dispatch( checkingCredentials() );
         dispatch( logout() );
 
-            const result = await fetch('http://localhost:3001/api/paciente', {
+            const result = await fetch(`${process.env.REACT_APP_API}/api/paciente`, {
                 method: 'POST',
                 body: JSON.stringify(paciente),
                 headers: {
@@ -35,21 +35,21 @@ export const startCreatingUserWithEmailPasswordPatient = (paciente) => {
                 return dispatch(logoutBack());
             }
 
-            localStorage.setItem('paciente', JSON.stringify(data[0]));
+            localStorage.setItem('usuario', JSON.stringify(data[0]));
 
             dispatch(loginBack(data[0]));
     } 
 }
 
-export const startCreatingUserWithEmailPasswordPsycho = (paciente) => {
+export const startCreatingUserWithEmailPasswordPsycho = (psycho) => {
 
     return async (dispatch) => {
         dispatch( checkingCredentials() );
         dispatch( logout() );
 
-            const result = await fetch('http://localhost:3001/api/paciente', {
+            const result = await fetch(`${process.env.REACT_APP_API}/api/psicologo`, {
                 method: 'POST',
-                body: JSON.stringify(paciente),
+                body: JSON.stringify(psycho),
                 headers: {
                     'Content-Type': 'application/json'
                 }
@@ -61,8 +61,10 @@ export const startCreatingUserWithEmailPasswordPsycho = (paciente) => {
                 dispatch(errorRegisterBack(data.error));
                 return dispatch(logoutBack());
             }
+            
+            localStorage.setItem('usuario', JSON.stringify(data[0]));
 
-            dispatch(loginBack(data));
+            dispatch(loginBack(data[0]));
     } 
 }
 
@@ -74,7 +76,7 @@ export const startLoginWithEmailPassword = (email, password) => {
         dispatch( checkingCredentials() );
         dispatch( logout() );
 
-        const result = await fetch('http://localhost:3001/api/auth/login', {
+        const result = await fetch(`${process.env.REACT_APP_API}/api/auth/login`, {
             method: 'POST',
             body: JSON.stringify(login),
             headers: {
@@ -88,8 +90,8 @@ export const startLoginWithEmailPassword = (email, password) => {
         }
 
         const data = await result.json();
-        console.log(data)
-        localStorage.setItem('paciente', JSON.stringify(data));
+
+        localStorage.setItem('usuario', JSON.stringify(data));
 
         dispatch(loginBack(data));
 
@@ -103,6 +105,6 @@ export const startLogout = () => {
 
         dispatch(logout());
         dispatch(logoutBack());
-        localStorage.setItem('paciente', JSON.stringify({}));
+        localStorage.setItem('usuario', JSON.stringify({}));
     }
 }

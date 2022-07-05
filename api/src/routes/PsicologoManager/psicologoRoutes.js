@@ -1,7 +1,7 @@
 const Router = require("express");
 const {check} = require('express-validator');
 const { verficarEmail , verificarId} = require("../../helpers/db-validators");
-const { getPsicologo, postPsicologo, getOnePsicologoAndUsers, getPsicologosByProvincia, getPsicologosByCiudad, getPsicologosByEspecialidad,postServicioPsicologo,getPsicologosByGenero } = require("./psicologoController");
+const { getPsicologo, postPsicologo, getOnePsicologoAndUsers, getPsicologosByProvincia, getPsicologosByCiudad, getPsicologosByEspecialidad,postServicioPsicologo,getPsicologosByGenero, updatePsicologo } = require("./psicologoController");
 const validarJWT = require("../../middlewares/jwt-validator");
 const validarCampos = require("../../middlewares/validar-campos");
 
@@ -23,5 +23,6 @@ router.get('/provincia/:provincia', getPsicologosByProvincia)
 router.get('/ciudad/:ciudad', getPsicologosByCiudad)
 router.get('/especialidad/:especialidad', getPsicologosByEspecialidad)
 router.post('/servicio/:id', postServicioPsicologo)
+router.put("/:id", updatePsicologo)
 router.get('/genero/:genero', getPsicologosByGenero)
 module.exports = router;

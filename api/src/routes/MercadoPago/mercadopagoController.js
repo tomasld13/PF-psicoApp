@@ -1,4 +1,5 @@
-const { Factura, Paciente, MetodoPago } = require("../../db")
+const { Factura, Paciente, MetodoPago, Psicologo, Dia, Horarios, Usuario } = require("../../db")
+const {URL_BACK, URL_FRONT} = process.env;
 const server = require('express').Router();
 
 //SDK de MercadoPago
@@ -17,7 +18,7 @@ const postMP = (req, res) => {
     const items = [ 
         {servicio: data.servicio, precio: data.precio, quantity: 1}, 
     ]
-    const external_reference = data.id;
+    const external_reference = data.id + "*" + data.hora + "*" + data.fecha + "*" + data.psicoId;
     const items_md = items.map(item => ({
         title: item.servicio,
         quantity: item.quantity,
@@ -26,9 +27,9 @@ const postMP = (req, res) => {
     let preference = {
         items: items_md,
         back_urls: {
-            success: "http://localhost:3001/api/mercadopago/pagos",
-            failure: "http://localhost:3001/api/mercadopago/pagos",
-            pending: "http://localhost:3001/api/mercadopago/pagos"
+            success: `${URL_BACK === "localhost" ? "http://localhost:3001": URL_BACK}/api/mercadopago/pagos`,
+            failure: `${URL_BACK === "localhost" ? "http://localhost:3001": URL_BACK}/api/mercadopago/pagos`,
+            pending: `${URL_BACK === "localhost" ? "http://localhost:3001": URL_BACK}/api/mercadopago/pagos`
         },
         auto_return: "approved",
         payment_methods: {
@@ -38,7 +39,7 @@ const postMP = (req, res) => {
                 }
             ],
         },
-        external_reference: `${external_reference}`,
+        external_reference: external_reference,
         installments: 3,
         statement_descriptor: "Test",
         shipments: {
@@ -94,22 +95,29 @@ const getPayments = async (req, res) => {
     const payment_status = req.query.status;
     const merchant_order_id = req.query.merchant_order_id;
     const external_reference = req.query.external_reference;
-
+    const [id, hora, fecha, psicoId] = external_reference.split("*")
     const factura = await Factura.create({
             payment_id: payment_id,
             payment_status: payment_status,
             merchant_order_id: merchant_order_id,
             status: "paid"})
-    const paciente = await Paciente.findByPk(Number(external_reference));
-    paciente.setFacturas(factura);
+    const psicologo = await Psicologo.findByPk(Number(psicoId))
+    const dia = await Dia.findOne({where:{fecha:fecha}})
+    const horario = await Horarios.create({hora:hora})
+    const usuario = await Usuario.findByPk(Number(id), {include: {model: Paciente}});
+    const paciente = await Paciente.findByPk(usuario.paciente.id)
+    horario.setPaciente(paciente)
+    horario.setPsicologo(psicologo)
+    dia.addHorarios(horario)
+    psicologo.addDia(dia)
     const metodoPago = await MetodoPago.findByPk(1);
     factura.setMetodoPago(metodoPago);
-
+    await paciente.setFacturas(factura);
             console.info("redirect success");
-            res.redirect("http://localhost:3000");
+            res.redirect(`${URL_FRONT}`);
     } catch (error) {
         console.error("error al actualizar la factura", error);
-        return res.redirect(`http://localhost:3000/?error${error}&where=al+buscar`);
+        return res.redirect(`${URL_FRONT}?error${error}&where=al+buscar`);
     }
 }
 

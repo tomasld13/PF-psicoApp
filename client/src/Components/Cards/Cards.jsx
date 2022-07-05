@@ -18,6 +18,9 @@ export default function Cards() {
   const [find, setFind] = useState([]);
   const [sort, setSort] = useState('');
 
+  //const [inputGender,setInputGender] = useState('')
+  const [gender, setGender] = useState([]);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -63,19 +66,30 @@ export default function Cards() {
     setInputFind(e.target.value);
   }
 
+  // const handlerChangeGender = (e)=> {
+  //   setInputGender(`${e.target.value}`)
+  // }
+
   const onChangeFilter = (e) => {
     dispatch(filterPsicology(e.target.value));
   }
+  
 
-  const cleanFind = () => {
-    setFind([])
-  }
+
+  // const cleanFind = () => {
+  //   setFind([])
+  // }
 
   const handleRemove = (e) => {
     e.preventDefault()
-    dispatch(getPsicology())
+    dispatch(filterPsicology('0'))
     setSort('')
     setInputFind('')
+    setFind([])
+    setGender([])
+    document.getElementById("orden").value= " "
+    document.getElementById("genero").value= " "
+    document.getElementById("especialidad").value= " "
   }
 
   useEffect(() => {
@@ -91,18 +105,18 @@ export default function Cards() {
 
         <div className="flex flex-col content-center items-center">
           <input className='border border-gray-300 my-2.5 px-3 py-1 rounded-lg shadow-sm focus:outline-none focus:border-primary' type="text" placeholder="Psicologo..." onChange={e => handlerChange(e)} value={inputFind}/>
-          <button className='bg-primary text-white border border-primary font-bold py-2 px-4 rounded hover:bg-white hover:text-primary my-2.5 h-9' onClick={(e) => {
+          <button className='bg-primary text-white border border-primary font-bold py-2 px-4 rounded hover:bg-white hover:text-primary my-2.5' onClick={(e) => {
             handlerChange(e)
             const findInput = psychologists.filter(psycho => {
               return psycho.name.toLowerCase().includes(inputFind.toLowerCase()) || psycho.lastname.toLowerCase().includes(inputFind.toLowerCase())
             });
             setFind(findInput)
           }}>Buscar</button>
-          <button onClick={() => cleanFind()}>X</button>
+          {/* <button onClick={() => cleanFind()}>X</button> */}
         </div>
         <select className='border border-gray-300 my-2.5 px-3 py-1 rounded-lg shadow-sm focus:outline-none focus:border-primary' 
         name="especialidad" 
-        id="especialidad" 
+        id="orden" 
         onChange={handlerClick}>
             <option selected disabled value=" "> Orden... </option>
             <option value="asc">asc</option>
@@ -113,11 +127,19 @@ export default function Cards() {
           <div>
           <select className='border border-gray-300 my-2.5 px-3 py-1 rounded-lg shadow-sm focus:outline-none focus:border-primary' 
         name="especialidad" 
-        id="especialidad" 
-        onChange={handlerClick}>
+        id="genero" 
+        onChange={(e)=>{
+            console.log(e.target.value, "target value", `${e.target.value}`)
+            const iGender = psychologists.filter(psycho => {
+              //console.log( `${psycho.generoId}`, `${e.target.value}`)
+              return (`${psycho.generoId}` === `${e.target.value}`)
+            });
+            setGender(iGender)
+            }}>
             <option selected disabled value=" "> Género </option>
-            <option value="masculino">Hombre</option>
-            <option value="femenino">Mujer</option>
+            <option value="1">Hombre</option>
+            <option value="2">Mujer</option>
+            <option value="3">No Binario</option>
         </select>
           </div>
           <select className='border border-gray-300 my-2.5 px-3 py-1 rounded-lg shadow-sm focus:outline-none focus:border-primary' 
@@ -132,7 +154,9 @@ export default function Cards() {
             <option value="Organizacional">Psicologia Organizacional</option>
           </select>
         </div>
-        <Button onClick={() => handleRemove()}>Limpiar filtros</Button>
+
+        <button className="bg-primary text-white border border-primary font-bold py-2 px-4 rounded hover:bg-white hover:text-primary my-2.5 mx-2.5 h-10" onClick={(e)=>handleRemove(e)}>Limpiar filtros</button>
+
       </div>
 
       <div>
@@ -150,6 +174,20 @@ export default function Cards() {
                       especialidad={psycho.psicologo.especialidades[0].especialidad}
                       ciudad={psycho.ciudad.name}/>
             }) :
+
+            gender.length > 0 ? [...gender].splice(
+              firstIndex,itemsPerPage
+            ).map(psycho => {
+              return <Card
+                      id={psycho.psicologo.id}
+                      key={psycho.id} 
+                      nombreCompleto={`${psycho.name} ${psycho.lastname}`}
+                      experiencia={psycho.psicologo.yearsExperience}
+                      especialidad={psycho.psicologo.especialidades[0].especialidad}
+                      ciudad={psycho.ciudad.name}/>
+            }) :
+
+
             spatiality.length !== 0 ? [...spatiality].splice(
               firstIndex,itemsPerPage
             ).map(psycho => {
@@ -160,7 +198,7 @@ export default function Cards() {
                       nombreCompleto={`${psycho.name} ${psycho.lastname}`}
                       experiencia={psycho.psicologo.yearsExperience}
                       especialidad={psycho.psicologo.especialidades[0].especialidad}
-                      ciudad={psycho.ciudad.name}/>
+                      ciudad={psycho.ciudad?.name}/>
             }) : psychologists.length > 0 ? [...psychologists].splice(
               firstIndex,itemsPerPage
             ).map(psycho => {
@@ -169,8 +207,8 @@ export default function Cards() {
                       key={psycho.id} 
                       nombreCompleto={`${psycho.name} ${psycho.lastname}`}
                       experiencia={psycho.psicologo.yearsExperience}
-                      especialidad={psycho.psicologo.especialidades[0].especialidad}
-                      ciudad={psycho.ciudad.name}/>
+                      especialidad={psycho.psicologo.especialidades[0]?.especialidad}
+                      ciudad={psycho.ciudad?.name}/>
             }) :
                 (<div>
                   <Loading/>

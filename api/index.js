@@ -1,5 +1,5 @@
-const {conn} = require('./src/db') ;
-const server = require("./src/app");
+const {conn, Psicologo, Paciente, Rol, Genero, MetodoPago, Modalidad, Administrador, Especialidades, Provincia, Ciudad, Servicio} = require('./src/db') ;
+const {socketServer, configurarSockets} = require("./src/app");
 const getRoles = require("./src/creadores/roles.js")
 const getGeneros = require("./src/creadores/generos.js")
 const getMetodos = require("./src/creadores/metodosDePago.js")
@@ -10,40 +10,34 @@ const getCiudades = require("./src/creadores/ciudades")
 const getServicios = require("./src/creadores/servicios")
 const {generePacientes, generePsicologos, generarAdmin} = require("./src/creadores/usuarios")
 require('dotenv').config();
-const socketController = require('./src/routes/SocketManager/socketController')
 
-const http = require('http');
-
-const socketServer = http.createServer(server);
-const socketIO = require('socket.io');
-const io = socketIO(socketServer,{
-  cors: {
-    origin: "*",
-    methods: ["GET", "POST"]
-  }
-});
-const sockets = ()=>{
-  io.on('connection',(socket)=> socketController(socket, io))
-}
-
-
-conn.sync({force: true, logging: false}).then(async () => {
+conn.sync({force: false,  logging: false}).then(async () => {
   console.log('Base de datos conectada! :D');
   socketServer.listen(process.env.PORT, async function () {
-    getRoles();
-    getGeneros();
-    getMetodos();
-    getModalidades();
-    getEspecialidades();
-    await getProvincias();
-    await getCiudades();
-    generePacientes();
-    generePsicologos();
-    await generarAdmin();
-    getServicios();
+    const roles = await Rol.findAll()
+    if(roles.length < 1) getRoles();
+    const generos = await Genero.findAll()
+    if(generos.length < 1) getGeneros();
+    const metodo = await MetodoPago.findAll()
+    if(metodo.length < 1) getMetodos();
+    const modalidad = await Modalidad.findAll()
+    if(modalidad.length < 1) getModalidades();
+    const especialidad = await Especialidades.findAll()
+    if(especialidad.length < 1) getEspecialidades();
+    const provincias = await Provincia.findAll()
+    if(provincias.length < 1) await getProvincias();
+    const ciudades = await Ciudad.findAll()
+    if(ciudades.length < 1) await getCiudades();
+    const servicios = await Servicio.findAll()
+    if(servicios.length < 1) await getServicios();
+    const pacientes = await Paciente.findAll()
+    if(pacientes.length < 1) generePacientes();
+    const psicologos = await Psicologo.findAll()
+    if(psicologos.length < 1) generePsicologos();
+    const admins = await Administrador.findAll()
+    if(admins.length < 1) await generarAdmin();
     console.log(`App is listening on port ${process.env.PORT}!`);
-  });
-  sockets();
+    configurarSockets();
+  });  
 })
 .catch((err) => console.error(err));
-module.exports = io;
