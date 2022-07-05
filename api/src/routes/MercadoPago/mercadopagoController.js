@@ -1,4 +1,5 @@
 const { Factura, Paciente, MetodoPago, Psicologo, Dia, Horarios, Usuario } = require("../../db")
+const {URL_BACK, URL_FRONT} = process.env;
 const server = require('express').Router();
 
 //SDK de MercadoPago
@@ -26,9 +27,9 @@ const postMP = (req, res) => {
     let preference = {
         items: items_md,
         back_urls: {
-            success: "http://localhost:3001/api/mercadopago/pagos",
-            failure: "http://localhost:3001/api/mercadopago/pagos",
-            pending: "http://localhost:3001/api/mercadopago/pagos"
+            success: `${URL_BACK === "localhost" ? "http://localhost:3001": URL_BACK}/api/mercadopago/pagos`,
+            failure: `${URL_BACK === "localhost" ? "http://localhost:3001": URL_BACK}/api/mercadopago/pagos`,
+            pending: `${URL_BACK === "localhost" ? "http://localhost:3001": URL_BACK}/api/mercadopago/pagos`
         },
         auto_return: "approved",
         payment_methods: {
@@ -113,10 +114,10 @@ const getPayments = async (req, res) => {
     factura.setMetodoPago(metodoPago);
     await paciente.setFacturas(factura);
             console.info("redirect success");
-            res.redirect("http://localhost:3000");
+            res.redirect(`${URL_FRONT}`);
     } catch (error) {
         console.error("error al actualizar la factura", error);
-        return res.redirect(`http://localhost:3000/?error${error}&where=al+buscar`);
+        return res.redirect(`${URL_FRONT}?error${error}&where=al+buscar`);
     }
 }
 
