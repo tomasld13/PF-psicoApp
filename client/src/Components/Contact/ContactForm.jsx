@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Button } from '../Button/Button'
 import styled from 'styled-components'
+import Swal from "sweetalert2";
 
 const FormStyle = styled.form`
   width: 100%;
@@ -35,9 +36,30 @@ function ContactForm() {
     const [email, setEmail] = useState('')
     const [message, setMessage] = useState('')
 
+    async function handleSubmit(event){
+      event.preventDefault()
+      const formSend = new FormData(event.target)
+      console.log(formSend)
+      const response = await fetch("https://formspree.io/f/xzbozenn",{
+          method: "POST",
+          body: formSend,
+          headers: {
+              'Accept': 'application/json'
+          }
+      })
+      .catch(error => console.log(error))
+      if (response.ok){
+          event.target.reset()
+          Swal.fire(
+            'El mensaje fue enviado con éxito!',
+            'success'
+          )
+      }
+    }
+  
   return (
   <>
-    <FormStyle>
+    <FormStyle onSubmit={(e) => handleSubmit(e)}>
             <div className="form-group">
                 <label 
                 htmlFor="name"> Tu nombre
