@@ -48,7 +48,11 @@ export default function Checkout({idpsycho}) {
             templateColumns={{ base: 'repeat(1, 1fr)', md: 'repeat(2, 1fr)' }}
             gap={6}
             >
+<<<<<<< HEAD
                 <div className='h-80 bg-primary'>
+=======
+                <div className='bg-primary'>
+>>>>>>> frontend
                     <Calendar/>
                 </div>
 

@@ -1,5 +1,8 @@
 const { Factura, Paciente, MetodoPago, Psicologo, Dia, Horarios, Usuario } = require("../../db")
+<<<<<<< HEAD
 const {URL_BACK, URL_FRONT} = process.env;
+=======
+>>>>>>> frontend
 const server = require('express').Router();
 
 //SDK de MercadoPago

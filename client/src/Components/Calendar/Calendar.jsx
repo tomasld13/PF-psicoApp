@@ -90,10 +90,18 @@ export const Calendar = ({idPsycho}) => {
         console.log(psychologist);
         return (
             <>
+<<<<<<< HEAD
                 <h1>CALENDARIO</h1>
                 {
                     psychologist.formatoHorarios?.min 
                     ? <div className='flex'>
+=======
+                <h1 className='text-white font-bold'>CALENDARIO</h1>
+                {
+                    psychologist.formatoHorarios?.min 
+                    ? <div className='flex flex-col'>
+                    <div className='mt-2.5 mb-5'>
+>>>>>>> frontend
                     <DatePicker
                     selected={startDate}
                     onChange={(date) => {
@@ -108,6 +116,11 @@ export const Calendar = ({idPsycho}) => {
                     withPortal
                     // inline
                     />
+<<<<<<< HEAD
+=======
+                    </div>
+                    <div className='mb-5'>
+>>>>>>> frontend
                     <DatePicker
                     selected={startTime}
                     excludeTimes={excludes}
@@ -122,6 +135,10 @@ export const Calendar = ({idPsycho}) => {
                     withPortal
                     // inline
                     />
+<<<<<<< HEAD
+=======
+                    </div>
+>>>>>>> frontend
                 </div> : <div>
                     <Loading/>
                 </div>
