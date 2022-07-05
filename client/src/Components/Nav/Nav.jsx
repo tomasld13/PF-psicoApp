@@ -63,7 +63,7 @@ function Nav() {
             <li className='nav-item'>
               <Link 
               smooth={true}
-              offset={50} 
+              offset={20} 
               duration={700}
               to='questions' 
               className='nav-links' 
