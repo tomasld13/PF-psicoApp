@@ -1,10 +1,9 @@
 import { useEffect, useMemo, useState} from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate, Link } from "react-router-dom";
 import { useForm } from "../../hooks/useForm";
 import { startCreatingUserWithEmailPasswordPsycho } from '../../slice/auth/thunks.js';
 import { getProvincias, getCiudades, cleanCiudades } from '../../slice/psico/thunks.js';
-import Swal from "sweetalert2";
+
 const emailRegex = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
 
 const formData = {
@@ -59,13 +58,14 @@ export const RegisterPsycho = ({rol}) => {
     const ciudades = useSelector(state => state.psicology.ciudades);
 
     const isCheckingAuthentication = useMemo(() => status === 'checking', [status]);
-    const navigate = useNavigate();
+
+
     const { name, email, password, onInputChange, formState,
             isFormValid, nameValid, emailValid, passwordValid, lastname, lastnameValid,
             telephone, telephoneValid, address, addressValid, birth, birthValid,
-            generValid, ciudad, ciudadValid, provinciaValid, yearsExperience, yearsExperienceValid,
-            especialidad, especialidadValid, inicioHorario, inicioHorarioValid,
-            finHorario, finHorarioValid, intervaloSesion, intervaloSesionValid} = useForm(formData, formValidations);
+            generValid, ciudadValid, provinciaValid, yearsExperience, yearsExperienceValid,
+            especialidadValid, inicioHorarioValid,finHorarioValid, intervaloSesion,
+            intervaloSesionValid} = useForm(formData, formValidations);
 
 
     const onSubmit = (e) => {
@@ -75,11 +75,7 @@ export const RegisterPsycho = ({rol}) => {
         if(!isFormValid) return;
 
         dispatch( startCreatingUserWithEmailPasswordPsycho(formState) );
-        Swal.fire(
-            'La cuenta fue creada exitosamente',
-            'success'
-        )
-        navigate('/')
+
     }
 
     useEffect(() => {
@@ -130,7 +126,8 @@ export const RegisterPsycho = ({rol}) => {
                         <option  selected value="0"> Genero </option>
                         <option value="Masculino">Masculino</option>
                         <option value="Femenino">Femenino</option>
-                        <option value="No binario">No binario</option>
+                        <option value="No Binario">No Binario</option>
+                        <option value="Otro">Otro</option>
                     </select>
                     {!!generValid && formSubmitted ? <span style={{color:'red'}}>{generValid}</span> : null}
                 </div>
@@ -213,7 +210,7 @@ export const RegisterPsycho = ({rol}) => {
                 </div>
                 <div className="flex flex-col content-center items-center">
                     <button className='bg-primary text-white border border-primary font-bold py-2 px-4 rounded hover:bg-white hover:text-primary my-2.5 h-12 ' disabled={isCheckingAuthentication}>Crear cuenta</button>
-                    {errorRegister !== '' ? <span style={{color:'red'}}>{errorRegister}</span> : null}
+                    {errorRegister ? <span style={{color:'red'}}>{errorRegister}</span> : null}
                 </div>
             </form>
     </div>

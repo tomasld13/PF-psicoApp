@@ -20,7 +20,6 @@ check('password','La contraseña debe ser minimo de 6 characteres').isLength({mi
 postPaciente);
 //Trae un paciente por id.
 router.get('/:id',[
-    validarJWT,
     validarCampos,
     check('id').custom(verificarId),
 
