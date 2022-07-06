@@ -67,14 +67,11 @@ const postPaciente = async (req, res, next) => {
 const getOnePacienteAndUsers = async (req, res, next) => {
   const { id } = req.params;
   try {
-    const paciente = await Usuario.findByPk(id, {
-      include: [{ model: Paciente, include: { model: Factura, attributes: ["id", "status", "payment_id", "payment_status", "metodoPagoId"] }, attributes: { exclude: ["fk_usuarioID", "fk_especialidadId"] } },
-      { model: Ciudad, include: { model: Provincia, attributes: ['name'] }, attributes: ['name'] },
+    const paciente = await Paciente.findByPk(id, { include: [{model: Usuario, 
+      include:[ { model: Ciudad, include: { model: Provincia, attributes: ['name'] }, attributes: ['name'] },
       { model: Genero, attributes: ["genero"] },
-      { model: Rol, attributes: ["name"] }]
-    });
-    console.log(paciente)
-    console.log(paciente.paciente)
+      { model: Rol, attributes: ["name"] }]},{model: Factura, attributes: ["status", "payment_id", "payment_status", "merchant_order_id" ]}]});
+
     if (!paciente) {
       return res.status(404).send({ error: "Paciente no encontrado" });
     }
