@@ -1,14 +1,13 @@
 import styled from 'styled-components'
-import Sidebar from './Componentes/Sidebar';
+// import Sidebar from './Componentes/Sidebar';
 import MainContent from './Componentes/MainContent'
-import UserList from './Componentes/Users/UserList';
+
 
 
 function AdminApp() {
     return <Container>
-    <Sidebar />
+    {/* <Sidebar /> */}
     <MainContent />
-    {/* <UserList /> */}
     </Container>
 }
 

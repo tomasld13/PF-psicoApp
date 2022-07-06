@@ -21,7 +21,7 @@ import UserList from "../../Admin/Componentes/Users/UserList";
 
 export default function PsicoApp() {
 
-    const {rolId}  = useSelector(state => state.auth.authBack);
+    const { rolId }  = useSelector(state => state.auth.authBack);
 
     return (
         <>
@@ -64,7 +64,7 @@ export default function PsicoApp() {
                     <SideBar/>
                     <Routes>
                         <Route path="/" element={<AdminApp />}/>
-                        <Route path='/usuarios/:id' element={<UserList />} />
+                        <Route path='/usuarios' element={<UserList />} />
                         <Route path="/*" element={ <Navigate to="/" /> } />
                     </Routes>
                 </>

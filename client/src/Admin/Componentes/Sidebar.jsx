@@ -23,7 +23,7 @@ function Sidebar() {
             <RiHomeLine />
             <h3>Dashboard</h3>
           </Link>
-          <Link>
+          <Link to='/usuarios'>
             <BsFillPersonFill />
             <h3>Pacientes</h3>
           </Link>
