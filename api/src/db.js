@@ -53,7 +53,7 @@ sequelize.models = Object.fromEntries(capsEntries);
 // En sequelize.models están todos los modelos importados como propiedades
 // Para relacionarlos hacemos un destructuring
 
-const { Psicologo, Paciente, Usuario, Rol, Genero, MetodoPago, Factura, Detalle, Modalidad, Administrador, Especialidades, Horarios, Reviews, HistoriasClinicas, Consulta, Provincia, Ciudad, Servicio, Precio, Dia, Mensaje } = sequelize.models;
+const { Psicologo, Paciente, Usuario, Rol, Genero, MetodoPago, Factura, Detalle, Modalidad, Administrador, Especialidades, Horarios, Reviews, Consulta, Provincia, Ciudad, Servicio, Precio, Dia, Mensaje } = sequelize.models;
 // Aca vendrian las relaciones
 // Product.hasMany(Reviews);
 
@@ -117,17 +117,6 @@ Psicologo.hasMany(Reviews, {foreignKey : 'fk_psicologoID', targetKey : 'id'});
 //Reviews->Paciente
 Reviews.belongsTo(Paciente, {foreignKey : 'fk_pacienteID', targetKey : 'id'});
 Paciente.hasMany(Reviews, {foreignKey : 'fk_pacienteID', targetKey : 'id'});
-//HistoriasClinicas->Paciente
-Paciente.hasOne(HistoriasClinicas,{foreignKey : 'fk_pacienteID', targetKey : 'id'}, {
-  onDelete : 'CASCADE',
-  onUpdate : 'CASCADE'});
-HistoriasClinicas.belongsTo(Paciente, {foreignKey : 'fk_pacienteID', targetKey : 'id'});
-//HistoriasClinicas->Psicologo
-HistoriasClinicas.belongsTo(Psicologo, {foreignKey : 'fk_psicologoID', targetKey : 'id'});
-Psicologo.hasMany(HistoriasClinicas, {foreignKey : 'fk_psicologoID', targetKey : 'id'});
-//HistoriasClinicas->Consulta
-HistoriasClinicas.hasMany(Consulta, {foreignKey : 'fk_historiaClinicaID', targetKey : 'id'});
-Consulta.belongsTo(HistoriasClinicas, {foreignKey : 'fk_historiaClinicaID', targetKey : 'id'});
 //Provincias Ciudades
 Provincia.hasMany(Ciudad);
 Ciudad.belongsTo(Provincia)
@@ -146,7 +135,7 @@ Psicologo.belongsToMany(Servicio, {through : 'psicologo_servicio', timestamps : 
 Precio.belongsToMany(Servicio, {through : 'servicio_precio', timestamps : false});
 Servicio.belongsToMany(Precio, {through : 'servicio_precio', timestamps : false});
 //Usuario-Usuario/Mensaje
-Mensaje.belongsTo(Usuario, { foreignKey: 'de', targetKey: 'id', as: 'msjRecibido' });
+Mensaje.belongsTo(Usuario, { foreignKey: 'de', targetKey: 'id', as: 'msjRecibido' });//mode: Mensaje. 
 Mensaje.belongsTo(Usuario, { foreignKey: 'para', targetKey: 'id', as: 'msjEnviado' });
 
 module.exports = {

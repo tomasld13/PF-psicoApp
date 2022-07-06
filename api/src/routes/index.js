@@ -10,6 +10,7 @@ const diaRoutes = require("./DiaManager/diaRoutes")
 const AdministradorRoutes = require('./AdminManager/AdminRoutes')
 const mercadopagoRoutes = require('./MercadoPago/mercadopagoRoutes');
 const mensajesRoutes = require('./MensajesManager/mensajesRoutes')
+const facturaRoutes = require('./FacturasManager/facturaRoutes')
 
 const router = Router();
 
@@ -26,4 +27,5 @@ router.use('/administrador', AdministradorRoutes)
 
 router.use('/mercadopago', mercadopagoRoutes)
 router.use('/mensajes', mensajesRoutes)
+router.use('/Factura', facturaRoutes)
 module.exports = router;
