@@ -112,11 +112,11 @@ Paciente.hasMany(Horarios)
 Horarios.belongsTo(Dia)
 Dia.hasMany(Horarios)
 //Reviews->Psicologo
-Reviews.belongsTo(Psicologo, {foreignKey : 'fk_psicologoID', targetKey : 'id'});
+/* Reviews.belongsTo(Psicologo, {foreignKey : 'fk_psicologoID', targetKey : 'id'});
 Psicologo.hasMany(Reviews, {foreignKey : 'fk_psicologoID', targetKey : 'id'});
 //Reviews->Paciente
 Reviews.belongsTo(Paciente, {foreignKey : 'fk_pacienteID', targetKey : 'id'});
-Paciente.hasMany(Reviews, {foreignKey : 'fk_pacienteID', targetKey : 'id'});
+Paciente.hasMany(Reviews, {foreignKey : 'fk_pacienteID', targetKey : 'id'}); */
 //Provincias Ciudades
 Provincia.hasMany(Ciudad);
 Ciudad.belongsTo(Provincia)
@@ -137,6 +137,9 @@ Servicio.belongsToMany(Precio, {through : 'servicio_precio', timestamps : false}
 //Usuario-Usuario/Mensaje
 Mensaje.belongsTo(Usuario, { foreignKey: 'de', targetKey: 'id', as: 'msjRecibido' });//mode: Mensaje. 
 Mensaje.belongsTo(Usuario, { foreignKey: 'para', targetKey: 'id', as: 'msjEnviado' });
+//Relacion Paciente-Psicologo
+Paciente.belongsToMany(Psicologo, {through : Reviews});
+Psicologo.belongsToMany(Paciente, {through : Reviews});
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
