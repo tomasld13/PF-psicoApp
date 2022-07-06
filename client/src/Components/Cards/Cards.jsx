@@ -105,7 +105,11 @@ export default function Cards() {
   }, []);
 
   return (
-    <section /*className={styles.section_cards}*/ className="flex justify-around">
+    <section /*className={styles.section_cards}*/ className="flex justify-around flex-wrap sm:flex-nowrap
+    md:flex-nowrap
+    lg:flex-nowrap
+    xl:flex-nowrap
+    ">
       <div 
       //className={styles.btn_container}
       className="container my-16 ml-2.5 py-10 w-64 px-2.5 bg-secundary border border-primary rounded-lg"
@@ -178,7 +182,10 @@ export default function Cards() {
 
       <div>
         <SectionTitle heading='¿Cuál psicólogo puede ayudarte?' subheading=""/>
-        <div className={styles.cards_container}>
+        <div 
+        className={styles.cards_container}
+        //className='flex flex-wrap justify-center justify-evenly w-full'
+        >
           {
             find.length > 0 ? [...find].splice(
               firstIndex,itemsPerPage

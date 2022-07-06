@@ -23,3 +23,10 @@
     margin-bottom: 10px;
     width: 30%;
 }
+
+@media (min-width:1280px) {
+    .cards_container {
+        width: 1080px
+    }
+
+}
