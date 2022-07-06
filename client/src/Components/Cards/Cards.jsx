@@ -20,10 +20,7 @@ export default function Cards() {
 
   //const [inputGender,setInputGender] = useState('')
   const [gender, setGender] = useState([]);
-<<<<<<< HEAD
-=======
   
->>>>>>> frontend
 
   const dispatch = useDispatch();
 
@@ -100,10 +97,7 @@ export default function Cards() {
     document.getElementById("orden").value= " "
     document.getElementById("genero").value= " "
     document.getElementById("especialidad").value= " "
-<<<<<<< HEAD
-=======
     document.getElementById("exp").value= " "
->>>>>>> frontend
   }
 
   useEffect(() => {
@@ -163,11 +157,7 @@ export default function Cards() {
             <option value="1">Hombre</option>
             <option value="2">Mujer</option>
             <option value="3">No Binario</option>
-<<<<<<< HEAD
-        </select>
-=======
           </select>
->>>>>>> frontend
           </div>
           <select className='border border-gray-300 my-2.5 px-3 py-1 rounded-lg shadow-sm focus:outline-none focus:border-primary' 
           name="especialidad" 

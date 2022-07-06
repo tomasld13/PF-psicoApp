@@ -117,8 +117,4 @@ export const psicologySlice = createSlice({
     },
 });
 
-<<<<<<< HEAD
-export const {getPsychos, filterSpatiality, sortByNamePsycho, getPsychoByID, postMercadopago, calendar, getProvinciasSelect, getCiudadesSelect} = psicologySlice.actions; 
-=======
 export const {getPsychos, filterSpatiality, sortByNamePsycho, getPsychoByID, postMercadopago, calendar, getProvinciasSelect, getCiudadesSelect, sortByExpPsycho} = psicologySlice.actions; 
->>>>>>> frontend

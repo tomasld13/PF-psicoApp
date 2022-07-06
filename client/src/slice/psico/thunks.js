@@ -1,9 +1,5 @@
 import { async } from '@firebase/util';
-<<<<<<< HEAD
-import { getPsychos, filterSpatiality, sortByNamePsycho, getPsychoByID, postMercadopago, calendar, getProvinciasSelect, getCiudadesSelect  } from './psicologySlice.js';
-=======
 import { getPsychos, filterSpatiality, sortByNamePsycho, getPsychoByID, postMercadopago, calendar, getProvinciasSelect, getCiudadesSelect, sortByExpPsycho  } from './psicologySlice.js';
->>>>>>> frontend
 import axios from 'axios';
 
 export const getPsicology = () => {

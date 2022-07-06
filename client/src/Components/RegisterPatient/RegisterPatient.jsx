@@ -67,6 +67,7 @@ export const RegisterPatient = ({rol}) => {
         dispatch( startCreatingUserWithEmailPasswordPatient(formState) );
         Swal.fire(
             'La cuenta fue creada exitosamente',
+            '',
             'success'
         )
         navigate('/')

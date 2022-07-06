@@ -12,7 +12,6 @@ import { theme } from '../Profile/Helpers/index'
 import Main from "../Profile/Main";
 import Cover from '../Profile/Cover'
 import SectionTitle from "../SectionTitle/SectionTitle";
-//import MainDetails from '../PsicoDetails/Details/Main'
 
 export default function PsicoApp() {
     return (
