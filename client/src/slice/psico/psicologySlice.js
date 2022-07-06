@@ -63,6 +63,45 @@ export const psicologySlice = createSlice({
                 }
             }
         },
+
+        sortByExpPsycho: (state, {payload}) => {
+            if(payload === 'asc') {
+                return {
+                    ...state,
+                    psychologists: state.sortPsycho?.slice().sort((a,b) => {
+                        if(a.yearsExperience > b.yearsExperience) return 1;
+                        else if (a.yearsExperience < b.yearsExperience) return -1;
+                        return 0;
+                    }),
+                    spatiality: state.copyPsycho?.slice().sort((a,b) => {
+                        if(a.yearsExperience > b.yearsExperience) return 1;
+                        else if (a.yearsExperience < b.yearsExperience) return -1;
+                        return 0;
+                    }),
+                }
+            } else if(payload === 'desc') {
+                return {
+                    ...state,
+                    psychologists: state.sortPsycho?.slice().sort((a,b) => {
+                        if(a.yearsExperience < b.yearsExperience) return 1;
+                        else if (a.yearsExperience > b.yearsExperience) return -1;
+                        return 0;
+                    }),
+                    spatiality: state.copyPsycho?.slice().sort((a,b) => {
+                        if(a.yearsExperience < b.yearsExperience) return 1;
+                        else if (a.yearsExperience > b.yearsExperience) return -1;
+                        return 0;
+                    }),
+                }
+            } else {
+                return {
+                    ...state,
+                    psychologists: state.sortPsycho,
+                    spatiality: state.copyPsycho,
+                }
+            }
+        }, 
+
         postMercadopago: (state, {payload}) => {
             state.initPoint = payload;
         },
@@ -78,4 +117,4 @@ export const psicologySlice = createSlice({
     },
 });
 
-export const {getPsychos, filterSpatiality, sortByNamePsycho, getPsychoByID, postMercadopago, calendar, getProvinciasSelect, getCiudadesSelect} = psicologySlice.actions; 
+export const {getPsychos, filterSpatiality, sortByNamePsycho, getPsychoByID, postMercadopago, calendar, getProvinciasSelect, getCiudadesSelect, sortByExpPsycho} = psicologySlice.actions; 

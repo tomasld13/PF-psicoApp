@@ -26,7 +26,7 @@ export const authSlice = createSlice({
             error: null,
             token: null
         },
-        error: ''
+        error: null
     },
     reducers: {
         login: (state, {payload}) => {

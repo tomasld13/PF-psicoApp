@@ -13,7 +13,7 @@ mercadopago.configure({
 })
 
 //ruta que genera la URL a mercado pago
-const postMP = async (req, res) => {
+const postMP = (req, res) => {
     const data = req.body;
     const items = [ 
         {servicio: data.servicio, precio: data.precio, quantity: 1}, 
@@ -48,26 +48,11 @@ const postMP = async (req, res) => {
         }
     };
 
-    // if (Array.isArray(data)) {
-    //     for (let i = 0; i < data.length; i++) {
-    //         preference.items.push({
-    //         servicio: data.servicio,
-    //         precio: data.precio
-    //     });
-    //     }
-    // } else {
-    //     preference.items.push({
-    //     title: data.servicio,
-    //     picture_url: data.precio,
-    //     });
-    // }
-    const paciente = await Usuario.findByPk(Number(data.id));
     mercadopago.preferences.create(preference)
     .then(function (response) {
         console.log("respondio");
         global.id = response.body.init_point;
-        // console.log(response.body);
-        console.log(paciente)
+        console.log(response.body);
         res.json({id: global.id});
     }).catch(error =>{
         console.log(error);
