@@ -1,5 +1,6 @@
 import { signInWithGoogle, loginWithEmailPassword, logoutFirebase } from '../../firebase/providers.js';
 import { checkingCredentials, logout, login, loginBack, logoutBack, errorRegisterBack } from './authSlice.js';
+import Swal from "sweetalert2";
 
 export const startGoogleSignIn = () => {
     return async (dispatch) => {
@@ -38,6 +39,11 @@ export const startCreatingUserWithEmailPasswordPatient = (paciente) => {
             localStorage.setItem('usuario', JSON.stringify(data[0]));
 
             dispatch(loginBack(data[0]));
+
+            Swal.fire(
+                'La cuenta fue creada exitosamente',
+                'success'
+            );
     } 
 }
 
@@ -65,6 +71,11 @@ export const startCreatingUserWithEmailPasswordPsycho = (psycho) => {
             localStorage.setItem('usuario', JSON.stringify(data[0]));
 
             dispatch(loginBack(data[0]));
+
+            Swal.fire(
+                'La cuenta fue creada exitosamente',
+                'success'
+            );
     } 
 }
 
