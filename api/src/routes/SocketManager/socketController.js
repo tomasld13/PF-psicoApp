@@ -1,13 +1,40 @@
-const {Psicologo, Paciente, Mensaje} = require('../../db');
-const Usuario = require('../../models/Usuario');
+const {Usuario, Mensaje, Paciente, Ciudad, Provincia, Genero, Rol} = require('../../db');
 
 
 
+const usuarioConectado = async( id ) => {
 
-const getUsuarios = async(id) => {
+    const usuario = await Usuario.findByPk(id);
+    usuario.online = true;
+    await usuario.save();
+    
+    return usuario;
+}
+
+const usuarioDesconectado = async( id ) => {
+    const usuario = await Usuario.findByPk(id);
+    usuario.online = false;
+    await usuario.save();
+    
+    return usuario;
+}
+
+const getPacientes = async() => {
 
     const usuarios=await Usuario.findAll({
-        where: { rolId: 1, state : true }, include: [{ model: Paciente, where, attributes: { exclude: ["fk_usuarioID", "fk_especialidadId"] } },
+        where: { rolId: 1, state : true }, include: [{ model: Paciente, attributes: { exclude: ["fk_usuarioID", "fk_especialidadId"] } },
+        { model: Ciudad, include: { model: Provincia, attributes: ['name'] }, attributes: ['name'] },
+        { model: Genero, attributes: ["genero"] },
+        { model: Rol, attributes: ["name"] }]
+      });
+        
+
+    return usuarios;
+}
+const getPsicologos = async() => {
+
+    const usuarios=await Usuario.findAll({
+        where: { rolId: 2, state : true }, include: [{ model: Paciente, attributes: { exclude: ["fk_usuarioID", "fk_especialidadId"] } },
         { model: Ciudad, include: { model: Provincia, attributes: ['name'] }, attributes: ['name'] },
         { model: Genero, attributes: ["genero"] },
         { model: Rol, attributes: ["name"] }]
@@ -21,8 +48,8 @@ const grabarMensaje = async( payload ) => {
     
     try {
         
-        const mensaje = new Mensaje( payload );
-        await mensaje.save();
+        const mensaje = await Mensaje.Create( payload );
+        
 
         return mensaje;
 
@@ -35,8 +62,10 @@ const grabarMensaje = async( payload ) => {
 
 
 module.exports = {
-    
-    getUsuarios,
-    grabarMensaje
+    getPsicologos,
+    getPacientes,
+    grabarMensaje,
+    usuarioConectado,
+    usuarioDesconectado
 }
 
