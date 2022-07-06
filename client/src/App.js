@@ -5,6 +5,8 @@ import PsicoApp from './Components/PsicoApp/PsicoApp';
 import AuthRoutes from './Components/AuthRoutes/AuthRoutes';
 import { useCheckAuth } from './hooks/useCheckAuth';
 import { useCheckAuthBack } from './hooks/useCheckAuthBack';
+import { ChakraProvider } from "@chakra-ui/react";
+import { theme } from './Components/Profile/Helpers/index'
 
 function App() {
   

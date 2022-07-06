@@ -1,10 +1,8 @@
 import { useEffect, useMemo, useState} from "react";
-import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from "../../hooks/useForm";
 import { startCreatingUserWithEmailPasswordPatient } from '../../slice/auth/thunks.js';
 import { getProvincias, getCiudades, cleanCiudades } from '../../slice/psico/thunks.js';
-import Swal from "sweetalert2";
 
 const emailRegex = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
 
@@ -43,7 +41,6 @@ export const RegisterPatient = ({rol}) => {
     formData.rol = rol;
 
     const dispatch = useDispatch();
-    const navigate = useNavigate();
 
     const [formSubmitted, setFormSubmitted] = useState(false);
     const [idProvincia, setIdProvincia] = useState(0);
@@ -60,17 +57,15 @@ export const RegisterPatient = ({rol}) => {
             telephone, telephoneValid, address, addressValid, birth, birthValid,
             generValid, ciudadValid, provinciaValid} = useForm(formData, formValidations);
 
-    const onSubmit = (e) => {
+    
+    const onSubmit = async (e) => {
         e.preventDefault();
         setFormSubmitted(true);
+
         if(!isFormValid) return;
-        dispatch( startCreatingUserWithEmailPasswordPatient(formState) );
-        Swal.fire(
-            'La cuenta fue creada exitosamente',
-            'success'
-        )
-        navigate('/')
+        dispatch(startCreatingUserWithEmailPasswordPatient(formState) );
     }
+
     
     useEffect(() => {
         dispatch(getProvincias());
@@ -159,7 +154,7 @@ export const RegisterPatient = ({rol}) => {
                     disabled={isCheckingAuthentication}
                     type="submit"
                     >Crear cuenta</button>
-                    {errorRegister !== '' ? <span style={{color:'red'}}>{errorRegister}</span> : null}
+                    {errorRegister ? <span style={{color:'red'}}>{errorRegister}</span> : null}
                 </div>
             </form>
         </div>
