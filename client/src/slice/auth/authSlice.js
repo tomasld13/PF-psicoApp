@@ -26,7 +26,7 @@ export const authSlice = createSlice({
             error: null,
             token: null
         },
-        error: ''
+        error: null
     },
     reducers: {
         login: (state, {payload}) => {
@@ -51,17 +51,17 @@ export const authSlice = createSlice({
         },
         loginBack: (state, {payload}) => {
             state.authBack.status = 'authenticated';
-            state.authBack.id = payload.user.id;
-            state.authBack.name = payload.user.name;
-            state.authBack.lastname = payload.user.lastname;
-            state.authBack.email = payload.user.email;
-            state.authBack.telephone = payload.user.telephone;
-            state.authBack.address = payload.user.address;
-            state.authBack.birth = payload.user.birth;
-            state.authBack.rolId = payload.user.rolId;
-            state.authBack.generoId = payload.user.generoId;
-            state.authBack.ciudadId = payload.user.ciudadId;
-            state.authBack.token = payload.token; 
+            state.authBack.id = payload.user ? payload.user.id : payload.id;
+            state.authBack.name = payload.user ? payload.user.name : payload.name;
+            state.authBack.lastname = payload.user ? payload.user.lastname : payload.lastname;
+            state.authBack.email = payload.user ? payload.user.email : payload.email;
+            state.authBack.telephone = payload.user ? payload.user.telephone : payload.telephone;
+            state.authBack.address = payload.user ? payload.user.address : payload.address;
+            state.authBack.birth = payload.user ? payload.user.birth : payload.birth;
+            state.authBack.rolId = payload.user ? payload.user.rolId : payload.rolId;
+            state.authBack.generoId = payload.user ? payload.user.generoId : payload.generoId;
+            state.authBack.ciudadId = payload.user ? payload.user.ciudadId : payload.ciudadId;
+            state.authBack.token = payload.user ? payload.token : null; 
         },
         logoutBack: (state, {payload}) => {
             state.authBack.status = 'no-authenticated';

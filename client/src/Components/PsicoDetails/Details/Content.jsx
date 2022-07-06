@@ -1,13 +1,14 @@
 import { Box, Tab, TabList, TabPanel, TabPanels, Tabs } from '@chakra-ui/react'
-
-import AccountSettings from './AccountSettings'
+import { useParams } from 'react-router-dom'
+import Informacion from './Informacion.jsx'
+import Checkout from '../../PruebaMercadoPago/Checkout'
 // import Actions from './Actions'
-import Favorites from './Favorites'
-import Notificationes from './Notificationes'
+// import Favorites from './Favorites'
+// import Notificationes from './Notificationes'
 
 const Content = () => {
-  const tabs = ['Ajustes', 'Favoritos', 'Notificaciones']
-
+  const tabs = ['Información','Agendar cita',/* 'Notificaciones'*/]
+  const {id} = useParams()
   return (
     <Box
       as="main"
@@ -43,13 +44,13 @@ const Content = () => {
 
         <TabPanels px={3} mt={5}>
           <TabPanel>
-            <AccountSettings />
+            <Informacion />
           </TabPanel>
           <TabPanel>
-            <Favorites />
+            <Checkout idpsycho={id}/>
           </TabPanel>
           <TabPanel>
-            <Notificationes />
+            {/* <Notificationes /> */}
           </TabPanel>
         </TabPanels>
       </Tabs>

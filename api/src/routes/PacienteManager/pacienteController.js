@@ -32,11 +32,11 @@ const getPacientes = (req, res, next) => {
     .catch((error) => next(error));
 };
 const postPaciente = async (req, res, next) => {
-  const { name, lastname, email, telephone, address, birth, rol, gener, ciudad, password } = req.body;
+  const { name, lastname, email, telephone, address, birth, rol, gener, ciudad, password, dni } = req.body;
 
   try {
     //Creacion de usuario
-    const newUSuario = await Usuario.create({ name, lastname, email, telephone, address, birth, password: bcrypt.hashSync(password, 10) });
+    const newUSuario = await Usuario.create({ name, lastname, email, telephone, address, birth, dni, password: bcrypt.hashSync(password, 10) });
     const newPaciente = await Paciente.create();
     const role = await Rol.findOne({ where: { name: rol } });
     const genero = await Genero.findOne({ where: { genero: gener } });
@@ -67,12 +67,11 @@ const postPaciente = async (req, res, next) => {
 const getOnePacienteAndUsers = async (req, res, next) => {
   const { id } = req.params;
   try {
-    const paciente = await Usuario.findByPk(id, {
-      include: [{ model: Paciente, include: { model: Factura, attributes: ["id", "status", "payment_id", "payment_status", "metodoPagoId"] }, attributes: { exclude: ["fk_usuarioID", "fk_especialidadId"] } },
-      { model: Ciudad, include: { model: Provincia, attributes: ['name'] }, attributes: ['name'] },
+    const paciente = await Paciente.findByPk(id, { include: [{model: Usuario, 
+      include:[ { model: Ciudad, include: { model: Provincia, attributes: ['name'] }, attributes: ['name'] },
       { model: Genero, attributes: ["genero"] },
-      { model: Rol, attributes: ["name"] }]
-    });
+      { model: Rol, attributes: ["name"] }]},{model: Factura, attributes: ["status", "payment_id", "payment_status", "merchant_order_id" ]}]});
+
     if (!paciente) {
       return res.status(404).send({ error: "Paciente no encontrado" });
     }
@@ -109,10 +108,45 @@ const deletePaciente = async (req, res) => {
     });
   }
 }
+
+const updatePaciente = async (req, res, next) => {
+  const {id} = req.params;
+  const {name, lastname, email, telephone, address, birth, gener, ciudad, password} = req.body
+  console.log(name)
+  try {
+    const user = await Usuario.findOne({
+      where: { id: id }, include: [{ model: Paciente, attributes: { exclude: ["fk_usuarioID", "fk_especialidadId"] } },
+      { model: Ciudad, include: { model: Provincia, attributes: ['name'] }, attributes: ['name'] },
+      { model: Genero, attributes: ["genero"] },
+      { model: Rol, attributes: ["name"] }]
+    });
+    if(!user) return res.status(404).send("No existe ningun paciente con ese id")
+    if(name) await user.update({name:name})
+    if(lastname) await user.update({lastname:lastname})
+    if(email) await user.update({email:email})
+    if(telephone) await user.update({telephone:telephone})
+    if(address) await user.update({address:address})
+    if(birth) await user.update({birth:birth})
+    if(gener) await user.setGenero(await Genero.findOne({where:{genero:gener}}));
+    if(ciudad) await user.setCiudad(await Ciudad.findOne({where:{name:ciudad}}));
+    if(password) await user.update({password:bcrypt.hashSync(password, 10)})
+    const userRes = await Usuario.findOne({
+      where: { id: id }, include: [{ model: Paciente, attributes: { exclude: ["fk_usuarioID", "fk_especialidadId"] } },
+      { model: Ciudad, include: { model: Provincia, attributes: ['name'] }, attributes: ['name'] },
+      { model: Genero, attributes: ["genero"] },
+      { model: Rol, attributes: ["name"] }]
+    });
+    res.send(userRes)
+  } catch (error) {
+    next(error)
+  }
+}
+
 module.exports = {
   getPacientes,
   postPaciente,
   getOnePacienteAndUsers,
+  updatePaciente,
   deletePaciente
 }
 

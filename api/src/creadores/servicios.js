@@ -1,11 +1,11 @@
 const {Servicio} = require("../db")
 
-function getServicios(){
-    Servicio.create({servicio: "Sesion personal"})
-    Servicio.create({servicio: "Sesion de pareja"})
-    Servicio.create({servicio: "Sesion de grupo"})
-    Servicio.create({servicio: "Sesion infantil"})
-    Servicio.create({servicio: "Sesion de trabajo"})
+async function getServicios(){
+    await Servicio.create({servicio: "Sesion personal"})
+    await Servicio.create({servicio: "Sesion de pareja"})
+    await Servicio.create({servicio: "Sesion de grupo"})
+    await Servicio.create({servicio: "Sesion infantil"})
+    await Servicio.create({servicio: "Sesion de trabajo"})
 }
 
 

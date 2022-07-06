@@ -1,4 +1,5 @@
-const { Factura, Paciente, MetodoPago, Psicologo, Dia, Horarios } = require("../../db")
+const { Factura, Paciente, MetodoPago, Psicologo, Dia, Horarios, Usuario } = require("../../db")
+const {URL_BACK, URL_FRONT} = process.env;
 const server = require('express').Router();
 
 //SDK de MercadoPago
@@ -26,9 +27,9 @@ const postMP = (req, res) => {
     let preference = {
         items: items_md,
         back_urls: {
-            success: "http://localhost:3001/api/mercadopago/pagos",
-            failure: "http://localhost:3001/api/mercadopago/pagos",
-            pending: "http://localhost:3001/api/mercadopago/pagos"
+            success: `${URL_BACK === "localhost" ? "http://localhost:3001": URL_BACK}/api/mercadopago/pagos`,
+            failure: `${URL_BACK === "localhost" ? "http://localhost:3001": URL_BACK}/api/mercadopago/pagos`,
+            pending: `${URL_BACK === "localhost" ? "http://localhost:3001": URL_BACK}/api/mercadopago/pagos`
         },
         auto_return: "approved",
         payment_methods: {
@@ -46,20 +47,6 @@ const postMP = (req, res) => {
             cost: 0
         }
     };
-
-    // if (Array.isArray(data)) {
-    //     for (let i = 0; i < data.length; i++) {
-    //         preference.items.push({
-    //         servicio: data.servicio,
-    //         precio: data.precio
-    //     });
-    //     }
-    // } else {
-    //     preference.items.push({
-    //     title: data.servicio,
-    //     picture_url: data.precio,
-    //     });
-    // }
 
     mercadopago.preferences.create(preference)
     .then(function (response) {
@@ -100,22 +87,23 @@ const getPayments = async (req, res) => {
             payment_status: payment_status,
             merchant_order_id: merchant_order_id,
             status: "paid"})
-    const psicologo = await Psicologo.findByPk(psicoId)
+    const psicologo = await Psicologo.findByPk(Number(psicoId))
     const dia = await Dia.findOne({where:{fecha:fecha}})
     const horario = await Horarios.create({hora:hora})
-    const paciente = await Paciente.findByPk(Number(id));
+    const usuario = await Usuario.findByPk(Number(id), {include: {model: Paciente}});
+    const paciente = await Paciente.findByPk(usuario.paciente.id)
     horario.setPaciente(paciente)
     horario.setPsicologo(psicologo)
     dia.addHorarios(horario)
     psicologo.addDia(dia)
-    paciente.setFacturas(factura);
     const metodoPago = await MetodoPago.findByPk(1);
     factura.setMetodoPago(metodoPago);
+    await paciente.setFacturas(factura);
             console.info("redirect success");
-            res.redirect("http://localhost:3000");
+            res.redirect(`${URL_FRONT}`);
     } catch (error) {
         console.error("error al actualizar la factura", error);
-        return res.redirect(`http://localhost:3000/?error${error}&where=al+buscar`);
+        return res.redirect(`${URL_FRONT}?error${error}&where=al+buscar`);
     }
 }
 

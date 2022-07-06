@@ -3,11 +3,11 @@ import { useEffect, useState } from 'react'
 import Checkout from './Checkout.jsx'
 import axios from 'axios'
 
-export default function Prueba() {
+export default function Prueba({idpsycho}) {
     const [data, setData] = useState('')
     return (
         <> 
-            <Checkout /> 
+            <Checkout idpsycho={idpsycho}/> 
         </>
     )
 }
