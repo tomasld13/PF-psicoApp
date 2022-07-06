@@ -10,7 +10,7 @@ const diaRoutes = require("./DiaManager/diaRoutes")
 const AdministradorRoutes = require('./AdminManager/AdminRoutes')
 const mercadopagoRoutes = require('./MercadoPago/mercadopagoRoutes');
 const mensajesRoutes = require('./MensajesManager/mensajesRoutes')
-
+const reviewRoutes = require('./ReviewsManager/reviewRoutes')
 const uploadRoutes = require('./UploadManager/uploadRoutes')
 
 const facturaRoutes = require('./FacturasManager/facturaRoutes')
@@ -36,4 +36,5 @@ router.use('/update', uploadRoutes)
 
 router.use('/Factura', facturaRoutes)
 
+router.use('/reviews',reviewRoutes)
 module.exports = router;
