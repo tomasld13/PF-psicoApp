@@ -114,7 +114,8 @@ export const RegisterPatient = ({rol}) => {
                         <option  selected value="0"> Genero </option>
                         <option value="Masculino">Masculino</option>
                         <option value="Femenino">Femenino</option>
-                        <option value="No binario">No binario</option>
+                        <option value="No Binario">No Binario</option>
+                        <option value="Otro">Otro</option>
                     </select>
                     {!!generValid && formSubmitted ? <span style={{color:'red'}}>{generValid}</span> : null}
                 </div>
