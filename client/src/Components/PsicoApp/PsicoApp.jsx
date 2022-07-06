@@ -15,8 +15,10 @@ import Cover from '../Profile/Cover'
 import SectionTitle from "../SectionTitle/SectionTitle";
 import { LandingPsico } from "../LandingPsico/LandingPsico";
 import AdminApp from '../../Admin/AdminApp'
+
 ;
 import UserList from "../../Admin/Componentes/Users/UserList";
+import Sidebar from "../Profile/Sidebar/Sidebar";
 
 
 export default function PsicoApp() {
@@ -61,7 +63,7 @@ export default function PsicoApp() {
                     </Routes>
                 </>
                 : <>
-                    <SideBar/>
+                    <Sidebar />
                     <Routes>
                         <Route path="/" element={<AdminApp />}/>
                         <Route path='/usuarios' element={<UserList />} />
