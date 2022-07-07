@@ -11,7 +11,7 @@ import { Calendar } from "../Calendar/Calendar";
 import { ChakraProvider } from "@chakra-ui/react";
 import { theme } from '../Profile/Helpers/index'
 import Main from "../Profile/Main";
-import Cover from '../Profile/Cover'
+import Cover from '../Profile/Cover';
 import SectionTitle from "../SectionTitle/SectionTitle";
 import { LandingPsico } from "../LandingPsico/LandingPsico";
 import { LandingAdmin } from "../LandingAdmin/LandingAdmin";
@@ -23,7 +23,6 @@ export default function PsicoApp() {
 
     return (
         <>
-        
             {
                 rolId === 1 || rolId === null 
                 ? <>

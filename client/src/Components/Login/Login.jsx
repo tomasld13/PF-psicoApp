@@ -44,8 +44,7 @@ export default function Login() {
                     {errorMessage !== '' ? <span style={{color:'red'}}>{errorMessage}</span> : null}
                     <button className='bg-primary text-white border border-primary font-bold py-2 px-4 rounded hover:bg-white hover:text-primary my-2.5 h-12 ' disabled={isAuthenticating}>Iniciar Sesión</button>
                     <div>
-                    
-                    <button className='flex bg-primary text-white border border-primary font-bold  py-2 px-4 rounded hover:bg-white hover:text-primary my-2.5 items-center h-12' onClick={onGoogleSignIn} disabled={isAuthenticating}><img class="scale-40"  src={imgGoogle}/>Conéctate con Google</button>
+                        <button className='flex bg-primary text-white border border-primary font-bold  py-2 px-4 rounded hover:bg-white hover:text-primary my-2.5 items-center h-12' onClick={onGoogleSignIn} disabled={isAuthenticating}><img class="scale-40"  src={imgGoogle}/>Conéctate con Google</button>
                     </div>
                 </div>
                 <a href='/auth/register'>
