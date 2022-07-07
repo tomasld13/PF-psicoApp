@@ -48,20 +48,6 @@ const postMP = (req, res) => {
         }
     };
 
-    // if (Array.isArray(data)) {
-    //     for (let i = 0; i < data.length; i++) {
-    //         preference.items.push({
-    //         servicio: data.servicio,
-    //         precio: data.precio
-    //     });
-    //     }
-    // } else {
-    //     preference.items.push({
-    //     title: data.servicio,
-    //     picture_url: data.precio,
-    //     });
-    // }
-
     mercadopago.preferences.create(preference)
     .then(function (response) {
         console.log("respondio");
