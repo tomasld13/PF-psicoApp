@@ -29,6 +29,8 @@ const postPsicologo = async (req, res, next) => {
         newUSuario.setGenero(genero);
         newUSuario.setCiudad(city);
         newPsicologo.setEspecialidades(espe);
+        
+        
         res.status(200).send([newUSuario, newPsicologo]);
     } catch (error) {
         res.status(404).send({ error: error.message })
