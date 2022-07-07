@@ -1,5 +1,6 @@
 import { signInWithGoogle, loginWithEmailPassword, logoutFirebase } from '../../firebase/providers.js';
-import { checkingCredentials, logout, login, loginBack, logoutBack, errorRegisterBack } from './authSlice.js';
+import { checkingCredentials, logout, login, loginBack, logoutBack, errorRegisterBack, updateP } from './authSlice.js';
+import axios from 'axios';
 import Swal from "sweetalert2";
 
 export const startGoogleSignIn = () => {
@@ -117,5 +118,16 @@ export const startLogout = () => {
         dispatch(logout());
         dispatch(logoutBack());
         localStorage.setItem('usuario', JSON.stringify({}));
+    }
+}
+
+export const updatePaciente = (id, data) => {
+    return async (dispatch) => {
+        try {
+            const resp = await axios.put(`${process.env.REACT_APP_API}/api/paciente/${id}`, data);
+            dispatch(updateP(resp.data));
+        } catch (error) {
+            console.log(error)
+        }
     }
 }

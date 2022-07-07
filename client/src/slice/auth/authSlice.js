@@ -79,8 +79,11 @@ export const authSlice = createSlice({
         },
         errorRegisterBack: (state, {payload}) => {
             state.error = payload;
+        },
+        updateP: (state, {payload}) => {
+            state.authBack = payload
         }
     }
 });
 
-export const {login, logout, checkingCredentials, loginBack, logoutBack, errorRegisterBack} = authSlice.actions; 
+export const {login, logout, checkingCredentials, loginBack, logoutBack, errorRegisterBack, updateP} = authSlice.actions; 

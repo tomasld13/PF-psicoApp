@@ -113,8 +113,9 @@ export const psicologySlice = createSlice({
         },
         getCiudadesSelect: (state, {payload}) => {
             state.ciudades = payload;
-        }
+        },
     },
+    
 });
 
 export const {getPsychos, filterSpatiality, sortByNamePsycho, getPsychoByID, postMercadopago, calendar, getProvinciasSelect, getCiudadesSelect, sortByExpPsycho} = psicologySlice.actions; 
