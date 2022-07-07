@@ -66,6 +66,7 @@ export const PricingCard = styled(Link)`
     &:hover {
       transform: none;
     }
+
   }
 `;
 

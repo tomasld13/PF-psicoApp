@@ -38,6 +38,7 @@ function Pricing({idpsycho}) {
             fecha: date,
             psicoId: idpsycho
         }));
+        //console.log(e.target, 'e.target')
     }
 
     function selectIcon(sesionValue) {
@@ -66,7 +67,7 @@ function Pricing({idpsycho}) {
                 {pychoId ? pychoId.servicios?.map((item, index) => {
                             return (     
                                     <PricingCard onClick={(e) =>{
-
+                                        
                                         handleOnClick(e, item.servicio, item.precios[0].costo)}}
                                         PricingCard to='#pago'>
                                         <PricingCardInfo>

@@ -88,7 +88,7 @@ export const Calendar = ({idPsycho}) => {
             return {date, time};
         }
 
-        console.log(psychologist);
+        //console.log(psychologist);
         return (
             <>
                 <h1 className='text-white font-bold'>CALENDARIO</h1>
