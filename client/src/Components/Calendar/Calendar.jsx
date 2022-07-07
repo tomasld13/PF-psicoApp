@@ -5,6 +5,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { useSelector, useDispatch } from 'react-redux';
 import { getPsychologyID, postDateTime } from '../../slice/psico/thunks.js';
 import Loading from '../Loading/Loading.jsx';
+import './calendar.css'
 
 export const Calendar = ({idPsycho}) => {
     

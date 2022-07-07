@@ -11,6 +11,10 @@ export default function Card({nombreCompleto, experiencia, especialidad, ciudad,
     className="container flex flex-col h-200 w-64  p-4 m-2.5 bg-secundary rounded-lg border border-primary xl:w-1/4 lg:w-1/3"
     >
         <div className='flex justify-around items-center'>
+            <div className={style.fav}>
+              <input id="toggle-heart" type="checkbox"/>
+              <label for="toggle-heart" aria-label="like">❤</label>
+           </div>
             <img className='rounded-full w-1/2' src={img}/>
             <div> 
                 <Link to={`/psico/${id}`}>
