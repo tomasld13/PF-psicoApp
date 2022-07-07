@@ -14,12 +14,16 @@ import Main from "../Profile/Main";
 import Cover from '../Profile/Cover';
 import SectionTitle from "../SectionTitle/SectionTitle";
 import { LandingPsico } from "../LandingPsico/LandingPsico";
-import { LandingAdmin } from "../LandingAdmin/LandingAdmin";
-//import MainDetails from '../PsicoDetails/Details/Main'
+import AdminApp from '../../Admin/AdminApp'
+
+;
+import UserList from "../../Admin/Componentes/Users/UserList";
+import Sidebar from "../Profile/Sidebar/Sidebar";
+
 
 export default function PsicoApp() {
 
-    const {rolId}  = useSelector(state => state.auth.authBack);
+    const { rolId }  = useSelector(state => state.auth.authBack);
 
     return (
         <>
@@ -58,9 +62,10 @@ export default function PsicoApp() {
                     </Routes>
                 </>
                 : <>
-                    <Nav/>
+                    <Sidebar />
                     <Routes>
-                        <Route path="/" element={<LandingAdmin />}/>
+                        <Route path="/" element={<AdminApp />}/>
+                        <Route path='/usuarios' element={<UserList />} />
                         <Route path="/*" element={ <Navigate to="/" /> } />
                     </Routes>
                 </>

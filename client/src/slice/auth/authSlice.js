@@ -101,6 +101,7 @@ export const authSlice = createSlice({
             state.authBack.token = null;
         },
         loginGoogle: (state, {payload}) => {
+            console.log(payload);
             state.authGoogle.status = 'authenticated';
             state.authGoogle.id = payload.user ? payload.user.id : payload.id;
             state.authGoogle.name = payload.user ? payload.user.name : payload.name;

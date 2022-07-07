@@ -19,6 +19,7 @@ export const startGoogleSignIn = () => {
         const pacienteEmail = dataPacientes.find(paciente => paciente.email === result.email);
 
         if (!pacienteEmail) {
+            console.log();
             dispatch(checkingGoogle(result));
         } else {
             dispatch(loginEmailPasswordGoogle(result.email, result.uid, result.photoURL));
@@ -28,7 +29,6 @@ export const startGoogleSignIn = () => {
 
 export const startCreatingUserWithEmailPasswordPatient = (paciente) => {
 
-    console.log(paciente);
     return async (dispatch) => {
         dispatch( checkingCredentials() );
         dispatch( logout() );
@@ -138,12 +138,12 @@ export const loginEmailPasswordGoogle = (email, password, photoURL) => {
 
     const login = {email,password};
 
+    
     return async (dispatch) => {
         dispatch( checkingCredentials() );
         dispatch( logout() );
         dispatch( logoutBack() );
 
-        console.log(login);
         const result = await fetch(`${process.env.REACT_APP_API}/api/auth/login`, {
             method: 'POST',
             body: JSON.stringify(login),
@@ -159,7 +159,6 @@ export const loginEmailPasswordGoogle = (email, password, photoURL) => {
 
         const data = await result.json();
         data.user.photo = photoURL;
-        console.log(data);
         localStorage.setItem('usuarioGoogle', JSON.stringify(data));
 
         dispatch(loginGoogle(data));
