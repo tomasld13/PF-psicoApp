@@ -44,6 +44,10 @@ module.exports = (sequelize)=>{
         online : {
             type : DataTypes.BOOLEAN,
             defaultValue : false
+        },
+        dni: {
+            type: DataTypes.BIGINT,
+            unique: true
         }
     },{
         timestamps : false
