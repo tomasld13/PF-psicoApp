@@ -44,13 +44,13 @@ export default function Checkout({idpsycho}) {
 
     return (
         <>
-            <Grid
+            <div className='bg-primary'>
+                <Calendar/>
+            </div>
+            {/* <Grid
             templateColumns={{ base: 'repeat(1, 1fr)', md: 'repeat(2, 1fr)' }}
             gap={6}
             >
-                <div className='bg-primary'>
-                    <Calendar/>
-                </div>
 
                 <div>
                     <form className='container flex flex-col'>
@@ -79,7 +79,7 @@ export default function Checkout({idpsycho}) {
                 </div>
             
 
-            </Grid>
+            </Grid> */}
             <Pricing idpsycho={id}/>
             <div>
                 { linkPago ? <button className='h-10  my-8 py-2.5 px-8 bg-green-500 rounder text-white font-bold'><a href={`${linkPago}`}> Confirmar </a></button>: null }

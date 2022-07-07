@@ -16,7 +16,7 @@ import {
   PricingCardLength,
   PricingCardFeatures,
   PricingCardFeature
- } from './Pricing.element'
+ } from './PricingH.element'
 
 function Pricing() {
   return (
