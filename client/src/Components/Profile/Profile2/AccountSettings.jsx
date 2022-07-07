@@ -2,7 +2,9 @@ import { FormControl, FormLabel, Grid, Input, Select, FormErrorMessage, FormHelp
 import { useSelector, useDispatch } from 'react-redux'
 import { useState } from 'react'
 import { updatePaciente } from '../../../slice/auth/thunks'
+import { loginBack } from '../../../slice/auth/authSlice'
 import Swal from "sweetalert2";
+import { useEffect } from 'react'
 
 function validate(input) {
   let errors = {}
@@ -29,7 +31,6 @@ function validate(input) {
 
 
 function AccountSettings() {
-
   const dispatch = useDispatch();
 
   const [errors, setErrors] = useState({})
@@ -49,11 +50,11 @@ function AccountSettings() {
     lastname: '',
     email: '',
     telephone: '',
+    address: ''
   })
 
   function handleSubmit(e) {
     e.preventDefault();
-
     dispatch(updatePaciente(id, update))
     Swal.fire(
       'Datos actualizados correctamente',
