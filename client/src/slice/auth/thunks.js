@@ -1,5 +1,5 @@
 import { signInWithGoogle, loginWithEmailPassword, logoutFirebase } from '../../firebase/providers.js';
-import { checkingCredentials, logout, login, loginBack, logoutBack, errorRegisterBack, logoutGoogle, checkingGoogle, loginGoogle, updatePacient } from './authSlice.js';
+import { checkingCredentials, logout, login, loginBack, logoutBack, errorRegisterBack, logoutGoogle, checkingGoogle, loginGoogle } from './authSlice.js';
 import axios from 'axios';
 import Swal from "sweetalert2";
 
@@ -13,17 +13,24 @@ export const startGoogleSignIn = () => {
 
         if (!result.ok) return dispatch(logout(result.errorMessage));
 
-        const rsPacientes = await fetch(`${process.env.REACT_APP_API}/api/paciente`);
+        try {
+            const rsPacientes = await fetch(`${process.env.REACT_APP_API}/api/paciente`);
+    
+            const dataPacientes = await rsPacientes.json();
+    
+            const pacienteEmail = dataPacientes.find(paciente => paciente.email === result.email);
+    
+            if (!pacienteEmail) {
+                console.log();
+                dispatch(checkingGoogle(result));
+            } else {
+                dispatch(loginEmailPasswordGoogle(result.email, result.uid, result.photoURL));
+            }
 
-        const dataPacientes = await rsPacientes.json();
 
-        const pacienteEmail = dataPacientes.find(paciente => paciente.email === result.email);
-
-        if (!pacienteEmail) {
-            console.log();
-            dispatch(checkingGoogle(result));
-        } else {
-            dispatch(loginEmailPasswordGoogle(result.email, result.uid, result.photoURL));
+        } catch (error) {
+            dispatch(errorRegisterBack('Error en la autenticación'));
+            return dispatch(startLogout());
         }
     }
 }
@@ -173,19 +180,49 @@ export const startLogout = () => {
 
         dispatch(logout());
         dispatch(logoutBack());
+        dispatch(logoutGoogle());
         localStorage.setItem('usuario', JSON.stringify({}));
         localStorage.setItem('usuarioGoogle', JSON.stringify({}));
     }
 }
 
 export const updatePaciente = (id, data) => {
-    console.log("ENTRO EN EL UPDATE")
-    return async (dispatch) => {
+    return async () => {
         try {
             const resp = await axios.put(`${process.env.REACT_APP_API}/api/paciente/${id}`, data);
-            console.log("ESTO ES DATA", data);
-            console.log("ESTO ES RESPDATA", resp.data);
-            dispatch(updatePacient(resp.data));
+
+
+            const usuarioStorage = (localStorage.getItem('usuario')) ? JSON.parse( localStorage.getItem('usuario') ) : JSON.parse( localStorage.getItem('usuarioGoogle') );
+            
+            if(usuarioStorage.user) {
+                usuarioStorage.user.name = resp.data.name;
+                usuarioStorage.user.lastname = resp.data.lastname;
+                usuarioStorage.user.telephone = resp.data.telephone;
+                usuarioStorage.user.email = resp.data.email;
+                usuarioStorage.user.address = resp.data.address;
+
+                if ((localStorage.getItem('usuario'))) {
+                    
+                    localStorage.setItem('usuario', JSON.stringify(usuarioStorage));
+                } else {
+                    localStorage.setItem('usuarioGoogle', JSON.stringify(usuarioStorage));
+                }
+
+            } else {
+                usuarioStorage.name = resp.data.name;
+                usuarioStorage.lastname = resp.data.lastname;
+                usuarioStorage.telephone = resp.data.telephone;
+                usuarioStorage.email = resp.data.email;
+                usuarioStorage.address = resp.data.address;
+
+                if ((localStorage.getItem('usuario'))) {
+                    
+                    localStorage.setItem('usuario', JSON.stringify(usuarioStorage));
+                } else {
+                    localStorage.setItem('usuarioGoogle', JSON.stringify(usuarioStorage));
+                }
+            }
+
         } catch (error) {
             console.log(error)
         }

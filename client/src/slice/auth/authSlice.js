@@ -101,7 +101,6 @@ export const authSlice = createSlice({
             state.authBack.token = null;
         },
         loginGoogle: (state, {payload}) => {
-            console.log(payload);
             state.authGoogle.status = 'authenticated';
             state.authGoogle.id = payload.user ? payload.user.id : payload.id;
             state.authGoogle.name = payload.user ? payload.user.name : payload.name;
@@ -133,19 +132,7 @@ export const authSlice = createSlice({
         errorRegisterBack: (state, {payload}) => {
             state.error = payload;
         },
-        updatePacient: (state, {payload}) => {
-            return{
-                ...state,
-                authBack: {
-                    name : payload.name,
-                    lastname : payload.lastname,
-                    email : payload.email,
-                    telephone : payload.telephone,
-                    address : payload.address,
-                }
-            }
-        }
     }
 });
 
-export const {login, logout, checkingCredentials, loginBack, logoutBack, errorRegisterBack, loginGoogle, logoutGoogle, checkingGoogle, updatePacient} = authSlice.actions; 
+export const {login, logout, checkingCredentials, loginBack, logoutBack, errorRegisterBack, loginGoogle, logoutGoogle, checkingGoogle} = authSlice.actions; 
