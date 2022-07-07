@@ -8,6 +8,7 @@ import { useCheckAuthBack } from './hooks/useCheckAuthBack';
 import { ChakraProvider } from "@chakra-ui/react";
 import { theme } from './Components/Profile/Helpers/index'
 import { RegisterGoogle } from './Components/ResgisterGoogle/RegisterGoogle';
+import AdminApp from './Admin/AdminApp'
 
 function App() {
   
@@ -30,6 +31,7 @@ function App() {
           (status === 'authenticated' || statusBack.status === 'authenticated') 
           ? <Routes>
             <Route path="/*" element={<PsicoApp/>}/>
+           /
           </Routes>
           : <Routes>
               <Route path="/*" element={<PsicoApp/>}/>
