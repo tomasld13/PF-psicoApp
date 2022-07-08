@@ -34,7 +34,7 @@ const YourProjects = styled.div`
   margin-top: -3rem !important;
   height: 80%;
   width: 90%;
-  background-color: white;
+  background-color: linear-gradient(to bottom right, white 0%, #e6e4ff 70%);
   padding: 2rem;
   border-radius: 1rem;
   box-shadow: ${cardShadow};
@@ -44,8 +44,10 @@ const YourProjects = styled.div`
   }
   @media screen and (min-width: 320px) and (max-width: 960px) {
     height: max-content;
-    width: 80%;
-    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    width: 95%;
+    margin-top: 3rem !important;
   }
 `;
 
