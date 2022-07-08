@@ -31,6 +31,7 @@ const transporter = nodemailer.createTransport({
 //ruta que genera la URL a mercado pago
 const postMP = async (req, res) => {
     const data = req.body;
+    const email = data.email;
     const items = [
         { servicio: data.servicio, precio: data.precio, quantity: 1 },
     ]
