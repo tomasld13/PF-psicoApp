@@ -37,6 +37,6 @@ router.use('/mensajes', mensajesRoutes)
 router.use('/update', uploadRoutes)
 
 router.use('/Factura', facturaRoutes)
-router.use('blogs', blogRoutes)
+router.use('/blog', blogRoutes)
 router.use('/reviews',reviewRoutes)
 module.exports = router;
