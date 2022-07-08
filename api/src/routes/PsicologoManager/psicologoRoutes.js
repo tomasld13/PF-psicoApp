@@ -4,6 +4,7 @@ const { verficarEmail , verificarId} = require("../../helpers/db-validators");
 const { getPsicologo, postPsicologo, getOnePsicologoAndUsers, getPsicologosByProvincia, getPsicologosByCiudad, getPsicologosByEspecialidad,postServicioPsicologo,getPsicologosByGenero, updatePsicologo, suspenderPsicologo, activarPsicologo } = require("./psicologoController");
 const validarJWT = require("../../middlewares/jwt-validator");
 const validarCampos = require("../../middlewares/validar-campos");
+const { esAdminRol } = require("../../middlewares/validarAdmin");
 
 const router = Router()
 
@@ -25,7 +26,7 @@ router.get('/especialidad/:especialidad', getPsicologosByEspecialidad);
 router.post('/servicio/:id', postServicioPsicologo);
 router.put("/:id", updatePsicologo);
 router.get('/genero/:genero', getPsicologosByGenero);
-router.put('/suspender/:id', suspenderPsicologo);
-router.put('/activar/:id', activarPsicologo)
+router.put('/suspender/:id',[validarJWT, esAdminRol, validarCampos], suspenderPsicologo);
+router.put('/activar/:id',[validarJWT, esAdminRol, validarCampos], activarPsicologo)
 
 module.exports = router;
