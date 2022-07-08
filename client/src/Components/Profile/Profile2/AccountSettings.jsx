@@ -48,12 +48,7 @@ function AccountSettings() {
 
   function handleSubmit(e) {
     e.preventDefault();
-<<<<<<< HEAD
-
-    dispatch(updatePaciente({name, lastname, email, telephone, address}))
-=======
     dispatch(updatePaciente(id, update))
->>>>>>> 610f8abbb713f5816006643a762e1eab9f5f55d6
     Swal.fire(
       'Datos actualizados correctamente',
       '',
