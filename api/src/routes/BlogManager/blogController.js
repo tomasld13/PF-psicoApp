@@ -21,8 +21,18 @@ const getBlog = async (req,res)=>{
     } catch (error) {
         console.log(error);
     }
-}
+};
+const deleteBlog = async (req,res)=>{
+    const {id} = req.params;
+    try {
+        const deletedPost = await Blog.destroy(id);
+        res.send(deletedPost);
+    } catch (error) {
+        console.log(error)
+    }
+};
 module.exports = {
     agregarBlog,
-    getBlog
+    getBlog,
+    deleteBlog
 }

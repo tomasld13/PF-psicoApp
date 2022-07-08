@@ -2,7 +2,7 @@ const Router = require("express");
 const validarJWT = require("../../middlewares/jwt-validator");
 const validarCampos = require("../../middlewares/validar-campos");
 const { esAdminRol } = require("../../middlewares/validarAdmin");
-const { agregarBlog, getBlog } = require("./blogController");
+const { agregarBlog, getBlog, deleteBlog } = require("./blogController");
 
 const router = Router();
 
@@ -14,7 +14,11 @@ router.get('/',[
     validarJWT,
     esAdminRol,
     validarCampos
-],getBlog)
+],getBlog);
+router.delete('/:id',[validarJWT,
+    esAdminRol,
+    validarCampos],
+    deleteBlog)
 
 
 
