@@ -34,11 +34,6 @@ const columns = [
     valueGetter: (params) =>
       `${params.row.firstName || ''} ${params.row.lastName || ''}`,
   }, 
-  { 
-    field: 'status',
-    headerName: 'Status',
-    width: 120
-  },
   {
     field: 'action',
     headerName: 'Acciones',
@@ -47,7 +42,7 @@ const columns = [
       return (
         <> 
         
-        <Link to={'/pacientes/'+params.row.id}>
+        <Link to={'/usuario/'+params.row.id}>
         <button className="userListEdit">Editar</button>
         </Link>
         <AiOutlineDelete 
@@ -64,7 +59,7 @@ const columns = [
   return (
     <> 
     <Sidebar />
-    <div style={{ height: 660, width: '65%', marginInlineStart: 400, marginTop: -650 }}>
+    <div style={{ height: 660, width: '57%', marginInlineStart: 500, marginTop: -650,  }}>
       <DataGrid
         rows={data}
         columns={columns}

@@ -6,11 +6,11 @@ function Badge({
   content,
   clean = false,
   glow = false,
-  pago = false,
-  demora = false,
+  activo = false,
+  inhabilitado = false,
 }) {
   return (
-    <Div clean={clean} glow={glow} pago={pago} demora={demora}>
+    <Div clean={clean} glow={glow} activo={activo} inhabilitado={inhabilitado}>
       {content}
     </Div>
   );
@@ -37,14 +37,14 @@ const Div = styled.span`
           background-color: rgba(109, 134, 245, 0.192);
         color:#2f233d;
     `}
-    ${({ pago }) =>
-    pago &&
+    ${({ activo }) =>
+    activo &&
     `
         background-color:#70e00041;
         color:#70e000;
     `}
-${({ demora }) =>
-    demora &&
+${({ inhabilitado }) =>
+    inhabilitado &&
     `
         background-color:#ff595e41;
         color:#ff595e;
