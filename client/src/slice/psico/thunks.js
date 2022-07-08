@@ -1,5 +1,5 @@
 import { async } from '@firebase/util';
-import { getPsychos, filterSpatiality, sortByNamePsycho, getPsychoByID, postMercadopago, calendar, getProvinciasSelect, getCiudadesSelect, sortByExpPsycho  } from './psicologySlice.js';
+import { getPsychos, filterSpatiality, sortByNamePsycho, getPsychoByID, postMercadopago, calendar, getProvinciasSelect, getCiudadesSelect, sortByExpPsycho, getPacientID  } from './psicologySlice.js';
 import axios from 'axios';
 
 export const getPsicology = () => {
@@ -72,6 +72,17 @@ export const getPsychologyID = (id) => {//Consigue Psicologos por ID
         }
     }
 }
+
+// export const getPacientID = (id) => {//Consigue Paciente por ID
+//     return async (dispatch)=> {
+//         try {
+//             const data = await axios(`${process.env.REACT_APP_API}/api/paciente/${id}`);
+//             dispatch(getPacientByID(data));
+//         } catch (error) {
+//             return (error)           
+//         }
+//     }
+// }
 
 const getDiasPsicologos = (dias) => {
     return dias.map(m => {

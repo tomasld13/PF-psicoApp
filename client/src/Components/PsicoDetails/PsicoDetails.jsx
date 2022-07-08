@@ -18,10 +18,6 @@ export default function PsicoDetails() {
         dispatch(getPsychologyID(id));
     }, []);
 
-    console.log(Boolean(pychoId))
-    console.log(typeof(pychoId))
-    console.log(pychoId)
-    console.log(typeof(pychoId), "despues")
     return (
     <>{
         (pychoId.hasOwnProperty("id"))? <>  
