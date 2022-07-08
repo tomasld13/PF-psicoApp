@@ -7,23 +7,27 @@ import Nav from "../Nav/Nav";
 import Psychologists from "../Psychologists/Psychologists";
 import ScrollToTop from "../ScrollToTop/ScrollToTop";
 import PsicoDetails from "../PsicoDetails/PsicoDetails.jsx"
+import PacientDetails from '../PacientDetails/PacientDetails.jsx'
 import { Calendar } from "../Calendar/Calendar";
 import { ChakraProvider } from "@chakra-ui/react";
 import { theme } from '../Profile/Helpers/index'
 import Main from "../Profile/Main";
-import Cover from '../Profile/Cover'
+import Cover from '../Profile/Cover';
 import SectionTitle from "../SectionTitle/SectionTitle";
 import { LandingPsico } from "../LandingPsico/LandingPsico";
-import { LandingAdmin } from "../LandingAdmin/LandingAdmin";
-//import MainDetails from '../PsicoDetails/Details/Main'
+import AdminApp from '../../Admin/AdminApp'
+
+;
+import UserList from "../../Admin/Componentes/Users/UserList";
+import Sidebar from "../Profile/Sidebar/Sidebar";
+
 
 export default function PsicoApp() {
 
-    const {rolId}  = useSelector(state => state.auth.authBack);
+    const { rolId }  = useSelector(state => state.auth.authBack);
 
     return (
         <>
-        
             {
                 rolId === 1 || rolId === null 
                 ? <>
@@ -38,6 +42,12 @@ export default function PsicoApp() {
                                 {/* <Cover /> */}
                                 {/* <MainDetails/> */}
                                 <PsicoDetails/>
+                            </ChakraProvider>
+                        }/>
+                         <Route path='/paciente/:id' element={
+                            <ChakraProvider theme={theme}>
+                                <PacientDetails/>
+                                {/* <PsicoDetails/> */}
                             </ChakraProvider>
                         }/>
                         <Route path='/contacto' element={ <ContactSection/>} />  
@@ -59,9 +69,10 @@ export default function PsicoApp() {
                     </Routes>
                 </>
                 : <>
-                    <Nav/>
+                    <Sidebar />
                     <Routes>
-                        <Route path="/" element={<LandingAdmin />}/>
+                        <Route path="/" element={<AdminApp />}/>
+                        <Route path='/usuarios' element={<UserList />} />
                         <Route path="/*" element={ <Navigate to="/" /> } />
                     </Routes>
                 </>

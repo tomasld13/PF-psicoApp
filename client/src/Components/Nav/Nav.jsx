@@ -13,6 +13,7 @@ function Nav() {
 
   const {displayName, status} = useSelector(state => state.auth.authFirebase);
   const storeAuthBack = useSelector(state => state.auth.authBack);
+  const storeGoogle = useSelector(state => state.auth.authGoogle); 
   
   const handleClick = () => setClick(!click);
   const closeMobileMenu = () => setClick(false);
@@ -41,8 +42,8 @@ function Nav() {
             <img src={logoImage} alt="logo image" />
           </a>
           {
-            status === 'authenticated' || storeAuthBack.status === 'authenticated' 
-            ? <div className='text-user'>Hola, {!displayName ? storeAuthBack.name : displayName}!</div> 
+            storeGoogle.status === 'authenticated' || storeAuthBack.status === 'authenticated' 
+            ? <div className='text-user'>Hola, {!storeGoogle.name ? storeAuthBack.name : storeGoogle.name}!</div> 
             : null
           }
           <div className='menu-icon' onClick={handleClick}>
@@ -101,7 +102,7 @@ function Nav() {
             </li>
           </ul>
           {
-            status === 'authenticated' || storeAuthBack.status === 'authenticated'
+            storeAuthBack.status === 'authenticated' || storeGoogle.status === 'authenticated'
             ?  button && <Dropdown >Logout</Dropdown>
             : button && <a href='/auth/login'>
               {/* <Button buttonStyle='btn--outline'>Login</Button> */}

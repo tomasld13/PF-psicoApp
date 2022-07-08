@@ -19,7 +19,7 @@ export default function Register() {
             <div>
                 <div className="flex flex-col content-center items-center">
                     <select className='border border-gray-300 my-2.5 px-3 py-1 rounded-lg shadow-sm focus:outline-none focus:border-primary' name="rol" id="rol" onChange={onChange}>
-                        <option  selected value="0"> Rol </option>
+                        <option  selected disabled value=""> Rol </option>
                         <option value="Psicologo">Psicologo</option>
                         <option value="Paciente">Paciente</option>
                     </select>

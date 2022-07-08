@@ -6,7 +6,7 @@ import { Calendar } from "../Calendar/Calendar";
 //import Pricing from "../Pricing/Pricing.jsx"
 import Loading from '../Loading/Loading'
 import Main from "./Details/Main.jsx";
-import Prueba from "../PruebaMercadoPago/Prueba";
+
 //import Checkout from '../PruebaMercadoPago/Checkout'
 
 export default function PsicoDetails() {
@@ -18,10 +18,6 @@ export default function PsicoDetails() {
         dispatch(getPsychologyID(id));
     }, []);
 
-    console.log(Boolean(pychoId))
-    console.log(typeof(pychoId))
-    console.log(pychoId)
-    console.log(typeof(pychoId), "despues")
     return (
     <>{
         (pychoId.hasOwnProperty("id"))? <>  
