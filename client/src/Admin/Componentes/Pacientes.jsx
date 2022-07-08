@@ -25,7 +25,7 @@ function Pacientes() {
           <SubTitle>Paciente</SubTitle>
         </Detail>
       </Project>
-      <AllProjects>Ver todos los pacientes</AllProjects>
+      <AllProjects><a href="/pacientes">Ver todos los pacientes</a></AllProjects>
     </YourProjects>
   );
 }

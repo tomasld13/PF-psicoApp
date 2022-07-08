@@ -20,7 +20,7 @@ function Invoices() {
             </TextContainer>
           </Info>
           <Container>
-            <Badge content="Pago" pago />
+            <Badge content="activo" activo />
             <Price>$ 1,200.87</Price>
           </Container>
         </Invoice>
@@ -35,7 +35,7 @@ function Invoices() {
             </TextContainer>
           </Info>
           <Container>
-            <Badge content="Mora" demora />
+            <Badge content="inhabilitado" inhabilitado />
             <Price>$ 1,200.87</Price>
           </Container>
         </Invoice>
