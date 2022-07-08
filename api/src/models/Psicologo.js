@@ -26,6 +26,10 @@ module.exports = (sequelize) => {
     },
     sobreMi:{
       type: DataTypes.TEXT('long')
+    },
+    pacientesAtendidos : {
+      type : DataTypes.ARRAY(DataTypes.INTEGER),
+      defaultValue : []
     }
   },
     
