@@ -171,7 +171,7 @@ export const getCiudades = (id) => {
 
             dispatch(getCiudadesSelect(data.ciudads));
         } catch (error) {
-            
+            console.log(error)
         }
     }
 }
@@ -180,4 +180,5 @@ export const cleanCiudades = () => {
     return (dispatch) => {
         dispatch(getCiudadesSelect([]));
     }
+
 }

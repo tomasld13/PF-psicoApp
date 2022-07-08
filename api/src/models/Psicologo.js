@@ -16,6 +16,16 @@ module.exports = (sequelize) => {
     },
     intervaloSesion: {
       type: DataTypes.INTEGER
+    },
+    cbu:{
+      type: DataTypes.STRING
+    },
+    matriculaProfesional:{
+      type: DataTypes.STRING,
+      unique: true
+    },
+    sobreMi:{
+      type: DataTypes.TEXT('long')
     }
   },
     
