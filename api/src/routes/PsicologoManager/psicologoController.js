@@ -194,7 +194,65 @@ const updatePsicologo = async (req, res, next) => {
     } catch (error) {
         next(error)
     }
-}
+};
+const suspenderPsicologo = async (req, res) => {
+    const { id } = req.params;
+    try {
+      await Usuario.update({ state: false }, {
+        where: {
+          id: id
+        }
+      });
+  
+      const user = await Usuario.findOne({
+        where: { id: id }, include: [{ model: Psicologo, attributes: { exclude: ["fk_usuarioID", "fk_especialidadId"] } },
+        { model: Ciudad, include: { model: Provincia, attributes: ['name'] }, attributes: ['name'] },
+        { model: Genero, attributes: ["genero"] },
+        { model: Rol, attributes: ["name"] }]
+      });
+  
+      res.status(200).json({
+        ok: true,
+        user
+      });
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({
+        ok: false,
+        msg: "Hable con el administrador",
+      });
+    }
+  };
+  const activarPsicologo = async (req, res) => {
+    const { id } = req.params;
+    try {
+      await Usuario.update({ state: true }, {
+        where: {
+          id: id
+        }
+      });
+  
+      const user = await Usuario.findOne({
+        where: { id: id }, include: [{ model: Psicologo, attributes: { exclude: ["fk_usuarioID", "fk_especialidadId"] } },
+        { model: Ciudad, include: { model: Provincia, attributes: ['name'] }, attributes: ['name'] },
+        { model: Genero, attributes: ["genero"] },
+        { model: Rol, attributes: ["name"] }]
+      });
+  
+      res.status(200).json({
+        ok: true,
+        user
+      });
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({
+        ok: false,
+        msg: "Hable con el administrador",
+      });
+    }
+  };
+  
+
 
 module.exports = {
     getPsicologo,
@@ -205,5 +263,7 @@ module.exports = {
     getPsicologosByEspecialidad,
     postServicioPsicologo,
     getPsicologosByGenero,
-    updatePsicologo
+    updatePsicologo,
+    suspenderPsicologo,
+    activarPsicologo
 }

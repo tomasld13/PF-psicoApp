@@ -27,7 +27,6 @@ function Pricing({idpsycho}) {
     const dispatch = useDispatch();
     const {id, email, token } = useSelector(state=>state.auth.authBack)
     //let ico = [(<GoBriefcase/>),(<MdEscalatorWarning/>),(<MdOutlineGroups/>),(<MdOutlineWc/>),(<MdOutlineEmojiPeople/>)];
-
     function handleOnClick(e, s, p){
         e.preventDefault();
         dispatch(postMP({

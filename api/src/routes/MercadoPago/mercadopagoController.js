@@ -30,13 +30,12 @@ const transporter = nodemailer.createTransport({
 
 //ruta que genera la URL a mercado pago
 const postMP = async (req, res) => {
-    const data = req.body;
-    const email = data.email;
-    console.log(email, "AQUI ESTA EMAIL");
+    const data = req.body.body;
+    const psicoId = data.psicoId.id;
     const items = [
         { servicio: data.servicio, precio: data.precio, quantity: 1 },
     ]
-    const external_reference = data.id + "*" + data.hora + "*" + data.fecha + "*" + data.psicoId;
+    const external_reference = data.id + "*" + data.hora + "*" + data.fecha + "*" + psicoId + "*" + data.email;
     const items_md = items.map(item => ({
         title: item.servicio,
         quantity: item.quantity,
@@ -76,27 +75,6 @@ const postMP = async (req, res) => {
             console.log(error);
             res.status(400).send({ error: error });
         })
-    let info = await transporter.sendMail({
-        from: `${process.env.EMAIL}`, // sender address
-        to: `${data.email}`, // list of receivers
-        subject: "Turno de atención psicológica ✔", // Subject line
-        text: `Usted ha agendado un turno la fecha ${data.fecha}`, // plain text body
-        html: "<b>Hello world?</b>", // html body
-    });
-    console.log(info);
-}
-
-const getPago = (req, res) => {
-    const { id } = req.params;
-    mercadopago.preferences.get(id)
-        .then(function (response) {
-            console.log(response.body);
-            res.json(response.body);
-        }).catch(error => {
-            console.log(error);
-            res.status(400).send({ error: error });
-        }
-        )
 }
 
 //ruta que recibe la informacion del pago
@@ -107,7 +85,7 @@ const getPayments = async (req, res) => {
         const payment_status = req.query.status;
         const merchant_order_id = req.query.merchant_order_id;
         const external_reference = req.query.external_reference;
-        const [id, hora, fecha, psicoId] = external_reference.split("*")
+        const [id, hora, fecha, psicoId, email] = external_reference.split("*")
         const factura = await Factura.create({
             payment_id: payment_id,
             payment_status: payment_status,
@@ -127,6 +105,15 @@ const getPayments = async (req, res) => {
         const metodoPago = await MetodoPago.findByPk(1);
         factura.setMetodoPago(metodoPago);
         await paciente.setFacturas(factura);
+
+        let info = await transporter.sendMail({
+            from: `${process.env.EMAIL}`, // sender address
+            to: email, // list of receivers
+            subject: "Turno de atención psicológica ✔", // Subject line
+            text: `Usted ha agendado un turno la fecha ${fecha} a la hora ${hora}`, // plain text body
+            html: `Usted ha agendado un turno la fecha ${fecha} a la hora ${hora}`, // html body
+        });
+        console.log(info);
         
         console.info("redirect success");
         res.redirect(`${URL_FRONT}`);
