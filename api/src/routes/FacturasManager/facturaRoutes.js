@@ -1,5 +1,5 @@
 const Router = require("express");
-const { getFacturaByPacienteID } = require("./FacturaController");
+const { getFacturaByPacienteID } = require("./facturaController");
 
 const router = Router()
 
