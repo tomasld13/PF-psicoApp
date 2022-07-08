@@ -1,4 +1,4 @@
-const {conn, Psicologo, Paciente, Rol, Genero, MetodoPago, Modalidad, Administrador, Especialidades, Provincia, Ciudad, Servicio} = require('./src/db') ;
+const {conn, Psicologo, Dia, Paciente, Rol, Genero, MetodoPago, Modalidad, Administrador, Especialidades, Provincia, Ciudad, Servicio} = require('./src/db') ;
 const {socketServer, configurarSockets} = require("./src/app");
 const getRoles = require("./src/creadores/roles.js")
 const getGeneros = require("./src/creadores/generos.js")
@@ -8,6 +8,7 @@ const getEspecialidades = require('./src/creadores/especialidades');
 const getProvincias = require("./src/creadores/provincias")
 const getCiudades = require("./src/creadores/ciudades")
 const getServicios = require("./src/creadores/servicios")
+const checkDia = require("./src/creadores/checkDia")
 const {generePacientes, generePsicologos, generarAdmin} = require("./src/creadores/usuarios")
 require('dotenv').config();
 
@@ -36,6 +37,7 @@ conn.sync({force: true,  logging: false}).then(async () => {
     if(psicologos.length < 1) generePsicologos();
     const admins = await Administrador.findAll()
     if(admins.length < 1) await generarAdmin();
+    await checkDia()
     console.log(`App is listening on port ${process.env.PORT}!`);
     configurarSockets();
   });  
