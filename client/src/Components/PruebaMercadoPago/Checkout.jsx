@@ -5,11 +5,12 @@ import { postMP } from '../../slice/psico/thunks.js';
 import { Grid, } from '@chakra-ui/react' 
 import { Calendar } from '../Calendar/Calendar.jsx';
 import Pricing from '../Pricing/Pricing.jsx'
+import { useParams } from 'react-router-dom';
 
 export default function Checkout({idpsycho}) {
     const [service, setService] = useState("");
     const [price, setPrice] = useState("");
-
+    const params = useParams();
     const { rolId } = useSelector(state => state.auth.authBack);
     const {date, time} = useSelector(state => state.psicology.calendar);
     //console.log(date,time, "hola")
@@ -19,8 +20,7 @@ export default function Checkout({idpsycho}) {
     const { pychoId } = useSelector(state => state.psicology)
     const {id} = useSelector(state=>state.auth.authBack)
     const linkPago = useSelector (state=>state.psicology.initPoint.id)
-    useEffect(()=>{      
-    }, [])
+
 
     function handleOnChange(e) {
         e.preventDefault()
@@ -45,7 +45,7 @@ export default function Checkout({idpsycho}) {
     return (
         <>
             <div className='bg-primary'>
-                <Calendar/>
+                <Calendar idPsycho={id}/>
             </div>
             {/* <Grid
             templateColumns={{ base: 'repeat(1, 1fr)', md: 'repeat(2, 1fr)' }}
@@ -80,7 +80,7 @@ export default function Checkout({idpsycho}) {
             
 
             </Grid> */}
-            <Pricing idpsycho={id}/>
+            <Pricing idpsycho={params}/>
             <div>
                 { linkPago ? <button className='h-10  my-8 py-2.5 px-8 bg-green-500 rounder text-white font-bold'><a href={`${linkPago}`}> Confirmar </a></button>: null }
             </div>
