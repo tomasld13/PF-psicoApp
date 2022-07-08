@@ -78,9 +78,9 @@ const postMP = async (req, res) => {
         })
     let info = await transporter.sendMail({
         from: `${process.env.EMAIL}`, // sender address
-        to: `${email}`, // list of receivers
-        subject: "Welcome to Psico Health ✔", // Subject line
-        text: "Welcome to PsicoHealth. Here you'll find a way to realease your soul.", // plain text body
+        to: `${data.email}`, // list of receivers
+        subject: "Turno de atención psicológica ✔", // Subject line
+        text: `Usted ha agendado un turno la fecha ${data.fecha}`, // plain text body
         html: "<b>Hello world?</b>", // html body
     });
     console.log(info);
