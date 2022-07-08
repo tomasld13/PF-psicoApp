@@ -26,6 +26,21 @@ export const authSlice = createSlice({
             error: null,
             token: null
         },
+        authGoogle: {
+            status: 'checking',
+            id: null,
+            name: null,
+            lastname: null,
+            email: null,
+            telephone: null,
+            address: null,
+            birth: null,
+            rolId: null,
+            generoId: null,
+            ciudadId: null,
+            error: null,
+            token: null
+        },
         error: null
     },
     reducers: {
@@ -48,6 +63,14 @@ export const authSlice = createSlice({
         checkingCredentials: (state) => {
             state.authFirebase.status = 'checking';
             state.authBack.status = 'checking';
+            state.authGoogle.status = 'checking';
+        },
+        checkingGoogle: (state, {payload}) => {
+            state.authGoogle.status = 'checking-google';
+            state.authGoogle.name = payload.displayName;
+            state.authGoogle.email = payload.email;
+            state.authGoogle.photoURL = payload.photoURL;
+            state.authGoogle.uid = payload.uid;
         },
         loginBack: (state, {payload}) => {
             state.authBack.status = 'authenticated';
@@ -63,7 +86,7 @@ export const authSlice = createSlice({
             state.authBack.ciudadId = payload.user ? payload.user.ciudadId : payload.ciudadId;
             state.authBack.token = payload.user ? payload.token : null; 
         },
-        logoutBack: (state, {payload}) => {
+        logoutBack: (state) => {
             state.authBack.status = 'no-authenticated';
             state.authBack.id = null;
             state.authBack.name = null;
@@ -77,22 +100,39 @@ export const authSlice = createSlice({
             state.authBack.ciudadId = null;
             state.authBack.token = null;
         },
+        loginGoogle: (state, {payload}) => {
+            state.authGoogle.status = 'authenticated';
+            state.authGoogle.id = payload.user ? payload.user.id : payload.id;
+            state.authGoogle.name = payload.user ? payload.user.name : payload.name;
+            state.authGoogle.lastname = payload.user ? payload.user.lastname : payload.lastname;
+            state.authGoogle.email = payload.user ? payload.user.email : payload.email;
+            state.authGoogle.telephone = payload.user ? payload.user.telephone : payload.telephone;
+            state.authGoogle.address = payload.user ? payload.user.address : payload.address;
+            state.authGoogle.birth = payload.user ? payload.user.birth : payload.birth;
+            state.authGoogle.rolId = payload.user ? payload.user.rolId : payload.rolId;
+            state.authGoogle.generoId = payload.user ? payload.user.generoId : payload.generoId;
+            state.authGoogle.ciudadId = payload.user ? payload.user.ciudadId : payload.ciudadId;
+            state.authGoogle.photoURL = payload.user ? payload.user.photo : payload.photo;
+            state.authGoogle.token = payload.user ? payload.token : null; 
+        },
+        logoutGoogle: (state) => {
+            state.authGoogle.status = 'no-authenticated';
+            state.authGoogle.id = null;
+            state.authGoogle.name = null;
+            state.authGoogle.lastname = null;
+            state.authGoogle.email = null;
+            state.authGoogle.telephone = null;
+            state.authGoogle.address = null;
+            state.authGoogle.birth = null;
+            state.authGoogle.rolId = null;
+            state.authGoogle.generoId = null;
+            state.authGoogle.ciudadId = null;
+            state.authGoogle.token = null;
+        },
         errorRegisterBack: (state, {payload}) => {
             state.error = payload;
         },
-        updatePacient: (state, {payload}) => {
-            return{
-                ...state,
-                authBack: {
-                    name : payload.name,
-                    lastname : payload.lastname,
-                    email : payload.email,
-                    telephone : payload.telephone,
-                    address : payload.address,
-                }
-            }
-        }
     }
 });
 
-export const {login, logout, checkingCredentials, loginBack, logoutBack, errorRegisterBack, updatePacient} = authSlice.actions; 
+export const {login, logout, checkingCredentials, loginBack, logoutBack, errorRegisterBack, loginGoogle, logoutGoogle, checkingGoogle} = authSlice.actions; 
