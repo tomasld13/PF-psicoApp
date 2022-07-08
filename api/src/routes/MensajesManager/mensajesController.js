@@ -1,4 +1,4 @@
-const Mensaje = require('../../db');
+const {Mensaje} = require('../../db');
 const { Op } = require("sequelize");
 const obtenerChat = async (req, res) => {
 

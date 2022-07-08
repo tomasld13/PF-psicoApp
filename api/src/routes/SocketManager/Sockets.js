@@ -1,9 +1,7 @@
 
-const { usuarioConectado,
-    usuarioDesconectado,
-    grabarMensaje,
-    getUsuarios } = require('./socketController');
-
+const { getPacientes, grabarMensaje, getPsicologos, usuarioConectado, usuarioDesconectado } = require('./socketController');
+const { Usuario } = require('../../db')
+const {comprobarJWT} = require('../../helpers/generar-JWT');
 class Sockets {
 
     constructor(io) {
@@ -15,7 +13,7 @@ class Sockets {
 
     socketEvents() {
 
-        
+
         this.io.on('connection', async (socket) => {
 
             const [valido, id] = comprobarJWT(socket.handshake.query['x-token']);
@@ -26,10 +24,20 @@ class Sockets {
             }
 
             await usuarioConectado(id);
-
+            const user = await Usuario.findByPk(id)
+            console.log(user.toJSON());
             // Unir al usuario a una sala de socket.io
             socket.join(id);
+            if(user.rolId === 2){
+                this.io.emit('lista-usuarios', await getPacientes())//Aca va a emitir un arreglo con todos los usuarios,
+            //Lo que yo quiero en mi server que estos usuarios sean los contactos paciente-psicologo. 
+            }
+            if(user.rolId===1){
+                this.io.emit('lista-usuarios', await getPsicologos())//Aca va a emitir un arreglo con todos los usuarios,
+                //Lo que yo quiero en mi server que estos usuarios sean los contactos paciente-psicologo. 
+            }
             
+
 
             // TODO: Escuchar cuando el cliente manda un mensaje
             socket.on('mensaje-personal', async (payload) => {

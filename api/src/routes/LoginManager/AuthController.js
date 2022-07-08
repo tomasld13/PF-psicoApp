@@ -37,6 +37,7 @@ const login = async (req, res = response) => {
         const token = await generarJWT(user.id);
 
         res.json({
+            ok : true,
             user,
             token
         });
@@ -62,6 +63,7 @@ const renewToken = async (req, res) => {
     const user = await Usuario.findByPk(id);
 
     res.json({
+        ok : true,
         user,
         token,
     })

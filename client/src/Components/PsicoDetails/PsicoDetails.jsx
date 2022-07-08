@@ -16,12 +16,9 @@ export default function PsicoDetails() {
 
     useEffect(() => {
         dispatch(getPsychologyID(id));
-    }, []);
+        console.log("contador")
+    },[dispatch]);
 
-    console.log(Boolean(pychoId))
-    console.log(typeof(pychoId))
-    console.log(pychoId)
-    console.log(typeof(pychoId), "despues")
     return (
     <>{
         (pychoId.hasOwnProperty("id"))? <>  

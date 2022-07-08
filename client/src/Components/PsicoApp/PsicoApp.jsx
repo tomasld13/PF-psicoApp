@@ -7,11 +7,12 @@ import Nav from "../Nav/Nav";
 import Psychologists from "../Psychologists/Psychologists";
 import ScrollToTop from "../ScrollToTop/ScrollToTop";
 import PsicoDetails from "../PsicoDetails/PsicoDetails.jsx"
+import PacientDetails from '../PacientDetails/PacientDetails.jsx'
 import { Calendar } from "../Calendar/Calendar";
 import { ChakraProvider } from "@chakra-ui/react";
 import { theme } from '../Profile/Helpers/index'
 import Main from "../Profile/Main";
-import Cover from '../Profile/Cover'
+import Cover from '../Profile/Cover';
 import SectionTitle from "../SectionTitle/SectionTitle";
 import { LandingPsico } from "../LandingPsico/LandingPsico";
 import AdminApp from '../../Admin/AdminApp'
@@ -28,7 +29,6 @@ export default function PsicoApp() {
 
     return (
         <>
-        
             {
                 rolId === 1 || rolId === null 
                 ? <>
@@ -43,6 +43,12 @@ export default function PsicoApp() {
                                 {/* <Cover /> */}
                                 {/* <MainDetails/> */}
                                 <PsicoDetails/>
+                            </ChakraProvider>
+                        }/>
+                         <Route path='/paciente/:id' element={
+                            <ChakraProvider theme={theme}>
+                                <PacientDetails/>
+                                {/* <PsicoDetails/> */}
                             </ChakraProvider>
                         }/>
                         <Route path='/contacto' element={ <ContactSection/>} />  
