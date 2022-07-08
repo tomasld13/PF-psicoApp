@@ -32,6 +32,7 @@ const transporter = nodemailer.createTransport({
 const postMP = async (req, res) => {
     const data = req.body;
     const email = data.email;
+    console.log(email, "AQUI ESTA EMAIL");
     const items = [
         { servicio: data.servicio, precio: data.precio, quantity: 1 },
     ]
