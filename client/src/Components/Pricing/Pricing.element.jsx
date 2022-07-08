@@ -68,6 +68,9 @@ export const PricingCard = styled(Link)`
     }
 
   }
+  &:active{
+    background: red;
+  } 
 `;
 
 export const PricingCardInfo = styled.div`

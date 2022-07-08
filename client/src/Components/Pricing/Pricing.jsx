@@ -25,7 +25,7 @@ function Pricing({idpsycho}) {
     const { pychoId } = useSelector(state => state.psicology);
     const {date, time} = useSelector(state => state.psicology.calendar);
     const dispatch = useDispatch();
-    const {id} = useSelector(state=>state.auth.authBack)
+    const {id, email } = useSelector(state=>state.auth.authBack)
     //let ico = [(<GoBriefcase/>),(<MdEscalatorWarning/>),(<MdOutlineGroups/>),(<MdOutlineWc/>),(<MdOutlineEmojiPeople/>)];
 
     function handleOnClick(e, s, p){
@@ -36,7 +36,8 @@ function Pricing({idpsycho}) {
             precio: p,
             hora: time,
             fecha: date,
-            psicoId: idpsycho
+            psicoId: idpsycho,
+            email: email
         }));
         //console.log(e.target, 'e.target')
     }
