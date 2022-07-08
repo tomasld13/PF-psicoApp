@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import Badge from "./Badge";
-import AvatarImage from "../Assets/avatarImage.jpg";
+import AvatarImage from '../Assets/face1.jpg';
 import { cardShadow, hoverEffect } from "../Utils/index";
 
 function ProjectRecommendation() {
@@ -14,8 +14,8 @@ function ProjectRecommendation() {
               <img src={AvatarImage} alt="" />
             </Avatar>
             <Info>
-              <InfoName>Profesional del mes</InfoName>
-              <InfoUpdate>40 sesiones mensuales</InfoUpdate>
+              <InfoName>Chino</InfoName>
+              <InfoUpdate>Profesional del mes</InfoUpdate>
             </Info>
           </InfoContainer>
           <Badge content="Premiado" />
@@ -38,10 +38,11 @@ function ProjectRecommendation() {
 const RecommendProject = styled.div`
   border-radius: 1rem;
   margin-top: -0.6rem;
+  margin-left: 2rem;
   height: 130%;
   padding: 1rem;
   background-color: white;
-  width: 27.5vw;
+  width: 30vw;
   box-shadow: ${cardShadow};
   transition: 0.4s ease-in-out;
   &:hover {
