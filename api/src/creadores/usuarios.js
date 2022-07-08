@@ -355,7 +355,7 @@ const generePsicologos = async () => {
             birth: p.birth,
 			password : bcrypt.hashSync(p.password, 10)
         })
-        const actualPsicologo = await Psicologo.create({yearsExperience: 10, inicioHorario: "08:00:00", finHorario: "16:00:00", intervaloSesion: 60})
+        const actualPsicologo = await Psicologo.create({yearsExperience: 10, inicioHorario: "08:00:00", finHorario: "16:00:00", intervaloSesion: 60, pacientesAtendidos : [5,4,1,2]})
 		const dias = await Dia.bulkCreate(fechas)
 		dias.map(async (d) => await actualPsicologo.addDia(d))
 		actualPS.setPsicologo(actualPsicologo)

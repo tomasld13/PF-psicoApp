@@ -4,7 +4,7 @@ import Informacion from './Informacion.jsx'
 // import Actions from './Actions'
 // import Favorites from './Favorites'
 // import Notificationes from './Notificationes'
-
+import Checkout from '../../PruebaMercadoPago/Checkout'
 const Content = () => {
   const tabs = ['Información','Agendar cita',/* 'Notificaciones'*/]
   const {id} = useParams()
@@ -46,6 +46,7 @@ const Content = () => {
             <Informacion />
           </TabPanel>
           <TabPanel>
+            <Checkout id={id} />
           </TabPanel>
           <TabPanel>
             {/* <Notificationes /> */}
