@@ -30,6 +30,10 @@ module.exports = (sequelize) => {
     pacientesAtendidos : {
       type : DataTypes.ARRAY(DataTypes.INTEGER),
       defaultValue : []
+    },
+    dni: {
+        type: DataTypes.BIGINT,
+        unique: true
     }
   },
     
