@@ -2,8 +2,9 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { onAuthStateChanged } from 'firebase/auth';
 import { FirebaseAuth } from "../firebase/config";
-import { loginGoogle,  } from "../slice/auth/authSlice.js";
+import { loginGoogle, logoutGoogle  } from "../slice/auth/authSlice.js";
 import { startLogout } from '../slice/auth/thunks.js';
+
 
 export const useCheckAuth = () => {
     const {status} = useSelector(state => state.auth.authGoogle);
@@ -12,7 +13,7 @@ export const useCheckAuth = () => {
     useEffect(() => {
         onAuthStateChanged(FirebaseAuth, async (user) => {
 
-        if( !usuarioStorage.user?.name && !usuarioStorage.name ) return dispatch(startLogout());
+        if( !usuarioStorage.user?.name && !usuarioStorage.name ) return dispatch(logoutGoogle());
 
         const {photoURL} = user;
         usuarioStorage.photo = photoURL
