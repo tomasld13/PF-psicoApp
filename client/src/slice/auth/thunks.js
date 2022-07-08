@@ -72,6 +72,7 @@ export const startCreatingUserWithEmailPasswordPatient = (paciente) => {
 
             Swal.fire(
                 'La cuenta fue creada exitosamente',
+                '',
                 'success'
             );
     } 
@@ -105,6 +106,7 @@ export const startCreatingUserWithEmailPasswordPsycho = (psycho) => {
 
             Swal.fire(
                 'La cuenta fue creada exitosamente',
+                '',
                 'success'
             );
     } 

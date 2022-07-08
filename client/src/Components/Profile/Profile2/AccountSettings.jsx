@@ -43,7 +43,8 @@ function AccountSettings() {
     address: ''
   })
 
-  const { name, lastname, email, telephone, address, id } = useSelector(state=>state.auth.authBack)
+  const { name, lastname, email, telephone, address, id } = useSelector(state=>state.auth.authBack);
+  const userGoogle = useSelector(state => state.auth.authGoogle);
 
   const [input, setInput] = useState({
     name: '',
@@ -55,7 +56,11 @@ function AccountSettings() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    dispatch(updatePaciente(id, update))
+    if (id) {
+      dispatch(updatePaciente(id, update));
+    } else {
+      dispatch(updatePaciente(userGoogle.id, update));
+    }
     Swal.fire(
       'Datos actualizados correctamente',
       '',
@@ -79,7 +84,6 @@ function AccountSettings() {
         })
         )
       }
-      console.log(update)
       
 
     // function handleSubmit(e) {
@@ -95,7 +99,7 @@ function AccountSettings() {
     //   } 
     // }
 
-    const isEnabled = !errors.name && !errors.lastname && !errors.telephone && !errors.email
+    const isEnabled = !errors.name && !errors.lastname && !errors.telephone
     
   return (
     <Grid
@@ -114,7 +118,7 @@ function AccountSettings() {
         type="text" 
         name='name'
         value={input.name}
-        placeholder={name}
+        placeholder={name ? name : userGoogle.name}
         onChange={(e) => handleInputChange(e)}
         ></Input>
          {errors.name && <p className="e">{errors.name}</p>}  
@@ -130,7 +134,7 @@ function AccountSettings() {
         type="text" 
         name='lastname'
         value={input.lastname}
-        placeholder={lastname} 
+        placeholder={lastname ? lastname : userGoogle.lastname} 
         onChange={(e) => handleInputChange(e)}
         ></Input>
       {errors.lastname && <p className="e">{errors.lastname}</p>} 
@@ -145,7 +149,7 @@ function AccountSettings() {
           value={input.telephone}
           name='telephone'
           type="phone"
-          placeholder={telephone}
+          placeholder={telephone ? telephone : userGoogle.telephone}
           onChange={(e) => handleInputChange(e)}
         />
       </FormControl>
@@ -160,8 +164,9 @@ function AccountSettings() {
           type="email"
           value={input.email}
           name='email'
-          placeholder={email}
+          placeholder={email ? email : userGoogle.email}
           onChange={(e) => handleInputChange(e)}
+          disabled={userGoogle.email ? true : false}
         />
  {errors.email && <p className="e">{errors.email}</p>} 
       </FormControl>
@@ -171,7 +176,7 @@ function AccountSettings() {
         <Input
           focusBorderColor="brand.blue"
           type="text"
-          placeholder={address}
+          placeholder={address ? address : userGoogle.address}
         />
       </FormControl>
       {/* <FormControl id="password">
