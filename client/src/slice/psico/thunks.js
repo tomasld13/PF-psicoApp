@@ -134,10 +134,26 @@ export const postDateTime = (dateTime) => {
     }
 }
 
-export const postMP = (data) => {
+// export const postMP = (data) => {
+//     return async (dispatch) => {
+//         try {
+//             const resp = await axios.post(`${process.env.REACT_APP_API}/api/mercadopago`, data);
+//             dispatch(postMercadopago(resp.data));
+//         } catch (error) {
+//             return (error)
+//         }
+//     }
+// }
+export const postMP = (data, token) => {
     return async (dispatch) => {
         try {
-            const resp = await axios.post(`${process.env.REACT_APP_API}/api/mercadopago`, data);
+            const resp = await axios.post(`${process.env.REACT_APP_API}/api/mercadopago`, {
+                method: 'POST',
+                body: data,
+                headers: {
+                    'x-token': `${token}`
+                }
+            });
             dispatch(postMercadopago(resp.data));
         } catch (error) {
             return (error)
