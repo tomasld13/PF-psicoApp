@@ -39,18 +39,18 @@ function Invoices() {
             <Price>$ 1,200.87</Price>
           </Container>
         </Invoice>
-          <AllProjects>Ver todos los psicologos</AllProjects>
+          <AllProjects href="/psicologos">Ver todos los psicologos</AllProjects>
       </CardContent>
     </InvoicesContainer>
   );
 }
 
 const InvoicesContainer = styled.div`
-  width: 30rem;
+  width: 35rem;
   border-radius: 1rem;
   margin-top: 1rem;
   background-color: white;
-  height: 140%;
+  height: 145%;
   box-shadow: ${cardShadow};
   transition: 0.4s ease-in-out;
   &:hover {
@@ -118,7 +118,7 @@ const Container = styled.div`
   
 `;
 
-const AllProjects = styled.h5`
+const AllProjects = styled.a`
   text-align: end;
   color: ${themeColor};
   cursor: pointer;

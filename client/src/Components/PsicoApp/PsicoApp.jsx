@@ -63,10 +63,9 @@ export default function PsicoApp() {
                     </Routes>
                 </>
                 : <>
-                    <Sidebar />
                     <Routes>
                         <Route path="/" element={<AdminApp />}/>
-                        <Route path='/usuarios' element={<UserList />} />
+                        <Route path='/pacientes' element={<UserList />} />
                         <Route path="/*" element={ <Navigate to="/" /> } />
                     </Routes>
                 </>

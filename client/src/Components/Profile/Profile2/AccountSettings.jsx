@@ -34,13 +34,6 @@ function AccountSettings() {
 
   const [errors, setErrors] = useState({})
 
-  const [update, setUpdate] = useState({
-    name: '',
-    lastname: '',
-    email: '',
-    telephone: '',
-    address: ''
-  })
 
   const { name, lastname, email, telephone, address, id } = useSelector(state=>state.auth.authBack)
 
@@ -54,7 +47,7 @@ function AccountSettings() {
   function handleSubmit(e) {
     e.preventDefault();
 
-    dispatch(updatePaciente(id, update))
+    dispatch(updatePaciente({name, lastname, email, telephone, address}))
     Swal.fire(
       'Datos actualizados correctamente',
       '',
@@ -67,10 +60,6 @@ function AccountSettings() {
         ...input,
         [e.target.name]: e.target.value,
       })
-      setUpdate({
-        ...update,
-        [e.target.name]: e.target.value
-      })
       setErrors(
         validate({
           ...input,
@@ -78,7 +67,6 @@ function AccountSettings() {
         })
         )
       }
-      console.log(update)
       
 
     // function handleSubmit(e) {

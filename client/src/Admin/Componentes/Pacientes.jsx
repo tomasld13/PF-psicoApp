@@ -31,10 +31,11 @@ function Pacientes() {
 }
 
 const YourProjects = styled.div`
-  height: 70%;
+  margin-top: -3rem !important;
+  height: 80%;
+  width: 90%;
   background-color: white;
-  margin: 0;
-  padding: 1rem;
+  padding: 2rem;
   border-radius: 1rem;
   box-shadow: ${cardShadow};
   transition: 0.4s ease-in-out;
@@ -51,7 +52,7 @@ const YourProjects = styled.div`
 const Project = styled.div`
   display: flex;
   align-items: center;
-  margin-bottom: 0.3rem;
+  margin-bottom: 0.5rem;
 `;
 const Avatar = styled.div`
   img {
