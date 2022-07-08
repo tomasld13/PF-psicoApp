@@ -137,9 +137,9 @@ Servicio.belongsToMany(Precio, {through : 'servicio_precio', timestamps : false}
 //Usuario-Usuario/Mensaje
 Mensaje.belongsTo(Usuario, { foreignKey: 'de', targetKey: 'id', as: 'msjRecibido' });//mode: Mensaje. 
 Mensaje.belongsTo(Usuario, { foreignKey: 'para', targetKey: 'id', as: 'msjEnviado' });
-//Relacion Paciente-Psicologo
-Paciente.belongsToMany(Psicologo, {through : Reviews});
-Psicologo.belongsToMany(Paciente, {through : Reviews});
+//Relacion Paciente-Psicologo por reviews.
+Paciente.belongsToMany(Psicologo, {through : { model : Reviews, unique : false}, constraints : false});
+Psicologo.belongsToMany(Paciente, {through : { model : Reviews, unique : false}, constraints : false});
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
