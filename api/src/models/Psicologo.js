@@ -25,7 +25,11 @@ module.exports = (sequelize) => {
       unique: true
     },
     sobreMi:{
-      type: DataTypes.TEXT('long')
+      type: DataTypes.STRING(1234)
+    },
+    pacientesAtendidos : {
+      type : DataTypes.ARRAY(DataTypes.INTEGER),
+      defaultValue : []
     }
   },
     

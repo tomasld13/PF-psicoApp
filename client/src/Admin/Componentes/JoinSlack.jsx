@@ -87,7 +87,7 @@ const SlackJoin = styled.button`
   background-color: ${themeColor};
   border: none;
   outline: none;
-  padding: 1rem 2rem;
+  padding: 1rem 1rem;
   color: white;
   border-radius: 0.5rem;
   font-size: 1.2rem;

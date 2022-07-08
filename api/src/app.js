@@ -9,6 +9,8 @@ const http = require('http');
 const Sockets = require('./routes/SocketManager/Sockets')
 const path = require('path');
 const publicPath = path.resolve(__dirname, './public');
+const fileUpload = require('express-fileupload');
+
 server.use('/',express.static(publicPath));
 
 
@@ -32,6 +34,10 @@ server.use((req, res, next) => {
   res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
   next();
 });
+server.use(fileUpload({
+  useTempFiles : true,
+  tempFileDir : '/tmp/'
+}));
 
 server.use((err, req, res, next) => {
     // eslint-disable-line no-unused-vars

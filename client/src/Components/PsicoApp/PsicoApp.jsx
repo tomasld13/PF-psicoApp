@@ -20,6 +20,7 @@ import AdminApp from '../../Admin/AdminApp'
 ;
 import UserList from "../../Admin/Componentes/Users/UserList";
 import Sidebar from "../Profile/Sidebar/Sidebar";
+import UserAdmin from '../../Admin/Componentes/UserPage/UserAdmin.jsx';
 
 
 export default function PsicoApp() {
@@ -69,10 +70,10 @@ export default function PsicoApp() {
                     </Routes>
                 </>
                 : <>
-                    <Sidebar />
                     <Routes>
                         <Route path="/" element={<AdminApp />}/>
-                        <Route path='/usuarios' element={<UserList />} />
+                        <Route path='/pacientes' element={<UserList />} />
+                        <Route path='/pacientes/:id' element={<UserAdmin />} />
                         <Route path="/*" element={ <Navigate to="/" /> } />
                     </Routes>
                 </>
