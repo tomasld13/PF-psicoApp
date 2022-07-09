@@ -1,4 +1,5 @@
 const Router = require("express");
+const Favoritos = require("../models/Favoritos");
 
 const {
     AuthRoutes,
@@ -15,7 +16,9 @@ const {
     uploadRoutes,
     facturaRoutes,
     blogRoutes,
-    reviewRoutes
+    reviewRoutes,
+    usuarioRoutes,
+    favoritosRoutes,
 } = require('./routesIndex');
 
 const router = Router();
@@ -30,7 +33,7 @@ router.use('/especialidades', especialidadesRoutes)
 router.use("/dia", diaRoutes)
 router.use("/horarios", horariosRoutes)
 router.use('/administrador', administradorRoutes)
-
+router.use("/usuario", usuarioRoutes)
 router.use('/mercadopago', mercadopagoRoutes)
 router.use('/mensajes', mensajesRoutes)
 
@@ -39,4 +42,5 @@ router.use('/update', uploadRoutes)
 router.use('/Factura', facturaRoutes)
 router.use('/blog', blogRoutes)
 router.use('/reviews',reviewRoutes)
+router.use('/favoritos', favoritosRoutes)
 module.exports = router;

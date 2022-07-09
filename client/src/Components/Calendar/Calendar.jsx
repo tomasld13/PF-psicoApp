@@ -21,7 +21,7 @@ export const Calendar = ({idPsycho}) => {
         if (psychologist.id) {
             setExcludes(getTimeExcludes(startDate));
         }
-        dispatch(getPsychologyID(idPsycho));
+        // dispatch(getPsychologyID(idPsycho));
         dispatch(postDateTime(postDates()))
     },[startDate, startTime]);
     
