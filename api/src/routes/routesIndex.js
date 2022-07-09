@@ -13,6 +13,7 @@ const reviewRoutes = require('./ReviewsManager/reviewRoutes')
 const uploadRoutes = require('./UploadManager/uploadRoutes')
 const blogRoutes = require('./BlogManager/blogRoutes');
 const facturaRoutes = require('./FacturasManager/facturaRoutes')
+const newsletterRoutes = require('./NewsletterManager/NewsletterRoutes')
 
 module.exports ={
     psicologoRoutes,
@@ -29,5 +30,6 @@ module.exports ={
     reviewRoutes,
     uploadRoutes,
     blogRoutes,
-    facturaRoutes
+    facturaRoutes,
+    newsletterRoutes
 }

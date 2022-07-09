@@ -15,7 +15,8 @@ const {
     uploadRoutes,
     facturaRoutes,
     blogRoutes,
-    reviewRoutes
+    reviewRoutes,
+    newsletterRoutes
 } = require('./routesIndex');
 
 const router = Router();
@@ -39,4 +40,6 @@ router.use('/update', uploadRoutes)
 router.use('/Factura', facturaRoutes)
 router.use('/blog', blogRoutes)
 router.use('/reviews',reviewRoutes)
+router.use('/newsletter', newsletterRoutes)
+
 module.exports = router;
