@@ -15,7 +15,8 @@ const {
     uploadRoutes,
     facturaRoutes,
     blogRoutes,
-    reviewRoutes
+    reviewRoutes,
+    usuarioRoutes
 } = require('./routesIndex');
 
 const router = Router();
@@ -30,7 +31,7 @@ router.use('/especialidades', especialidadesRoutes)
 router.use("/dia", diaRoutes)
 router.use("/horarios", horariosRoutes)
 router.use('/administrador', administradorRoutes)
-
+router.use("/usuario", usuarioRoutes)
 router.use('/mercadopago', mercadopagoRoutes)
 router.use('/mensajes', mensajesRoutes)
 
