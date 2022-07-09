@@ -13,7 +13,7 @@ export default function UserAdmin() {
     <div className='user-admin-profile'>
         <div className="user-title-container">
           <h1 className="edit-user">Editar Paciente</h1>
-          <button className="userAddButton"><a href='/pacientes/crear'>Crear Nuevo</a></button>
+          <button className="userAddButton">Crear Nuevo</button>
         </div>
         <div className="user-container">
           <div className="user-show">

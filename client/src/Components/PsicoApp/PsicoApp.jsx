@@ -21,10 +21,6 @@ import AdminApp from '../../Admin/AdminApp'
 import UserList from "../../Admin/Componentes/Users/UserList";
 import Sidebar from "../Profile/Sidebar/Sidebar";
 import UserAdmin from '../../Admin/Componentes/UserPage/UserAdmin.jsx';
-import PsicoList from "../../Admin/Componentes/Psicologos/PsicoList";
-import PsicoAdmin from "../../Admin/Componentes/PsicoPage/PsicoAdmin";
-import CreateUser from "../../Admin/Componentes/UserPage/CreateUser";
-import CreatePsico from "../../Admin/Componentes/PsicoPage/CreatePsico";
 
 
 export default function PsicoApp() {
@@ -78,10 +74,6 @@ export default function PsicoApp() {
                         <Route path="/" element={<AdminApp />}/>
                         <Route path='/pacientes' element={<UserList />} />
                         <Route path='/pacientes/:id' element={<UserAdmin />} />
-                        <Route path='/pacientes/crear' element={<CreateUser />} />
-                        <Route path='/psicologos' element={<PsicoList />} />
-                        <Route path='/psicologos/:id' element={<PsicoAdmin />} />
-                        <Route path='/psicologos/crear' element={<CreatePsico />} />
                         <Route path="/*" element={ <Navigate to="/" /> } />
                     </Routes>
                 </>
