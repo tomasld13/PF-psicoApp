@@ -1,4 +1,5 @@
 const Router = require("express");
+const Favoritos = require("../models/Favoritos");
 
 const {
     AuthRoutes,
@@ -16,8 +17,9 @@ const {
     facturaRoutes,
     blogRoutes,
     reviewRoutes,
-    newsletterRoutes
-    usuarioRoutes
+    newsletterRoutes,
+    usuarioRoutes,
+    favoritosRoutes,
 } = require('./routesIndex');
 
 const router = Router();
@@ -40,5 +42,5 @@ router.use('/Factura', facturaRoutes)
 router.use('/blog', blogRoutes)
 router.use('/reviews',reviewRoutes)
 router.use('/newsletter', newsletterRoutes)
-
+router.use('/favoritos', favoritosRoutes)
 module.exports = router;

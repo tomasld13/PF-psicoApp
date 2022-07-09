@@ -105,6 +105,16 @@ const getPayments = async (req, res) => {
         const metodoPago = await MetodoPago.findByPk(1);
         factura.setMetodoPago(metodoPago);
         await paciente.setFacturas(factura);
+        const pacienteExistente = psicologo.pacientesAtendidos.find(el => el === usuario.paciente.id)
+        console.log("PACIENTE EXISTENTE", pacienteExistente)
+        if(!pacienteExistente){
+            psicologo.update({
+                pacientesAtendidos:[...psicologo.pacientesAtendidos, usuario.paciente.id]
+            })
+        }else{
+            console.log("El paciente ya fue atendido")
+        }
+       
 
         let info = await transporter.sendMail({
             from: `${process.env.EMAIL}`, // sender address
