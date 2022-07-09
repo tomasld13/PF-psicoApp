@@ -42,7 +42,7 @@ function Sidebar() {
           </LinkStyle>
           <LinkStyle>
             <MdOutlinePersonSearch />
-            <h3>Profesionales</h3>
+            <a href='/psicologos'>Profesionales</a>
           </LinkStyle>
           <LinkStyle>
             <AiOutlinePieChart />
