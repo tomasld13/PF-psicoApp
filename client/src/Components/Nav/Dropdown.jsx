@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { Button } from '../Button/Button'
 import { startLogout } from '../../slice/auth/thunks';
+
 function Dropdown() {
 
     const [showOptions, setShowOptions] = useState(false)

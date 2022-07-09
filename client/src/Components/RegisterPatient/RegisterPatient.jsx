@@ -58,7 +58,7 @@ export const RegisterPatient = ({rol}) => {
             generValid, ciudadValid, provinciaValid} = useForm(formData, formValidations);
 
     
-    const onSubmit = async (e) => {
+    const onSubmit = (e) => {
         e.preventDefault();
         setFormSubmitted(true);
 

@@ -1,7 +1,10 @@
 import { FormControl, FormLabel, Grid, Input, Select, FormErrorMessage, FormHelperText, Button } from '@chakra-ui/react'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { useState } from 'react'
+import { updatePaciente } from '../../../slice/auth/thunks'
+import { loginBack } from '../../../slice/auth/authSlice'
 import Swal from "sweetalert2";
+import { useEffect } from 'react'
 
 function validate(input) {
   let errors = {}
@@ -28,32 +31,56 @@ function validate(input) {
 
 
 function AccountSettings() {
-
+  const dispatch = useDispatch();
 
   const [errors, setErrors] = useState({})
 
-  const { name, lastname, email, telephone, address } = useSelector(state=>state.auth.authBack)
+  const [update, setUpdate] = useState({
+    name: '',
+    lastname: '',
+    email: '',
+    telephone: '',
+    address: ''
+  })
+
+  const { name, lastname, email, telephone, address, id } = useSelector(state=>state.auth.authBack)
 
   const [input, setInput] = useState({
     name: '',
     lastname: '',
     email: '',
     telephone: '',
+    address: ''
   })
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    dispatch(updatePaciente(id, update))
+    Swal.fire(
+      'Datos actualizados correctamente',
+      '',
+      'success'
+    )
+  }
 
     function handleInputChange(e) {
       setInput({
         ...input,
         [e.target.name]: e.target.value,
       })
-    setErrors(
-      validate({
-        ...input,
-        [e.target.name]: e.target.value,
+      setUpdate({
+        ...update,
+        [e.target.name]: e.target.value
       })
-    )
-  }
-
+      setErrors(
+        validate({
+          ...input,
+          [e.target.name]: e.target.value,
+        })
+        )
+      }
+      console.log(update)
+      
 
     // function handleSubmit(e) {
     //   e.preventDefault();
@@ -75,7 +102,7 @@ function AccountSettings() {
       templateColumns={{ base: 'repeat(1, 1fr)', md: 'repeat(2, 1fr)' }}
       gap={6}
     >    
-    <form>
+    <form onSubmit={(e) => handleSubmit(e)}>
     
       <FormControl 
       isRequired
@@ -147,16 +174,16 @@ function AccountSettings() {
           placeholder={address}
         />
       </FormControl>
-      <FormControl id="country">
-        <FormLabel>País</FormLabel>
-        <Select focusBorderColor="brand.blue" placeholder="Seleccionar país">
-          <option value="argentina" selected>
-            Argentina
-          </option>
-        </Select>
-      </FormControl>
+      {/* <FormControl id="password">
+        <FormLabel>Contraseña</FormLabel>
+        <Input 
+          focusBorderColor="brand.blue"
+          type="password"
+          placeholder={password}
+        />
+      </FormControl> */}
+  <Button disabled={!isEnabled} type='submit'>Actualizar</Button>
   </form>
-  <Button disabled={!isEnabled}>Actualizar</Button>
     </Grid>
   )
 }

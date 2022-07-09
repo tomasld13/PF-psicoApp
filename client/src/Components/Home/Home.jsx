@@ -4,7 +4,7 @@ import Landing from '../Landing/Landing.jsx';
 import SubSectionHome from '../SubSectionHome/SubSectionHome.jsx';
 import Questions from "../Questions/Questions.jsx"
 import Testimonials from '../Testimonials/Testimonials.jsx';
-import Pricing from '../Pricing/Pricing'
+import PricingH from '../Pricing/PricingH'
 import About from '../About/About.jsx';
 
 export function Home() {
@@ -14,7 +14,7 @@ export function Home() {
       <SubSectionHome />
       <About />
       <Features />
-      <Pricing />
+      <PricingH />
       <Questions />
       <Testimonials />
     </div>
