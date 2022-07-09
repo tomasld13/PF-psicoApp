@@ -1,4 +1,5 @@
 import React from 'react'
+import { useDispatch } from 'react-redux'
 import styled from 'styled-components'
 import Badge from './Badge'
 import AvatarImage from '../Assets/avatarImage.jpg'
@@ -7,9 +8,21 @@ import { RiHomeLine } from "react-icons/ri";
 import { MdOutlinePersonSearch } from "react-icons/md";
 import { BsFillPersonFill } from "react-icons/bs";
 import { AiOutlinePieChart } from "react-icons/ai";
+import { startLogout } from '../../slice/auth/thunks'
+// import { Link } from 'react-router-dom'
+
+
+
 
 
 function Sidebar() {
+
+  const dispatch = useDispatch()
+
+  const onLogout = () => {
+    dispatch(startLogout());
+  }
+
   return (
     <Container>
       <ProfileContainer>
@@ -19,24 +32,25 @@ function Sidebar() {
       </ProfileContainer>
       <LinksContainer>
         <Links>
-          <Link>
+          <LinkStyle>
             <RiHomeLine />
-            <h3>Dashboard</h3>
-          </Link>
-          <Link to='/usuarios'>
+            <a href='/'>Dashboard</a>
+          </LinkStyle>
+          <LinkStyle>
             <BsFillPersonFill />
-            <h3>Pacientes</h3>
-          </Link>
-          <Link>
+            <a href='/pacientes'>Pacientes</a>
+          </LinkStyle>
+          <LinkStyle>
             <MdOutlinePersonSearch />
             <h3>Profesionales</h3>
-          </Link>
-          <Link>
+          </LinkStyle>
+          <LinkStyle>
             <AiOutlinePieChart />
             <h3>Reportes</h3>
-          </Link>
+          </LinkStyle>
         </Links>
       </LinksContainer>
+        <ContactContainer><a onClick={onLogout}>Cerrar Sesión</a></ContactContainer>
     </Container>
   );
 }
@@ -91,7 +105,7 @@ const Links = styled.ul`
   height: 60%;
 `;
 
-const Link = styled.li`
+const LinkStyle = styled.li`
   margin-left: 25%;
   margin-bottom: 2rem;
   display: flex;
@@ -119,6 +133,7 @@ const ContactContainer = styled.div`
   padding: 1rem;
   a {
     color: white;
+    cursor: pointer;
     text-decoration: none;
   }
   @media screen and (min-width: 320px) and (max-width: 960px) {

@@ -1,12 +1,12 @@
 import styled from 'styled-components'
-// import Sidebar from './Componentes/Sidebar';
+import Sidebar from './Componentes/Sidebar';
 import MainContent from './Componentes/MainContent'
 
 
 
 function AdminApp() {
     return <Container>
-    {/* <Sidebar /> */}
+    <Sidebar />
     <MainContent />
     </Container>
 }

@@ -18,8 +18,8 @@ const getPsicologo = async (req, res, next) => {
 const postPsicologo = async (req, res, next) => {
     const { name, lastname, email, telephone, address, birth, rol, gener, ciudad, yearsExperience, especialidad, password, inicioHorario, finHorario, intervaloSesion, cbu, matriculaProfesional, dni, sobreMi } = req.body;
     try {
-        const newUSuario = await Usuario.create({ name, lastname, email, telephone, address, birth, dni, password: bcrypt.hashSync(password, 10) });
-        const newPsicologo = await Psicologo.create({ yearsExperience, inicioHorario, finHorario, intervaloSesion, cbu, matriculaProfesional, sobreMi });
+        const newUSuario = await Usuario.create({ name, lastname, email, telephone, address, birth, password: bcrypt.hashSync(password, 10) });
+        const newPsicologo = await Psicologo.create({ yearsExperience, inicioHorario, finHorario, dni, intervaloSesion, cbu, matriculaProfesional, sobreMi });
         const role = await Rol.findOne({ where: { name: rol } });
         const genero = await Genero.findOne({ where: { genero: gener } });
         const city = await Ciudad.findOne({ where: { name: ciudad } });
