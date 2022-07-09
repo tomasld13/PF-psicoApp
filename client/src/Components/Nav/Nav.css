@@ -21,7 +21,7 @@
   .navbar-logo {
     color: #575989;
     justify-self: start;
-    margin-left: 10px;
+    margin-left: 20px;
     /* margin-top: 2rem; */
     width: 20%;
     cursor: pointer;
@@ -92,10 +92,6 @@
     .NavbarItems {
       position: relative;
     }
-
-    .buttonNavResp {
-     display: none;
-    }
   
     .nav-menu {
       display: flex;
@@ -135,8 +131,8 @@
       position: absolute;
       top: 0;
       left: 0;
-      width: 50%;
-      transform: translate(-5%, 0%);
+      width: 40%;
+      transform: translate(20%, -20%);
     }
 
     .text-user {

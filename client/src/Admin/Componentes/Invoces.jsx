@@ -57,8 +57,7 @@ const InvoicesContainer = styled.div`
     box-shadow: ${hoverEffect};
   }
   @media screen and (min-width: 320px) and (max-width: 960px) {
-    width: 90% !important;
-    margin-top: 2rem;
+    width: 80%;
     display: flex;
     justify-content: center;
     align-items: center;

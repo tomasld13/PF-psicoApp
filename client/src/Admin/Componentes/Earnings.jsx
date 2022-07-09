@@ -30,11 +30,7 @@ function Earnings() {
       box-shadow: ${hoverEffect};
     }
     @media screen and (min-width: 320px) and (max-width: 960px) {
-      display: flex;
-      flex-direction: column;
-      justify-items: center;
-      margin-top: 10rem;;
-      width: 90%;
+      width: 80%;
     }
   `;
   

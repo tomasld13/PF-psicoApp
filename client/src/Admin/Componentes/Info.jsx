@@ -45,7 +45,6 @@ const InfoCard = styled.div`
     box-shadow: ${hoverEffect};
   }
   @media screen and (min-width: 320px) and (max-width: 960px) {
-    margin-top: 2rem;
     width: 95%;
   }
 `;
