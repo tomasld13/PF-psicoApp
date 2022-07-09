@@ -1,5 +1,5 @@
 import { async } from '@firebase/util';
-import { getPsychos, filterSpatiality, sortByNamePsycho, getPsychoByID, postMercadopago, calendar, getProvinciasSelect, getCiudadesSelect, sortByExpPsycho  } from './psicologySlice.js';
+import { getPsychos, filterSpatiality, sortByNamePsycho, getPsychoByID, postMercadopago, calendar, getProvinciasSelect, getCiudadesSelect, sortByExpPsycho, getPacientID  } from './psicologySlice.js';
 import axios from 'axios';
 
 export const getPsicology = () => {
@@ -73,6 +73,17 @@ export const getPsychologyID = (id) => {//Consigue Psicologos por ID
     }
 }
 
+// export const getPacientID = (id) => {//Consigue Paciente por ID
+//     return async (dispatch)=> {
+//         try {
+//             const data = await axios(`${process.env.REACT_APP_API}/api/paciente/${id}`);
+//             dispatch(getPacientByID(data));
+//         } catch (error) {
+//             return (error)           
+//         }
+//     }
+// }
+
 const getDiasPsicologos = (dias) => {
     return dias.map(m => {
         const dia = m.fecha.split("-")
@@ -123,10 +134,26 @@ export const postDateTime = (dateTime) => {
     }
 }
 
-export const postMP = (data) => {
+// export const postMP = (data) => {
+//     return async (dispatch) => {
+//         try {
+//             const resp = await axios.post(`${process.env.REACT_APP_API}/api/mercadopago`, data);
+//             dispatch(postMercadopago(resp.data));
+//         } catch (error) {
+//             return (error)
+//         }
+//     }
+// }
+export const postMP = (data, token) => {
     return async (dispatch) => {
         try {
-            const resp = await axios.post(`${process.env.REACT_APP_API}/api/mercadopago`, data);
+            const resp = await axios.post(`${process.env.REACT_APP_API}/api/mercadopago`, {
+                method: 'POST',
+                body: data,
+                headers: {
+                    'x-token': `${token}`
+                }
+            });
             dispatch(postMercadopago(resp.data));
         } catch (error) {
             return (error)

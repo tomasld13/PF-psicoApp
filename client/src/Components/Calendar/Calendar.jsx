@@ -5,6 +5,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { useSelector, useDispatch } from 'react-redux';
 import { getPsychologyID, postDateTime } from '../../slice/psico/thunks.js';
 import Loading from '../Loading/Loading.jsx';
+import './calendar.css'
 
 export const Calendar = ({idPsycho}) => {
     
@@ -20,7 +21,7 @@ export const Calendar = ({idPsycho}) => {
         if (psychologist.id) {
             setExcludes(getTimeExcludes(startDate));
         }
-        dispatch(getPsychologyID(idPsycho));
+        // dispatch(getPsychologyID(idPsycho));
         dispatch(postDateTime(postDates()))
     },[startDate, startTime]);
     
@@ -88,7 +89,7 @@ export const Calendar = ({idPsycho}) => {
             return {date, time};
         }
 
-        console.log(psychologist);
+        //console.log(psychologist);
         return (
             <>
                 <h1>CALENDARIO</h1>

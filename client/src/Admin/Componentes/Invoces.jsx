@@ -20,7 +20,7 @@ function Invoices() {
             </TextContainer>
           </Info>
           <Container>
-            <Badge content="Pago" pago />
+            <Badge content="activo" activo />
             <Price>$ 1,200.87</Price>
           </Container>
         </Invoice>
@@ -35,29 +35,30 @@ function Invoices() {
             </TextContainer>
           </Info>
           <Container>
-            <Badge content="Mora" demora />
+            <Badge content="inhabilitado" inhabilitado />
             <Price>$ 1,200.87</Price>
           </Container>
         </Invoice>
-          <AllProjects>Ver todos los psicologos</AllProjects>
+          <AllProjects href="/psicologos">Ver todos los psicologos</AllProjects>
       </CardContent>
     </InvoicesContainer>
   );
 }
 
 const InvoicesContainer = styled.div`
-  width: 30rem;
+  width: 35rem;
   border-radius: 1rem;
   margin-top: 1rem;
   background-color: white;
-  height: 140%;
+  height: 145%;
   box-shadow: ${cardShadow};
   transition: 0.4s ease-in-out;
   &:hover {
     box-shadow: ${hoverEffect};
   }
   @media screen and (min-width: 320px) and (max-width: 960px) {
-    width: 80%;
+    width: 90% !important;
+    margin-top: 2rem;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -118,7 +119,7 @@ const Container = styled.div`
   
 `;
 
-const AllProjects = styled.h5`
+const AllProjects = styled.a`
   text-align: end;
   color: ${themeColor};
   cursor: pointer;

@@ -25,16 +25,17 @@ function Pacientes() {
           <SubTitle>Paciente</SubTitle>
         </Detail>
       </Project>
-      <AllProjects>Ver todos los pacientes</AllProjects>
+      <AllProjects><a href="/pacientes">Ver todos los pacientes</a></AllProjects>
     </YourProjects>
   );
 }
 
 const YourProjects = styled.div`
-  height: 70%;
-  background-color: white;
-  margin: 0;
-  padding: 1rem;
+  margin-top: -3rem !important;
+  height: 80%;
+  width: 90%;
+  background-color: linear-gradient(to bottom right, white 0%, #e6e4ff 70%);
+  padding: 2rem;
   border-radius: 1rem;
   box-shadow: ${cardShadow};
   transition: 0.4s ease-in-out;
@@ -43,15 +44,17 @@ const YourProjects = styled.div`
   }
   @media screen and (min-width: 320px) and (max-width: 960px) {
     height: max-content;
-    width: 80%;
-    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    width: 95%;
+    margin-top: 3rem !important;
   }
 `;
 
 const Project = styled.div`
   display: flex;
   align-items: center;
-  margin-bottom: 0.3rem;
+  margin-bottom: 0.5rem;
 `;
 const Avatar = styled.div`
   img {

@@ -5,6 +5,7 @@ import { AiOutlineDelete } from 'react-icons/ai'
 import { Link } from 'react-router-dom'
 import { UserRows } from './data'
 import './UserList.css'
+import Sidebar from '../Sidebar';
 
 
 export default function UserList() {
@@ -33,6 +34,11 @@ const columns = [
     valueGetter: (params) =>
       `${params.row.firstName || ''} ${params.row.lastName || ''}`,
   }, 
+  { 
+    field: 'status',
+    headerName: 'Status',
+    width: 120
+  },
   {
     field: 'action',
     headerName: 'Acciones',
@@ -40,7 +46,8 @@ const columns = [
     renderCell: (params) => {
       return (
         <> 
-        <Link to={'/usuario/'+params.row.id}>
+        
+        <Link to={'/pacientes/'+params.row.id}>
         <button className="userListEdit">Editar</button>
         </Link>
         <AiOutlineDelete 
@@ -55,7 +62,9 @@ const columns = [
 ];
 
   return (
-    <div style={{ height: 660, width: '80%', marginInlineStart: 80,  }}>
+    <> 
+    <Sidebar />
+    <div style={{ height: 660, width: '65%', marginInlineStart: 400, marginTop: -650 }}>
       <DataGrid
         rows={data}
         columns={columns}
@@ -65,5 +74,6 @@ const columns = [
         checkboxSelection
       />
     </div>
+    </>
   );
 }
