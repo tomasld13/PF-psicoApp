@@ -13,7 +13,7 @@ function AdminApp() {
 
 const Container = styled.div`
     display: flex;
-    height: 100vh;
+    height: 100%;
     background: linear-gradient(to bottom right, white 0, #e6e4ff 100%);
 `
 

@@ -90,7 +90,6 @@ function Nav() {
                 Contacto
               </a>
             </li>
-
             <li>
               <a
                 href='/auth/login'
@@ -106,7 +105,7 @@ function Nav() {
             ?  button && <Dropdown >Logout</Dropdown>
             : button && <a href='/auth/login'>
               {/* <Button buttonStyle='btn--outline'>Login</Button> */}
-              <Button buttonStyle='btn--outline' link='/auth/login'>Ingresar</Button>
+              <Button className='buttonNavResp' buttonStyle='btn--outline' link='/auth/login'>Ingresar</Button>
             </a> 
           }
         </div>

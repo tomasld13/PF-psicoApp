@@ -42,7 +42,7 @@ function Sidebar() {
           </LinkStyle>
           <LinkStyle>
             <MdOutlinePersonSearch />
-            <h3>Profesionales</h3>
+            <a href='/psicologos'>Profesionales</a>
           </LinkStyle>
           <LinkStyle>
             <AiOutlinePieChart />
@@ -65,8 +65,12 @@ const Container = styled.div`
   align-items: center;
   gap: 3rem;
   @media screen and (min-width: 320px) and (max-width: 960px) {
-    width: 90vh;
-    height: max-content !important;
+    display: none;
+    /* display: flex;
+    flex-direction: column;
+    margin-left: 8rem;
+    width: 90vh !important;
+    height: max-content !important; */
   }
 `;
 
@@ -137,7 +141,9 @@ const ContactContainer = styled.div`
     text-decoration: none;
   }
   @media screen and (min-width: 320px) and (max-width: 960px) {
-    margin-bottom: 2rem;
+    margin-bottom: 1rem !important;
+    display: flex;
+    flex-direction: column;
     width: 15rem;
     height: 100% !important;
   }
