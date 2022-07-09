@@ -32,11 +32,11 @@ const getPacientes = (req, res, next) => {
     .catch((error) => next(error));
 };
 const postPaciente = async (req, res, next) => {
-  const { name, lastname, email, telephone, address, birth, rol, gener, ciudad, password, dni } = req.body;
+  const { name, lastname, email, telephone, address, birth, rol, gener, ciudad, password } = req.body;
 
   try {
     //Creacion de usuario
-    const newUSuario = await Usuario.create({ name, lastname, email, telephone, address, birth, dni, password: bcrypt.hashSync(password, 10) });
+    const newUSuario = await Usuario.create({ name, lastname, email, telephone, address, birth, password: bcrypt.hashSync(password, 10) });
     const newPaciente = await Paciente.create();
     const role = await Rol.findOne({ where: { name: rol } });
     const genero = await Genero.findOne({ where: { genero: gener } });
