@@ -81,7 +81,7 @@ export default function Checkout({idpsycho}) {
 
             </Grid> */}
             <Pricing idpsycho={params}/>
-            {   rolId? 
+            { rolId? 
                 (<div>
                     { linkPago ? <button className='h-10  my-8 py-2.5 px-8 bg-green-500 rounder text-white font-bold'><a href={`${linkPago}`}> Confirmar </a></button>: null }
                 </div>)
