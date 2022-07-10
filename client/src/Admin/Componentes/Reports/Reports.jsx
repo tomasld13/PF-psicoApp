@@ -42,12 +42,15 @@ function Reports() {
 
 export default Reports
 
-
-
 const Container = styled.div`
-    width: 100%;
     display: flex;
     justify-content: space-between;
+    @media screen and (min-width: 320px) and (max-width: 960px) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
 `;
 
 const FeaturedItem = styled.div`
@@ -59,6 +62,12 @@ const FeaturedItem = styled.div`
     &:hover {
     box-shadow: ${hoverEffect};
     }
+    @media screen and (min-width: 320px) and (max-width: 960px) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
 `;
 
 const FeaturedTitle = styled.span`
