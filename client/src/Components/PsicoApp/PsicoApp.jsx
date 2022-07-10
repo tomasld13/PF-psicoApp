@@ -45,12 +45,6 @@ export default function PsicoApp() {
                                 <PsicoDetails/>
                             </ChakraProvider>
                         }/>
-                         <Route path='/paciente/:id' element={
-                            <ChakraProvider theme={theme}>
-                                <PacientDetails/>
-                                {/* <PsicoDetails/> */}
-                            </ChakraProvider>
-                        }/>
                         <Route path='/contacto' element={ <ContactSection/>} />  
                         <Route path="/*" element={ <Navigate to="/" /> } />
                         <Route path='/perfil' element={
@@ -66,6 +60,11 @@ export default function PsicoApp() {
                     <Nav/>
                     <Routes>
                         <Route path="/" element={<LandingPsico />}/>
+                         <Route path='/paciente/:id' element={
+                            <ChakraProvider theme={theme}>
+                                <PacientDetails/>
+                            </ChakraProvider>
+                        }/>
                         <Route path="/*" element={ <Navigate to="/" /> } />
                     </Routes>
                 </>
