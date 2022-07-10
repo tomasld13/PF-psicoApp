@@ -92,40 +92,45 @@ export const Calendar = ({idPsycho}) => {
         //console.log(psychologist);
         return (
             <> 
-                <h1>CALENDARIO</h1>
+                <h1 className='font-bold text-white mt-2.5'>CALENDARIO</h1>
                 {
                     psychologist.formatoHorarios?.min 
-                    ? <><div className='flex'>
-                    <DatePicker
-                    selected={startDate}
-                    onChange={(date) => {
-                        setStartDate(date);
-                        dispatch(postDateTime(postDates()));
-                    }}
-                    includeDates={psychologist.formatoDias}
-                    showWeekNumbers
-                    minDate={new Date()}
-                    monthsShown={1}
-                    dateFormat="yyyy/MM/dd"
-                    withPortal
-                    // inline
-                    /></div>
-                    <div>
-                    <DatePicker
-                    selected={startTime}
-                    excludeTimes={excludes}
-                    onChange={(date) => setStartTime(date)}
-                    showTimeSelect
-                    showTimeSelectOnly
-                    timeIntervals={psychologist.intervaloSesion}
-                    timeCaption="Time"
-                    dateFormat="hh:mm aa"
-                    minTime={psychologist.formatoHorarios.min}
-                    maxTime={psychologist.formatoHorarios.max}
-                    withPortal
-                    // inline
-                    />
-                </div></> : <div>
+                    ? <div className='flex flex-col'>
+                    <div className='mt-2.5 mb-5'>
+                        <label className='text-white'>Selecciona una fecha</label>
+                        <DatePicker
+                        selected={startDate}
+                        onChange={(date) => {
+                            setStartDate(date);
+                            dispatch(postDateTime(postDates()));
+                        }}
+                        includeDates={psychologist.formatoDias}
+                        showWeekNumbers
+                        minDate={new Date()}
+                        monthsShown={1}
+                        dateFormat="yyyy/MM/dd"
+                        withPortal
+                        // inline
+                        />
+                    </div>
+                    <div className='mb-5'>
+                        <label className='text-white'>Selecciona una Hora</label>
+                        <DatePicker
+                        selected={startTime}
+                        excludeTimes={excludes}
+                        onChange={(date) => setStartTime(date)}
+                        showTimeSelect
+                        showTimeSelectOnly
+                        timeIntervals={psychologist.intervaloSesion}
+                        timeCaption="Time"
+                        dateFormat="hh:mm aa"
+                        minTime={psychologist.formatoHorarios.min}
+                        maxTime={psychologist.formatoHorarios.max}
+                        withPortal
+                        // inline
+                        />
+                    </div>
+                </div> : <div>
                     <Loading/>
                 </div>
                 }

@@ -22,25 +22,25 @@ export default function Checkout({idpsycho}) {
     const linkPago = useSelector (state=>state.psicology.initPoint.id)
 
 
-    function handleOnChange(e) {
-        e.preventDefault()
-        const [servicio, precio] = e.target.value.split(",")
-        setService(servicio);
-        setPrice(precio);
-    }
+    // function handleOnChange(e) {
+    //     e.preventDefault()
+    //     const [servicio, precio] = e.target.value.split(",")
+    //     setService(servicio);
+    //     setPrice(precio);
+    // }
     
-    function handleOnClick(e){
-        e.preventDefault();
-        //console.log(service," ", Number(price))
-        dispatch(postMP({
-            id: id,
-            servicio: service,
-            precio: Number(price),
-            hora: time,
-            fecha: date,
-            psicoId: idpsycho
-        }));
-    }
+    // function handleOnClick(e){
+    //     e.preventDefault();
+    //     //console.log(service," ", Number(price))
+    //     dispatch(postMP({
+    //         id: id,
+    //         servicio: service,
+    //         precio: Number(price),
+    //         hora: time,
+    //         fecha: date,
+    //         psicoId: idpsycho
+    //     }));
+    // }
 
     return (
         <>
