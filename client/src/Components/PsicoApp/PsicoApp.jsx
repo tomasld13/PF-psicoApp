@@ -14,17 +14,16 @@ import { theme } from '../Profile/Helpers/index'
 import Main from "../Profile/Main";
 import Cover from '../Profile/Cover';
 import SectionTitle from "../SectionTitle/SectionTitle";
-import { LandingPsico } from "../LandingPsico/LandingPsico";
 import AdminApp from '../../Admin/AdminApp'
 
 ;
 import UserList from "../../Admin/Componentes/Users/UserList";
-import Sidebar from "../Profile/Sidebar/Sidebar";
 import UserAdmin from '../../Admin/Componentes/UserPage/UserAdmin.jsx';
 import PsicoList from "../../Admin/Componentes/Psicologos/PsicoList";
 import PsicoAdmin from "../../Admin/Componentes/PsicoPage/PsicoAdmin";
 import CreateUser from "../../Admin/Componentes/UserPage/CreateUser";
 import CreatePsico from "../../Admin/Componentes/PsicoPage/CreatePsico";
+import ForPsicos from "../ForPsicos/ForPsicos"
 
 
 export default function PsicoApp() {
@@ -69,7 +68,7 @@ export default function PsicoApp() {
                 : rolId === 2 ? <> 
                     <Nav/>
                     <Routes>
-                        <Route path="/" element={<LandingPsico />}/>
+                        <Route path="/" element={<ForPsicos />}/>
                         <Route path="/*" element={ <Navigate to="/" /> } />
                     </Routes>
                 </>

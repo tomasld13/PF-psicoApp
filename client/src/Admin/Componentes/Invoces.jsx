@@ -21,7 +21,6 @@ function Invoices() {
           </Info>
           <Container>
             <Badge content="activo" activo />
-            <Price>$ 1,200.87</Price>
           </Container>
         </Invoice>
         <Invoice>
@@ -36,7 +35,6 @@ function Invoices() {
           </Info>
           <Container>
             <Badge content="inhabilitado" inhabilitado />
-            <Price>$ 1,200.87</Price>
           </Container>
         </Invoice>
           <AllProjects href="/psicologos">Ver todos los psicologos</AllProjects>
