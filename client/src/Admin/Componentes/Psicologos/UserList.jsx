@@ -3,12 +3,12 @@ import { useState } from "react";
 import { DataGrid } from '@mui/x-data-grid';
 import { AiOutlineDelete } from 'react-icons/ai'
 import { Link } from 'react-router-dom'
-import { UserRows } from './psicodata'
-import './PsicoList.css'
+import { UserRows } from './data'
+import './UserList.css'
 import Sidebar from '../Sidebar';
 
 
-export default function PsicoList() {
+export default function UserList() {
 
   const [data, setData] = useState(UserRows)
 
@@ -18,24 +18,21 @@ export default function PsicoList() {
 
 const columns = [
   { field: 'id', headerName: 'ID', width: 70 },
+  { field: 'firstName', headerName: 'Nombre', width: 130 },
+  { field: 'lastName', headerName: 'Apellido', width: 130 },
+  {
+    field: 'email',
+    headerName: 'Email',
+    width: 180,
+  },
   {
     field: 'fullName',
     headerName: 'Nombre Completo',
+    description: 'This column has a value getter and is not sortable.',
     sortable: false,
     width: 160,
     valueGetter: (params) =>
       `${params.row.firstName || ''} ${params.row.lastName || ''}`,
-  }, 
-  {
-    field: 'matricula',
-    headerName: 'Matrícula',
-    width: 180,
-  },
-  {
-    field: 'status',
-    headerName: 'Status',
-    sortable: false,
-    width: 160,
   }, 
   {
     field: 'action',
@@ -45,7 +42,7 @@ const columns = [
       return (
         <> 
         
-        <Link to={'/psicologos/'+params.row.id}>
+        <Link to={'/usuario/'+params.row.id}>
         <button className="userListEdit">Editar</button>
         </Link>
         <AiOutlineDelete 

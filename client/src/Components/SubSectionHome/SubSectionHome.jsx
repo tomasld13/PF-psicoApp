@@ -11,19 +11,17 @@ const SubsectionItemStyles = styled.div`
     gap: 10rem; 
     margin-bottom: 2rem;
     justify-content: space-between;
-    align-items: center;
     align-self: center;
     margin-top: -15rem;
-    width: 98%;
+    width: 90%;
   }
-  @media only screen and (max-width: 960px) {
+  @media only screen and (max-width: 768px) {
     .subsection__allitems {
         flex-direction: column;
-        justify-content: center;
-        width: 60%;
-        margin: 0 auto 0 4rem;
-        margin-top: -8rem;
-        margin-bottom: 2rem;
+        max-width: 350px;
+        margin: 0 auto;
+        margin-top: -5rem;
+        margin-bottom: 5rem;
         gap: 5rem;
     }
   }

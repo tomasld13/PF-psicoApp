@@ -18,8 +18,8 @@ const getPsicologo = async (req, res, next) => {
 const postPsicologo = async (req, res, next) => {
     const { name, lastname, email, telephone, address, birth, rol, gener, ciudad, yearsExperience, especialidad, password, inicioHorario, finHorario, intervaloSesion, cbu, matriculaProfesional, dni, sobreMi } = req.body;
     try {
-        const newUSuario = await Usuario.create({ name, lastname, email, telephone, address, birth, dni, password: bcrypt.hashSync(password, 10) });
-        const newPsicologo = await Psicologo.create({ yearsExperience, inicioHorario, finHorario, intervaloSesion, cbu, matriculaProfesional, sobreMi });
+        const newUSuario = await Usuario.create({ name, lastname, email, telephone, address, birth, password: bcrypt.hashSync(password, 10) });
+        const newPsicologo = await Psicologo.create({ yearsExperience, inicioHorario, finHorario, dni, intervaloSesion, cbu, matriculaProfesional, sobreMi });
         const role = await Rol.findOne({ where: { name: rol } });
         const genero = await Genero.findOne({ where: { genero: gener } });
         const city = await Ciudad.findOne({ where: { name: ciudad } });
@@ -194,7 +194,65 @@ const updatePsicologo = async (req, res, next) => {
     } catch (error) {
         next(error)
     }
-}
+};
+const suspenderPsicologo = async (req, res) => {
+    const { id } = req.params;
+    try {
+      await Usuario.update({ state: false }, {
+        where: {
+          id: id
+        }
+      });
+  
+      const user = await Usuario.findOne({
+        where: { id: id }, include: [{ model: Psicologo, attributes: { exclude: ["fk_usuarioID", "fk_especialidadId"] } },
+        { model: Ciudad, include: { model: Provincia, attributes: ['name'] }, attributes: ['name'] },
+        { model: Genero, attributes: ["genero"] },
+        { model: Rol, attributes: ["name"] }]
+      });
+  
+      res.status(200).json({
+        ok: true,
+        user
+      });
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({
+        ok: false,
+        msg: "Hable con el administrador",
+      });
+    }
+  };
+  const activarPsicologo = async (req, res) => {
+    const { id } = req.params;
+    try {
+      await Usuario.update({ state: true }, {
+        where: {
+          id: id
+        }
+      });
+  
+      const user = await Usuario.findOne({
+        where: { id: id }, include: [{ model: Psicologo, attributes: { exclude: ["fk_usuarioID", "fk_especialidadId"] } },
+        { model: Ciudad, include: { model: Provincia, attributes: ['name'] }, attributes: ['name'] },
+        { model: Genero, attributes: ["genero"] },
+        { model: Rol, attributes: ["name"] }]
+      });
+  
+      res.status(200).json({
+        ok: true,
+        user
+      });
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({
+        ok: false,
+        msg: "Hable con el administrador",
+      });
+    }
+  };
+  
+
 
 module.exports = {
     getPsicologo,
@@ -205,5 +263,7 @@ module.exports = {
     getPsicologosByEspecialidad,
     postServicioPsicologo,
     getPsicologosByGenero,
-    updatePsicologo
+    updatePsicologo,
+    suspenderPsicologo,
+    activarPsicologo
 }

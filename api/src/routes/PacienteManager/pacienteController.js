@@ -1,4 +1,4 @@
-const { Paciente, Usuario, Rol, Genero, Ciudad, Provincia, Factura } = require("../../db");
+const { Paciente, Usuario, Rol, Genero, Ciudad, Provincia, Factura, Favoritos } = require("../../db");
 const bcrypt = require('bcryptjs');
 /* const SibApiV3Sdk = require('sib-api-v3-sdk'); */
 require('dotenv').config();
@@ -32,11 +32,11 @@ const getPacientes = (req, res, next) => {
     .catch((error) => next(error));
 };
 const postPaciente = async (req, res, next) => {
-  const { name, lastname, email, telephone, address, birth, rol, gener, ciudad, password, dni } = req.body;
+  const { name, lastname, email, telephone, address, birth, rol, gener, ciudad, password } = req.body;
 
   try {
     //Creacion de usuario
-    const newUSuario = await Usuario.create({ name, lastname, email, telephone, address, birth, dni, password: bcrypt.hashSync(password, 10) });
+    const newUSuario = await Usuario.create({ name, lastname, email, telephone, address, birth, password: bcrypt.hashSync(password, 10) });
     const newPaciente = await Paciente.create();
     const role = await Rol.findOne({ where: { name: rol } });
     const genero = await Genero.findOne({ where: { genero: gener } });
@@ -70,7 +70,8 @@ const getOnePacienteAndUsers = async (req, res, next) => {
     const paciente = await Paciente.findByPk(id, { include: [{model: Usuario, 
       include:[ { model: Ciudad, include: { model: Provincia, attributes: ['name'] }, attributes: ['name'] },
       { model: Genero, attributes: ["genero"] },
-      { model: Rol, attributes: ["name"] }]},{model: Factura, attributes: ["status", "payment_id", "payment_status", "merchant_order_id" ]}]});
+      { model: Rol, attributes: ["name"] }]},{model: Factura, attributes: ["status", "payment_id", "payment_status", "merchant_order_id" ]},
+    {model: Favoritos, attributes: ["psicofavorito"]}]});
 
     if (!paciente) {
       return res.status(404).send({ error: "Paciente no encontrado" });
