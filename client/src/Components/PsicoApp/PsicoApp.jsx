@@ -24,6 +24,7 @@ import PsicoAdmin from "../../Admin/Componentes/PsicoPage/PsicoAdmin";
 import CreateUser from "../../Admin/Componentes/UserPage/CreateUser";
 import CreatePsico from "../../Admin/Componentes/PsicoPage/CreatePsico";
 import ForPsicos from "../ForPsicos/ForPsicos"
+import Reports from "../../Admin/Componentes/Reports/Reports";
 
 
 export default function PsicoApp() {
@@ -75,6 +76,7 @@ export default function PsicoApp() {
                 : <>
                     <Routes>
                         <Route path="/" element={<AdminApp />}/>
+                        <Route path="/reportes" element={<Reports />}/>
                         <Route path='/pacientes' element={<UserList />} />
                         <Route path='/pacientes/:id' element={<UserAdmin />} />
                         <Route path='/pacientes/crear' element={<CreateUser />} />

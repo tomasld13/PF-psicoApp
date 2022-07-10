@@ -46,7 +46,7 @@ function Sidebar() {
           </LinkStyle>
           <LinkStyle>
             <AiOutlinePieChart />
-            <h3>Reportes</h3>
+            <a href='/reportes'>Reportes</a>
           </LinkStyle>
         </Links>
       </LinksContainer>
