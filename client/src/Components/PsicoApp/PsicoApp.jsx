@@ -19,15 +19,12 @@ import AdminApp from '../../Admin/AdminApp'
 ;
 import UserList from "../../Admin/Componentes/Users/UserList";
 import UserAdmin from '../../Admin/Componentes/UserPage/UserAdmin.jsx';
-<<<<<<< HEAD
 import PsicoList from "../../Admin/Componentes/Psicologos/PsicoList";
 import PsicoAdmin from "../../Admin/Componentes/PsicoPage/PsicoAdmin";
 import CreateUser from "../../Admin/Componentes/UserPage/CreateUser";
 import CreatePsico from "../../Admin/Componentes/PsicoPage/CreatePsico";
 import ForPsicos from "../ForPsicos/ForPsicos"
 import ReportsHome from "../../Admin/Componentes/Reports/ReportsHome";
-=======
->>>>>>> frontend
 
 
 export default function PsicoApp() {
