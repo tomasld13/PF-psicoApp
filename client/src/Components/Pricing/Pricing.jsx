@@ -30,10 +30,9 @@ function Pricing({idpsycho}) {
     function handleOnClick(e, s, p, index){
         
         clearClass = document.getElementsByClassName('current')
-        if(clearClass) {
+        if(clearClass[0]) {
             clearClass[0].classList.remove('current')
         }
-        
         element = document.getElementsByName(`name-${index}`)
         element[0].classList.add('current')
         
