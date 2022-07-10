@@ -14,15 +14,10 @@ import { theme } from '../Profile/Helpers/index'
 import Main from "../Profile/Main";
 import Cover from '../Profile/Cover';
 import SectionTitle from "../SectionTitle/SectionTitle";
-import AdminApp from '../../Admin/AdminApp'
-
-;
+import AdminApp from '../../Admin/AdminApp';
 import UserList from "../../Admin/Componentes/Users/UserList";
 import UserAdmin from '../../Admin/Componentes/UserPage/UserAdmin.jsx';
-import PsicoList from "../../Admin/Componentes/Psicologos/PsicoList";
-import PsicoAdmin from "../../Admin/Componentes/PsicoPage/PsicoAdmin";
-import CreateUser from "../../Admin/Componentes/UserPage/CreateUser";
-import CreatePsico from "../../Admin/Componentes/PsicoPage/CreatePsico";
+
 import ForPsicos from "../ForPsicos/ForPsicos"
 import ReportsHome from "../../Admin/Componentes/Reports/ReportsHome";
 
