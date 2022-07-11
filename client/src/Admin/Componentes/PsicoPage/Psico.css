@@ -11,18 +11,6 @@
     margin-top: -35rem;
 }
 
-
-.userAddButton {
-    width: 80px;
-    border: none;
-    padding: 5px;
-    background-color: #575989;
-    border-radius: 5px;
-    cursor: pointer;
-    color: white;
-    font-size: 16px;
-}
-
 .user-show {
     flex: 1;
     padding: 20px;
@@ -105,23 +93,10 @@
     font-weight: 600;
 }
 
-.userUpdateItem{
-    display: flex;
-    font-display: column;
-    margin-top: 10px;
-}
-
 .userUpdateItem>label {
     margin-bottom: 5px;
     font-size: 17px;
     margin-right: 20px;
-}
-
-.userUpdateInputs {
-    border: none;
-    width: 250px;
-    height: 30px;
-    border-bottom: 1px solid #575989;
 }
 
 .formRightInfo{

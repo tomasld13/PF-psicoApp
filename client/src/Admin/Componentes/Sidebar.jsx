@@ -42,11 +42,11 @@ function Sidebar() {
           </LinkStyle>
           <LinkStyle>
             <MdOutlinePersonSearch />
-            <a href='/psicologos'>Profesionales</a>
+            <h3>Profesionales</h3>
           </LinkStyle>
           <LinkStyle>
             <AiOutlinePieChart />
-            <h3>Reportes</h3>
+            <a href='/reportes'>Reportes</a>
           </LinkStyle>
         </Links>
       </LinksContainer>
@@ -65,12 +65,8 @@ const Container = styled.div`
   align-items: center;
   gap: 3rem;
   @media screen and (min-width: 320px) and (max-width: 960px) {
-    display: none;
-    /* display: flex;
-    flex-direction: column;
-    margin-left: 8rem;
-    width: 90vh !important;
-    height: max-content !important; */
+    width: 90vh;
+    height: max-content !important;
   }
 `;
 
@@ -141,9 +137,7 @@ const ContactContainer = styled.div`
     text-decoration: none;
   }
   @media screen and (min-width: 320px) and (max-width: 960px) {
-    margin-bottom: 1rem !important;
-    display: flex;
-    flex-direction: column;
+    margin-bottom: 2rem;
     width: 15rem;
     height: 100% !important;
   }

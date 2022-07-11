@@ -38,7 +38,7 @@ function Pricing() {
                                 <PricingCardFeature>Soporte 24 hs</PricingCardFeature>
                                 <PricingCardFeature>Para 1 persona</PricingCardFeature>
                             </PricingCardFeatures>
-                            {/* <Button primary>Elegir Plan</Button> */}
+                            <Button primary>Elegir Plan</Button>
                         </PricingCardInfo>
                     </PricingCard>
                     <PricingCard to='/auth/login'>
@@ -54,7 +54,7 @@ function Pricing() {
                                 <PricingCardFeature>Soporte 24 hs</PricingCardFeature>
                                 <PricingCardFeature>Para 1 persona</PricingCardFeature>
                             </PricingCardFeatures>
-                            {/* <Button primary>Elegir Plan</Button> */}
+                            <Button primary>Elegir Plan</Button>
                         </PricingCardInfo>
                     </PricingCard>
                     <PricingCard to='/auth/login'>
@@ -70,7 +70,7 @@ function Pricing() {
                                 <PricingCardFeature>Soporte 24 hs</PricingCardFeature>
                                 <PricingCardFeature>Para 2 personas</PricingCardFeature>
                             </PricingCardFeatures>
-                            {/* <Button primary>Elegir Plan</Button> */}
+                            <Button primary>Elegir Plan</Button>
                         </PricingCardInfo>
                     </PricingCard>
                 </PricingContainer>
