@@ -103,7 +103,7 @@ export const getPacientID = (id) => {//Consigue Paciente por ID
     return async (dispatch)=> {
         try {
             const data = await axios(`${process.env.REACT_APP_API}/api/paciente/${id}`);
-            dispatch(getPacientByID(data));
+            dispatch(getPacientByID(data.data));
         } catch (error) {
             return (error)           
         }
@@ -235,5 +235,21 @@ export const psychoFavs = (method, idUser, idPsycho) => {
         }).then(rs => rs.json())
         .then(data => console.log(data))
         .catch(e => console.log(e));
+    }
+}
+
+export const deletePatient = (id, user, token) => {
+    return async () => {
+        const rs = await fetch(`${process.env.REACT_APP_API}/api/${user}/${id}`,{
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                'x-token': token
+            }
+        });
+
+        const data = await rs.json();
+
+        console.log(data);
     }
 }
