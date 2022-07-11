@@ -12,7 +12,7 @@ const checkDia = require("./src/creadores/checkDia")
 const {generePacientes, generePsicologos, generarAdmin} = require("./src/creadores/usuarios")
 require('dotenv').config();
 
-conn.sync({force: true, logging: false}).then(async () => {
+conn.sync({force: false, logging: false}).then(async () => {
   console.log('Base de datos conectada! :D');
   socketServer.listen(process.env.PORT, async function () {
     const roles = await Rol.findAll()
