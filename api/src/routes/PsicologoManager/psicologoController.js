@@ -1,4 +1,4 @@
-const { Psicologo, Usuario, Paciente, Ciudad, Provincia, Genero, Rol, Especialidades, Servicio, Dia, Precio, Horarios } = require("../../db");
+const { Psicologo, Usuario, Paciente, Ciudad, Provincia, Genero, Rol, Especialidades, Servicio, Dia, Precio, Horarios, Factura } = require("../../db");
 const bcrypt = require('bcryptjs');
 
 const getPsicologo = async (req, res, next) => {
@@ -251,8 +251,25 @@ const suspenderPsicologo = async (req, res) => {
       });
     }
   };
-  
 
+const aPagar = async (req, res, next) => {
+    const {id} = req.params
+    try {
+        let saldo = 0
+        const facturas = await Factura.findAll({include:{model:Psicologo}})
+        const user = await Usuario.findOne({
+            where: { id: id }, include: [{ model: Psicologo, attributes: { exclude: ["fk_usuarioID", "fk_especialidadId"] } },
+            { model: Ciudad, include: { model: Provincia, attributes: ['name'] }, attributes: ['name'] },
+            { model: Genero, attributes: ["genero"] },
+            { model: Rol, attributes: ["name"] }]
+          });
+        if(!user.psicologo) res.status(404).send("No existe un psicologo con ese id")
+        facturas.map((f) => {if(f.psicologoId == user.psicologo.id) saldo += f.precio})
+        res.send({saldo: saldo*0.1})
+    } catch (error) {
+        next(error)
+    }
+}
 
 module.exports = {
     getPsicologo,
@@ -265,5 +282,6 @@ module.exports = {
     getPsicologosByGenero,
     updatePsicologo,
     suspenderPsicologo,
-    activarPsicologo
+    activarPsicologo,
+    aPagar
 }

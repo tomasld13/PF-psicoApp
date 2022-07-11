@@ -1,7 +1,7 @@
 const Router = require("express");
 const {check} = require('express-validator');
 const { verficarEmail , verificarId} = require("../../helpers/db-validators");
-const { getPsicologo, postPsicologo, getOnePsicologoAndUsers, getPsicologosByProvincia, getPsicologosByCiudad, getPsicologosByEspecialidad,postServicioPsicologo,getPsicologosByGenero, updatePsicologo, suspenderPsicologo, activarPsicologo } = require("./psicologoController");
+const { getPsicologo, postPsicologo, getOnePsicologoAndUsers, getPsicologosByProvincia, getPsicologosByCiudad, getPsicologosByEspecialidad,postServicioPsicologo,getPsicologosByGenero, updatePsicologo, suspenderPsicologo, activarPsicologo, aPagar } = require("./psicologoController");
 const validarJWT = require("../../middlewares/jwt-validator");
 const validarCampos = require("../../middlewares/validar-campos");
 const { esAdminRol } = require("../../middlewares/validarAdmin");
@@ -9,6 +9,7 @@ const { esAdminRol } = require("../../middlewares/validarAdmin");
 const router = Router()
 
 router.get('/', getPsicologo);
+router.get("/saldo/:id", aPagar)
 router.post('/',
 [check('email','No es un email valido').isEmail(),
 check('email').custom(verficarEmail),

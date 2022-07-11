@@ -81,6 +81,9 @@ Factura.belongsTo(MetodoPago)
 //Paciente->Factura
 Paciente.hasMany(Factura)
 Factura.belongsTo(Paciente)
+//Psicologo->Factura
+Psicologo.hasMany(Factura)
+Factura.belongsTo(Psicologo)
 //Facturas->Detalle
 Factura.hasMany(Detalle)
 Detalle.belongsTo(Factura)
