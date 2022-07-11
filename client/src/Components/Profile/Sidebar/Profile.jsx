@@ -21,6 +21,8 @@ import {
 } from '@chakra-ui/react'
 
 function Profile() {
+
+  const { photoURL } = useSelector(state => state.auth.authGoogle);
   const [userProfile, setUserProfile] = useState(null)
 
   const { isOpen, onOpen, onClose } = useDisclosure()
@@ -52,7 +54,7 @@ function Profile() {
         name="nombre"
         cursor="pointer"
         onClick={openChooseImage}
-        src={userProfile ? userProfile : {imagetemplate}}
+        src={photoURL ? photoURL : null }
       >
         <AvatarBadge bg="brand.blue" boxSize="1em">
           <svg width="0.4em" fill="currentColor" viewBox="0 0 20 20">

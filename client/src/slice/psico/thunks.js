@@ -196,5 +196,18 @@ export const cleanCiudades = () => {
     return (dispatch) => {
         dispatch(getCiudadesSelect([]));
     }
+}
 
+export const psychoFavs = (method, idUser, idPsycho) => {
+    return () => {
+        fetch(`${process.env.REACT_APP_API}/api/favoritos/${idPsycho}`, {
+            method: method,
+            body: JSON.stringify({id: idUser}),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(rs => rs.json())
+        .then(data => console.log(data))
+        .catch(e => console.log(e));
+    }
 }

@@ -155,9 +155,7 @@ function AccountSettings() {
       </FormControl>
       {errors.telephone && <p className="e">{errors.telephone}</p>} 
 
-      <FormControl 
-      isRequired 
-      id="email">
+      <FormControl id="email">
         <FormLabel>Email</FormLabel>
         <Input
           focusBorderColor="brand.blue"
@@ -168,7 +166,7 @@ function AccountSettings() {
           onChange={(e) => handleInputChange(e)}
           disabled={userGoogle.email ? true : false}
         />
- {errors.email && <p className="e">{errors.email}</p>} 
+      {errors.email && <p className="e">{errors.email}</p>} 
       </FormControl>
             
       <FormControl id="address">

@@ -14,14 +14,9 @@ export const startGoogleSignIn = () => {
         if (!result.ok) return dispatch(logout(result.errorMessage));
 
         try {
-            const rsPacientes = await fetch(`${process.env.REACT_APP_API}/api/paciente`);
+            const rsPaciente = await fetch(`${process.env.REACT_APP_API}/api/usuario/${result.email}`);
     
-            const dataPacientes = await rsPacientes.json();
-    
-            const pacienteEmail = dataPacientes.find(paciente => paciente.email === result.email);
-    
-            if (!pacienteEmail) {
-                console.log();
+            if (!rsPaciente.ok) {
                 dispatch(checkingGoogle(result));
             } else {
                 dispatch(loginEmailPasswordGoogle(result.email, result.uid, result.photoURL));
