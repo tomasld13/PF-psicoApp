@@ -35,7 +35,7 @@ const postMP = async (req, res) => {
     const items = [
         { servicio: data.servicio, precio: data.precio, quantity: 1 },
     ]
-    const external_reference = data.id + "*" + data.hora + "*" + data.fecha + "*" + psicoId + "*" + data.email;
+    const external_reference = data.id + "*" + data.hora + "*" + data.fecha + "*" + psicoId + "*" + data.email + "*" + data.precio;
     const items_md = items.map(item => ({
         title: item.servicio,
         quantity: item.quantity,
@@ -85,12 +85,15 @@ const getPayments = async (req, res) => {
         const payment_status = req.query.status;
         const merchant_order_id = req.query.merchant_order_id;
         const external_reference = req.query.external_reference;
-        const [id, hora, fecha, psicoId, email] = external_reference.split("*")
+        const [id, hora, fecha, psicoId, email, precio] = external_reference.split("*")
         const factura = await Factura.create({
             payment_id: payment_id,
             payment_status: payment_status,
             merchant_order_id: merchant_order_id,
-            status: "paid"
+            status: "paid",
+            fecha: fecha,
+            precio: parseInt(precio),
+            saldado: false
         })
         const psicologo = await Psicologo.findByPk(Number(psicoId))
         const dia = await Dia.findOne({ where: { fecha: fecha } })
@@ -104,7 +107,8 @@ const getPayments = async (req, res) => {
         psicologo.addDia(dia)
         const metodoPago = await MetodoPago.findByPk(1);
         factura.setMetodoPago(metodoPago);
-        await paciente.setFacturas(factura);
+        await paciente.addFacturas(factura);
+        await psicologo.addFacturas(factura)
         const pacienteExistente = psicologo.pacientesAtendidos.find(el => el === usuario.paciente.id)
         console.log("PACIENTE EXISTENTE", pacienteExistente)
         if(!pacienteExistente){
