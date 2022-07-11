@@ -14,13 +14,12 @@ import { theme } from '../Profile/Helpers/index'
 import Main from "../Profile/Main";
 import Cover from '../Profile/Cover';
 import SectionTitle from "../SectionTitle/SectionTitle";
-import { LandingPsico } from "../LandingPsico/LandingPsico";
-import AdminApp from '../../Admin/AdminApp'
-
-;
+import AdminApp from '../../Admin/AdminApp';
 import UserList from "../../Admin/Componentes/Users/UserList";
-import Sidebar from "../Profile/Sidebar/Sidebar";
 import UserAdmin from '../../Admin/Componentes/UserPage/UserAdmin.jsx';
+
+import ForPsicos from "../ForPsicos/ForPsicos"
+import ReportsHome from "../../Admin/Componentes/Reports/ReportsHome";
 
 
 export default function PsicoApp() {
@@ -45,12 +44,6 @@ export default function PsicoApp() {
                                 <PsicoDetails/>
                             </ChakraProvider>
                         }/>
-                         <Route path='/paciente/:id' element={
-                            <ChakraProvider theme={theme}>
-                                <PacientDetails/>
-                                {/* <PsicoDetails/> */}
-                            </ChakraProvider>
-                        }/>
                         <Route path='/contacto' element={ <ContactSection/>} />  
                         <Route path="/*" element={ <Navigate to="/" /> } />
                         <Route path='/perfil' element={
@@ -65,13 +58,19 @@ export default function PsicoApp() {
                 : rolId === 2 ? <> 
                     <Nav/>
                     <Routes>
-                        <Route path="/" element={<LandingPsico />}/>
+                        <Route path="/" element={<ForPsicos />}/>
+                         <Route path='/paciente/:id' element={
+                            <ChakraProvider theme={theme}>
+                                <PacientDetails/>
+                            </ChakraProvider>
+                        }/>
                         <Route path="/*" element={ <Navigate to="/" /> } />
                     </Routes>
                 </>
                 : <>
                     <Routes>
                         <Route path="/" element={<AdminApp />}/>
+                        <Route path="/reportes" element={<ReportsHome />}/>
                         <Route path='/pacientes' element={<UserList />} />
                         <Route path='/pacientes/:id' element={<UserAdmin />} />
                         <Route path="/*" element={ <Navigate to="/" /> } />
