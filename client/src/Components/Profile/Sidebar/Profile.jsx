@@ -26,7 +26,7 @@ function Profile() {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const profileImage = useRef(null)
 
-  const { name } = useSelector(state=>state.auth.authBack)
+  const { name, rolId } = useSelector(state=>state.auth.authBack)
 
   const openChooseImage = () => {
     profileImage.current.click()
@@ -97,7 +97,7 @@ function Profile() {
           {name}
         </Heading>
         <Text color="brand.gray" fontSize="sm">
-          Paciente
+          {(rolId===1)?"Paciente":"Psicologo"}
         </Text>
       </VStack>
     </VStack>
