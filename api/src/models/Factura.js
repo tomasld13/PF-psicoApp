@@ -24,6 +24,9 @@ module.exports = (sequelize)=>{
         },
         precio: {
             type: DataTypes.INTEGER
+        },
+        saldado: {
+            type: DataTypes.BOOLEAN
         }
     },
     {

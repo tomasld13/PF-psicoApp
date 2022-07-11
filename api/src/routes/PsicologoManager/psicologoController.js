@@ -252,11 +252,11 @@ const suspenderPsicologo = async (req, res) => {
     }
   };
 
-const aPagar = async (req, res, next) => {
+const totalAPagar = async (req, res, next) => {
     const {id} = req.params
     try {
         let saldo = 0
-        const facturas = await Factura.findAll({include:{model:Psicologo}})
+        let facturas = await Factura.findAll({include:{model:Psicologo}})
         const user = await Usuario.findOne({
             where: { id: id }, include: [{ model: Psicologo, attributes: { exclude: ["fk_usuarioID", "fk_especialidadId"] } },
             { model: Ciudad, include: { model: Provincia, attributes: ['name'] }, attributes: ['name'] },
@@ -264,8 +264,13 @@ const aPagar = async (req, res, next) => {
             { model: Rol, attributes: ["name"] }]
           });
         if(!user.psicologo) res.status(404).send("No existe un psicologo con ese id")
-        facturas.map((f) => {if(f.psicologoId == user.psicologo.id) saldo += f.precio})
-        res.send({saldo: saldo*0.1})
+        facturas = facturas.filter((f) => {
+            if(f.psicologoId == user.psicologo.id && !f.saldado){
+                saldo += f.precio
+                return true
+            }
+        })
+        res.send({saldo: saldo*0.1, facturas})
     } catch (error) {
         next(error)
     }
@@ -283,5 +288,5 @@ module.exports = {
     updatePsicologo,
     suspenderPsicologo,
     activarPsicologo,
-    aPagar
+    totalAPagar
 }

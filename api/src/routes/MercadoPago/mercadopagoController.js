@@ -92,7 +92,8 @@ const getPayments = async (req, res) => {
             merchant_order_id: merchant_order_id,
             status: "paid",
             fecha: fecha,
-            precio: parseInt(precio)
+            precio: parseInt(precio),
+            saldado: false
         })
         const psicologo = await Psicologo.findByPk(Number(psicoId))
         const dia = await Dia.findOne({ where: { fecha: fecha } })
