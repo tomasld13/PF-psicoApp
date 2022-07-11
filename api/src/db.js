@@ -54,7 +54,7 @@ sequelize.models = Object.fromEntries(capsEntries);
 // Para relacionarlos hacemos un destructuring
 
 
-const { Psicologo, Paciente, Usuario, Rol, Genero, MetodoPago, Factura, Detalle, Modalidad, Administrador, Especialidades, Horarios, Reviews, Consulta, Provincia, Ciudad, Servicio, Precio, Dia, Mensaje, Newsletter, Suscriptor } = sequelize.models;
+const { Psicologo, Paciente, Usuario, Rol, Genero, MetodoPago, Factura, Detalle, Modalidad, Administrador, Especialidades, Horarios, Reviews, Consulta, Provincia, Ciudad, Servicio, Precio, Dia, Mensaje, Newsletter, Suscriptor, Favoritos } = sequelize.models;
 
 // Aca vendrian las relaciones
 // Product.hasMany(Reviews);

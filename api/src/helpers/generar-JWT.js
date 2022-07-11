@@ -17,7 +17,7 @@ const comprobarJWT = ( token = '' ) => {
 
     try {
         const { id } = jwt.verify( token, process.env.SECRETORPRIVATEKEY );
-
+        console.log('ESTO ES EL VERIFY DEL TOKEN EN COMPROBARJWT: ',jwt.verify( token, process.env.SECRETORPRIVATEKEY ))
         return [ true, id ];
 
     } catch (error) {
