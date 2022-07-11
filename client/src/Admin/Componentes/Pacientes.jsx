@@ -1,18 +1,32 @@
-import React from "react";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import AvatarImage from "../Assets/avatarImage.jpg";
 import AvatarImage2 from "../Assets/avatarImage.jpg";
 import { cardShadow, hoverEffect, themeColor } from "../Utils/index";
+import { getPatient } from '../../slice/psico/thunks.js';
+import Loading from '../../Components/Loading/Loading.jsx';
 
 function Pacientes() {
+
+  const pacientes = useSelector(state => state.psicology.patients);
+  const dispatch = useDispatch();
+
+
+  useEffect(() => {
+    dispatch(getPatient());
+  }, []);
+
   return (
     <YourProjects>
-      <Project>
+      {
+        pacientes.length > 0 ? <>
+          <Project>
         <Avatar>
           <img src={AvatarImage} alt="" />
         </Avatar>
         <Detail>
-          <Title>Chino</Title>
+          <Title>{pacientes[0].name}</Title>
           <SubTitle>Paciente</SubTitle>
         </Detail>
       </Project>
@@ -21,10 +35,14 @@ function Pacientes() {
           <img src={AvatarImage} alt="" />
         </Avatar>
         <Detail>
-          <Title>Nombre</Title>
+          <Title>{pacientes[1].name}</Title>
           <SubTitle>Paciente</SubTitle>
         </Detail>
       </Project>
+        </> : <Project>
+          <Loading />
+        </Project>
+      }
       <AllProjects><a href="/pacientes">Ver todos los pacientes</a></AllProjects>
     </YourProjects>
   );

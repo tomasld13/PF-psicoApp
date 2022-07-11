@@ -47,11 +47,11 @@ function AccountSettings() {
   const userGoogle = useSelector(state => state.auth.authGoogle);
 
   const [input, setInput] = useState({
-    name: '',
-    lastname: '',
-    email: '',
-    telephone: '',
-    address: ''
+    name: name,
+    lastname: lastname,
+    email: email,
+    telephone: telephone,
+    address: address
   })
 
   function handleSubmit(e) {
@@ -117,7 +117,7 @@ function AccountSettings() {
         focusBorderColor="brand.blue" 
         type="text" 
         name='name'
-        value={input.name}
+        value={name}
         placeholder={name ? name : userGoogle.name}
         onChange={(e) => handleInputChange(e)}
         ></Input>
