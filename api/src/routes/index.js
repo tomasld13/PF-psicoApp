@@ -20,10 +20,10 @@ const {
     newsletterRoutes,
     usuarioRoutes,
     favoritosRoutes,
+    gananciasRoutes
 } = require('./routesIndex');
 
 const router = Router();
-
 
 router.use('/auth', AuthRoutes)
 router.use('/psicologo', psicologoRoutes);
@@ -38,6 +38,7 @@ router.use("/usuario", usuarioRoutes)
 router.use('/mercadopago', mercadopagoRoutes)
 router.use('/mensajes', mensajesRoutes)
 router.use('/update', uploadRoutes)
+router.use('/ganancias', gananciasRoutes);
 router.use('/Factura', facturaRoutes)
 router.use('/blog', blogRoutes)
 router.use('/reviews',reviewRoutes)
