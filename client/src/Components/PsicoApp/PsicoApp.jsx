@@ -37,6 +37,7 @@ export default function PsicoApp() {
                         <Route path="/" element={<Home/>}/>
                         <Route path="/calendar" element={<Calendar />}/>
                         <Route path='/psico' element={<Psychologists/>} />
+                        <Route path='/psicohome' element={<ForPsicos /> } />
                         <Route path='/psico/:id' element={
                             <ChakraProvider theme={theme}>
                                 {/* <Cover /> */}

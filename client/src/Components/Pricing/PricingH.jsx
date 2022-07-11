@@ -1,8 +1,9 @@
 import React from 'react'
 import { Button } from '../Button/Button'
 import { IconContext } from 'react-icons/lib'
-import { GiGoldBar, GiCutDiamond, GiCrystalBars } from 'react-icons/gi'
-import { FaHandRock } from 'react-icons/fa'
+import { HiUserGroup } from 'react-icons/hi'
+import { BsFillPersonFill } from 'react-icons/bs'
+import { GiLovers } from 'react-icons/gi'
 import { 
     PricingSection,
   PricingWrapper,
@@ -28,10 +29,10 @@ function Pricing() {
                     <PricingCard to='/auth/login'>
                         <PricingCardInfo>
                             <PricingCardIcon>
-                                <FaHandRock />
+                                <BsFillPersonFill />
                             </PricingCardIcon>
                             <PricingCardPlan>Citas Individuales</PricingCardPlan>
-                            <PricingCardCost>Desde $3.499</PricingCardCost>
+                            <PricingCardCost>Desde $3.499 ARS</PricingCardCost>
                             {/* <PricingCardLength>Semanal</PricingCardLength> */}
                             <PricingCardFeatures>
                                 <PricingCardFeature>Incluye 1 cita de 50 minutos</PricingCardFeature>
@@ -44,11 +45,11 @@ function Pricing() {
                     <PricingCard to='/auth/login'>
                         <PricingCardInfo>
                             <PricingCardIcon>
-                                <GiCrystalBars />
+                                <GiLovers />
                             </PricingCardIcon>
                             <PricingCardPlan>Citas de pareja</PricingCardPlan>
                             <PricingCardCost>Desde $16.499 ARS</PricingCardCost>
-                            <PricingCardLength>Mensual</PricingCardLength>
+                            {/* <PricingCardLength>Mensual</PricingCardLength> */}
                             <PricingCardFeatures>
                                 <PricingCardFeature>Incluye 2 citas semanales</PricingCardFeature>
                                 <PricingCardFeature>Soporte 24 hs</PricingCardFeature>
@@ -60,11 +61,11 @@ function Pricing() {
                     <PricingCard to='/auth/login'>
                         <PricingCardInfo>
                             <PricingCardIcon>
-                                <GiCutDiamond />
+                                <HiUserGroup />
                             </PricingCardIcon>
                             <PricingCardPlan>Citas grupales</PricingCardPlan>
                             <PricingCardCost>$28.499 ARS</PricingCardCost>
-                            <PricingCardLength>Mensual</PricingCardLength>
+                            {/* <PricingCardLength>Mensual</PricingCardLength> */}
                             <PricingCardFeatures>
                                 <PricingCardFeature>2 citas semanales</PricingCardFeature>
                                 <PricingCardFeature>Soporte 24 hs</PricingCardFeature>
