@@ -18,6 +18,15 @@ module.exports = (sequelize)=>{
         merchant_order_id:{
             type: DataTypes.BIGINT,
             defaultValue: 0,
+        },
+        fecha: {
+            type: DataTypes.DATEONLY
+        },
+        precio: {
+            type: DataTypes.INTEGER
+        },
+        saldado: {
+            type: DataTypes.BOOLEAN
         }
     },
     {
