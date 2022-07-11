@@ -31,14 +31,14 @@ function Pricing() {
                                 <FaHandRock />
                             </PricingCardIcon>
                             <PricingCardPlan>Citas Individuales</PricingCardPlan>
-                            <PricingCardCost>$2,300 ARS</PricingCardCost>
-                            <PricingCardLength>Semanal</PricingCardLength>
+                            <PricingCardCost>Desde $3.499</PricingCardCost>
+                            {/* <PricingCardLength>Semanal</PricingCardLength> */}
                             <PricingCardFeatures>
                                 <PricingCardFeature>Incluye 1 cita de 50 minutos</PricingCardFeature>
                                 <PricingCardFeature>Soporte 24 hs</PricingCardFeature>
                                 <PricingCardFeature>Para 1 persona</PricingCardFeature>
                             </PricingCardFeatures>
-                            <Button primary>Elegir Plan</Button>
+                            {/* <Button primary>Elegir Plan</Button> */}
                         </PricingCardInfo>
                     </PricingCard>
                     <PricingCard to='/auth/login'>
@@ -46,15 +46,15 @@ function Pricing() {
                             <PricingCardIcon>
                                 <GiCrystalBars />
                             </PricingCardIcon>
-                            <PricingCardPlan>Paquete regular</PricingCardPlan>
-                            <PricingCardCost>$16.249 ARS</PricingCardCost>
+                            <PricingCardPlan>Citas de pareja</PricingCardPlan>
+                            <PricingCardCost>Desde $16.499 ARS</PricingCardCost>
                             <PricingCardLength>Mensual</PricingCardLength>
                             <PricingCardFeatures>
                                 <PricingCardFeature>Incluye 2 citas semanales</PricingCardFeature>
                                 <PricingCardFeature>Soporte 24 hs</PricingCardFeature>
-                                <PricingCardFeature>Para 1 persona</PricingCardFeature>
+                                <PricingCardFeature>Para 2 personas</PricingCardFeature>
                             </PricingCardFeatures>
-                            <Button primary>Elegir Plan</Button>
+                            {/* <Button primary>Elegir Plan</Button> */}
                         </PricingCardInfo>
                     </PricingCard>
                     <PricingCard to='/auth/login'>
@@ -62,15 +62,15 @@ function Pricing() {
                             <PricingCardIcon>
                                 <GiCutDiamond />
                             </PricingCardIcon>
-                            <PricingCardPlan>Paquete Premium</PricingCardPlan>
+                            <PricingCardPlan>Citas grupales</PricingCardPlan>
                             <PricingCardCost>$28.499 ARS</PricingCardCost>
                             <PricingCardLength>Mensual</PricingCardLength>
                             <PricingCardFeatures>
                                 <PricingCardFeature>2 citas semanales</PricingCardFeature>
                                 <PricingCardFeature>Soporte 24 hs</PricingCardFeature>
-                                <PricingCardFeature>Para 2 personas</PricingCardFeature>
+                                <PricingCardFeature>Para 6 personas</PricingCardFeature>
                             </PricingCardFeatures>
-                            <Button primary>Elegir Plan</Button>
+                            {/* <Button primary>Elegir Plan</Button> */}
                         </PricingCardInfo>
                     </PricingCard>
                 </PricingContainer>
