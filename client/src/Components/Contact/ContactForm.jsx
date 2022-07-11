@@ -35,11 +35,10 @@ function ContactForm() {
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [message, setMessage] = useState('')
-
+    
     async function handleSubmit(event){
       event.preventDefault()
       const formSend = new FormData(event.target)
-      console.log(formSend)
       const response = await fetch("https://formspree.io/f/xzbozenn",{
           method: "POST",
           body: formSend,
@@ -67,19 +66,21 @@ function ContactForm() {
                     type="text" 
                     id='name' 
                     name='name' 
-                    value={name}  
+                    value={name}
+                    required
                     onChange={e => setName(e.target.value)}
                     />
                 </label>
             </div>
             <div className="form-group">
                 <label
-                 htmlFor="email"> Tu correo
+                  htmlFor="email"> Tu correo
                     <input
                     type="text" 
                     id='email' 
-                    email='email'
-                     value={email}  
+                    name='email'
+                    required
+                    value={email}  
                     onChange={e => setEmail(e.target.value)}
                     />
                 </label>
@@ -91,6 +92,7 @@ function ContactForm() {
                     type="text"
                     id='message' 
                     name='message' 
+                    required
                     value={message}  
                     onChange={e => setMessage(e.target.value)}
                     />

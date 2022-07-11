@@ -1,3 +1,5 @@
+import { useEffect, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import {
     FormControl,
     FormLabel,
@@ -11,8 +13,33 @@ import {
     NumberInputField,
     NumberInputStepper,
   } from '@chakra-ui/react'
+import { psychoFavs } from '../../../slice/psico/thunks.js';
   
   function CompanySettings() {
+
+    const idUserBack = useSelector(state => state.auth.authBack.id);
+    const idUserGoogle = useSelector(state => state.auth.authGoogle.id);
+    const dispatch = useDispatch();
+
+    const [statePsychoFavs, setStatePsychoFavs] = useState([]);
+
+    useEffect(() => {
+
+      fetch(`${process.env.REACT_APP_API}/api/favoritos/${idUserBack ? idUserBack : idUserGoogle}`)
+        .then(rs => rs.json())
+        .then(data => {
+          setStatePsychoFavs(data.favoritos);
+        })
+        .catch(err => console.log(err));
+
+    }, [statePsychoFavs]);
+
+    const deleteFavs = () => {
+      const idUser = idUserBack ? idUserBack : idUserGoogle
+      dispatch(psychoFavs('DELETE',idUser, ));
+    }
+    
+
     return (
       <Grid
         templateColumns={{ base: 'repeat(1, 1fr)', md: 'repeat(2, 1fr)' }}
