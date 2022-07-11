@@ -9,7 +9,8 @@ const getProvincias = require("./src/creadores/provincias")
 const getCiudades = require("./src/creadores/ciudades")
 const getServicios = require("./src/creadores/servicios")
 const checkDia = require("./src/creadores/checkDia")
-const {generePacientes, generePsicologos, generarAdmin} = require("./src/creadores/usuarios")
+const {generePacientes, generePsicologos, generarAdmin} = require("./src/creadores/usuarios");
+const createMessage = require('./src/routes/MensajesManager/mensajesSeeders');
 require('dotenv').config();
 
 conn.sync({force: true, logging: false}).then(async () => {
@@ -38,6 +39,7 @@ conn.sync({force: true, logging: false}).then(async () => {
     const admins = await Administrador.findAll()
     if(admins.length < 1) await generarAdmin();
     await checkDia()
+    createMessage();
     console.log(`App is listening on port ${process.env.PORT}!`);
     configurarSockets();
   });  
