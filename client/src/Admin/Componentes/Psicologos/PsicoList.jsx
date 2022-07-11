@@ -4,11 +4,11 @@ import { DataGrid } from '@mui/x-data-grid';
 import { AiOutlineDelete } from 'react-icons/ai'
 import { Link } from 'react-router-dom'
 import { UserRows } from './data'
-import './UserList.css'
+import './PsicoList.css'
 import Sidebar from '../Sidebar';
 
 
-export default function UserList() {
+export default function PsicoList() {
 
   const [data, setData] = useState(UserRows)
 
@@ -42,7 +42,7 @@ const columns = [
       return (
         <> 
         
-        <Link to={'/usuario/'+params.row.id}>
+        <Link to={'/psicologos/'+params.row.id}>
         <button className="userListEdit">Editar</button>
         </Link>
         <AiOutlineDelete 
