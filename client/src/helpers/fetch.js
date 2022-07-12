@@ -1,8 +1,8 @@
-const baseUrl = process.env.REACT_APP_API_URL;
+const baseUrl = process.env.REACT_APP_API;
 
 export const fetchSinToken = async( endpoint, data, method = 'GET' ) => {
 
-    const url = `${ baseUrl }/${ endpoint }`;
+    const url = `${ baseUrl }/api/${ endpoint }`;
 
     if ( method === 'GET' ) {
         const resp = await fetch( url );
@@ -24,7 +24,7 @@ export const fetchSinToken = async( endpoint, data, method = 'GET' ) => {
 
 export const fetchConToken = async( endpoint, data, method = 'GET' ) => {
 
-    const url = `${ baseUrl }/${ endpoint }`;
+    const url = `${ baseUrl }/api/${ endpoint }`;
     const token = localStorage.getItem('token') || '';
 
     if ( method === 'GET' ) {

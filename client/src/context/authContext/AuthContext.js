@@ -36,29 +36,7 @@ export const AuthProvider = ({ children }) => {
         return resp.ok;
 
     }
-    //Este es el create USer
-    const register = async(name, email, password) => {
 
-        const resp = await fetchSinToken('login/new', { name, email, password }, 'POST');
-        
-        if ( resp.ok ) {
-            localStorage.setItem('token', resp.token );
-            const { user } = resp;
-
-            setAuth({
-                id: user.id,
-                checking: false,
-                logged: true,
-                name: user.name,
-                email: user.email,
-            });
-
-            return true;
-        }
-
-        return resp.msg;
-
-    }
 
     const verificaToken = useCallback( async() => {
 
@@ -118,7 +96,7 @@ export const AuthProvider = ({ children }) => {
         <AuthContext.Provider value={{
             auth,
             login,
-            register,
+            
             verificaToken,
             logout,
         }}>

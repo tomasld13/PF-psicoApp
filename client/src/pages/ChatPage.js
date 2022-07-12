@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
-import { ChatSelect } from '../components/ChatSelect';
-import { InboxPeople } from '../components/InboxPeople';
-import { Messages } from '../components/Messages';
-import { ChatContext } from '../context/chat/ChatContext';
+import { ChatSelect } from '../Components/ChatComponents/ChatSelect';
+import { InboxPeople } from '../Components/ChatComponents/InboxPeople';
+import { Messages } from '../Components/ChatComponents/Messages';
+import { ChatContext } from '../context/chatContext/chatContext';
 
 
 import '../css/chat.css';
