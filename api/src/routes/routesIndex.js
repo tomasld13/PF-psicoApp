@@ -17,6 +17,7 @@ const newsletterRoutes = require('./NewsletterManager/NewsletterRoutes')
 const usuarioRoutes = require("./UsuarioManager/UsuarioRoutes")
 const favoritosRoutes = require('./FavoritosManager/favoritoRoutes')
 const gananciasRoutes = require("./GananciasManager/gananciasRoutes")
+const testimonioRoutes = require('./TestimonioManager/testimonioRoutes');
 
 module.exports ={
     psicologoRoutes,
@@ -37,5 +38,6 @@ module.exports ={
     newsletterRoutes,
     usuarioRoutes,
     favoritosRoutes,
-    gananciasRoutes
+    gananciasRoutes,
+    testimonioRoutes
 }
