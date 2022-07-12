@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Button } from '../Button/Button';
+import { Button } from '../../Button/Button';
 import { Link, animateScroll as scroll } from 'react-scroll'
 import './Nav.css';
-import { startLogout } from '../../slice/auth/thunks';
-import logoImage from './logo.png'
-import Dropdown from './Dropdown';
+import { startLogout } from '../../../slice/auth/thunks';
+import logoImage from '../logo.png'
+import Dropdown from '../Dropdown';
 
 function PsicoNav() {
   const [click, setClick] = useState(false);
