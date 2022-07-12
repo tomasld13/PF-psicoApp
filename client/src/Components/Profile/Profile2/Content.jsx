@@ -79,8 +79,6 @@ const Content = () => {
             </TabPanels>
           }
 
-        
-        
       </Tabs>
 
       {/* <Actions /> */}
