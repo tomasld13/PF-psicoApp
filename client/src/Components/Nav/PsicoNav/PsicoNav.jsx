@@ -7,7 +7,7 @@ import { startLogout } from '../../slice/auth/thunks';
 import logoImage from './logo.png'
 import Dropdown from './Dropdown';
 
-function Nav() {
+function PsicoNav() {
   const [click, setClick] = useState(false);
   const [button, setButton] = useState(true);
 
@@ -51,35 +51,23 @@ function Nav() {
           </div>
           <ul className={click ? 'nav-menu active' : 'nav-menu'}>
             <li className='nav-item'>
-              <Link 
-              smooth={true}
-              offset={50} 
-              duration={700}
-              to='about' 
+              <a
+              href='/psicohome' 
               className='nav-links' 
               onClick={closeMobileMenu}>
-                Nosotros
-              </Link>
+                Home
+              </a>
             </li>
             <li className='nav-item'>
               <Link 
               smooth={true}
               offset={20} 
               duration={700}
-              to='questions' 
+              to='support' 
               className='nav-links' 
               onClick={closeMobileMenu}>
-                Preguntas Frecuentes
+                Más Información
               </Link>
-            </li>
-            <li className='nav-item'>
-              <a
-                href='/psicohome'
-                className='nav-links'
-                onClick={closeMobileMenu}
-              >
-                Para Psicólogos
-              </a>
             </li>
             <li className='nav-item'>
               <a
@@ -115,4 +103,4 @@ function Nav() {
   );
 }
 
-export default Nav;
+export default PsicoNav;

@@ -4,6 +4,7 @@ import ContactSection from "../Contact/ContactSection";
 import Footer from "../Footer/Footer";
 import { Home } from "../Home/Home";
 import Nav from "../Nav/Nav";
+import PsicoNav from "../Nav/PsicoNav/PsicoNav.jsx";
 import Psychologists from "../Psychologists/Psychologists";
 import ScrollToTop from "../ScrollToTop/ScrollToTop";
 import PsicoDetails from "../PsicoDetails/PsicoDetails.jsx"
@@ -59,7 +60,7 @@ export default function PsicoApp() {
                     <Footer/>
                 </>
                 : rolId === 2 ? <> 
-                    <Nav/>
+                    <PsicoNav />
                     <Routes>
                         <Route path="/" element={<ForPsicos />}/>
                         <Route path='/contacto' element={ <ContactSection/>} />  
