@@ -22,7 +22,7 @@ function Dropdown() {
     <div>
       <button 
       type='button'
-      class='inline-flex justficy-center w-full rounded-md border border-g bg-primary'
+      class='mr-3  inline-flex justficy-center w-full rounded-md border border-g bg-primary'
       onClick={handleClick}
       id="menu-button" 
       aria-expanded='true'

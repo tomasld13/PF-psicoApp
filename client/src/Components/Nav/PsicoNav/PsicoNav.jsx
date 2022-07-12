@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button } from '../../Button/Button';
 import { Link, animateScroll as scroll } from 'react-scroll'
-import './Nav.css';
+import './PsicoNav.css';
 import { startLogout } from '../../../slice/auth/thunks';
 import logoImage from '../logo.png'
 import Dropdown from '../Dropdown';
@@ -41,15 +41,17 @@ function PsicoNav() {
           <a href='/' className='navbar-logo' onClick={closeMobileMenu}>
             <img src={logoImage} alt="logo image" />
           </a>
-          {
-            storeGoogle.status === 'authenticated' || storeAuthBack.status === 'authenticated' 
-            ? <div className='text-user'>Hola, {!storeGoogle.name ? storeAuthBack.name : storeGoogle.name}!</div> 
-            : null
-          }
           <div className='menu-icon' onClick={handleClick}>
             <i className={click ? 'fas fa-times' : 'fas fa-bars'} />
           </div>
           <ul className={click ? 'nav-menu active' : 'nav-menu'}>
+           <div>
+          {
+            status === 'authenticated' || storeAuthBack.status === 'authenticated' 
+            ? <div className='text-user'>Hola, {!displayName ? storeAuthBack.name : displayName}!</div> 
+            : null
+          }
+          </div>
             <li className='nav-item'>
               <a
               href='/psicohome' 
