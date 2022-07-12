@@ -5,12 +5,14 @@ import { GiWorld } from 'react-icons/gi'
 import SubSectionItem from './SubSectionItem'
 
 const SubsectionItemStyles = styled.div`
-  padding: 10rem 0 0 3rem;
+  padding: 10rem 0 0 0;
+  margin-left: 6rem;
   .subsection__allitems {
     display: flex;
     gap: 10rem; 
     margin-bottom: 2rem;
     justify-content: space-between;
+    align-items: center;
     align-self: center;
     margin-top: -15rem;
     width: 90%;
@@ -19,7 +21,9 @@ const SubsectionItemStyles = styled.div`
     .subsection__allitems {
         flex-direction: column;
         max-width: 350px;
-        margin: 0 auto;
+       display: flex;
+       align-items: center;
+       margin-left: -1rem;
         margin-top: -5rem;
         margin-bottom: 5rem;
         gap: 5rem;
