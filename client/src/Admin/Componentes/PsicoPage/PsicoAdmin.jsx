@@ -1,4 +1,4 @@
-import './User.css'
+import './Psico.css'
 import imageavatar from '../../Assets/face1.jpg';
 import styled from 'styled-components'
 
@@ -6,7 +6,7 @@ import React from 'react'
 import { MdLocationSearching, MdMailOutline, MdOutlineSystemSecurityUpdate, MdPermIdentity } from 'react-icons/md';
 import Sidebar from '../Sidebar';
 
-export default function UserAdmin() {
+export default function PsicoAdmin() {
   return (
     <>
       <Sidebar />

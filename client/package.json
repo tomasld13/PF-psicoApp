@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@chakra-ui/layout": "^2.0.2",
     "@chakra-ui/react": "^2.2.1",
     "@emotion/react": "^11.9.3",
     "@emotion/styled": "^11.9.3",
@@ -17,6 +18,7 @@
     "dotenv": "^16.0.1",
     "firebase": "^9.8.4",
     "framer-motion": "^6.3.16",
+    "google-map-react": "^2.2.0",
     "react": "^18.2.0",
     "react-bootstrap": "^2.4.0",
     "react-datepicker": "^4.8.0",
