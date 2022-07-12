@@ -1,3 +1,4 @@
+import React, { useContext, useEffect } from 'react';
 import { Navigate, Route, Routes } from "react-router-dom";
 import { useSelector } from "react-redux";
 import ContactSection from "../Contact/ContactSection";
@@ -23,11 +24,23 @@ import ForPsicos from "../ForPsicos/ForPsicos"
 import ReportsHome from "../../Admin/Componentes/Reports/ReportsHome";
 import PsychoList from "../../Admin/Componentes/Psicologos/PsychoList";
 import PsychoAdmin from "../../Admin/Componentes/PsicoPage/PsychoAdmin";
+import { AuthContext } from '../../context/authContext/AuthContext';
 
+
+import {ChatPage} from '../../pages/ChatPage'
+import { login } from '../../slice/auth/authSlice';
 
 export default function PsicoApp() {
 
     const { rolId }  = useSelector(state => state.auth.authBack);
+
+    const { auth, verificaToken } = useContext( AuthContext );
+    
+    useEffect( () => {
+        verificaToken();
+        
+    },[verificaToken])
+
 
     return (
         <>
@@ -56,6 +69,8 @@ export default function PsicoApp() {
                             <Cover />
                             <Main />           
                         </ChakraProvider> } />
+                        <Route path='/mensajes' element = {<ChatPage/>}/>
+                        
                     </Routes>
                     <Footer/>
                 </>
@@ -75,6 +90,7 @@ export default function PsicoApp() {
                                 <Main />           
                             </ChakraProvider> }         
                         />
+                        <Route path='/mensajes' element = {<ChatPage/>}/>
                         <Route path="/*" element={ <Navigate to="/" /> } />
                     </Routes>
                 </>

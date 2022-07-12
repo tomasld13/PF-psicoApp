@@ -16,17 +16,19 @@ axios.defaults.baseURL = process.env.REACT_APP_API || "http://localhost:3001"
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <ChatProvider>
-    <AuthProvider>
-      <SocketProvider>
-        <Provider store={store}>
-          <React.Fragment>
-            <BrowserRouter>
+
+  <Provider store={store}>
+    <React.Fragment>
+      <BrowserRouter>
+        <ChatProvider>
+          <AuthProvider>
+            <SocketProvider>
               <App />
-            </BrowserRouter>
-          </React.Fragment>
-        </Provider>
-      </SocketProvider>
-    </AuthProvider>
-  </ChatProvider>,
+            </SocketProvider>
+          </AuthProvider>
+        </ChatProvider>
+      </BrowserRouter>
+    </React.Fragment>
+  </Provider>
+
 );
