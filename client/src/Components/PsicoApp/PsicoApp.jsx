@@ -62,6 +62,7 @@ export default function PsicoApp() {
                     <Nav/>
                     <Routes>
                         <Route path="/" element={<ForPsicos />}/>
+                        <Route path='/contacto' element={ <ContactSection/>} />  
                          <Route path='/paciente/:id' element={
                             <ChakraProvider theme={theme}>
                                 <PacientDetails/>

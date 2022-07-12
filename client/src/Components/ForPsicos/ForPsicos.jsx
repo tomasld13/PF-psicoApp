@@ -12,6 +12,7 @@ function ForPsicos() {
     <SubsectionPsico />
     <AllInOne />
     <MoreInfo />
+    <Footer />
     </>
   )
 }
