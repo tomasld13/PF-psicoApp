@@ -29,23 +29,29 @@ function Pricing({idpsycho}) {
     //let ico = [(<GoBriefcase/>),(<MdEscalatorWarning/>),(<MdOutlineGroups/>),(<MdOutlineWc/>),(<MdOutlineEmojiPeople/>)];
     function handleOnClick(e, s, p, index){
         
-        clearClass = document.getElementsByClassName('current')
-        if(clearClass[0]) {
-            clearClass[0].classList.remove('current')
-        }
-        element = document.getElementsByName(`name-${index}`)
-        element[0].classList.add('current')
         
         e.preventDefault();
-        dispatch(postMP({
-            id: id,
-            servicio: s,
-            precio: p,
-            hora: time,
-            fecha: date,
-            psicoId: idpsycho,
-            email: email
-        }, token));    
+        try {
+            if (!time) throw new Error('Seleccione una fecha');
+            clearClass = document.getElementsByClassName('current')
+            if(clearClass[0]) {
+                clearClass[0].classList.remove('current')
+            }
+            element = document.getElementsByName(`name-${index}`)
+            element[0].classList.add('current')
+            
+            dispatch(postMP({
+                id: id,
+                servicio: s,
+                precio: p,
+                hora: time,
+                fecha: date,
+                psicoId: idpsycho,
+                email: email
+            }, token));    
+        } catch (error) {
+            alert(error);
+        }
     }
 
     function selectIcon(sesionValue) {
