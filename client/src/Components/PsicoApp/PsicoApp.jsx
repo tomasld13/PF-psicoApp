@@ -19,11 +19,11 @@ import AdminApp from '../../Admin/AdminApp';
 import UserList from "../../Admin/Componentes/Users/UserList";
 import UserAdmin from '../../Admin/Componentes/UserPage/UserAdmin.jsx';
 import PsicoAdmin from '../../Admin/Componentes/PsicoPage/PsicoAdmin.jsx'
-
 import ForPsicos from "../ForPsicos/ForPsicos"
 import ReportsHome from "../../Admin/Componentes/Reports/ReportsHome";
 import PsicoList from "../../Admin/Componentes/Psicologos/PsicoList";
 import { AuthContext } from '../../context/authContext/AuthContext';
+
 
 import {ChatPage} from '../../pages/ChatPage'
 import { login } from '../../slice/auth/authSlice';
@@ -76,7 +76,7 @@ export default function PsicoApp() {
                     <Nav/>
                     <Routes>
                         <Route path="/" element={<ForPsicos />}/>
-                         <Route path='/paciente/:id' element={
+                        <Route path='/paciente/:id' element={
                             <ChakraProvider theme={theme}>
                                 <PacientDetails/>
                             </ChakraProvider>
