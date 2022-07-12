@@ -31,7 +31,6 @@ function App() {
           (status === 'authenticated' || statusBack.status === 'authenticated') 
           ? <Routes>
             <Route path="/*" element={<PsicoApp/>}/>
-           /
           </Routes>
           : <Routes>
               <Route path="/*" element={<PsicoApp/>}/>

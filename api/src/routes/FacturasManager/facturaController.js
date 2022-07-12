@@ -3,9 +3,11 @@ const { Factura, Paciente, Usuario} = require("../../db")
 const getFacturaByPacienteID = async (req, res) => {
     const { id } = req.params;
     try {
+        const usuario = await Usuario.findByPk(id, {include: {model: Paciente, attributes: ["id"]}});
+        console.log(usuario);
         const factura = await Factura.findAll({
         where: {
-            pacienteId: id
+            pacienteId: usuario.paciente.id
         },
         include: [{model: Paciente, include: [{model: Usuario, attributes: ["name", "lastname", "email", "telephone"]}]}]
         });

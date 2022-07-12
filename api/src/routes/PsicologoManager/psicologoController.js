@@ -117,7 +117,7 @@ const getPsicologosByCiudad = async (req, res, next) => {
 const getPsicologosByEspecialidad = async (req, res, next) => {
     const { especialidad } = req.params
     try {
-        const psicologos = await Usuario.findByPk({
+        const psicologos = await Usuario.findAll({
             where: { rolId: 2 },
             include: [{ model: Psicologo, include: [{ model: Especialidades, attributes: ['especialidad'] }, { model: Servicio, include: [{ model: Precio, attributes: ['costo'] }] }], attributes: { exclude: ["fk_usuarioID", "especialidadeId"] } },
             { model: Ciudad, include: { model: Provincia, attributes: ['name'] }, attributes: ['name'] },

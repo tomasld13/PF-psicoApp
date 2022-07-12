@@ -74,13 +74,13 @@ function ContactForm() {
             </div>
             <div className="form-group">
                 <label
-                 htmlFor="email"> Tu correo
+                  htmlFor="email"> Tu correo
                     <input
                     type="text" 
                     id='email' 
                     name='email'
                     required
-                     value={email}  
+                     value={email}
                     onChange={e => setEmail(e.target.value)}
                     />
                 </label>

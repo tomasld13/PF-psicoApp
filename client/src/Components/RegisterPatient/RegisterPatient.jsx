@@ -46,7 +46,6 @@ export const RegisterPatient = ({rol}) => {
     const [idProvincia, setIdProvincia] = useState(0);
 
     const { status } = useSelector(state => state.auth.authBack);
-    const errorRegister = useSelector(state => state.auth.error);
     const provincias = useSelector(state => state.psicology.provincias);
     const ciudades = useSelector(state => state.psicology.ciudades);
 
@@ -139,7 +138,7 @@ export const RegisterPatient = ({rol}) => {
                         <select className='border border-gray-300 my-2.5 px-3 py-1 rounded-lg shadow-sm focus:outline-none focus:border-primary' name="ciudad" id="ciudad" onChange={onInputChange}>
                             <option  selected value="0">Ciudad</option>
                             {
-                                ciudades.length > 0 ? ciudades.map((ciudad) => {
+                                ciudades?.length > 0 ? ciudades.map((ciudad) => {
                                     return <option value={ciudad.name} key={ciudad.id}>
                                                 {ciudad.name}</option>
                                 }) : null
@@ -153,9 +152,7 @@ export const RegisterPatient = ({rol}) => {
                     <button 
                     className='bg-primary text-white border border-primary font-bold py-2 px-4 rounded hover:bg-white hover:text-primary my-2.5 h-12 ' 
                     disabled={isCheckingAuthentication}
-                    type="submit"
                     >Crear cuenta</button>
-                    {errorRegister ? <span style={{color:'red'}}>{errorRegister}</span> : null}
                 </div>
             </form>
         </div>

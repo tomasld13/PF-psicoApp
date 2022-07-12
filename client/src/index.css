@@ -13,6 +13,11 @@ code {
     monospace;
 }
 
+.current {
+  background-color: #575989 !important;
+  border: 2px  solid #242424 !important;
+
+}
 
 /*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
 
