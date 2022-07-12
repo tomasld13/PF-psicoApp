@@ -86,6 +86,7 @@ export default function PsicoApp() {
                                 <Main />           
                             </ChakraProvider> }         
                         />
+                        <Route path='/mensajes' element = {<ChatPage/>}/>
                         <Route path="/*" element={ <Navigate to="/" /> } />
                     </Routes>
                 </>
