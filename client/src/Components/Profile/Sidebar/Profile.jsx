@@ -19,6 +19,7 @@ import {
   useDisclosure,
   VStack,
 } from '@chakra-ui/react'
+import { getPsicology } from '../../../slice/psico/thunks';
 
 function Profile() {
 
@@ -29,6 +30,7 @@ function Profile() {
   const profileImage = useRef(null)
 
   const { name, rolId } = useSelector(state=>state.auth.authBack)
+  const google = useSelector(state=>state.auth.authGoogle.rolId)
 
   const openChooseImage = () => {
     profileImage.current.click()
@@ -99,7 +101,8 @@ function Profile() {
           {name}
         </Heading>
         <Text color="brand.gray" fontSize="sm">
-          {(rolId===1)?"Paciente":"Psicologo"}
+          {(rolId===1 || google === 1)?"Paciente":"Psicologo"}
+
         </Text>
       </VStack>
     </VStack>

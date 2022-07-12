@@ -32,7 +32,7 @@ import { psychoFavs } from '../../../slice/psico/thunks.js';
         })
         .catch(err => console.log(err));
 
-    }, [statePsychoFavs]);
+    }, []);
 
     const deleteFavs = () => {
       const idUser = idUserBack ? idUserBack : idUserGoogle
