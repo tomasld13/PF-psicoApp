@@ -53,7 +53,6 @@ export const RegisterPsycho = ({rol}) => {
     const [idProvincia, setIdProvincia] = useState(0);
 
     const { status } = useSelector(state => state.auth.authBack);
-    const errorRegister = useSelector(state => state.auth.error);
     const provincias = useSelector(state => state.psicology.provincias);
     const ciudades = useSelector(state => state.psicology.ciudades);
 
@@ -210,7 +209,6 @@ export const RegisterPsycho = ({rol}) => {
                 </div>
                 <div className="flex flex-col content-center items-center">
                     <button className='bg-primary text-white border border-primary font-bold py-2 px-4 rounded hover:bg-white hover:text-primary my-2.5 h-12 ' disabled={isCheckingAuthentication}>Crear cuenta</button>
-                    {errorRegister ? <span style={{color:'red'}}>{errorRegister}</span> : null}
                 </div>
             </form>
     </div>

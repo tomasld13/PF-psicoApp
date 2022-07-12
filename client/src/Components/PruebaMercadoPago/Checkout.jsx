@@ -12,6 +12,7 @@ export default function Checkout({idpsycho}) {
     const [price, setPrice] = useState("");
     const params = useParams();
     const { rolId } = useSelector(state => state.auth.authBack);
+    const google = useSelector(state => state.auth.authGoogle.rolId);
     const {date, time} = useSelector(state => state.psicology.calendar);
     //console.log(date,time, "hola")
 
@@ -28,7 +29,7 @@ export default function Checkout({idpsycho}) {
                 <Calendar idPsycho={id}/>
             </div>
             <Pricing idpsycho={params}/>
-            { rolId? 
+            { rolId || google ? 
                 (<div>
                     { linkPago ? <button className='h-10  my-8 py-2.5 px-8 bg-green-500 rounder text-white font-bold'><a href={`${linkPago}`}> Confirmar </a></button>: null }
                 </div>)
