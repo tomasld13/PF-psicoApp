@@ -17,8 +17,8 @@ const {
     facturaRoutes,
     blogRoutes,
     reviewRoutes,
-    newsletterRoutes,
     usuarioRoutes,
+    newsletterRoutes,
     favoritosRoutes,
     gananciasRoutes
 } = require('./routesIndex');
