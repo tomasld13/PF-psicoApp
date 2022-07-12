@@ -4,7 +4,7 @@ const bcrypt = require('bcryptjs');
 const getPsicologo = async (req, res, next) => {
     Usuario.findAll({
         where: { rolId: 2 },
-        include: [{ model: Psicologo, include: [{ model: Especialidades, attributes: ['especialidad'] }, { model: Servicio, include: [{ model: Precio, attributes: ['costo'] }] }], attributes: { exclude: ["fk_usuarioID", "especialidadeId"] } },
+        include: [{ model: Psicologo, include: [{ model: Especialidades, attributes: ['especialidad'] }, { model: Servicio, include: [{ model: Precio, attributes: ['costo'] }] }, {model: Factura}], attributes: { exclude: ["fk_usuarioID", "especialidadeId"] } },
         { model: Ciudad, include: { model: Provincia, attributes: ['name'] }, attributes: ['name'] },
         { model: Genero, attributes: ["genero"] },
         { model: Rol, attributes: ["name"] }]
