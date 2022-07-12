@@ -78,6 +78,7 @@ export default function PsicoApp() {
                         />
                         <Route path="/*" element={ <Navigate to="/" /> } />
                     </Routes>
+                    <Footer/>
                 </>
                 : <>
                     <Routes>

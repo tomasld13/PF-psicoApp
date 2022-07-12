@@ -74,7 +74,7 @@ function Nav() {
             </li>
             <li className='ItemNav'>
               <a
-                href='/'
+                href='/psicohome'
                 className='LinksForNav'
                 onClick={closeMobileMenu}
               >
