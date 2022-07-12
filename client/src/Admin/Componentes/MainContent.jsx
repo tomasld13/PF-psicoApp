@@ -52,6 +52,7 @@ const Container = styled.div`
     flex-direction: column;
     width: 100%;
     margin: 1rem 0 0 0;
+    height: max-content !important;
   }
 `;
 
@@ -96,7 +97,7 @@ const ColumnTwo1 = styled.div`
   height: 115%;
   width: 100%;
   @media screen and (min-width: 320px) and (max-width: 960px) {
-    height: max-content;
+    height: 100%;
     justify-content: center;
     align-items: center;
   }

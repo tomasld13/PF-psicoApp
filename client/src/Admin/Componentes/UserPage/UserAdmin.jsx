@@ -1,6 +1,6 @@
 import './User.css'
 import imageavatar from '../../Assets/face1.jpg';
-
+import styled from 'styled-components'
 
 import React from 'react'
 import { MdLocationSearching, MdMailOutline, MdOutlineSystemSecurityUpdate, MdPermIdentity } from 'react-icons/md';
@@ -9,25 +9,24 @@ import Sidebar from '../Sidebar';
 export default function UserAdmin() {
   return (
     <>
-    <Sidebar />
-    <div className='user-admin-profile'>
-        <div className="user-title-container">
-          <h1 className="edit-user">Editar Paciente</h1>
-          <button className="userAddButton">Crear Nuevo</button>
-        </div>
-        <div className="user-container">
-          <div className="user-show">
-            <div className="user-show-title">
-              <span className="show-username">Nombre del paciente</span>
-              <span className="show-title">Algun título</span>
-            </div>
-            <div className="user-show-bottom">
-              <span className="user-show-tittle-bottom">
+      <Sidebar />
+    <Container >
+        <UserTitle>
+          <h1>Editar Paciente</h1>
+        </UserTitle>
+        <UserContainer>
+          <UserShow>
+            <UserShowTitle>
+              <ShowUsername>Nombre del paciente</ShowUsername>
+              <ShowTitle>Algun título</ShowTitle>
+            </UserShowTitle>
+            <UserShowBottom>
+              <TitleButtom>
                 Detalles de la cuenta
-                <div className="user-show-info">
+                <UserShowInfo>
                 <MdPermIdentity className='user-show-icon'/>
                 <span className="user-show-input-title">Nombre Completo</span>
-                </div>
+                </UserShowInfo>
                 <div className="user-show-info">
                 <MdLocationSearching className='user-show-icon'/>
                 <span className="user-show-input-title">Dirección</span>
@@ -40,38 +39,13 @@ export default function UserAdmin() {
                 <MdOutlineSystemSecurityUpdate className='user-show-icon'/>
                 <span className="user-show-input-title">Status</span>
                 </div>
-              </span>
-
-            </div>
-          </div>
-          <div className="user-update">
+              </TitleButtom>
+            </UserShowBottom>
+          </UserShow>
+          <UserUpdate>
             <span className="userUpdateTitle">Editar</span>
             <form  className="userUpdateForm">
               <div className="form-left-info">
-                <div className="userUpdateItem">
-                  <label>Nombre completo</label>
-                  <input 
-                  type="text" 
-                  placeholder='nombrecompleto'
-                  className='userUpdateInputs'
-                  />
-                </div>
-                <div className="userUpdateItem">
-                  <label>Email</label>
-                  <input 
-                  type="text" 
-                  placeholder='nombrecompleto'
-                  className='userUpdateInputs'
-                  />
-                </div>
-                <div className="userUpdateItem">
-                  <label>Contraseña</label>
-                  <input 
-                  type="text" 
-                  placeholder='nombrecompleto'
-                  className='userUpdateInputs'
-                  />
-                </div>
                 <div className="userUpdateItem">
                   <label>Status</label>
                   <select
@@ -83,17 +57,90 @@ export default function UserAdmin() {
                 </div>
               </div>
               <div className="formRightInfo">
-                <div className="userupdate-upload">
-                  <img 
-                  src={imageavatar} 
-                  alt="imagen de perfil admin" />
-                </div>
                 <button className="userUpdateButton">Actualizar</button>
               </div>
             </form>
-          </div>
-        </div>
-    </div>
+          </UserUpdate>
+        </UserContainer>
+    </Container>
   </>
   )
 }
+
+const Container = styled.div`
+    flex: 4;
+    padding: 20px;
+    /* margin-left: 50rem; */
+    width: 73%;
+    margin-left: 25rem;
+    margin-top: -35rem;
+    @media screen and (min-width: 320px) and (max-width: 960px) {
+      display: flex;
+      flex-direction: column;
+      width: 90%;
+      margin-left: 10rem;
+    }
+
+`
+const UserTitle = styled.div` 
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-family: 'Montserrat';
+`; 
+
+const UserContainer = styled.div`
+    display: flex;
+    margin-top: 20px;
+
+`;
+
+const UserShow = styled.div` 
+    flex: 1;
+    padding: 20px;
+    -webkit-box-shadow: 0px 0px 15px -10px rgba(0, 0, 0.75 ) ;
+    box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
+`;
+
+const UserShowTitle = styled.div` 
+    display: flex;
+    flex-direction: column;
+    margin-left: 20px;
+`;
+
+const UserUpdate = styled.div` 
+    flex: 2;
+    padding: 20px;
+    margin-left: 20px;
+    -webkit-box-shadow: 0px 0px 15px -10px rgba(0, 0, 0.75 ) ;
+    box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
+`;
+
+const ShowUsername = styled.span`
+    font-weight: 600;
+    font-family: 'Montserrat';
+`
+
+const ShowTitle = styled.span`
+  font-weight: 300;
+  font-family: 'Montserrat';
+`
+
+const UserShowBottom = styled.div`
+   margin-top: 20px;
+`;
+
+const TitleButtom = styled.span`
+     font-size: 14px;
+    font-weight: 600;
+    color: #575989;
+    font-family: 'Montserrat';
+`
+
+const UserShowInfo = styled.div`
+    display: flex;
+    align-items: center;
+    margin: 20px 0;
+    color: lightgray;
+    font-family: 'Montserrat';
+`

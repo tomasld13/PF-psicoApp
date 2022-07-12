@@ -1,0 +1,36 @@
+
+.addUserItem>label{
+    margin-bottom: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    color: gray;
+}
+
+.addUserItem>input {
+    height: 30px;
+    width: 15rem;
+    padding: 10px;
+    border: 1px solid gray;
+    border-radius: 5px;
+}
+
+.addUserGender {
+    margin-top: 15px;
+}
+
+.addUserGender>label{
+    margin: 10px;
+    font-size: 18px;
+    color: #555;
+}
+
+
+@media screen and (min-width: 320px) and (max-width: 960px) {
+  .addUserButton {
+    display: flex;
+    justify-items: center;
+    align-items: center;
+    margin-top: 10rem;
+    margin-left: 6rem;
+  }
+  }

@@ -5,6 +5,10 @@ module.exports = (sequelize)=>{
         psicofavorito: {
             type : DataTypes.STRING,
             allowNull : false
+        },
+        idPsico: {
+            type: DataTypes.INTEGER,
+            allowNull: false
         }
     },
     {
