@@ -14,13 +14,14 @@ import { theme } from '../Profile/Helpers/index'
 import Main from "../Profile/Main";
 import Cover from '../Profile/Cover';
 import SectionTitle from "../SectionTitle/SectionTitle";
-import { LandingPsico } from "../LandingPsico/LandingPsico";
-import AdminApp from '../../Admin/AdminApp'
-
-;
+import AdminApp from '../../Admin/AdminApp';
 import UserList from "../../Admin/Componentes/Users/UserList";
-import Sidebar from "../Profile/Sidebar/Sidebar";
 import UserAdmin from '../../Admin/Componentes/UserPage/UserAdmin.jsx';
+import PsicoAdmin from '../../Admin/Componentes/PsicoPage/PsicoAdmin.jsx'
+
+import ForPsicos from "../ForPsicos/ForPsicos"
+import ReportsHome from "../../Admin/Componentes/Reports/ReportsHome";
+import PsicoList from "../../Admin/Componentes/Psicologos/PsicoList";
 
 
 export default function PsicoApp() {
@@ -38,17 +39,12 @@ export default function PsicoApp() {
                         <Route path="/" element={<Home/>}/>
                         <Route path="/calendar" element={<Calendar />}/>
                         <Route path='/psico' element={<Psychologists/>} />
+                        <Route path='/psicohome' element={<ForPsicos /> } />
                         <Route path='/psico/:id' element={
                             <ChakraProvider theme={theme}>
                                 {/* <Cover /> */}
                                 {/* <MainDetails/> */}
                                 <PsicoDetails/>
-                            </ChakraProvider>
-                        }/>
-                         <Route path='/paciente/:id' element={
-                            <ChakraProvider theme={theme}>
-                                <PacientDetails/>
-                                {/* <PsicoDetails/> */}
                             </ChakraProvider>
                         }/>
                         <Route path='/contacto' element={ <ContactSection/>} />  
@@ -65,15 +61,30 @@ export default function PsicoApp() {
                 : rolId === 2 ? <> 
                     <Nav/>
                     <Routes>
-                        <Route path="/" element={<LandingPsico />}/>
+                        <Route path="/" element={<ForPsicos />}/>
+                         <Route path='/paciente/:id' element={
+                            <ChakraProvider theme={theme}>
+                                <PacientDetails/>
+                            </ChakraProvider>
+                        }/>
+                        <Route path='/perfil' element={
+                            <ChakraProvider theme={theme}>  
+                                <SectionTitle heading="Bienvenido a tu perfil" subheading=""/>
+                                <Cover />
+                                <Main />           
+                            </ChakraProvider> }         
+                        />
                         <Route path="/*" element={ <Navigate to="/" /> } />
                     </Routes>
                 </>
                 : <>
                     <Routes>
                         <Route path="/" element={<AdminApp />}/>
+                        <Route path="/reportes" element={<ReportsHome />}/>
                         <Route path='/pacientes' element={<UserList />} />
                         <Route path='/pacientes/:id' element={<UserAdmin />} />
+                        <Route path='/psicologos' element={<PsicoList />} />
+                        <Route path='/psicologos/:id' element={<PsicoAdmin />} />
                         <Route path="/*" element={ <Navigate to="/" /> } />
                     </Routes>
                 </>

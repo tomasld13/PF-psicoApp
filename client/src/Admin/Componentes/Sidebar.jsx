@@ -27,7 +27,7 @@ function Sidebar() {
     <Container>
       <ProfileContainer>
         <Avatar src={AvatarImage} />
-        <Name>SOY EL ADMIN PAPÁ</Name>
+        <Name>ADMINISTRADOR</Name>
         <Badge content="ADMIN" />
       </ProfileContainer>
       <LinksContainer>
@@ -42,11 +42,11 @@ function Sidebar() {
           </LinkStyle>
           <LinkStyle>
             <MdOutlinePersonSearch />
-            <h3>Profesionales</h3>
+            <a href='/psicologos'>Profesionales</a>
           </LinkStyle>
           <LinkStyle>
             <AiOutlinePieChart />
-            <h3>Reportes</h3>
+            <a href='/reportes'>Reportes</a>
           </LinkStyle>
         </Links>
       </LinksContainer>
@@ -65,8 +65,7 @@ const Container = styled.div`
   align-items: center;
   gap: 3rem;
   @media screen and (min-width: 320px) and (max-width: 960px) {
-    width: 90vh;
-    height: max-content !important;
+    display: none;
   }
 `;
 
@@ -75,6 +74,7 @@ const ProfileContainer = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  font-family: 'Montserrat';
 `;
 
 const Avatar = styled.img`
@@ -88,6 +88,7 @@ const Name = styled.h1`
   font-size: 1.5rem;
   font-weight: 400;
   margin: 0.8rem 0 0.5rem 0;
+  font-family: 'Montserrat';
 `;
 
 const LinksContainer = styled.div`
@@ -95,6 +96,7 @@ const LinksContainer = styled.div`
   height: 100%;
   width: 100%;
   border-radius: 2rem;
+  font-family: 'Montserrat';
 `;
 
 const Links = styled.ul`
@@ -103,6 +105,7 @@ const Links = styled.ul`
   flex-direction: column;
   padding-top: 2rem;
   height: 60%;
+  font-family: 'Montserrat';
 `;
 
 const LinkStyle = styled.li`
@@ -114,6 +117,7 @@ const LinkStyle = styled.li`
   cursor: pointer;
   h3 {
     font-weight: 300;
+    font-family: 'Montserrat';
   }
   svg {
     font-size: 1.1rem;
@@ -135,6 +139,7 @@ const ContactContainer = styled.div`
     color: white;
     cursor: pointer;
     text-decoration: none;
+    font-family: 'Montserrat';
   }
   @media screen and (min-width: 320px) and (max-width: 960px) {
     margin-bottom: 2rem;

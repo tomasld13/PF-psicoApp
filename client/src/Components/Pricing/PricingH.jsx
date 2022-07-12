@@ -1,8 +1,9 @@
 import React from 'react'
 import { Button } from '../Button/Button'
 import { IconContext } from 'react-icons/lib'
-import { GiGoldBar, GiCutDiamond, GiCrystalBars } from 'react-icons/gi'
-import { FaHandRock } from 'react-icons/fa'
+import { HiUserGroup } from 'react-icons/hi'
+import { BsFillPersonFill } from 'react-icons/bs'
+import { GiLovers } from 'react-icons/gi'
 import { 
     PricingSection,
   PricingWrapper,
@@ -28,49 +29,49 @@ function Pricing() {
                     <PricingCard to='/auth/login'>
                         <PricingCardInfo>
                             <PricingCardIcon>
-                                <FaHandRock />
+                                <BsFillPersonFill />
                             </PricingCardIcon>
                             <PricingCardPlan>Citas Individuales</PricingCardPlan>
-                            <PricingCardCost>$2,300 ARS</PricingCardCost>
-                            <PricingCardLength>Semanal</PricingCardLength>
+                            <PricingCardCost>Desde $3.499 ARS</PricingCardCost>
+                            {/* <PricingCardLength>Semanal</PricingCardLength> */}
                             <PricingCardFeatures>
                                 <PricingCardFeature>Incluye 1 cita de 50 minutos</PricingCardFeature>
                                 <PricingCardFeature>Soporte 24 hs</PricingCardFeature>
                                 <PricingCardFeature>Para 1 persona</PricingCardFeature>
                             </PricingCardFeatures>
-                            <Button primary>Elegir Plan</Button>
+                            {/* <Button primary>Elegir Plan</Button> */}
                         </PricingCardInfo>
                     </PricingCard>
                     <PricingCard to='/auth/login'>
                         <PricingCardInfo>
                             <PricingCardIcon>
-                                <GiCrystalBars />
+                                <GiLovers />
                             </PricingCardIcon>
-                            <PricingCardPlan>Paquete regular</PricingCardPlan>
-                            <PricingCardCost>$16.249 ARS</PricingCardCost>
-                            <PricingCardLength>Mensual</PricingCardLength>
+                            <PricingCardPlan>Citas de pareja</PricingCardPlan>
+                            <PricingCardCost>Desde $16.499 ARS</PricingCardCost>
+                            {/* <PricingCardLength>Mensual</PricingCardLength> */}
                             <PricingCardFeatures>
                                 <PricingCardFeature>Incluye 2 citas semanales</PricingCardFeature>
                                 <PricingCardFeature>Soporte 24 hs</PricingCardFeature>
-                                <PricingCardFeature>Para 1 persona</PricingCardFeature>
+                                <PricingCardFeature>Para 2 personas</PricingCardFeature>
                             </PricingCardFeatures>
-                            <Button primary>Elegir Plan</Button>
+                            {/* <Button primary>Elegir Plan</Button> */}
                         </PricingCardInfo>
                     </PricingCard>
                     <PricingCard to='/auth/login'>
                         <PricingCardInfo>
                             <PricingCardIcon>
-                                <GiCutDiamond />
+                                <HiUserGroup />
                             </PricingCardIcon>
-                            <PricingCardPlan>Paquete Premium</PricingCardPlan>
+                            <PricingCardPlan>Citas grupales</PricingCardPlan>
                             <PricingCardCost>$28.499 ARS</PricingCardCost>
-                            <PricingCardLength>Mensual</PricingCardLength>
+                            {/* <PricingCardLength>Mensual</PricingCardLength> */}
                             <PricingCardFeatures>
                                 <PricingCardFeature>2 citas semanales</PricingCardFeature>
                                 <PricingCardFeature>Soporte 24 hs</PricingCardFeature>
-                                <PricingCardFeature>Para 2 personas</PricingCardFeature>
+                                <PricingCardFeature>Para 6 personas</PricingCardFeature>
                             </PricingCardFeatures>
-                            <Button primary>Elegir Plan</Button>
+                            {/* <Button primary>Elegir Plan</Button> */}
                         </PricingCardInfo>
                     </PricingCard>
                 </PricingContainer>
