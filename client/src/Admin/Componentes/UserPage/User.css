@@ -1,79 +1,3 @@
-* {
-    font-family: 'Montserrat';
-}
-
-.user-admin-profile {
-    flex: 4;
-    padding: 20px;
-    /* margin-left: 50rem; */
-    width: 73%;
-    margin-left: 25rem;
-    margin-top: -35rem;
-}
-
-.user-title-container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.userAddButton {
-    width: 80px;
-    border: none;
-    padding: 5px;
-    background-color: #575989;
-    border-radius: 5px;
-    cursor: pointer;
-    color: white;
-    font-size: 16px;
-}
-
-.user-container {
-    display: flex;
-    margin-top: 20px;
-}
-
-.user-show {
-    flex: 1;
-    padding: 20px;
-    -webkit-box-shadow: 0px 0px 15px -10px rgba(0, 0, 0.75 ) ;
-    box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
-}
-
-.user-update {
-    flex: 2;
-    padding: 20px;
-    margin-left: 20px;
-    -webkit-box-shadow: 0px 0px 15px -10px rgba(0, 0, 0.75 ) ;
-    box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
-}
-
-.user-show-top {
-    display: flex;
-    align-items: center;
-}
-
-.img-show-image {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    object-fit: cover;
-}
-
-.user-show-title {
-    display: flex;
-    flex-direction: column;
-    margin-left: 20px;
-}
-
-.show-username{
-    font-weight: 600;
-}
-
-.show-title {
-    font-weight: 300;
-}
-
 .user-show-bottom {
     margin-top: 20px;
 }
@@ -82,6 +6,7 @@
     font-size: 14px;
     font-weight: 600;
     color: #575989;
+    font-family: 'Montserrat';
 }
 
 .user-show-info {
@@ -98,11 +23,13 @@
 
 .user-show-input-title {
     margin-left: 15px;
+    font-family: 'Montserrat';
 }
 
 .userup-title {
     font-size: 24px;
     font-weight: 600;
+    font-family: 'Montserrat';
 }
 
 .userUpdateForm {
@@ -113,6 +40,7 @@
 
 .userUpdateTitle {
     font-weight: 600;
+    font-family: 'Montserrat';
 }
 
 .userUpdateItem{
@@ -125,6 +53,7 @@
     margin-bottom: 5px;
     font-size: 17px;
     margin-right: 20px;
+    font-family: 'Montserrat';
 }
 
 .userUpdateInputs {
@@ -151,6 +80,8 @@
     border-radius: 5px;
     border: none;
     padding: 5px;
+    margin-top: 4rem;
     cursor: pointer;
     background-color: #575989;
+    font-family: 'Montserrat';
 }

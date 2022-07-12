@@ -17,9 +17,11 @@ import SectionTitle from "../SectionTitle/SectionTitle";
 import AdminApp from '../../Admin/AdminApp';
 import UserList from "../../Admin/Componentes/Users/UserList";
 import UserAdmin from '../../Admin/Componentes/UserPage/UserAdmin.jsx';
+import PsicoAdmin from '../../Admin/Componentes/PsicoPage/PsicoAdmin.jsx'
 
 import ForPsicos from "../ForPsicos/ForPsicos"
 import ReportsHome from "../../Admin/Componentes/Reports/ReportsHome";
+import PsicoList from "../../Admin/Componentes/Psicologos/PsicoList";
 
 
 export default function PsicoApp() {
@@ -37,6 +39,7 @@ export default function PsicoApp() {
                         <Route path="/" element={<Home/>}/>
                         <Route path="/calendar" element={<Calendar />}/>
                         <Route path='/psico' element={<Psychologists/>} />
+                        <Route path='/psicohome' element={<ForPsicos /> } />
                         <Route path='/psico/:id' element={
                             <ChakraProvider theme={theme}>
                                 {/* <Cover /> */}
@@ -73,6 +76,8 @@ export default function PsicoApp() {
                         <Route path="/reportes" element={<ReportsHome />}/>
                         <Route path='/pacientes' element={<UserList />} />
                         <Route path='/pacientes/:id' element={<UserAdmin />} />
+                        <Route path='/psicologos' element={<PsicoList />} />
+                        <Route path='/psicologos/:id' element={<PsicoAdmin />} />
                         <Route path="/*" element={ <Navigate to="/" /> } />
                     </Routes>
                 </>

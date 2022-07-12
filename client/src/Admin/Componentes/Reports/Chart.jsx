@@ -30,7 +30,7 @@ function Chart({title, data, dataKey, grid}) {
 
 export default Chart;
 
-const ChartContainer = styled.div`
+const ChartContainer = styled.div`  
     padding: 20px;
     &:hover {
     box-shadow: ${hoverEffect};
