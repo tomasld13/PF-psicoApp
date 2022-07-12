@@ -62,12 +62,6 @@ export default function PsicoApp() {
                     <Nav/>
                     <Routes>
                         <Route path="/" element={<ForPsicos />}/>
-                        <Route path='/perfil' element={
-                        <ChakraProvider theme={theme}>  
-                            <SectionTitle heading="Bienvenido a tu perfil" subheading=""/>
-                            <Cover />
-                            <Main />           
-                        </ChakraProvider> } />
                          <Route path='/paciente/:id' element={
                             <ChakraProvider theme={theme}>
                                 <PacientDetails/>
