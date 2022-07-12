@@ -26,15 +26,17 @@ import PsicoList from "../../Admin/Componentes/Psicologos/PsicoList";
 import { AuthContext } from '../../context/authContext/AuthContext';
 
 import {ChatPage} from '../../pages/ChatPage'
+import { login } from '../../slice/auth/authSlice';
 
 export default function PsicoApp() {
 
     const { rolId }  = useSelector(state => state.auth.authBack);
 
     const { auth, verificaToken } = useContext( AuthContext );
-
+    
     useEffect( () => {
         verificaToken();
+        
     },[verificaToken])
 
 
