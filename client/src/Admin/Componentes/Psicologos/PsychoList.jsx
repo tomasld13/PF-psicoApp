@@ -1,31 +1,30 @@
-import { useEffect } from "react";
-import { useDispatch, useSelector} from 'react-redux';
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from 'react-redux';
 import { DataGrid } from '@mui/x-data-grid';
 import { AiOutlineDelete } from 'react-icons/ai'
 import { Link } from 'react-router-dom'
-import './UserList.css'
+import './PsicoList.css'
 import Sidebar from '../Sidebar';
-import {getPatient, deleteUser} from '../../../slice/psico/thunks.js';
+import { getPsicology, deleteUser, suspenderPsico } from '../../../slice/psico/thunks.js';
 
-export default function UserList() {
 
-  const pacientes = useSelector(state => state.psicology.patients);
+export default function PsychoList() {
+
+  const psicologos = useSelector(state => state.psicology.psychologists);
   const {token} = useSelector(state => state.auth.authBack);
 
   const dispatch = useDispatch();
 
   const handleDelete = (id) => {
-    dispatch(deleteUser(id,'paciente',token));
-    setTimeout(() => {
-      dispatch(getPatient());
-    },50);
+    dispatch(suspenderPsico(id,token));
+    dispatch(getPsicology());
   }
 
   useEffect(() => {
-    dispatch(getPatient());
+    dispatch(getPsicology());
   }, []);
-  
-  const columns = [
+
+const columns = [
   { field: 'id', headerName: 'ID', width: 70 },
   { field: 'name', headerName: 'Nombre', width: 130 },
   { field: 'lastname', headerName: 'Apellido', width: 130 },
@@ -42,7 +41,7 @@ export default function UserList() {
     width: 230,
     valueGetter: (params) =>
       `${params.row.name || ''} ${params.row.lastname || ''}`,
-  }, 
+  },
   { 
     field: 'state',
     headerName: 'Status',
@@ -55,15 +54,14 @@ export default function UserList() {
     renderCell: (params) => {
       return (
         <> 
-        
-        <Link to={'/pacientes/'+params.row.id}>
-        <button className="userListEdit">Editar</button>
-        </Link>
-        <AiOutlineDelete 
-        size='25' 
-        className='userListDelete'
-        onClick={() => handleDelete(params.row.id)}
-        />
+          <Link to={'/psicologos/'+params.row.psicologo.id}>
+          <button className="userListEdit">Editar</button>
+          </Link>
+          <AiOutlineDelete 
+          size='25' 
+          className='userListDelete'
+          onClick={() => handleDelete(params.row.id)}
+          />
         </>
       )
     }
@@ -73,9 +71,9 @@ export default function UserList() {
   return (
     <> 
     <Sidebar />
-    <div style={{ height: 660, width: '65%', marginInlineStart: 400, marginTop: -650 }}>
+    <div style={{ height: 660, width: '57%', marginInlineStart: 500, marginTop: -650,  }}>
       <DataGrid
-        rows={pacientes}
+        rows={psicologos}
         columns={columns}
         pageSize={10}
         disableSelectionOnClick

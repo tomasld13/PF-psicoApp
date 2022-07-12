@@ -1,42 +1,60 @@
-import React from "react";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import Badge from "./Badge";
 import AvatarImage from "../Assets/avatarImage.jpg";
 import AvatarImage2 from "../Assets/avatarImage.jpg";
 import { cardShadow, hoverEffect, themeColor } from "../Utils/index";
+import { getPsicology } from '../../slice/psico/thunks.js';
+import Loading from '../../Components/Loading/Loading.jsx';
 
 function Invoices() {
+
+  const psicologos = useSelector(state => state.psicology.psychologists);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getPsicology());
+  }, []);
+
+  console.log(psicologos);
   return (
     <InvoicesContainer>
       <CardContent>
-        <Invoice>
-          <Info>
-            <Avatar>
-              <img src={AvatarImage} alt="" />
-            </Avatar>
-            <TextContainer>
-              <Title>Psicologo 1</Title>
-              <SubTitle>especialidad</SubTitle>
-            </TextContainer>
-          </Info>
-          <Container>
-            <Badge content="activo" activo />
-          </Container>
-        </Invoice>
-        <Invoice>
-          <Info>
-            <Avatar>
-              <img src={AvatarImage2} alt="" />
-            </Avatar>
-            <TextContainer>
-              <Title>Psicologo 2</Title>
-              <SubTitle>Especialidad</SubTitle>
-            </TextContainer>
-          </Info>
-          <Container>
-            <Badge content="inhabilitado" inhabilitado />
-          </Container>
-        </Invoice>
+        {
+          psicologos.length > 0 ? <>
+            <Invoice>
+              <Info>
+                <Avatar>
+                  <img src={AvatarImage} alt="" />
+                </Avatar>
+                <TextContainer>
+                  <Title>{psicologos[0].name}</Title>
+                  <SubTitle>{psicologos[0].psicologo.especialidades[0].especialidad}</SubTitle>
+                </TextContainer>
+              </Info>
+              <Container>
+                <Badge content="activo" activo />
+              </Container>
+            </Invoice>
+            <Invoice>
+              <Info>
+                <Avatar>
+                  <img src={AvatarImage2} alt="" />
+                </Avatar>
+                <TextContainer>
+                  <Title>{psicologos[1].name}</Title>
+                  <SubTitle>{psicologos[1].psicologo.especialidades[0].especialidad}</SubTitle>
+                </TextContainer>
+              </Info>
+              <Container>
+                <Badge content="inhabilitado" inhabilitado />
+              </Container>
+            </Invoice>
+          </> : <Invoice>
+            <Loading />  
+          </Invoice>
+        }
           <AllProjects href="/psicologos">Ver todos los psicologos</AllProjects>
       </CardContent>
     </InvoicesContainer>

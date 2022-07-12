@@ -22,8 +22,8 @@ import PsicoAdmin from '../../Admin/Componentes/PsicoPage/PsicoAdmin.jsx'
 
 import ForPsicos from "../ForPsicos/ForPsicos"
 import ReportsHome from "../../Admin/Componentes/Reports/ReportsHome";
-import PsicoList from "../../Admin/Componentes/Psicologos/PsicoList";
-import { AuthContext } from '../../context/authContext/AuthContext';
+import PsychoList from "../../Admin/Componentes/Psicologos/PsychoList";
+import PsychoAdmin from "../../Admin/Componentes/PsicoPage/PsychoAdmin";
 
 import {ChatPage} from '../../pages/ChatPage'
 
@@ -74,7 +74,7 @@ export default function PsicoApp() {
                     <Nav/>
                     <Routes>
                         <Route path="/" element={<ForPsicos />}/>
-                         <Route path='/paciente/:id' element={
+                        <Route path='/paciente/:id' element={
                             <ChakraProvider theme={theme}>
                                 <PacientDetails/>
                             </ChakraProvider>
@@ -96,8 +96,8 @@ export default function PsicoApp() {
                         <Route path="/reportes" element={<ReportsHome />}/>
                         <Route path='/pacientes' element={<UserList />} />
                         <Route path='/pacientes/:id' element={<UserAdmin />} />
-                        <Route path='/psicologos' element={<PsicoList />} />
-                        <Route path='/psicologos/:id' element={<PsicoAdmin />} />
+                        <Route path='/psicologos' element={<PsychoList />} />
+                        <Route path='/psicologos/:id' element={<PsychoAdmin />} />
                         <Route path="/*" element={ <Navigate to="/" /> } />
                     </Routes>
                 </>
