@@ -97,7 +97,6 @@ const getPayments = async (req, res) => {
         })*/
         const psicologo = await Psicologo.findByPk(Number(psicoId), {include:{model:Factura}})
         psicologo.facturas.map(async(f) => await f.update({saldado:true}))
-        const pacienteExistente = psicologo.pacientesAtendidos.find(el => el === usuario.paciente.id)
         console.log("PACIENTE EXISTENTE", pacienteExistente)
         let info = await transporter.sendMail({
             from: `${process.env.EMAIL}`, // sender address
