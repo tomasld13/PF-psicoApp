@@ -19,7 +19,7 @@ import AdminApp from '../../Admin/AdminApp';
 import UserList from "../../Admin/Componentes/Users/UserList";
 import UserAdmin from '../../Admin/Componentes/UserPage/UserAdmin.jsx';
 import PsicoAdmin from '../../Admin/Componentes/PsicoPage/PsicoAdmin.jsx'
-
+import {AuthContext} from '../../context/authContext/AuthContext';
 import ForPsicos from "../ForPsicos/ForPsicos"
 import ReportsHome from "../../Admin/Componentes/Reports/ReportsHome";
 import PsychoList from "../../Admin/Componentes/Psicologos/PsychoList";

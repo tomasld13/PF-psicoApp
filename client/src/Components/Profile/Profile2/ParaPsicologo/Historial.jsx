@@ -1,4 +1,7 @@
-import React from "react"
+import React, { useEffect } from "react"
+import { useSelector, useDispatch } from "react-redux"
+import { psicologoFacturas } from "../../../../slice/psico/thunks"
+import { Link } from "react-router-dom"
 import {
   Table,
   Thead,
@@ -12,6 +15,12 @@ import {
 } from '@chakra-ui/react'
 
 export default function Historial() {
+  const { id } = useSelector(state => state.auth.authBack)
+  const facturas = useSelector(state => state.psicology.psicoFacturas)
+  const dispatch = useDispatch()
+  useEffect(() => {
+    dispatch(psicologoFacturas(id))
+  },[dispatch])
 
   return (
     <>
@@ -28,21 +37,15 @@ export default function Historial() {
       </Tr>
     </Thead>
     <Tbody>
-      <Tr>
-        <Td>inches</Td>
-        <Td>millimetres (mm)</Td>
-        <Td isNumeric>25.4</Td>
-      </Tr>
-      <Tr>
-        <Td>feet</Td>
-        <Td>centimetres (cm)</Td>
-        <Td isNumeric>30.48</Td>
-      </Tr>
-      <Tr>
-        <Td>yards</Td>
-        <Td>metres (m)</Td>
-        <Td isNumeric>0.91444</Td>
-      </Tr>
+      {facturas?.map(factura => (
+        <Tr>
+          <Td><Link to={`/paciente/${factura.pacienteId}`} >{factura.paciente.usuario.name}</Link></Td>
+          <Td><Link to={`/paciente/${factura.pacienteId}`} >{factura.paciente.usuario.lastname}</Link></Td>
+          <Td>{factura.precio}</Td>
+          <Td>{factura.servicio}</Td>
+          <Td>{factura.fecha}</Td>
+        </Tr>
+      ))}
     </Tbody>
   </Table>
 </TableContainer>

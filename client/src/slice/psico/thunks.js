@@ -10,7 +10,8 @@ import { getPsychos,
         sortByExpPsycho,
         getPacientByID,
         getPatients,
-        getPsychologistFavs  } from './psicologySlice.js';
+        getPsychologistFavs,
+        getPsicologoFacturas } from './psicologySlice.js';
 
 export const getPsicology = () => {
     return async (dispatch) => {
@@ -277,5 +278,13 @@ export const suspenderPsico = (id, token) => {
         const data = await rs.json();
 
         console.log(data);
+    }
+}
+
+export const psicologoFacturas = (id) => {
+    return async (dispatch) => {
+        const rs = await fetch(`${process.env.REACT_APP_API}/api/factura/psicologo/${id}`);
+        const data = await rs.json();
+        dispatch(getPsicologoFacturas(data));
     }
 }

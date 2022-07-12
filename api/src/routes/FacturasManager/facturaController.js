@@ -1,4 +1,4 @@
-const { Factura, Paciente, Usuario} = require("../../db")
+const { Factura, Paciente, Usuario, Psicologo} = require("../../db")
 
 const getFacturaByPacienteID = async (req, res) => {
     const { id } = req.params;
@@ -9,7 +9,7 @@ const getFacturaByPacienteID = async (req, res) => {
         where: {
             pacienteId: usuario.paciente.id
         },
-        include: [{model: Paciente, include: [{model: Usuario, attributes: ["name", "lastname", "email", "telephone"]}]}]
+        include: [{model: Paciente, include: [{model: Usuario, attributes: ["name", "lastname", "email", "telephone"]}]}, {model: Psicologo, include: [{model: Usuario, attributes: ["name", "lastname", "email", "telephone"]}]}]
         });
         if (!factura) {
         return res.status(404).send({ error: "Factura no encontrada" });
@@ -20,4 +20,23 @@ const getFacturaByPacienteID = async (req, res) => {
     }
 }
 
-module.exports = { getFacturaByPacienteID }
+const getFacturaByPsicologoID = async (req, res) => {
+    const { id } = req.params;
+    try {
+        const usuario = await Usuario.findByPk(id, {include: {model: Psicologo, attributes: ["id"]}});
+        const factura = await Factura.findAll({
+        where: {
+            psicologoId: usuario.psicologo.id
+        },
+        include: [{model: Psicologo, include: [{model: Usuario, attributes: ["name", "lastname", "email", "telephone"]}]}, {model: Paciente, include: [{model: Usuario, attributes: ["name", "lastname", "email", "telephone"]}]}]
+        });
+        if (!factura) {
+        return res.status(404).send({ error: "Factura no encontrada" });
+        }
+        return res.send(factura);
+    } catch (error) {
+        res.status(404).send({ error: error.message })
+    }
+}
+
+module.exports = { getFacturaByPacienteID, getFacturaByPsicologoID }
