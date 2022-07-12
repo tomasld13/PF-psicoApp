@@ -19,14 +19,18 @@ import {
   useDisclosure,
   VStack,
 } from '@chakra-ui/react'
+import { getPsicology } from '../../../slice/psico/thunks';
 
 function Profile() {
+
+  const { photoURL } = useSelector(state => state.auth.authGoogle);
   const [userProfile, setUserProfile] = useState(null)
 
   const { isOpen, onOpen, onClose } = useDisclosure()
   const profileImage = useRef(null)
 
-  const { name } = useSelector(state=>state.auth.authBack)
+  const { name, rolId } = useSelector(state=>state.auth.authBack)
+  const google = useSelector(state=>state.auth.authGoogle.rolId)
 
   const openChooseImage = () => {
     profileImage.current.click()
@@ -52,7 +56,7 @@ function Profile() {
         name="nombre"
         cursor="pointer"
         onClick={openChooseImage}
-        src={userProfile ? userProfile : {imagetemplate}}
+        src={photoURL ? photoURL : null }
       >
         <AvatarBadge bg="brand.blue" boxSize="1em">
           <svg width="0.4em" fill="currentColor" viewBox="0 0 20 20">
@@ -97,7 +101,8 @@ function Profile() {
           {name}
         </Heading>
         <Text color="brand.gray" fontSize="sm">
-          Paciente
+          {(rolId===1 || google === 1)?"Paciente":"Psicologo"}
+
         </Text>
       </VStack>
     </VStack>

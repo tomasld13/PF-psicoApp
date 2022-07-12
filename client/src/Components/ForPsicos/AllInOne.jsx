@@ -52,10 +52,9 @@ const AllInOne = () => {
               <AiOutlineCheckCircle className='w-7 mr-4 text-green-600' />
             </div>
             <div>
-              <h3 className='font-bold text-lg'>Historia clínica</h3>
+              <h3 className='font-bold text-lg'>Cobros sin intermediarios</h3>
               <p className='text-lg pt-2 pb-4'>
-              Las historias clínicas de tus pacientes se encuentran encriptadas 
-              para que puedas acceder de manera segura a ellas.
+              No necesitas intermediarios para cobrar a tus pacientes, solo te cobramos la membresia mensual.
               </p>
             </div>
           </div>
@@ -64,9 +63,9 @@ const AllInOne = () => {
               <AiOutlineCheckCircle className='w-7 mr-4 text-green-600' />
             </div>
             <div>
-              <h3 className='font-bold text-lg'>Premios</h3>
+              <h3 className='font-bold text-lg'>Recibe feedbacks de tus pacientes</h3>
               <p className='text-lg pt-2 pb-4'>
-                Premiamos al mejor psicologo del mes.
+              Recibí feedbacks de tus pacientes para que puedas mejorar tu perfil profesional.
               </p>
             </div>
           </div>

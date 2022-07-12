@@ -40,7 +40,7 @@ const checkDia = async () => {
     })*/
     let diaMesProximo = parseInt(diaActual[1])+1
     diaMesProximo = [diaActual[0], diaMesProximo.toString(), diaActual[2]]
-    dias = await Dia.findAll()
+    let dias = await Dia.findAll()
     let diasDB = []
     dias = await dias.map( async (d) => {
         if(!diasDB.includes(d.fecha)) diasDB.push(d.fecha)

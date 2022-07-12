@@ -19,7 +19,7 @@ function Sidebar() {
     >
       <Profile />
       <Data />
-      <Actions />
+      {/* <Actions /> */}
     </Box>
   )
 }

@@ -35,7 +35,7 @@ const postMP = async (req, res) => {
     const items = [
         { servicio: data.servicio, precio: data.precio, quantity: 1 },
     ]
-    const external_reference = data.id + "*" + data.hora + "*" + data.fecha + "*" + psicoId + "*" + data.email + "*" + data.precio;
+    const external_reference = data.id + "*" + data.hora + "*" + data.fecha + "*" + psicoId + "*" + data.email + "*" + data.precio + "*" + data.servicio;
     const items_md = items.map(item => ({
         title: item.servicio,
         quantity: item.quantity,
@@ -85,7 +85,7 @@ const getPayments = async (req, res) => {
         const payment_status = req.query.status;
         const merchant_order_id = req.query.merchant_order_id;
         const external_reference = req.query.external_reference;
-        const [id, hora, fecha, psicoId, email, precio] = external_reference.split("*")
+        const [id, hora, fecha, psicoId, email, precio, servicio] = external_reference.split("*")
         const factura = await Factura.create({
             payment_id: payment_id,
             payment_status: payment_status,
@@ -93,7 +93,8 @@ const getPayments = async (req, res) => {
             status: "paid",
             fecha: fecha,
             precio: parseInt(precio),
-            saldado: false
+            saldado: false,
+            servicio: servicio,
         })
         const psicologo = await Psicologo.findByPk(Number(psicoId))
         const dia = await Dia.findOne({ where: { fecha: fecha } })

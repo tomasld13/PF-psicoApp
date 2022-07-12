@@ -1,6 +1,15 @@
-import { async } from '@firebase/util';
-import { getPsychos, filterSpatiality, sortByNamePsycho, getPsychoByID, postMercadopago, calendar, getProvinciasSelect, getCiudadesSelect, sortByExpPsycho, getPacientByID  } from './psicologySlice.js';
 import axios from 'axios';
+import { getPsychos,
+        filterSpatiality,
+        sortByNamePsycho,
+        getPsychoByID,
+        postMercadopago,
+        calendar,
+        getProvinciasSelect,
+        getCiudadesSelect,
+        sortByExpPsycho,
+        getPacientByID,
+        getPatients  } from './psicologySlice.js';
 
 export const getPsicology = () => {
     return async (dispatch) => {
@@ -18,6 +27,23 @@ export const getPsicology = () => {
 
     }
 }
+
+export const getPatient = () => {
+    return async (dispatch) => {
+
+        try {
+            const response = await fetch(`${process.env.REACT_APP_API}/api/paciente`);
+
+            const dataPaciente = await response.json();
+
+            dispatch(getPatients(dataPaciente));
+
+        } catch (error) {
+            return error
+        }
+    }
+}
+
 
 export const filterPsicology = (spatiality) => {
     return async (dispatch) => {
@@ -76,7 +102,7 @@ export const getPsychologyID = (id) => {//Consigue Psicologos por ID
 export const getPacientID = (id) => {//Consigue Paciente por ID
     return async (dispatch)=> {
         try {
-            const data = await (await axios(`${process.env.REACT_APP_API}/api/paciente/${id}`)).data;
+            const data = await axios(`${process.env.REACT_APP_API}/api/paciente/${id}`);
             dispatch(getPacientByID(data));
         } catch (error) {
             return (error)           
@@ -134,6 +160,16 @@ export const postDateTime = (dateTime) => {
     }
 }
 
+// export const postMP = (data) => {
+//     return async (dispatch) => {
+//         try {
+//             const resp = await axios.post(`${process.env.REACT_APP_API}/api/mercadopago`, data);
+//             dispatch(postMercadopago(resp.data));
+//         } catch (error) {
+//             return (error)
+//         }
+//     }
+// }
 export const postMP = (data, token) => {
     return async (dispatch) => {
         try {
@@ -174,8 +210,8 @@ export const getCiudades = (id) => {
         try {
             const resp = await fetch(`${process.env.REACT_APP_API}/api/provincias/${id}`);
             const data = await resp.json();
-
-            dispatch(getCiudadesSelect(data.ciudads));
+            
+            dispatch(getCiudadesSelect(data));
         } catch (error) {
             console.log(error)
         }
@@ -186,5 +222,18 @@ export const cleanCiudades = () => {
     return (dispatch) => {
         dispatch(getCiudadesSelect([]));
     }
+}
 
+export const psychoFavs = (method, idUser, idPsycho) => {
+    return () => {
+        fetch(`${process.env.REACT_APP_API}/api/favoritos/${idPsycho}`, {
+            method: method,
+            body: JSON.stringify({id: idUser}),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(rs => rs.json())
+        .then(data => console.log(data))
+        .catch(e => console.log(e));
+    }
 }
