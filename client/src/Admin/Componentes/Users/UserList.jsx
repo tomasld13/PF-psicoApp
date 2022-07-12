@@ -16,7 +16,9 @@ export default function UserList() {
 
   const handleDelete = (id) => {
     dispatch(deleteUser(id,'paciente',token));
-    dispatch(getPatient());
+    setTimeout(() => {
+      dispatch(getPatient());
+    },50);
   }
 
   useEffect(() => {

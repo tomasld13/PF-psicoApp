@@ -15,6 +15,7 @@ import {
   } from '@chakra-ui/react'
 import { psychoFavs } from '../../../slice/psico/thunks.js';
 import { getPsychoFavs } from '../../../slice/psico/thunks.js';
+import { Link } from 'react-router-dom';
   
   function CompanySettings() {
 
@@ -29,11 +30,13 @@ import { getPsychoFavs } from '../../../slice/psico/thunks.js';
       dispatch(getPsychoFavs(idUser));
     }, []);
 
-    const deleteFavs = () => {
-      const idUser = idUserBack ? idUserBack : idUserGoogle
-      dispatch(psychoFavs('DELETE',idUser, ));
+    const deleteFavs = (idPsico) => {
+      dispatch(psychoFavs('DELETE',idUser, idPsico));
+      setTimeout(() => {
+        dispatch(getPsychoFavs(idUser));
+      },50);
     }
-    
+
     return (
       <Grid
         templateColumns={{ base: 'repeat(1, 1fr)', md: 'repeat(2, 1fr)' }}
@@ -65,9 +68,11 @@ import { getPsychoFavs } from '../../../slice/psico/thunks.js';
                 </FormControl>
                 <FormControl id="companyName">
                   <FormLabel>Nombre</FormLabel>
-                  <Input focusBorderColor="brand.blue" type="text" placeholder="Nombre del psicologo" value={fav.psicofavorito}/>
+                  <Link to={`/psico/${fav.idPsico}`}>
+                    <Input focusBorderColor="brand.blue" type="text" placeholder="Nombre del psicologo" value={fav.psicofavorito}/>
+                  </Link>
                 </FormControl>
-                <button onClick={deleteFavs}>Eliminar</button>
+                <button onClick={() => deleteFavs(fav.idPsico)}>Eliminar</button>
                 </> 
               })
             }
