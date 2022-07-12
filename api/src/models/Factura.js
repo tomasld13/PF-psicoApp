@@ -27,6 +27,9 @@ module.exports = (sequelize)=>{
         },
         saldado: {
             type: DataTypes.BOOLEAN
+        },
+        servicio: {
+            type: DataTypes.STRING
         }
     },
     {

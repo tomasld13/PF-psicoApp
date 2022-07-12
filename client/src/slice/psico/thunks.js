@@ -211,8 +211,8 @@ export const getCiudades = (id) => {
         try {
             const resp = await fetch(`${process.env.REACT_APP_API}/api/provincias/${id}`);
             const data = await resp.json();
-
-            dispatch(getCiudadesSelect(data.ciudads));
+            
+            dispatch(getCiudadesSelect(data));
         } catch (error) {
             console.log(error)
         }

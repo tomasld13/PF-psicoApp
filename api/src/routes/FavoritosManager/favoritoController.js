@@ -7,10 +7,11 @@ const postFavoritoByPacienteID = async (req, res) => {
         // const usuario = await Usuario.findOne({where:{id:id}, include:{model:Psicologo}})
         const psicologo = await Psicologo.findByPk(id, {include : {model : Usuario, attributes : ["name", "lastname"]}});
         const favorito = await Favoritos.create({
-            psicofavorito: psicologo.usuario.name + " " + psicologo.usuario.lastname
+            psicofavorito: psicologo.usuario.name + " " + psicologo.usuario.lastname,
+            idPsico: psicologo.id
         });
         const usuario_pacienteID = await Usuario.findOne({where:{id:pacienteID}, include:{model:Paciente}})
-        const paciente = await Paciente.findByPk(usuario_pacienteID.paciente.id, {include: {model: Favoritos, attributes: ["psicofavorito"]}});
+        const paciente = await Paciente.findByPk(usuario_pacienteID.paciente.id, {include: {model: Favoritos}});
         const exist = paciente.favoritos.find(el => el.psicofavorito === psicologo.usuario.name + " " + psicologo.usuario.lastname);
         if (!exist) {
             await paciente.addFavorito(favorito);
@@ -19,7 +20,7 @@ const postFavoritoByPacienteID = async (req, res) => {
                 message: "El psicologo ya esta en tus favoritos"
             })
         }
-        const pacienteRes = await Paciente.findByPk(usuario_pacienteID.paciente.id, {include: {model: Favoritos, attributes: ["psicofavorito"]}});
+        const pacienteRes = await Paciente.findByPk(usuario_pacienteID.paciente.id, {include: {model: Favoritos}});
         return res.send(pacienteRes);
     } catch (error) {
         res.status(404).send({ error: error.message })
@@ -51,7 +52,6 @@ const deleteFavoritoByPacienteID = async (req, res) => {
                 message: "El psicologo no esta en tus favoritos"
             })
         }
-        // return res.send({pacienteRes, destroy});
     } catch (error) {
         res.status(404).send({ error: error.message })
     }
@@ -62,7 +62,7 @@ const getFavoritosByPacienteID = async (req, res) => {
     const { id } = req.params;
     try {
         const usuario = await Usuario.findOne({where:{id:id}, include:{model:Paciente}})
-        const paciente = await Paciente.findByPk(usuario.paciente.id, {include: {model: Favoritos, attributes: ["psicofavorito"]}});
+        const paciente = await Paciente.findByPk(usuario.paciente.id, {include: {model: Favoritos}});
         return res.send(paciente);
     } catch (error) {
         res.status(404).send({ error: error.message })
