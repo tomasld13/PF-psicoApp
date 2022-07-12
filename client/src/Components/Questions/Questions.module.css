@@ -7,7 +7,6 @@
 
 .content {
     background-color: var(--secondary);
-    border-radius: 2rem;
     display: flex;
     flex-direction: row;
     width: 100%;
