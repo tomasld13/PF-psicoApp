@@ -5,7 +5,7 @@ import { AiOutlineDelete } from 'react-icons/ai'
 import { Link } from 'react-router-dom'
 import './UserList.css'
 import Sidebar from '../Sidebar';
-import {getPatient, deletePatient} from '../../../slice/psico/thunks.js';
+import {getPatient, deleteUser} from '../../../slice/psico/thunks.js';
 
 export default function UserList() {
 
@@ -15,7 +15,7 @@ export default function UserList() {
   const dispatch = useDispatch();
 
   const handleDelete = (id) => {
-    dispatch(deletePatient(id,'paciente',token));
+    dispatch(deleteUser(id,'paciente',token));
     dispatch(getPatient());
   }
 
