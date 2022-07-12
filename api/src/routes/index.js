@@ -39,7 +39,7 @@ router.use('/administrador', administradorRoutes)
 router.use("/usuario", usuarioRoutes)
 router.use('/mercadopago', mercadopagoRoutes)
 router.use('/mensajes', mensajesRoutes)
-router.use('/update', uploadRoutes)
+router.use('/upload', uploadRoutes)
 router.use('/ganancias', gananciasRoutes);
 router.use('/Factura', facturaRoutes)
 router.use('/blog', blogRoutes)
