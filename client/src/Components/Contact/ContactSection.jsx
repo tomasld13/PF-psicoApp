@@ -4,8 +4,8 @@ import ContactForm from './ContactForm'
 import ContactInfoItem from './ContactInfoItem'
 import styled from 'styled-components'
 import Nav from '../Nav/Nav'
+import MapSection from './GoogleMaps'
 import Footer from '../Footer/Footer'
-import Map from './Map'
 import SectionTitle from '../SectionTitle/SectionTitle'
 import ScrollToTop from '../ScrollToTop/ScrollToTop'
 
@@ -57,6 +57,14 @@ const ContactSectionStyle = styled.div`
   }
 `;
 
+
+
+const location = {
+  address: 'Guayaquil 200, C1424 CABA.',
+  lat: -34.619820571926304,
+  lng: -58.431131915578895,
+}
+
 function ContactSection() {
   return (
     <>
@@ -85,7 +93,7 @@ function ContactSection() {
             </div> 
         </div>
     </ContactSectionStyle>
-    <Map />
+    <MapSection location={location} zoomLevel={17} /> {/* include it here */}
     </>
   )
 }

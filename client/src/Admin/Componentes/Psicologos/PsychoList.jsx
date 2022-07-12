@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { DataGrid } from '@mui/x-data-grid';
 import { AiOutlineDelete } from 'react-icons/ai'
 import { Link } from 'react-router-dom'
-import './UserList.css'
+import './PsicoList.css'
 import Sidebar from '../Sidebar';
 import { getPsicology, deleteUser, suspenderPsico } from '../../../slice/psico/thunks.js';
 
@@ -14,7 +14,6 @@ export default function PsychoList() {
   const {token} = useSelector(state => state.auth.authBack);
 
   const dispatch = useDispatch();
-
 
   const handleDelete = (id) => {
     dispatch(suspenderPsico(id,token));
@@ -53,18 +52,16 @@ const columns = [
     headerName: 'Acciones',
     width: 150,
     renderCell: (params) => {
-      console.log(params.row);
       return (
         <> 
-        
-        <Link to={'/psicologos/'+params.row.psicologo.id}>
-        <button className="userListEdit">Editar</button>
-        </Link>
-        <AiOutlineDelete 
-        size='25' 
-        className='userListDelete'
-        onClick={() => handleDelete(params.row.id)}
-        />
+          <Link to={'/psicologos/'+params.row.psicologo.id}>
+          <button className="userListEdit">Editar</button>
+          </Link>
+          <AiOutlineDelete 
+          size='25' 
+          className='userListDelete'
+          onClick={() => handleDelete(params.row.id)}
+          />
         </>
       )
     }

@@ -18,6 +18,7 @@
     "dotenv": "^16.0.1",
     "firebase": "^9.8.4",
     "framer-motion": "^6.3.16",
+    "google-map-react": "^2.2.0",
     "react": "^18.2.0",
     "react-bootstrap": "^2.4.0",
     "react-datepicker": "^4.8.0",

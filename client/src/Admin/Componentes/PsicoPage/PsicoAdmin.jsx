@@ -1,70 +1,48 @@
-import { useEffect } from 'react';
-import { useDispatch, useSelector} from 'react-redux';
-import { useParams } from 'react-router-dom';
-import './User.css';
+import './Psico.css'
 import imageavatar from '../../Assets/face1.jpg';
 import styled from 'styled-components'
+
+import React from 'react'
 import { MdLocationSearching, MdMailOutline, MdOutlineSystemSecurityUpdate, MdPermIdentity } from 'react-icons/md';
 import Sidebar from '../Sidebar';
-import { getPacientID } from '../../../slice/psico/thunks.js';
-import Loading from '../../../Components/Loading/Loading';
 
-export default function UserAdmin() {
-
-  const paciente = useSelector(state => state.psicology.pacientId);
-
-  const {id} = useParams();
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(getPacientID(id));
-  }, []);
-  
-
-  console.log(paciente);
+export default function PsicoAdmin() {
   return (
     <>
-    <Sidebar />
-    <Container className='user-admin-profile'>
-        <div className="user-title-container">
-          <h1 className="edit-user">Editar Paciente</h1>
-          <button className="userAddButton">Crear Nuevo</button>
-        </div>
-        <UserContainer className="user-container">
-          <div className="user-show">
-            <div className="user-show-title">
-              <span className="show-username">Nombre del paciente</span>
-              <span className="show-title">Algun título</span>
-            </div>
-            <div className="user-show-bottom">
-              {
-                paciente.usuario ? <>  
-                  <span className="user-show-tittle-bottom">
-                    Detalles de la cuenta
-                    <div className="user-show-info">
-                    <MdPermIdentity className='user-show-icon'/>
-                    <span className="user-show-input-title">{`${paciente.usuario.name} ${paciente.usuario.lastname}`}</span>
-                    </div>
-                    <div className="user-show-info">
-                    <MdLocationSearching className='user-show-icon'/>
-                    <span className="user-show-input-title">{paciente.usuario.address}</span>
-                    </div>
-                    <div className="user-show-info">
-                    <MdMailOutline className='user-show-icon'/>
-                    <span className="user-show-input-title">{paciente.usuario.email}</span>
-                    </div>
-                    <div className="user-show-info">
-                    <MdOutlineSystemSecurityUpdate className='user-show-icon'/>
-                    <span className="user-show-input-title">{paciente.usuario.state ? 'activo' : 'inactivo'}</span>
-                    </div>
-                  </span>
-                </> : <>
-                  <Loading />
-                </>
-              }
-            </div>
-          </div>
-          <div className="user-update">
+      <Sidebar />
+    <Container >
+        <UserTitle>
+          <h1>Editar Paciente</h1>
+        </UserTitle>
+        <UserContainer>
+          <UserShow>
+            <UserShowTitle>
+              <ShowUsername>Nombre del paciente</ShowUsername>
+              <ShowTitle>Algun título</ShowTitle>
+            </UserShowTitle>
+            <UserShowBottom>
+              <TitleButtom>
+                Detalles de la cuenta
+                <UserShowInfo>
+                <MdPermIdentity className='user-show-icon'/>
+                <span className="user-show-input-title">Nombre Completo</span>
+                </UserShowInfo>
+                <div className="user-show-info">
+                <MdLocationSearching className='user-show-icon'/>
+                <span className="user-show-input-title">Dirección</span>
+                </div>
+                <div className="user-show-info">
+                <MdMailOutline className='user-show-icon'/>
+                <span className="user-show-input-title">Email</span>
+                </div>
+                <div className="user-show-info">
+                <MdOutlineSystemSecurityUpdate className='user-show-icon'/>
+                <span className="user-show-input-title">Status</span>
+                </div>
+              </TitleButtom>
+            </UserShowBottom>
+          </UserShow>
+          <UserUpdate>
             <span className="userUpdateTitle">Editar</span>
             <form  className="userUpdateForm">
               <div className="form-left-info">
@@ -82,7 +60,7 @@ export default function UserAdmin() {
                 <button className="userUpdateButton">Actualizar</button>
               </div>
             </form>
-          </div>
+          </UserUpdate>
         </UserContainer>
     </Container>
   </>
