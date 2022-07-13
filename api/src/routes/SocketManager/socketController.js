@@ -1,4 +1,4 @@
-const {Usuario, Mensaje, Paciente, Ciudad, Provincia, Genero, Rol} = require('../../db');
+const {Usuario, Mensaje, Paciente, Ciudad, Provincia, Genero, Rol, Psicologo} = require('../../db');
 
 
 
@@ -31,10 +31,10 @@ const getPacientes = async() => {
 
     return usuarios;
 }
-const getPsicologos = async() => {
+const getPsicologos = async(user) => {
 
     const usuarios=await Usuario.findAll({
-        where: { rolId: 2, state : true }, include: [{ model: Paciente, attributes: { exclude: ["fk_usuarioID", "fk_especialidadId"] } },
+        where: { rolId: 2, state : true }, include: [{ model: Psicologo, attributes: { exclude: ["fk_usuarioID", "fk_especialidadId"] } },
         { model: Ciudad, include: { model: Provincia, attributes: ['name'] }, attributes: ['name'] },
         { model: Genero, attributes: ["genero"] },
         { model: Rol, attributes: ["name"] }]
