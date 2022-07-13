@@ -23,8 +23,13 @@ import PsicoAdmin from '../../Admin/Componentes/PsicoPage/PsicoAdmin.jsx'
 
 import ForPsicos from "../ForPsicos/ForPsicos"
 import ReportsHome from "../../Admin/Componentes/Reports/ReportsHome";
+<<<<<<< HEAD
 import PsicoList from "../../Admin/Componentes/Psicologos/PsicoList";
 import { AuthContext } from '../../context/authContext/AuthContext';
+=======
+import PsychoList from "../../Admin/Componentes/Psicologos/PsychoList";
+import PsychoAdmin from "../../Admin/Componentes/PsicoPage/PsychoAdmin";
+>>>>>>> 52bf1dd6d3ac5108144f2791447f884d2adbd706
 
 import {ChatPage} from '../../pages/ChatPage'
 import { login } from '../../slice/auth/authSlice';
@@ -101,9 +106,14 @@ export default function PsicoApp() {
                         <Route path="/reportes" element={<ReportsHome />}/>
                         <Route path='/pacientes' element={<UserList />} />
                         <Route path='/pacientes/:id' element={<UserAdmin />} />
+<<<<<<< HEAD
                         <Route path='/psicologos' element={<PsicoList />} />
                         <Route path='/psicologos/:id' element={<PsicoAdmin />} />
                         <Route path='/mensajes' element = {<ChatPage/>}/>
+=======
+                        <Route path='/psicologos' element={<PsychoList />} />
+                        <Route path='/psicologos/:id' element={<PsychoAdmin />} />
+>>>>>>> 52bf1dd6d3ac5108144f2791447f884d2adbd706
                         <Route path="/*" element={ <Navigate to="/" /> } />
                     </Routes>
                 </>

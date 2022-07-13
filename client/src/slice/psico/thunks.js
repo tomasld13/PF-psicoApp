@@ -9,7 +9,8 @@ import { getPsychos,
         getCiudadesSelect,
         sortByExpPsycho,
         getPacientByID,
-        getPatients  } from './psicologySlice.js';
+        getPatients,
+        getPsychologistFavs  } from './psicologySlice.js';
 
 export const getPsicology = () => {
     return async (dispatch) => {
@@ -103,7 +104,7 @@ export const getPacientID = (id) => {//Consigue Paciente por ID
     return async (dispatch)=> {
         try {
             const data = await axios(`${process.env.REACT_APP_API}/api/paciente/${id}`);
-            dispatch(getPacientByID(data));
+            dispatch(getPacientByID(data.data));
         } catch (error) {
             return (error)           
         }
@@ -225,15 +226,56 @@ export const cleanCiudades = () => {
 }
 
 export const psychoFavs = (method, idUser, idPsycho) => {
-    return () => {
-        fetch(`${process.env.REACT_APP_API}/api/favoritos/${idPsycho}`, {
+
+    return async () => {
+        const rs = await fetch(`${process.env.REACT_APP_API}/api/favoritos/${idPsycho}`, {
             method: method,
-            body: JSON.stringify({id: idUser}),
+            body: JSON.stringify({pacienteID: idUser}),
             headers: {
                 'Content-Type': 'application/json'
             }
-        }).then(rs => rs.json())
-        .then(data => console.log(data))
-        .catch(e => console.log(e));
+        });
+        const data = await rs.json();
+        console.log(data);
+    }
+}
+
+export const getPsychoFavs = (id) => {
+    return async (dispatch) => {
+        const rs = await fetch(`${process.env.REACT_APP_API}/api/favoritos/${id}`);
+        const data = await rs.json();
+        dispatch(getPsychologistFavs(data));
+    }
+}
+
+export const deleteUser = (id, user, token) => {
+    return async () => {
+        const rs = await fetch(`${process.env.REACT_APP_API}/api/${user}/${id}`,{
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                'x-token': token
+            }
+        });
+
+        const data = await rs.json();
+
+        console.log(data);
+    }
+}
+
+export const suspenderPsico = (id, token) => {
+    return async () => {
+        const rs = await fetch(`${process.env.REACT_APP_API}/api/psicologo/suspender/${id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'x-token': token
+            }
+        });
+
+        const data = await rs.json();
+
+        console.log(data);
     }
 }
