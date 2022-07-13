@@ -1,5 +1,6 @@
 const Router = require("express");
 const Favoritos = require("../models/Favoritos");
+const { route } = require("./MensajesManager/mensajesRoutes");
 
 const {
     AuthRoutes,
@@ -17,10 +18,11 @@ const {
     facturaRoutes,
     blogRoutes,
     reviewRoutes,
-    newsletterRoutes,
     usuarioRoutes,
+    newsletterRoutes,
     favoritosRoutes,
-    gananciasRoutes
+    gananciasRoutes,
+    testimonioRoutes
 } = require('./routesIndex');
 
 const router = Router();
@@ -44,4 +46,5 @@ router.use('/blog', blogRoutes)
 router.use('/reviews',reviewRoutes)
 router.use('/newsletter', newsletterRoutes)
 router.use('/favoritos', favoritosRoutes)
+router.use('/testimonio', testimonioRoutes)
 module.exports = router;

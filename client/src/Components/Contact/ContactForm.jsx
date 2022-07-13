@@ -80,7 +80,7 @@ function ContactForm() {
                     id='email' 
                     name='email'
                     required
-                    value={email}  
+                     value={email}
                     onChange={e => setEmail(e.target.value)}
                     />
                 </label>

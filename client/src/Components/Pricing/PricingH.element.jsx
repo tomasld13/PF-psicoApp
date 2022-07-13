@@ -47,7 +47,7 @@ export const PricingCard = styled(Link)`
   background: #242424;
   box-shadow: 0 6px 20px rgba(56, 125, 255, 0.2);
   width: 280px;
-  height: 500px;
+  height: 550px;
   text-decoration: none;
   border-radius: 4px;
   &:nth-child(2) {
@@ -69,7 +69,7 @@ export const PricingCard = styled(Link)`
 export const PricingCardInfo = styled.div`
   display: flex;
   flex-direction: column;
-  height: 500px;
+  height: 550px;
   padding: 24px;
   align-items: center;
   color: #fff;
@@ -82,6 +82,7 @@ export const PricingCardIcon = styled.div`
 export const PricingCardPlan = styled.h3`
   margin-bottom: 5px;
   font-size: 24px;
+
 `;
 
 export const PricingCardCost = styled.h4`

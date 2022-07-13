@@ -29,12 +29,14 @@ export const startGoogleSignIn = () => {
         }
     }
 }
+let a = 0;
 
 export const startCreatingUserWithEmailPasswordPatient = (paciente) => {
 
     return async (dispatch) => {
         dispatch( checkingCredentials() );
         dispatch( logout() );
+        dispatch(logoutGoogle());
 
             const result = await fetch(`${process.env.REACT_APP_API}/api/paciente`, {
                 method: 'POST',
@@ -45,10 +47,18 @@ export const startCreatingUserWithEmailPasswordPatient = (paciente) => {
             });
 
             const data = await result.json();
-
+            
             if (data.error) {
-                dispatch(errorRegisterBack(data.error));
-                dispatch(logoutGoogle());
+                console.log("ENTRASTE AQUI",a = a + 1)
+                if (a === 1) {
+                    Swal.fire({
+                        title: 'El email ya ha sido registrado',
+                        text: data.error,
+                        icon: 'error',
+                        confirmButtonText: 'Ok'
+                    })
+                }
+                a = 0;
                 return dispatch(logoutBack());
             }
 
@@ -64,12 +74,14 @@ export const startCreatingUserWithEmailPasswordPatient = (paciente) => {
                 dispatch(logoutGoogle());
                 dispatch(loginBack(data[0]));
             }
-
-            Swal.fire(
-                'La cuenta fue creada exitosamente',
-                '',
-                'success'
-            );
+            
+                Swal.fire(
+                    'La cuenta fue creada exitosamente',
+                    '',
+                    'success'
+                );
+            
+            
     } 
 }
 
@@ -91,7 +103,16 @@ export const startCreatingUserWithEmailPasswordPsycho = (psycho) => {
             const data = await result.json();
 
             if (data.error) {
-                dispatch(errorRegisterBack(data.error));
+                console.log("ENTRASTE AQUI",a = a + 1)
+                if (a == 1) {
+                    Swal.fire({
+                        title: 'El email ya ha sido registrado',
+                        text: data.error,
+                        icon: 'error',
+                        confirmButtonText: 'Ok'
+                    })
+                }
+                a = 0;
                 return dispatch(logoutBack());
             }
             

@@ -48,7 +48,7 @@ const grabarMensaje = async( payload ) => {
     
     try {
         
-        const mensaje = await Mensaje.Create( payload );
+        const mensaje = await Mensaje.create( payload );
         
 
         return mensaje;
