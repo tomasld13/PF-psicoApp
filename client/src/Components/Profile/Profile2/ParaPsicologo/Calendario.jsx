@@ -5,7 +5,7 @@ export default function Calendario() {
   return (
     <>
         <div>
-            Hola Suscripcion
+            Hola Calendario
         </div>
     </>
   )

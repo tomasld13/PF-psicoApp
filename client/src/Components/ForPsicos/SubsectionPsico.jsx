@@ -9,7 +9,7 @@ export default function SubsectionPsico() {
             <img className='w-[500px] mx-auto my-4' src={benefit} alt='/' />
             <div className='flex flex-col justify-center'>
               <p className='text-[#575989] font-bold '>TE DAMOS LA BIENVENIDA!</p>
-              <h1 className='md:text-4xl sm:text-3xl text-2xl font-bold py-2'>Encontra y maneja a tus clientes de una forma sencilla</h1>
+              <h1 className='md:text-4xl sm:text-3xl text-2xl font-bold py-2'>Encuentra y maneja a tus clientes de una forma sencilla</h1>
               <p>
                 Podes comenzar hoy mismo a trabajar de forma rápida. A medida que vayas realizando sesiones vas a ir aumentando tu 
                 calificación y eso hará que seas mas reconocido. 

@@ -71,7 +71,7 @@ function ContactSection() {
     <ScrollToTop />
     <ContactSectionStyle>
         <div className="contact-container">
-          <SectionTitle heading='contactanos' subheading='' />
+          <SectionTitle heading='Contactanos' subheading='' />
             <div className="contactSection-wrapper">
 
                 <div className="contact-left text-lg text-white font-bold">

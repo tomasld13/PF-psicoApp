@@ -26,7 +26,7 @@ function Pricing() {
           <PricingWrapper>
             <PricingHeading>Precios</PricingHeading>
                 <PricingContainer>
-                    <PricingCard to='/auth/login'>
+                    <PricingCard>
                         <PricingCardInfo>
                             <PricingCardIcon>
                                 <BsFillPersonFill />
@@ -42,7 +42,7 @@ function Pricing() {
                             {/* <Button primary>Elegir Plan</Button> */}
                         </PricingCardInfo>
                     </PricingCard>
-                    <PricingCard to='/auth/login'>
+                    <PricingCard>
                         <PricingCardInfo>
                             <PricingCardIcon>
                                 <GiLovers />
@@ -58,7 +58,7 @@ function Pricing() {
                             {/* <Button primary>Elegir Plan</Button> */}
                         </PricingCardInfo>
                     </PricingCard>
-                    <PricingCard to='/auth/login'>
+                    <PricingCard>
                         <PricingCardInfo>
                             <PricingCardIcon>
                                 <HiUserGroup />

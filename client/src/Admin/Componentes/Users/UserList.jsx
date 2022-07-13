@@ -1,25 +1,52 @@
-import * as React from 'react';
-import { useState } from "react";
+import { useEffect } from "react";
+import { useDispatch, useSelector} from 'react-redux';
 import { DataGrid } from '@mui/x-data-grid';
 import { AiOutlineDelete } from 'react-icons/ai'
-import { Link } from 'react-router-dom'
-import { UserRows } from './data'
+import { Link, useNavigate } from 'react-router-dom'
+import Swal from 'sweetalert2'
 import './UserList.css'
 import Sidebar from '../Sidebar';
-
+import {getPatient, deleteUser} from '../../../slice/psico/thunks.js';
 
 export default function UserList() {
 
-  const [data, setData] = useState(UserRows)
+  const pacientes = useSelector(state => state.psicology.patients);
+  const {token} = useSelector(state => state.auth.authBack);
+  const paciente = useSelector(state => state.psicology.pacientId);
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleDelete = (id) => {
-    setData(data.filter((item) => item.id !==id))
+    Swal.fire({
+      title: '¿Estas seguro que querés eliminar al usuario?',
+      showDenyButton: true,
+      denyButtonText: 'Cancelar',
+      confirmButtonText: 'Eliminar'
+    }).then((result) => {
+
+      if(result.isConfirmed) {
+        Swal.fire('El usuario fue eliminado correctamente', "", 'success')
+        dispatch(deleteUser(id, 'paciente', token))
+        setTimeout(() => {
+       dispatch(getPatient());
+     },50);
+        navigate('/pacientes')
+      } else if (result.isDenied) {
+        Swal.fire('Los datos no se han guardado.','', 'info')
+      }
+    })
   }
 
-const columns = [
+
+  useEffect(() => {
+    dispatch(getPatient());
+  }, []);
+  
+  const columns = [
   { field: 'id', headerName: 'ID', width: 70 },
-  { field: 'firstName', headerName: 'Nombre', width: 130 },
-  { field: 'lastName', headerName: 'Apellido', width: 130 },
+  { field: 'name', headerName: 'Nombre', width: 130 },
+  { field: 'lastname', headerName: 'Apellido', width: 130 },
   {
     field: 'email',
     headerName: 'Email',
@@ -30,12 +57,12 @@ const columns = [
     headerName: 'Nombre Completo',
     description: 'This column has a value getter and is not sortable.',
     sortable: false,
-    width: 160,
+    width: 230,
     valueGetter: (params) =>
-      `${params.row.firstName || ''} ${params.row.lastName || ''}`,
+      `${params.row.name || ''} ${params.row.lastname || ''}`,
   }, 
   { 
-    field: 'status',
+    field: 'state',
     headerName: 'Status',
     width: 120
   },
@@ -66,7 +93,7 @@ const columns = [
     <Sidebar />
     <div style={{ height: 660, width: '65%', marginInlineStart: 400, marginTop: -650 }}>
       <DataGrid
-        rows={data}
+        rows={pacientes}
         columns={columns}
         pageSize={10}
         disableSelectionOnClick
