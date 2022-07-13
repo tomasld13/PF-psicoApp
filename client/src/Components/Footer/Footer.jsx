@@ -38,7 +38,13 @@ function Footer() {
         <div className='footer-link-wrapper'>
           <div class='footer-link-items'>
             <h2>NOSOTROS</h2>
-            <a href='/sign-up'>Cómo funciona</a>
+            <Link to='about' 
+            smooth={true} 
+            offset={50} 
+            duration={700} 
+            >
+            Acerca
+            </Link>
             <Link to='testimonios' 
             smooth={true} 
             offset={50} 
@@ -48,7 +54,6 @@ function Footer() {
             </Link>
             <a href='/psico'>Psicólogos</a>
             <Link to='pricing' smooth={true} offset={50} duration={700}>Precios</Link>
-            <a href='/'>Términos de servicio</a>
           </div>
           <div class='footer-link-items'>
             <h2>CONTACTANOS</h2>

@@ -13,7 +13,7 @@ const Content = () => {
 
   const tabs = (rolId===1)?
     ['Ajustes', 'Favoritos', 'Notificaciones',]
-    :['Ajustes', 'Favoritos', 'Suscripción','Calendario', 'Historial'];
+    :['Ajustes', 'Suscripción','Calendario', 'Historial'];
 
   return (
     <Box
@@ -68,13 +68,10 @@ const Content = () => {
                 <AccountSettings />
               </TabPanel>
               <TabPanel>
-                <Favorites />
+                <Suscripcion  />
               </TabPanel>
               <TabPanel>
-                <Suscripcion/> 
-              </TabPanel>
-              <TabPanel>
-                <Calendario/> 
+                <Calendario />
               </TabPanel>
               <TabPanel>
                 <Historial/> 
@@ -82,8 +79,6 @@ const Content = () => {
             </TabPanels>
           }
 
-        
-        
       </Tabs>
 
       {/* <Actions /> */}
