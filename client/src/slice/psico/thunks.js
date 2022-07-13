@@ -14,7 +14,8 @@ import { getPsychos,
         getPsychologistFavs,
         getPsicologoFacturas,
         getSaldoTotalPsicologo,
-        postMercadoPsicologo} from './psicologySlice.js';
+        postMercadoPsicologo,
+        getPacienteFacturas} from './psicologySlice.js';
 
 export const getPsicology = () => {
     return async (dispatch) => {
@@ -351,5 +352,13 @@ export const uploadImage = (id, img) => {
             const data = await rs.json();
             console.log(data);
         }
+    }
+}
+
+export const pacienteFacturas = (id) => {
+    return async (dispatch) => {
+        const rs = await fetch(`${process.env.REACT_APP_API}/api/factura/${id}`);
+        const data = await rs.json();
+        dispatch(getPacienteFacturas(data));
     }
 }

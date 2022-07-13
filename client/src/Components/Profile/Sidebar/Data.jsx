@@ -6,6 +6,7 @@ import { getPacientID } from '../../../slice/psico/thunks.js';
 function Data() {
 
   const paciente = useSelector(state => state.psicology.pacientId);
+  const facturas = useSelector(state => state.psicology.facturas);
   const authBack = useSelector(state => state.auth.authBack);
   const authGoogle = useSelector(state => state.auth.authGoogle);
 
@@ -17,7 +18,7 @@ function Data() {
   useEffect(() => {
     dispatch(getPacientID(idUser));
   }, [])
-  
+  console.log(paciente?.paciente?.facturas)
   return (
     <VStack as="ul" spacing={0} listStyleType="none">
       <Box
@@ -32,13 +33,22 @@ function Data() {
         borderColor="brand.light"
       >
       <Text color="brand.dark">Citas agendadas</Text>
-      {paciente.factura?.length > 0 ? paciente.factura.map(paciente => (
+      {facturas ? (
           <Text color={`brand.green`} fontWeight="bold">
-            {paciente.value}
+            {facturas.length} 
           </Text>
-      )) : <Text color={`brand.yellow`} fontWeight="bold">
+      ) : <Text color={`brand.yellow`} fontWeight="bold">
             No hay citas
           </Text> }
+          < hr/>
+          <Text color="brand.dark">Ultima Cita</Text>
+      {facturas ? (
+          <Text color={`brand.green`} fontWeight="bold">
+            {facturas[facturas?.length - 1]?.fecha} 
+            &nbsp;&nbsp;
+            {facturas[facturas?.length - 1]?.servicio}
+          </Text>
+      ) : null }
       </Box>
     </VStack>
   )

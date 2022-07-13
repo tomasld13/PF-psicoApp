@@ -7,6 +7,7 @@ import Notificationes from './Notificationes'
 import Suscripcion from './ParaPsicologo/Suscripcion.jsx'
 import Calendario from './ParaPsicologo/Calendario.jsx'
 import Historial from './ParaPsicologo/Historial.jsx'
+import HistorialPaciente from './HistorialPaciente'
 
 const Content = () => {
   const { rolId }  = useSelector(state => state.auth.authBack);
@@ -61,9 +62,9 @@ const Content = () => {
               {/* <TabPanel>
                 <Notificationes />
               </TabPanel> */}
-              {/* <TabPanel>
-                <Historial/> 
-              </TabPanel> */}
+              <TabPanel>
+                <HistorialPaciente/> 
+              </TabPanel> 
             </TabPanels>
             
             ://Para el perfil del Psicologo
