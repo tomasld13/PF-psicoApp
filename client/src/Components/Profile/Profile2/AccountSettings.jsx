@@ -52,7 +52,7 @@ function AccountSettings() {
     email: email,
     telephone: telephone,
     address: address
-  })
+  });
 
   function handleSubmit(e) {
     e.preventDefault();

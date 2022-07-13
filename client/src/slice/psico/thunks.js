@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { loginGoogle } from '../auth/authSlice.js';
 import { getPsychos,
         filterSpatiality,
         sortByNamePsycho,
@@ -164,16 +165,6 @@ export const postDateTime = (dateTime) => {
     }
 }
 
-// export const postMP = (data) => {
-//     return async (dispatch) => {
-//         try {
-//             const resp = await axios.post(`${process.env.REACT_APP_API}/api/mercadopago`, data);
-//             dispatch(postMercadopago(resp.data));
-//         } catch (error) {
-//             return (error)
-//         }
-//     }
-// }
 export const postMP = (data, token) => {
     return async (dispatch) => {
         try {
@@ -283,6 +274,7 @@ export const suspenderPsico = (id, token) => {
     }
 }
 
+
 export const psicologoFacturas = (id) => {
     return async (dispatch) => {
         const rs = await fetch(`${process.env.REACT_APP_API}/api/factura/psicologo/${id}`);
@@ -309,6 +301,55 @@ export const postSaldoTotal = (data) => {
             dispatch(postMercadoPsicologo(rs.data));
         } catch (error) {
             return (error);
+        }
+    }
+}
+
+export const activarPsico = (id, token) => {
+    return async () => {
+        const rs = await fetch(`${process.env.REACT_APP_API}/api/psicologo/activar/${id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'x-token': token
+            }
+        });
+
+        const data = await rs.json();
+
+        console.log(data);
+    }
+}
+
+export const uploadImage = (id, img) => {
+
+    return async () => {
+        
+        const formData = new FormData();
+        formData.append('archivo', img);
+
+        const rs = await fetch(`${process.env.REACT_APP_API}/api/upload/user/${id}`, {
+            method: 'PUT',
+            body: formData  
+        });
+
+        if (rs.ok) {
+            const data = await rs.json();
+            // dispatch(loginGoogle(data));
+
+            if (JSON.parse( localStorage.getItem('usuario') )) {
+                const usuarioBack = JSON.parse( localStorage.getItem('usuario') );
+                usuarioBack.avatar = data.avatar;
+                localStorage.setItem('usuario', JSON.stringify(usuarioBack));
+            } else {
+                const usuarioGoogle = JSON.parse( localStorage.getItem('usuarioGoogle') );
+                usuarioGoogle.user.avatar = data.avatar;
+                localStorage.setItem('usuarioGoogle', JSON.stringify(usuarioGoogle));
+            }
+
+        } else {
+            const data = await rs.json();
+            console.log(data);
         }
     }
 }

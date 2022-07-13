@@ -24,7 +24,8 @@ export const authSlice = createSlice({
             generoId: null,
             ciudadId: null,
             error: null,
-            token: null
+            token: null,
+            avatar: null
         },
         authGoogle: {
             status: 'checking',
@@ -40,7 +41,8 @@ export const authSlice = createSlice({
             ciudadId: null,
             error: null,
             token: null,
-            uid: null
+            uid: null,
+            avatar: null
         },
         error: null
     },
@@ -86,6 +88,7 @@ export const authSlice = createSlice({
             state.authBack.generoId = payload.user ? payload.user.generoId : payload.generoId;
             state.authBack.ciudadId = payload.user ? payload.user.ciudadId : payload.ciudadId;
             state.authBack.token = payload.user ? payload.token : null; 
+            state.authBack.avatar = payload.user ? payload.user.avatar : payload.avatar;
         },
         logoutBack: (state) => {
             state.authBack.status = 'no-authenticated';
@@ -116,6 +119,7 @@ export const authSlice = createSlice({
             state.authGoogle.photoURL = payload.user ? payload.user.photo : payload.photo;
             state.authGoogle.token = payload.user ? payload.token : null; 
             state.authGoogle.uid = payload.user ? payload.user.uid : payload.uid; 
+            state.authGoogle.avatar = payload.user ? payload.user.avatar : payload.avatar;
         },
         logoutGoogle: (state) => {
             state.authGoogle.status = 'no-authenticated';

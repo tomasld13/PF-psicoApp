@@ -17,7 +17,7 @@ function Invoices() {
     dispatch(getPsicology());
   }, []);
 
-  console.log(psicologos);
+  console.log(psicologos[1]);
   return (
     <InvoicesContainer>
       <CardContent>
@@ -30,7 +30,7 @@ function Invoices() {
                 </Avatar>
                 <TextContainer>
                   <Title>{psicologos[0].name}</Title>
-                  <SubTitle>{psicologos[0].psicologo.especialidades[0].especialidad}</SubTitle>
+                  <SubTitle>{psicologos[0].psicologo.especialidades[0]?.especialidad}</SubTitle>
                 </TextContainer>
               </Info>
               <Container>
@@ -44,7 +44,7 @@ function Invoices() {
                 </Avatar>
                 <TextContainer>
                   <Title>{psicologos[1].name}</Title>
-                  <SubTitle>{psicologos[1].psicologo.especialidades[0].especialidad}</SubTitle>
+                  <SubTitle>{psicologos[1].psicologo.especialidades[0]?.especialidad}</SubTitle>
                 </TextContainer>
               </Info>
               <Container>

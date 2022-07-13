@@ -62,7 +62,7 @@ function Informacion() {
           focusBorderColor="brand.blue"
           type="text"
           readOnly
-          value={`${pychoId.usuario.ciudad.name}`}
+          value={`${pychoId.usuario.ciudad?.name}`}
         />
         {/* <Select focusBorderColor="brand.blue" placeholder="Select city">
           <option value="buenosaires">Buenos Aires</option>

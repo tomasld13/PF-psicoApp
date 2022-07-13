@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { IoStatsChart } from "react-icons/io5";
 
 function Earnings() {
+
     return (
       <EarningsCard>
         <CardContent>
