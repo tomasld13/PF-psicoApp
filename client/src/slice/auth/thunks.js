@@ -38,7 +38,6 @@ export const startCreatingUserWithEmailPasswordPatient = (paciente) => {
     return async (dispatch) => {
         dispatch( checkingCredentials() );
         dispatch( logout() );
-        dispatch( logoutGoogle() );
 
             const result = await fetch(`${process.env.REACT_APP_API}/api/paciente`, {
                 method: 'POST',
@@ -52,6 +51,12 @@ export const startCreatingUserWithEmailPasswordPatient = (paciente) => {
             
             if (data.error) {
                 dispatch( logoutGoogle() );
+                Swal.fire({
+                    title: 'El email ya ha sido registrado',
+                    text: data.error,
+                    icon: 'error',
+                    confirmButtonText: 'Ok'
+                });
                 return dispatch(logoutBack());
             }
 
