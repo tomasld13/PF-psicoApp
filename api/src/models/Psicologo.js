@@ -16,6 +16,24 @@ module.exports = (sequelize) => {
     },
     intervaloSesion: {
       type: DataTypes.INTEGER
+    },
+    cbu:{
+      type: DataTypes.STRING
+    },
+    matriculaProfesional:{
+      type: DataTypes.STRING,
+      unique: true
+    },
+    sobreMi:{
+      type: DataTypes.STRING(1234)
+    },
+    pacientesAtendidos : {
+      type : DataTypes.ARRAY(DataTypes.INTEGER),
+      defaultValue : []
+    },
+    dni: {
+        type: DataTypes.BIGINT,
+        unique: true
     }
   },
     

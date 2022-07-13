@@ -1,0 +1,150 @@
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import styled from "styled-components";
+import Badge from "./Badge";
+import AvatarImage from "../Assets/avatarImage.jpg";
+import AvatarImage2 from "../Assets/avatarImage.jpg";
+import { cardShadow, hoverEffect, themeColor } from "../Utils/index";
+import { getPsicology } from '../../slice/psico/thunks.js';
+import Loading from '../../Components/Loading/Loading.jsx';
+
+function Invoices() {
+
+  const psicologos = useSelector(state => state.psicology.psychologists);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getPsicology());
+  }, []);
+
+  console.log(psicologos[1]);
+  return (
+    <InvoicesContainer>
+      <CardContent>
+        {
+          psicologos.length > 0 ? <>
+            <Invoice>
+              <Info>
+                <Avatar>
+                  <img src={AvatarImage} alt="" />
+                </Avatar>
+                <TextContainer>
+                  <Title>{psicologos[0].name}</Title>
+                  <SubTitle>{psicologos[0].psicologo.especialidades[0]?.especialidad}</SubTitle>
+                </TextContainer>
+              </Info>
+              <Container>
+                {
+                  psicologos[0].state ? <Badge content="activo" activo />
+                  : <Badge content="inhabilitado" inhabilitado />
+                }
+              </Container>
+            </Invoice>
+            <Invoice>
+              <Info>
+                <Avatar>
+                  <img src={AvatarImage2} alt="" />
+                </Avatar>
+                <TextContainer>
+                  <Title>{psicologos[1].name}</Title>
+                  <SubTitle>{psicologos[1].psicologo.especialidades[0]?.especialidad}</SubTitle>
+                </TextContainer>
+              </Info>
+              <Container>
+                {
+                  psicologos[1].state ? <Badge content="activo" activo />
+                  : <Badge content="inhabilitado" inhabilitado />
+                }
+              </Container>
+            </Invoice>
+          </> : <Invoice>
+            <Loading />  
+          </Invoice>
+        }
+          <AllProjects href="/psicologos">Ver todos los psicologos</AllProjects>
+      </CardContent>
+    </InvoicesContainer>
+  );
+}
+
+const InvoicesContainer = styled.div`
+  width: 35rem;
+  border-radius: 1rem;
+  margin-top: 1rem;
+  background-color: white;
+  height: 145%;
+  box-shadow: ${cardShadow};
+  transition: 0.4s ease-in-out;
+  &:hover {
+    box-shadow: ${hoverEffect};
+  }
+  @media screen and (min-width: 320px) and (max-width: 960px) {
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+`;
+
+const CardContent = styled.div`
+  @media screen and (min-width: 320px) and (max-width: 960px) {
+    margin: 2rem 0;
+  }
+`;
+const Invoice = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  margin: 0.4rem;
+  padding-top: 0.6rem;
+  @media screen and (min-width: 320px) and (max-width: 960px) {
+    flex-direction: column;
+    gap: 1rem;
+  }
+`;
+const Info = styled.div`
+  display: flex;
+  align-items: center;
+  width: 50%;
+  @media screen and (min-width: 320px) and (max-width: 960px) {
+    flex-direction: column;
+    width: 100%;
+    text-align: center;
+  }
+`;
+const Avatar = styled.div`
+  img {
+    height: 3.5rem;
+    width: 3.5rem;
+    border-radius: 3.5rem;
+  }
+`;
+const TextContainer = styled.div`
+  margin-left: 1rem;
+`;
+const Title = styled.h4``;
+const SubTitle = styled.h5`
+  font-weight: 400;
+`;
+
+const Container = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 30%;
+  align-items: center;
+  @media screen and (min-width: 320px) and (max-width: 960px) {
+    width: 100%;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+  
+`;
+
+const AllProjects = styled.a`
+  text-align: end;
+  color: ${themeColor};
+  cursor: pointer;
+`;
+const Price = styled.div``;
+
+export default Invoices;

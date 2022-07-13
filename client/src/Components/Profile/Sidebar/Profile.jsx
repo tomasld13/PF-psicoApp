@@ -1,5 +1,5 @@
 import { useState, useRef } from 'react'
-import { useSelector } from 'react-redux' 
+import { useDispatch, useSelector } from 'react-redux' 
 import imagetemplate from '../../Profile/team-male.jpg'
 import {
   Avatar,
@@ -19,31 +19,39 @@ import {
   useDisclosure,
   VStack,
 } from '@chakra-ui/react'
+import { getPsicology, uploadImage } from '../../../slice/psico/thunks';
 
 function Profile() {
+
+  const userGoogle = useSelector(state => state.auth.authGoogle);
+  const userBack = useSelector(state => state.auth.authBack);
   const [userProfile, setUserProfile] = useState(null)
 
   const { isOpen, onOpen, onClose } = useDisclosure()
   const profileImage = useRef(null)
 
-  const { name } = useSelector(state=>state.auth.authBack)
+  const dispatch = useDispatch();
+
+  const idUser = userGoogle.id ? userGoogle.id : userBack.id;
+  const userImg = userGoogle.avatar ? userGoogle.avatar : userGoogle.photoURL ? userGoogle.photoURL : userBack.avatar;
 
   const openChooseImage = () => {
     profileImage.current.click()
   }
+  
 
   const changeProfileImage = event => {
-    const ALLOWED_TYPES = ['image/png', 'image/jpeg', 'image/jpg']
-    const selected = event.target.files[0]
+    const selected = event.target.files[0];
+    dispatch(uploadImage(idUser, selected));
 
-    if (selected && ALLOWED_TYPES.includes(selected.type)) {
+    if (selected) {
       let reader = new FileReader()
       reader.onloadend = () => setUserProfile(reader.result)
       return reader.readAsDataURL(selected)
     }
 
-    onOpen()
   }
+
 
   return (
     <VStack spacing={3} py={5} borderBottomWidth={1} borderColor="brand.light">
@@ -52,7 +60,7 @@ function Profile() {
         name="nombre"
         cursor="pointer"
         onClick={openChooseImage}
-        src={userProfile ? userProfile : {imagetemplate}}
+        src={userProfile ? userProfile : userImg}
       >
         <AvatarBadge bg="brand.blue" boxSize="1em">
           <svg width="0.4em" fill="currentColor" viewBox="0 0 20 20">
@@ -94,10 +102,11 @@ function Profile() {
       </Modal>
       <VStack spacing={1}>
         <Heading as="h3" fontSize="xl" color="brand.dark">
-          {name}
+          {userGoogle.name ? userGoogle.name : userBack.name}
         </Heading>
         <Text color="brand.gray" fontSize="sm">
-          Paciente
+          {(userGoogle.rolId===1 || userBack.rolId === 1)?"Paciente":"Psicologo"}
+
         </Text>
       </VStack>
     </VStack>

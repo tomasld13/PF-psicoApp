@@ -1,0 +1,89 @@
+.user-show-bottom {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.user-show-tittle-bottom {
+    font-size: 14px;
+    font-weight: 600;
+    color: #575989;
+    font-family: 'Montserrat';
+}
+
+.user-show-info {
+    display: flex;
+    align-items: center;
+    margin: 20px 0;
+    color: lightgray;
+}
+
+.user-show-icon {
+    font-size: 20px !important;
+
+}
+
+.user-show-input-title {
+    margin-left: 15px;
+    font-family: 'Montserrat';
+}
+
+.userup-title {
+    font-size: 24px;
+    font-weight: 600;
+    font-family: 'Montserrat';
+}
+
+.userUpdateForm {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.userUpdateTitle {
+    font-weight: 600;
+    font-family: 'Montserrat';
+}
+
+.userUpdateItem{
+    display: flex;
+    font-display: column;
+    margin-top: 10px;
+}
+
+.userUpdateItem>label {
+    margin-bottom: 5px;
+    font-size: 17px;
+    margin-right: 20px;
+    font-family: 'Montserrat';
+}
+
+.userUpdateInputs {
+    border: none;
+    width: 250px;
+    height: 30px;
+    border-bottom: 1px solid #575989;
+}
+
+.formRightInfo{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.userupdate-upload {
+    width: 100px;
+    height: 100px;
+    border-radius: 10px;
+    object-fit: cover;
+    margin-left: 20px;
+}
+
+.userUpdateButton {
+    border-radius: 5px;
+    border: none;
+    padding: 5px;
+    margin-top: 4rem;
+    cursor: pointer;
+    background-color: #575989;
+    font-family: 'Montserrat';
+}

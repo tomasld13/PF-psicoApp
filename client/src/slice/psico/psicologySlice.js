@@ -5,14 +5,21 @@ export const psicologySlice = createSlice({
     name: 'psicology',
     initialState: {
         psychologists: [],
+        patients: [],
         spatiality: [],
         sortPsycho: [],
         copyPsycho: [],
         pychoId: {},
+        pacientId: {},
         initPoint: [],
         calendar: {},
         provincias: [],
-        ciudades: []
+        ciudades: [],
+        psychologiFavs: [],
+        psychoCalendar: [],
+        psicoFacturas: [],
+        saldoTotal: [],
+        saldoTotalFacturas: null
     },
     reducers: {
         getPsychos: (state, {payload}) => {
@@ -20,7 +27,13 @@ export const psicologySlice = createSlice({
             state.sortPsycho = payload
         },
         getPsychoByID: (state, {payload}) => {
-            state.pychoId = payload
+            state.pychoId = payload;
+        },
+        getPatients: (state, {payload}) => {
+            state.patients = payload;
+        },
+        getPacientByID: (state, {payload}) => {
+            state.pacientId = payload
         },
         filterSpatiality: (state, {payload}) => {
             state.spatiality = payload
@@ -63,7 +76,6 @@ export const psicologySlice = createSlice({
                 }
             }
         },
-
         sortByExpPsycho: (state, {payload}) => {
             if(payload === 'asc') {
                 return {
@@ -113,8 +125,43 @@ export const psicologySlice = createSlice({
         },
         getCiudadesSelect: (state, {payload}) => {
             state.ciudades = payload;
+        },
+        getPsychologistFavs: (state, {payload}) => {
+            state.psychologiFavs = payload;
+        },
+        getCalendarioPsicologo: (state, {payload}) => {
+            state.psychoCalendar = payload;
+        },
+        getPsicologoFacturas: (state, {payload}) => {
+            state.psicoFacturas = payload;
+        },
+        getSaldoTotalPsicologo: (state, {payload}) => {
+            state.saldoTotal = payload;
+        },
+        postMercadoPsicologo: (state, {payload}) => {
+            state.initPoint = payload;
+        },
+        getFacturas: (state, {payload}) => {
+            state.saldoTotalFacturas = payload;
         }
     },
+    
 });
 
-export const {getPsychos, filterSpatiality, sortByNamePsycho, getPsychoByID, postMercadopago, calendar, getProvinciasSelect, getCiudadesSelect, sortByExpPsycho} = psicologySlice.actions; 
+export const {getPsychos,
+        filterSpatiality,
+        sortByNamePsycho,
+        getPsychoByID,
+        postMercadopago,
+        calendar,
+        getProvinciasSelect,
+        getCiudadesSelect,
+        sortByExpPsycho,
+        getPacientByID,
+        getPatients,
+        getPsychologistFavs,
+        getCalendarioPsicologo,
+        getPsicologoFacturas,
+        getSaldoTotalPsicologo,
+        postMercadoPsicologo,
+        getFacturas} = psicologySlice.actions; 

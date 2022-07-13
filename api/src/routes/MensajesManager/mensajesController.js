@@ -1,24 +1,19 @@
-const Mensaje = require('../../db');
+const {Mensaje} = require('../../db');
 const { Op } = require("sequelize");
 const obtenerChat = async (req, res) => {
 
-    const miId = req.user.id;
-    const mensajesDe = req.params.de;
+    const miId = req.user.id;//Esto viene del validador de JWT, que trae la información de quien hace la peticion. "Pablo";
+    const mensajesDe = req.params.de;//Este es el usuario que envio los mensajes. Mensaje de: "augusto"
 
-    /* const last30 = await Mensaje.findAll({
-        $or: [
-            { de: miId, para: mensajesDe },
-            { de: mensajesDe, para: miId },
-        ]
-    }) */
+   
     const last30 = await Mensaje.findAll({
         where: {
-            [Op.or]: {
-                [Op.and]: [{ de: miId }, { para: mensajesDe }],
-                [Op.and]: [{ de: mensajesDe }, { para: miId }]
-            }
+             [Op.or] : [
+                {[Op.and] : [{de: miId}, {para : mensajesDe}]},
+                {[Op.and] : [{de: mensajesDe}, {para : miId}]}
+             ]
         },
-        limit : 30,
+        limit : 20,
         order : [['createdAt', 'ASC']]
     })
 
