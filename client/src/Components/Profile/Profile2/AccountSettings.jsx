@@ -86,19 +86,6 @@ function AccountSettings() {
       }
       
 
-    // function handleSubmit(e) {
-    //   e.preventDefault();
-
-    //   if(input.name === '' || input.lastname === '' || input.email === '' 
-    //   || input.telephone === '') {
-    //     return Swal.fire(
-    //       'Debe de completar los campos',
-    //       '',
-    //       'error'
-    //     )
-    //   } 
-    // }
-
     const isEnabled = !errors.name && !errors.lastname && !errors.telephone
     
   return (
@@ -121,7 +108,7 @@ function AccountSettings() {
         placeholder={name ? name : userGoogle.name}
         onChange={(e) => handleInputChange(e)}
         ></Input>
-         {errors.name && <p className="e">{errors.name}</p>}  
+        {errors.name && <p className="e">{errors.name}</p>}  
       </FormControl>
 
       <FormControl 
