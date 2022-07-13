@@ -316,7 +316,6 @@ export const getCalendarioPsicologoRuta = (id) => {
     }
 }
 
-
 export const uploadImage = (id, img) => {
 
     return async () => {
@@ -449,6 +448,7 @@ export const eliminarHorario = (id,date,time) => {
         console.log(data);
     }
 }
+
 export const psicologoFacturas = (id) => {
     return async (dispatch) => {
         const rs = await fetch(`${process.env.REACT_APP_API}/api/factura/psicologo/${id}`);
