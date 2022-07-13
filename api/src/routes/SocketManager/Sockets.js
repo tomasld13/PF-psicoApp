@@ -1,6 +1,6 @@
 
 const { getPacientes, grabarMensaje, getPsicologos, usuarioConectado, usuarioDesconectado, getUsuarios } = require('./socketController');
-const { Usuario } = require('../../db')
+const { Usuario, Favoritos, Paciente, Psicologo } = require('../../db')
 const {comprobarJWT} = require('../../helpers/generar-JWT');
 class Sockets {
 
@@ -25,7 +25,7 @@ class Sockets {
 
             await usuarioConectado(id);
             const user = await Usuario.findByPk(id)
-            
+            console.log("Soy el usuario que se conecta el socket: ",user.toJSON());
             // Unir al usuario a una sala de socket.io
             socket.join(id);
             if(user.rolId === 2){
@@ -33,7 +33,19 @@ class Sockets {
             //Lo que yo quiero en mi server que estos usuarios sean los contactos paciente-psicologo. 
             }
             if(user.rolId===1){
-                this.io.emit('lista-usuarios', await getPsicologos())//Aca va a emitir un arreglo con todos los usuarios,
+                const paci = await Usuario.findByPk(id, {
+                    where: { state: true }, include: [
+                      { model: Paciente, include : [
+                        {model: Favoritos, attributes: ["idPsico"]}
+                
+                        ], attributes: { exclude: ["fk_usuarioID", "fk_especialidadId"] } }]
+                  })
+                const idPsicos = paci.paciente.favoritos?.map(f=>{
+                    let favorito = f.toJSON();
+                    return favorito.idPsico;
+                })
+                
+                this.io.emit('lista-usuarios', await getPsicologos(idPsicos))//Aca va a emitir un arreglo con todos los usuarios,
                 //Lo que yo quiero en mi server que estos usuarios sean los contactos paciente-psicologo. 
             }
             if(user.rolId === 3){
