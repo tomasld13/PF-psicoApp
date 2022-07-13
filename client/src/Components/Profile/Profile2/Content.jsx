@@ -5,7 +5,7 @@ import AccountSettings from './AccountSettings'
 import Favorites from './Favorites'
 import Notificationes from './Notificationes'
 import Suscripcion from './ParaPsicologo/Suscripcion.jsx'
-import Calendario from './ParaPsicologo/Suscripcion.jsx'
+import Calendario from './ParaPsicologo/Calendario.jsx'
 import Historial from './ParaPsicologo/Historial.jsx'
 
 const Content = () => {
@@ -13,7 +13,7 @@ const Content = () => {
 
   const tabs = (rolId===1)?
     ['Ajustes', 'Favoritos', 'Notificaciones',]
-    :['Ajustes', 'Favoritos', 'Suscripción','Calendario', 'Historial'];
+    :['Ajustes', 'Suscripción','Calendario', 'Historial'];
 
   return (
     <Box
@@ -68,9 +68,6 @@ const Content = () => {
                 <AccountSettings />
               </TabPanel>
               <TabPanel>
-                <Favorites />
-              </TabPanel>
-              <TabPanel>
                 <Suscripcion/> 
               </TabPanel>
               <TabPanel>
@@ -82,8 +79,6 @@ const Content = () => {
             </TabPanels>
           }
 
-        
-        
       </Tabs>
 
       {/* <Actions /> */}

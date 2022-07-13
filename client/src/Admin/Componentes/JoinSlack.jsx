@@ -17,7 +17,7 @@ function JoinSlack() {
             <SlackFoot>Hace click para verlas</SlackFoot>
           </SlackText>
         </Slack>
-        <SlackJoin>VER</SlackJoin>
+        <SlackJoin><a href='/documentacion'>VER</a></SlackJoin>
       </CardContent>
     </JoinChannel>
   );
