@@ -117,7 +117,7 @@ function AccountSettings() {
         focusBorderColor="brand.blue" 
         type="text" 
         name='name'
-        value={name}
+        value={input.name}
         placeholder={name ? name : userGoogle.name}
         onChange={(e) => handleInputChange(e)}
         ></Input>
