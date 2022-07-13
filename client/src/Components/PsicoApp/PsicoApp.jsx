@@ -76,7 +76,7 @@ export default function PsicoApp() {
                     <Footer/>
                 </>
                 : rol === 2 ? <> 
-                    <Nav/>
+                    <PsicoNav/>
                     <Routes>
                         <Route path="/" element={<ForPsicos />}/>
                         <Route path='/contacto' element={ <ContactSection/>} />  

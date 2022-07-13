@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useSelector, useDispatch } from 'react-redux';
+import styled from 'styled-components';
 import { getPsychologyID, postDateTime, getCalendarioPsicologoRuta, getDiasPsicologos, minMaxTime, añadirDia, eliminarDia, añadirHorario, eliminarHorario } from '../../slice/psico/thunks.js';
 import Loading from '../Loading/Loading.jsx';
 import './calendar.css'

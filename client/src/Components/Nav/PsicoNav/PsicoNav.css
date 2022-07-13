@@ -82,8 +82,11 @@
 
 .text-user {
     font-size: 30px;
-    margin-top: 2rem;
-    margin-right: 6rem; 
+    display: flex;
+    justify-content: center;
+    margin-right: 6rem ;
+    margin-top: 1.5rem;
+    align-items: center;
     font-family: 'Montserrat';
   }
   
@@ -134,15 +137,13 @@
       position: absolute;
       top: 0;
       left: 0;
-      width: 50%;
-      transform: translate(0%, 0%);
+      width: 60%;
+      transform: translate(30%, 10%);
     }
 
     .text-user {
-      text-align: center;
-      margin-top: -5rem;
-      margin-left: 6rem;
-      text-transform: uppercase;
+        text-transform: uppercase;
+        margin-top: 1rem;
     }
   
     .menu-icon {

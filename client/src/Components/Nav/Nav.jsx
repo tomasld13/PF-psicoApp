@@ -38,7 +38,7 @@ function Nav() {
     <>
       <nav className='navbar'>
         <div className='navbar-container'>
-          <a href='/' className='navbar-logo' onClick={closeMobileMenu}>
+          <a href='/' className='LogoNavBar' onClick={closeMobileMenu}>
             <img src={logoImage} alt="logo image" />
           </a>
           {
@@ -106,7 +106,7 @@ function Nav() {
             ?  button && <Dropdown >Logout</Dropdown>
             : button && <a href='/auth/login'>
               {/* <Button buttonStyle='btn--outline'>Login</Button> */}
-              <Button buttonStyle='btn--outline' link='/auth/login'>Ingresar</Button>
+              <Button className='mr-1' buttonStyle='btn--outline' link='/auth/login'>Ingresar</Button>
             </a> 
           }
         </div>
