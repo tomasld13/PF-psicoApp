@@ -8,6 +8,7 @@ import { MdLocationSearching, MdMailOutline, MdOutlineSystemSecurityUpdate, MdPe
 import Sidebar from '../Sidebar';
 import { getPacientID,  } from '../../../slice/psico/thunks.js';
 import Loading from '../../../Components/Loading/Loading';
+import AvatarImage from "../../Assets/avatarImage.jpg";
 
 export default function UserAdmin() {
 
@@ -23,7 +24,7 @@ export default function UserAdmin() {
   const onClick = () => {
     dispatch()
   }
-  console.log(paciente);
+
   return (
     <>
     <Sidebar />
@@ -35,6 +36,9 @@ export default function UserAdmin() {
           <div className="user-show">
             <div className="user-show-title">
               <span className="show-username">{paciente.id ? paciente.name : 'Nombre del paciente'}</span>
+              <Avatar>
+                <img src={paciente.avatar ? paciente.avatar : AvatarImage} alt="" />
+              </Avatar>
             </div>
             <div className="user-show-bottom">
               {
@@ -147,3 +151,10 @@ const UserShowInfo = styled.div`
     color: lightgray;
     font-family: 'Montserrat';
 `
+const Avatar = styled.div`
+  img {
+    height: 10rem;
+    width: 10rem;
+    border-radius: 1rem;
+  }
+`;

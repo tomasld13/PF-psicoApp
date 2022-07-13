@@ -2,11 +2,13 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector} from 'react-redux';
 import { useParams } from 'react-router-dom';
 import './Psico.css';
+import styled from 'styled-components'
 import imageavatar from '../../Assets/face1.jpg';
 import { MdLocationSearching, MdMailOutline, MdOutlineSystemSecurityUpdate, MdPermIdentity } from 'react-icons/md';
 import Sidebar from '../Sidebar';
 import { getPsychologyID } from '../../../slice/psico/thunks.js';
 import Loading from '../../../Components/Loading/Loading';
+import AvatarImage from "../../Assets/avatarImage.jpg";
 
 export default function PsicoAdmin() {
 
@@ -31,6 +33,9 @@ export default function PsicoAdmin() {
           <div className="user-show">
             <div className="user-show-title">
               <span className="show-username">{psicologo.usuario ? psicologo.usuario.name : 'Nombre'}</span>
+              <Avatar>
+                <img src={psicologo.usuario?.avatar ? psicologo.usuario.avatar : AvatarImage} alt="" />
+              </Avatar>
             </div>
             <div className="user-show-bottom">
               {
@@ -65,3 +70,11 @@ export default function PsicoAdmin() {
   </>
   )
 }
+
+const Avatar = styled.div`
+  img {
+    height: 10rem;
+    width: 10rem;
+    border-radius: 1rem;
+  }
+`;
