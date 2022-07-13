@@ -20,11 +20,10 @@ import AdminApp from '../../Admin/AdminApp';
 import UserList from "../../Admin/Componentes/Users/UserList";
 import UserAdmin from '../../Admin/Componentes/UserPage/UserAdmin.jsx';
 import PsicoAdmin from '../../Admin/Componentes/PsicoPage/PsicoAdmin.jsx'
+import PsicoList from '../../Admin/Componentes/Psicologos/PsicoList.jsx';
 
 import ForPsicos from "../ForPsicos/ForPsicos"
 import ReportsHome from "../../Admin/Componentes/Reports/ReportsHome";
-import PsychoList from "../../Admin/Componentes/Psicologos/PsychoList";
-import PsychoAdmin from "../../Admin/Componentes/PsicoPage/PsychoAdmin";
 import { AuthContext } from '../../context/authContext/AuthContext';
 
 import {ChatPage} from '../../pages/ChatPage'

@@ -162,16 +162,6 @@ export const postDateTime = (dateTime) => {
     }
 }
 
-// export const postMP = (data) => {
-//     return async (dispatch) => {
-//         try {
-//             const resp = await axios.post(`${process.env.REACT_APP_API}/api/mercadopago`, data);
-//             dispatch(postMercadopago(resp.data));
-//         } catch (error) {
-//             return (error)
-//         }
-//     }
-// }
 export const postMP = (data, token) => {
     return async (dispatch) => {
         try {
@@ -268,6 +258,22 @@ export const deleteUser = (id, user, token) => {
 export const suspenderPsico = (id, token) => {
     return async () => {
         const rs = await fetch(`${process.env.REACT_APP_API}/api/psicologo/suspender/${id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'x-token': token
+            }
+        });
+
+        const data = await rs.json();
+
+        console.log(data);
+    }
+}
+
+export const activarPsico = (id, token) => {
+    return async () => {
+        const rs = await fetch(`${process.env.REACT_APP_API}/api/psicologo/activar/${id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
