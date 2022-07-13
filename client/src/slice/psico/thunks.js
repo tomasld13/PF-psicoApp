@@ -360,36 +360,50 @@ export const añadirDia = (id,date) => {
     }
 }
 
-export const añadirHorario = (id,{date}) => {
-    return async () => {
-        const rs = await fetch(`${process.env.REACT_APP_API}/api/dia/${id}`, {
+export const añadirHorario = (id,{date, time}) => {
+    return async (dispatch) => {
+        const rs = await fetch(`${process.env.REACT_APP_API}/api/horarios/psicologo/${id}`, {
             method: 'POST',
-            body:{
-                date
-            },
+            body: JSON.stringify({date, time}),
             headers: {
                 'Content-Type': 'application/json'
             }
         });
 
         const data = await rs.json();
-
+        if(data.error){
+            Swal.fire(
+                data.error,
+                '',
+                'error'
+            );
+        }else{
+            Swal.fire(
+                "Horario eliminado",
+                '',
+                'success'
+            );
+        }
         console.log(data);
     }
 }
 
-export const eliminarHorario = (id,date) => {
+export const eliminarHorario = (id,date,time) => {
     return async () => {
-        const rs = await fetch(`${process.env.REACT_APP_API}/api/dia/${id}`, {
-            method: 'POST',
-            body: JSON.stringify({date: date}),
+        const rs = await fetch(`${process.env.REACT_APP_API}/api/horarios/${id}`, {
+            method: 'DELETE',
+            body: JSON.stringify({date, time}),
             headers: {
                 'Content-Type': 'application/json'
             }
         });
 
         const data = await rs.json();
-
+        Swal.fire(
+            "Horario añadido",
+            '',
+            'success'
+        );
         console.log(data);
     }
 }

@@ -43,7 +43,7 @@ const deleteDias = async (req, res, next) => {
         if(!psicologo) return res.status(404).send("No se encontro ningun psicologo con ese id") 
         const dia = psicologo.dia.find((d) => d.fecha == date)
         if(!dia) return res.send("no existe el dia")
-        else if(dia.horarios.length > 0) return res.send({error:"El dia no puede eliminarse porque ya hay turnos reservados para esa fecha."})
+        else if(dia.horarios.filter((h) => h.pacienteId != null).length > 0) return res.send({error:"El dia no puede eliminarse porque ya hay turnos reservados para esa fecha."})
         await dia.destroy().then(async() => {
             const psicologoRes = await Psicologo.findByPk(usuario.psicologo.id, {include:{model:Dia, include:{model:Horarios}}})
             return res.send(psicologoRes)

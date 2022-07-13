@@ -16,12 +16,9 @@ export const psicologySlice = createSlice({
         provincias: [],
         ciudades: [],
         psychologiFavs: [],
-<<<<<<< HEAD
-        psychoCalendar: []
-=======
+        psychoCalendar: [],
         psicoFacturas: [],
         saldoTotal: []
->>>>>>> jhoskar
     },
     reducers: {
         getPsychos: (state, {payload}) => {

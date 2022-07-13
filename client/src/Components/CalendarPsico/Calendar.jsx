@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useSelector, useDispatch } from 'react-redux';
-import { getPsychologyID, postDateTime, getCalendarioPsicologoRuta, getDiasPsicologos, minMaxTime, añadirDia, eliminarDia } from '../../slice/psico/thunks.js';
+import { getPsychologyID, postDateTime, getCalendarioPsicologoRuta, getDiasPsicologos, minMaxTime, añadirDia, eliminarDia, añadirHorario, eliminarHorario } from '../../slice/psico/thunks.js';
 import Loading from '../Loading/Loading.jsx';
 import './calendar.css'
 
@@ -15,10 +15,8 @@ export const Calendar = ({idPsycho}) => {
     const [excludes, setExcludes] = useState([]);
     const dispatch = useDispatch();
 
-    console.log(psychologistDays)
     useEffect( () => {
         if (psychologistDays.dia) {
-            console.log("hola")
             setExcludes(getTimeExcludes(startDate));
         }else{
             dispatch(getCalendarioPsicologoRuta(idPsico))
@@ -62,7 +60,6 @@ export const Calendar = ({idPsycho}) => {
                 return new Date(dia[0],dia[1]-1,dia[2]).toString().slice(0,10) === new Date(startDate).toString().slice(0,10)
             });
 
-
             const horarios = dayPsico[0]?.horarios.map(h => {
                 let d = new Date();
                 let [hora, minutes] = h.hora.split(":");
@@ -90,11 +87,18 @@ export const Calendar = ({idPsycho}) => {
                     setStartDate(psychologistDays.formatoDias[0])
                     //dispatch(getCalendarioPsicologoRuta(idPsico))
                     break
-                case "añadirHorario":
-                    console.log(e.target.value)
+                case "borrarHorario":
+                    dispatch(añadirHorario(idPsico, postDates()))
+                    dispatch(getCalendarioPsicologoRuta(idPsico))
+                    getTimeExcludes()
+                    setStartDate(psychologistDays.formatoDias[0])
                     break
                 default:
-                    console.log(e.target.value)
+                    let time = document.getElementById("hora").value
+                    dispatch(eliminarHorario(idPsico, postDates().date, time))
+                    dispatch(getCalendarioPsicologoRuta(idPsico))
+                    getTimeExcludes()
+                    setStartDate(psychologistDays.formatoDias[0])
             }
         }
 
@@ -108,10 +112,16 @@ export const Calendar = ({idPsycho}) => {
 
             return {date, time};
         }
-        console.log(postDates().date)
-        let handleColor = (excludes) => {
-            return "text-error";
-          };
+
+        const getDiasSelect = () => {
+            const dayPsico = psychologistDays?.dia.filter(d => {
+                let dia = d.fecha.split("-");
+                return new Date(dia[0],dia[1]-1,dia[2]).toString().slice(0,10) === new Date(startDate).toString().slice(0,10)
+            });
+            const horarios = dayPsico[0]?.horarios ? dayPsico[0].horarios : [];
+            return horarios
+        }
+
         return (
             <> 
                 <h1 className='font-bold text-white mt-2.5'>CALENDARIO</h1>
@@ -148,10 +158,15 @@ export const Calendar = ({idPsycho}) => {
                         dateFormat="hh:mm aa"
                         minTime={psychologistDays.formatoHorarios.min}
                         maxTime={psychologistDays.formatoHorarios.max}
-                        timeClassName={handleColor}
                         />
 
                     </div>
+                    <select id="hora">
+                        <option>Horarios no disponibles</option>
+                        {getDiasSelect().length > 0 ? getDiasSelect().map((d) => {
+                            return(<option value={d.hora}>{d.hora}</option>)
+                        }) : null}
+                    </select>
                     <button value="borrarDia" onClick={(e) => send(e)}>Eliminar Día disponible</button>
                     <button value="añadirDia" onClick={(e) => send(e)}>Agregar Día disponible</button>
                     <button value="borrarHorario" onClick={(e) => send(e)}>Eliminar Horario disponible</button>
