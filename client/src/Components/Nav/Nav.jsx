@@ -78,7 +78,7 @@ function Nav() {
                 className='nav-links'
                 onClick={closeMobileMenu}
               >
-                Para Psicólogos
+                Soy Psicólogo
               </a>
             </li>
             <li className='nav-item'>

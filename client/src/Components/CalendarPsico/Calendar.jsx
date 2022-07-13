@@ -133,10 +133,11 @@ export const Calendar = ({idPsycho}) => {
                 {
                     psychologistDays.formatoDias
                     ? <div className='flex flex-col'>
-                    <div className='mt-2.5 mb-5'>
-                        <label className='text-white'>Selecciona una fecha</label>
+                    <div className='mt-4 mb-5'>
+                        <label className='text-white mb-1'>Selecciona una fecha:</label>
                         <p>Los días marcados en verde son los disponibles para los pacientes.</p>
                         <DatePicker
+                        className='mt-5'
                         selected={startDate}
                         onChange={(date) => {
                             setStartDate(date);
@@ -151,10 +152,11 @@ export const Calendar = ({idPsycho}) => {
                         />
                     </div>
                     <div className='mb-5'>
-                        <label className='text-white'>Selecciona una Hora</label>
+                        <label className='text-white'>Selecciona una Hora:</label>
                         <DatePicker
                         selected={startTime}
                         excludeTimes={excludes}
+                        className='mt-4'
                         onChange={(date) => setStartTime(date)}
                         showTimeSelect
                         showTimeSelectOnly
@@ -166,16 +168,20 @@ export const Calendar = ({idPsycho}) => {
                         />
 
                     </div>
-                    <select id="hora">
+                    <Select id="hora">
                         <option>Horarios no disponibles</option>
                         {getDiasSelect().length > 0 ? getDiasSelect().map((d) => {
                             return(<option value={d.hora}>{d.hora}</option>)
                         }) : null}
-                    </select>
-                    <button value="borrarDia" onClick={(e) => send(e)}>Eliminar Día disponible</button>
+
+                    </Select>
+                    <Botones>
+                    <BotonNegativo value="borrarDia" onClick={(e) => send(e)}>Eliminar Día disponible</BotonNegativo>
+                    <BotonNegativo value="borrarHorario" onClick={(e) => send(e)}>Eliminar Horario disponible</BotonNegativo>
                     <button value="añadirDia" onClick={(e) => send(e)}>Agregar Día disponible</button>
-                    <button value="borrarHorario" onClick={(e) => send(e)}>Eliminar Horario disponible</button>
                     <button value="añadirHorario" onClick={(e) => send(e)}>Agregar Horario disponible</button>
+                    </Botones>
+                    
                 </div> : <div>
                     <Loading/>
                 </div>
@@ -184,3 +190,22 @@ export const Calendar = ({idPsycho}) => {
             </>
         );
 }
+
+const Botones = styled.div`
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 3rem;
+`
+const BotonNegativo = styled.button`
+    color: red;
+`
+
+const Select = styled.select`
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2rem;
+    margin-left: 12rem;
+`
