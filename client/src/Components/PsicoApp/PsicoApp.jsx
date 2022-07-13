@@ -25,7 +25,6 @@ import ReportsHome from "../../Admin/Componentes/Reports/ReportsHome";
 import PsychoList from "../../Admin/Componentes/Psicologos/PsychoList";
 import PsychoAdmin from "../../Admin/Componentes/PsicoPage/PsychoAdmin";
 import { AuthContext } from '../../context/authContext/AuthContext';
-import ReportsHome from "../../Admin/Componentes/Reports/ReportsHome";
 
 import {ChatPage} from '../../pages/ChatPage'
 import { login } from '../../slice/auth/authSlice';

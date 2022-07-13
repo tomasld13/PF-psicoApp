@@ -1,9 +1,12 @@
 import { Box, Text, VStack } from '@chakra-ui/react'
+import { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
+import { getPacientID } from '../../../slice/psico/thunks.js';
 
 const list = [
   {
     id: 1,
-    name: 'Turnos pendientes',
+    name: 'Citas agendadas',
     value: 0,
     color: 'yellow',
   },
@@ -22,6 +25,21 @@ const list = [
 ]
 
 function Data() {
+
+  const paciente = useSelector(state => state.psicology.pacientId);
+  const authBack = useSelector(state => state.auth.authBack);
+  const authGoogle = useSelector(state => state.auth.authGoogle);
+
+  const dispatch = useDispatch();
+
+  const idUser = authBack.id ? authBack.id : authGoogle.id;
+
+
+  useEffect(() => {
+    dispatch(getPacientID(idUser));
+  }, [])
+  
+  console.log(paciente);
   return (
     <VStack as="ul" spacing={0} listStyleType="none">
       {list.map(item => (
