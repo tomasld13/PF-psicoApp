@@ -8,7 +8,7 @@ import Sidebar from '../Sidebar';
 import { getPsychologyID } from '../../../slice/psico/thunks.js';
 import Loading from '../../../Components/Loading/Loading';
 
-export default function PsychoAdmin() {
+export default function PsicoAdmin() {
 
   const psicologo = useSelector(state => state.psicology.pychoId);
 
@@ -94,8 +94,8 @@ export default function PsychoAdmin() {
                   <label>Status</label>
                   <select
                   className='userUpdateInputs'>
-                    <option>Activo</option>
-                    <option>Deshabilitado</option>
+                    <option selected>Activo</option>
+                    <option>Inactivo</option>
                     <option>Suspendido</option>
                   </select>
                 </div>

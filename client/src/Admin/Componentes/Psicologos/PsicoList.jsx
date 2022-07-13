@@ -4,6 +4,7 @@ import { DataGrid } from '@mui/x-data-grid';
 import { AiOutlineDelete } from 'react-icons/ai'
 import { Link } from 'react-router-dom'
 import './PsicoList.css'
+import Swal from 'sweetalert2'
 import Sidebar from '../Sidebar';
 import { getPsicology, deleteUser, suspenderPsico } from '../../../slice/psico/thunks.js';
 
@@ -12,13 +13,28 @@ export default function PsicoList() {
 
   const psicologos = useSelector(state => state.psicology.psychologists);
   const {token} = useSelector(state => state.auth.authBack);
+  
 
   const dispatch = useDispatch();
 
   const handleDelete = (id) => {
-    dispatch(suspenderPsico(id,token));
-    dispatch(getPsicology());
+    Swal.fire({
+      title: '¿Estas seguro que querés suspender al usuario?',
+      showDenyButton: true,
+      denyButtonText: 'Cancelar',
+      confirmButtonText: 'Eliminar'
+    }).then((result) => {
+
+      if(result.isConfirmed) {
+        Swal.fire('El usuario fue suspendido correctamente', "", 'success')
+        dispatch(suspenderPsico(id,token));
+        dispatch(getPsicology());
+      } else if (result.isDenied) {
+        Swal.fire('Los datos no se han guardado.','', 'info')
+      }
+    })
   }
+
 
   useEffect(() => {
     dispatch(getPsicology());
