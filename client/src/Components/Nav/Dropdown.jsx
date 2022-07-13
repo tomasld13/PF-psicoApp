@@ -1,11 +1,12 @@
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux'
 import { startLogout } from '../../slice/auth/thunks';
 
 function Dropdown() {
 
     const [showOptions, setShowOptions] = useState(false)
-
+    const navigate = useNavigate();
     const dispatch = useDispatch()
 
     const handleClick = () => {
@@ -14,6 +15,7 @@ function Dropdown() {
 
     const onLogout = () => {
         dispatch(startLogout());
+        navigate('/');
     }
 
   return (
