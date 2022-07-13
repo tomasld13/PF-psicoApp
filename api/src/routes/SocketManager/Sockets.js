@@ -33,15 +33,19 @@ class Sockets {
             //Lo que yo quiero en mi server que estos usuarios sean los contactos paciente-psicologo. 
             }
             if(user.rolId===1){
-                let paciente = await Usuario.findByPk(id, {
-                    include : [
-                        {model: Paciente, include : [
-                            {model: Favoritos, attributes : ["idPsico"]}
-                        ], attributes : { exclude: ["fk_usuarioID"] } }
-                    ]
-                });
-                console.log(paciente.toJSON());
-                this.io.emit('lista-usuarios', await getPsicologos(user))//Aca va a emitir un arreglo con todos los usuarios,
+                const paci = await Usuario.findByPk(id, {
+                    where: { state: true }, include: [
+                      { model: Paciente, include : [
+                        {model: Favoritos, attributes: ["idPsico"]}
+                
+                        ], attributes: { exclude: ["fk_usuarioID", "fk_especialidadId"] } }]
+                  })
+                const idPsicos = paci.paciente.favoritos?.map(f=>{
+                    let favorito = f.toJSON();
+                    return favorito.idPsico;
+                })
+                
+                this.io.emit('lista-usuarios', await getPsicologos(idPsicos))//Aca va a emitir un arreglo con todos los usuarios,
                 //Lo que yo quiero en mi server que estos usuarios sean los contactos paciente-psicologo. 
             }
             if(user.rolId === 3){

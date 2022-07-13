@@ -1,5 +1,5 @@
 const {Usuario, Mensaje, Paciente, Ciudad, Provincia, Genero, Rol, Psicologo} = require('../../db');
-
+const { Op } = require("sequelize");
 
 
 const usuarioConectado = async( id ) => {
@@ -22,7 +22,9 @@ const usuarioDesconectado = async( id ) => {
 const getPacientes = async() => {
 
     const usuarios=await Usuario.findAll({
-        where: { rolId: 1, state : true }, include: [{ model: Paciente, attributes: { exclude: ["fk_usuarioID", "fk_especialidadId"] } },
+        where: { rolId: 1, state : true }, include: [{ model: Paciente, where : {
+
+        }, attributes: { exclude: ["fk_usuarioID", "fk_especialidadId"] } },
         { model: Ciudad, include: { model: Provincia, attributes: ['name'] }, attributes: ['name'] },
         { model: Genero, attributes: ["genero"] },
         { model: Rol, attributes: ["name"] }]
@@ -31,17 +33,30 @@ const getPacientes = async() => {
 
     return usuarios;
 }
-const getPsicologos = async(user) => {
-
-    const usuarios=await Usuario.findAll({
-        where: { rolId: 2, state : true }, include: [{ model: Psicologo, attributes: { exclude: ["fk_usuarioID", "fk_especialidadId"] } },
-        { model: Ciudad, include: { model: Provincia, attributes: ['name'] }, attributes: ['name'] },
-        { model: Genero, attributes: ["genero"] },
-        { model: Rol, attributes: ["name"] }]
-      });
+const getPsicologos = async(idPsicos) => {
+    try {
+        const psicologos = await Psicologo.findAll({where : {
+            id : {
+                [Op.or] : idPsicos
+            }
+            
+        }, attributes : ["fk_usuarioID"]
+        });
+        const idUsuarios = psicologos?.map(p=>{
+            let user = p.toJSON();
+            return user.fk_usuarioID;
+        });
         
-
-    return usuarios;
+        const usuarios = await Usuario.findAll({where : {
+            id : {
+                [Op.or] : idUsuarios
+            }
+        }})   
+        
+        return usuarios;
+    } catch (error) {
+        console.log(error)
+    }
 }
 const getUsuarios = async ()=>{
     const usuarios = await Usuario.findAll();
