@@ -39,4 +39,18 @@ const getFacturaByPsicologoID = async (req, res) => {
     }
 }
 
-module.exports = { getFacturaByPacienteID, getFacturaByPsicologoID }
+const getAllFacturas = async (req, res) => {
+    try {
+        const factura = await Factura.findAll({ attributes: ["precio"]});
+        if (!factura) {
+        return res.status(404).send({ error: "Factura no encontrada" });
+        }
+        const sumaFacturas = factura.reduce((acc, curr) => acc + curr.precio, 0);
+        return res.send([{sumaFacturas}, factura]);
+
+    } catch (error) {
+        res.status(404).send({ error: error.message })
+    }
+}
+
+module.exports = { getFacturaByPacienteID, getFacturaByPsicologoID, getAllFacturas }
