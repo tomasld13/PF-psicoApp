@@ -23,7 +23,7 @@ function Pacientes() {
         pacientes.length > 0 ? <>
           <Project>
         <Avatar>
-          <img src={AvatarImage} alt="" />
+          <img src={pacientes[0].avatar ? pacientes[0].avatar : AvatarImage} alt="" />
         </Avatar>
         <Detail>
           <Title>{pacientes[0].name}</Title>
@@ -32,7 +32,7 @@ function Pacientes() {
       </Project>
       <Project>
         <Avatar>
-          <img src={AvatarImage} alt="" />
+          <img src={pacientes[1].avatar ? pacientes[1].avatar : AvatarImage} alt="" />
         </Avatar>
         <Detail>
           <Title>{pacientes[1].name}</Title>
