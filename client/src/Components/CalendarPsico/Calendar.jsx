@@ -15,7 +15,7 @@ export const Calendar = ({idPsycho}) => {
     const [excludes, setExcludes] = useState([]);
     const dispatch = useDispatch();
 
-    useEffect( () => {
+    useEffect(() => {
         if (psychologistDays.dia) {
             setExcludes(getTimeExcludes(startDate));
         }else{
@@ -24,6 +24,10 @@ export const Calendar = ({idPsycho}) => {
         // dispatch(getPsychologyID(idPsycho));
         dispatch(postDateTime(postDates()))
     },[startDate, startTime]);
+
+    useEffect(() => {
+        dispatch(getCalendarioPsicologoRuta(idPsico))
+    },[excludes])
 
         const getMonth = (month) => {
             switch(month){
