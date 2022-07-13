@@ -7,12 +7,9 @@ import { darkThemeColor } from '../Utils/index'
 import { RiHomeLine } from "react-icons/ri";
 import { MdOutlinePersonSearch } from "react-icons/md";
 import { BsFillPersonFill } from "react-icons/bs";
-import { AiOutlinePieChart } from "react-icons/ai";
+import { AiOutlinePieChart, AiFillMessage } from "react-icons/ai";
 import { startLogout } from '../../slice/auth/thunks'
 // import { Link } from 'react-router-dom'
-
-
-
 
 
 function Sidebar() {
@@ -47,6 +44,10 @@ function Sidebar() {
           <LinkStyle>
             <AiOutlinePieChart />
             <a href='/reportes'>Reportes</a>
+          </LinkStyle>
+          <LinkStyle>
+            <AiFillMessage />
+            <a href='/mensajes'>Mensajes</a>
           </LinkStyle>
         </Links>
       </LinksContainer>
