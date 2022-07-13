@@ -25,8 +25,10 @@ import ReportsHome from "../../Admin/Componentes/Reports/ReportsHome";
 import PsychoList from "../../Admin/Componentes/Psicologos/PsychoList";
 import PsychoAdmin from "../../Admin/Componentes/PsicoPage/PsychoAdmin";
 import { AuthContext } from '../../context/authContext/AuthContext';
+import ReportsHome from "../../Admin/Componentes/Reports/ReportsHome";
 
 import {ChatPage} from '../../pages/ChatPage'
+import { login } from '../../slice/auth/authSlice';
 
 export default function PsicoApp() {
 
@@ -34,9 +36,10 @@ export default function PsicoApp() {
     const userGoogle  = useSelector(state => state.auth.authGoogle);
 
     const { auth, verificaToken } = useContext( AuthContext );
-
+    
     useEffect( () => {
         verificaToken();
+        
     },[verificaToken])
 
     const rol = rolId ? rolId : userGoogle.rolId;

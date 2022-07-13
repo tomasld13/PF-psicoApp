@@ -58,6 +58,7 @@ export const startCreatingUserWithEmailPasswordPatient = (paciente) => {
                 dispatch(logoutBack());
                 const pacienteGoogle = data[0]
                 pacienteGoogle.photo = paciente.photo;
+                pacienteGoogle.uid = paciente.password;
                 localStorage.setItem('usuarioGoogle', JSON.stringify(data[0]));
                 dispatch(loginGoogle(pacienteGoogle));
             } else {
@@ -176,6 +177,7 @@ export const loginEmailPasswordGoogle = (email, password, photoURL) => {
 
         const data = await result.json();
         data.user.photo = photoURL;
+        data.user.uid = password;
         localStorage.setItem('usuarioGoogle', JSON.stringify(data));
 
         dispatch(loginGoogle(data));

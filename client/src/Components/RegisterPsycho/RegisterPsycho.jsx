@@ -1,9 +1,9 @@
-import { useEffect, useMemo, useState} from "react";
+import { useEffect, useMemo, useState, useContext} from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from "../../hooks/useForm";
 import { startCreatingUserWithEmailPasswordPsycho } from '../../slice/auth/thunks.js';
 import { getProvincias, getCiudades, cleanCiudades } from '../../slice/psico/thunks.js';
-
+import {AuthContext} from '../../context/authContext/AuthContext'
 const emailRegex = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
 
 const formData = {
@@ -54,6 +54,8 @@ export const RegisterPsycho = ({rol}) => {
 
     formData.rol = rol;
 
+    const { login } = useContext( AuthContext );
+
     const dispatch = useDispatch();
     const [formSubmitted, setFormSubmitted] = useState(false);
     const [idProvincia, setIdProvincia] = useState(0);
@@ -74,14 +76,14 @@ export const RegisterPsycho = ({rol}) => {
             matriculaProfesionalValid } = useForm(formData, formValidations);
 
 
-    const onSubmit = (e) => {
+    const onSubmit = async(e) => {
         e.preventDefault();
         setFormSubmitted(true);
 
         if(!isFormValid) return;
 
         dispatch( startCreatingUserWithEmailPasswordPsycho(formState) );
-
+        const ok = await login( formState.email, formState.password );
     }
 
     useEffect(() => {

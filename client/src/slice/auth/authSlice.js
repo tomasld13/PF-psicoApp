@@ -39,7 +39,8 @@ export const authSlice = createSlice({
             generoId: null,
             ciudadId: null,
             error: null,
-            token: null
+            token: null,
+            uid: null
         },
         error: null
     },
@@ -114,6 +115,7 @@ export const authSlice = createSlice({
             state.authGoogle.ciudadId = payload.user ? payload.user.ciudadId : payload.ciudadId;
             state.authGoogle.photoURL = payload.user ? payload.user.photo : payload.photo;
             state.authGoogle.token = payload.user ? payload.token : null; 
+            state.authGoogle.uid = payload.user ? payload.user.uid : payload.uid; 
         },
         logoutGoogle: (state) => {
             state.authGoogle.status = 'no-authenticated';
