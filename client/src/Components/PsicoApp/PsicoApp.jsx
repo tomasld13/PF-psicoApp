@@ -5,6 +5,7 @@ import ContactSection from "../Contact/ContactSection";
 import Footer from "../Footer/Footer";
 import { Home } from "../Home/Home";
 import Nav from "../Nav/Nav";
+import PsicoNav from "../Nav/PsicoNav/PsicoNav.jsx";
 import Psychologists from "../Psychologists/Psychologists";
 import ScrollToTop from "../ScrollToTop/ScrollToTop";
 import PsicoDetails from "../PsicoDetails/PsicoDetails.jsx"
@@ -19,14 +20,15 @@ import AdminApp from '../../Admin/AdminApp';
 import UserList from "../../Admin/Componentes/Users/UserList";
 import UserAdmin from '../../Admin/Componentes/UserPage/UserAdmin.jsx';
 import PsicoAdmin from '../../Admin/Componentes/PsicoPage/PsicoAdmin.jsx'
+
 import ForPsicos from "../ForPsicos/ForPsicos"
 import ReportsHome from "../../Admin/Componentes/Reports/ReportsHome";
 import PsicoList from "../../Admin/Componentes/Psicologos/PsicoList";
 import { AuthContext } from '../../context/authContext/AuthContext';
 
-
 import {ChatPage} from '../../pages/ChatPage'
 import { login } from '../../slice/auth/authSlice';
+import Documentation from '../../Admin/Componentes/Documentation/Documentation';
 
 export default function PsicoApp() {
 
@@ -73,10 +75,11 @@ export default function PsicoApp() {
                     <Footer/>
                 </>
                 : rolId === 2 ? <> 
-                    <Nav/>
+                    <PsicoNav />
                     <Routes>
                         <Route path="/" element={<ForPsicos />}/>
-                        <Route path='/paciente/:id' element={
+                        <Route path='/contacto' element={ <ContactSection/>} />  
+                         <Route path='/paciente/:id' element={
                             <ChakraProvider theme={theme}>
                                 <PacientDetails/>
                             </ChakraProvider>
@@ -91,6 +94,7 @@ export default function PsicoApp() {
                         <Route path='/mensajes' element = {<ChatPage/>}/>
                         <Route path="/*" element={ <Navigate to="/" /> } />
                     </Routes>
+                    <Footer/>
                 </>
                 : <>
                     <Routes>
@@ -100,6 +104,8 @@ export default function PsicoApp() {
                         <Route path='/pacientes/:id' element={<UserAdmin />} />
                         <Route path='/psicologos' element={<PsicoList />} />
                         <Route path='/psicologos/:id' element={<PsicoAdmin />} />
+                        <Route path='/mensajes' element = {<ChatPage/>}/>
+                        <Route path='/documentacion' element = {<Documentation />} />
                         <Route path="/*" element={ <Navigate to="/" /> } />
                     </Routes>
                 </>

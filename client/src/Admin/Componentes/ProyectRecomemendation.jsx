@@ -4,7 +4,10 @@ import Badge from "./Badge";
 import AvatarImage from '../Assets/face1.jpg';
 import { cardShadow, hoverEffect } from "../Utils/index";
 
+
+
 function ProjectRecommendation() {
+
   return (
     <RecommendProject>
       <CardContent>
@@ -14,7 +17,7 @@ function ProjectRecommendation() {
               <img src={AvatarImage} alt="" />
             </Avatar>
             <Info>
-              <InfoName>Chino</InfoName>
+              <InfoName>Leonard Ballard</InfoName>
               <InfoUpdate>Profesional del mes</InfoUpdate>
             </Info>
           </InfoContainer>

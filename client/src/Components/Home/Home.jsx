@@ -6,6 +6,7 @@ import Questions from "../Questions/Questions.jsx"
 import Testimonials from '../Testimonials/Testimonials.jsx';
 import PricingH from '../Pricing/PricingH'
 import About from '../About/About.jsx';
+import Benefits from '../Benefits/Benefits.jsx';
 
 export function Home() {
   return (
@@ -14,6 +15,7 @@ export function Home() {
       <SubSectionHome />
       <About />
       <Features />
+      <Benefits />
       <PricingH />
       <Questions />
       <Testimonials />
