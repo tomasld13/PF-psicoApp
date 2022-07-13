@@ -8,7 +8,7 @@ const getGanancias = async (req, res, next) => {
         let facturas = await Factura.findAll()
         let ganancia = 0
         facturas = facturas.map((f) => {if(f.fecha.slice(0,7) == fecha) ganancia += f.precio})
-        res.send({ganancia})
+        return res.send({ganancia})
     } catch (error) {
         next(error)
     }

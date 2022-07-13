@@ -34,11 +34,12 @@ const postHorarioPsicologo = async(req, res, next) => {
         let dia = await Dia.findOne({where:{fecha:date}})
         if(!dia) dia = await Dia.create({fecha: date})
         const horario = await Horarios.create({hora: time})
-        dia.addHorarios(horario)
+        await dia.addHorarios(horario)
         await psicologo.addHorarios(horario)
-        await psicologo.addDia(dia)
-        const psicologoRes = await Psicologo.findByPk(id, {include:{model: Dia ,include: {model: Horarios}}})
-        res.send(psicologoRes)
+        await psicologo.addDia(dia).then(async() => {
+            const psicologoRes = await Psicologo.findByPk(id, {include:{model: Dia ,include: {model: Horarios}}})
+            return res.send(psicologoRes)
+        })
     } catch (error) {
         next(error)
     }
