@@ -1,18 +1,26 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
 import Badge from "./Badge";
 import { cardShadow, hoverEffect, themeColor } from "../Utils/index";
 
+
+
 function Info() {
+
+  const psicologos = useSelector(state => state.psicology.psychologists);
+  const pacientes = useSelector(state => state.psicology.patients);
+  console.log(psicologos)
+  console.log(pacientes)
+
   return (
     <InfoCard>
       <Card>
         <CardContent>
           <Row>
-            <Digit>560</Digit>
+            <Digit>{psicologos.length}</Digit>
             <InfoContainer>
-              <Title>Pacientes</Title>
-              <SubTitle>20% nuevos cada mes</SubTitle>
+              <Title>Psicologos</Title>
             </InfoContainer>
           </Row>
         </CardContent>
@@ -20,10 +28,9 @@ function Info() {
       <Card>
         <CardContent>
           <Row>
-            <Digit>460</Digit>
+            <Digit>{pacientes.length}</Digit>
             <InfoContainer>
-              <Title>Psicologos</Title>
-              <SubTitle>5% nuevos cada mes</SubTitle>
+              <Title>Pacientes</Title>
             </InfoContainer>
           </Row>
         </CardContent>
@@ -52,7 +59,8 @@ const InfoCard = styled.div`
 const Card = styled.div`
   background-color: rgba(183, 194, 243, 0.3);
   border-radius: 1rem;
-  margin-bottom: 1rem;
+  margin-top: 1rem;
+  margin-bottom: 2rem;
 `;
 
 const CardContent = styled.div`
@@ -62,7 +70,7 @@ const CardContent = styled.div`
 const Row = styled.div`
   display: flex;
   align-items: center;
-  margin-bottom: 0.4rem;
+  margin-bottom: 1rem;
   ${({ justify }) =>
     justify &&
     `

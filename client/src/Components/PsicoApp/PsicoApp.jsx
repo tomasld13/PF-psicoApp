@@ -28,6 +28,7 @@ import { AuthContext } from '../../context/authContext/AuthContext';
 
 import {ChatPage} from '../../pages/ChatPage'
 import { login } from '../../slice/auth/authSlice';
+import Documentation from '../../Admin/Componentes/Documentation/Documentation';
 
 export default function PsicoApp() {
 
@@ -104,6 +105,7 @@ export default function PsicoApp() {
                         <Route path='/psicologos' element={<PsicoList />} />
                         <Route path='/psicologos/:id' element={<PsicoAdmin />} />
                         <Route path='/mensajes' element = {<ChatPage/>}/>
+                        <Route path='/documentacion' element = {<Documentation />} />
                         <Route path="/*" element={ <Navigate to="/" /> } />
                     </Routes>
                 </>
