@@ -1,27 +1,34 @@
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useSelector, useDispatch } from 'react-redux';
-import { postDateTime } from '../../slice/psico/thunks.js';
+import { getPsychologyID, postDateTime, getCalendarioPsicologoRuta, getDiasPsicologos, minMaxTime, añadirDia, eliminarDia, añadirHorario, eliminarHorario } from '../../slice/psico/thunks.js';
 import Loading from '../Loading/Loading.jsx';
-import './CalendarPsico.css'
+import './calendar.css'
 
-export const CalendarPsico = ({idPsycho}) => {
-    
-    const psychologist = useSelector(state => state.psicology.pychoId);
-    const [startDate, setStartDate] = useState(psychologist.id ? psychologist.formatoDias[0] : new Date());
+export const Calendar = ({idPsycho}) => {
+    const psychologistDays = useSelector(state => state.psicology.psychoCalendar);
+    const idPsico = useSelector(state => state.auth.authBack.id)
+    const [startDate, setStartDate] = useState(psychologistDays.formatoDias ? psychologistDays.formatoDias[0] : new Date());
     const [startTime, setStartTime] = useState(new Date().setHours(8,0));
     const [excludes, setExcludes] = useState([]);
     const dispatch = useDispatch();
 
     useEffect(() => {
-        if (psychologist.id) {
+        if (psychologistDays.dia) {
             setExcludes(getTimeExcludes(startDate));
+        }else{
+            dispatch(getCalendarioPsicologoRuta(idPsico))
         }
         // dispatch(getPsychologyID(idPsycho));
         dispatch(postDateTime(postDates()))
     },[startDate, startTime]);
-    
+
+    useEffect(() => {
+        dispatch(getCalendarioPsicologoRuta(idPsico))
+    },[excludes])
+
         const getMonth = (month) => {
             switch(month){
             case "Jan":
@@ -52,7 +59,7 @@ export const CalendarPsico = ({idPsycho}) => {
         }
     
         const getTimeExcludes = (startDate) => {
-            const dayPsico = psychologist.dia.filter(d => {
+            const dayPsico = psychologistDays?.dia.filter(d => {
                 let dia = d.fecha.split("-");
                 return new Date(dia[0],dia[1]-1,dia[2]).toString().slice(0,10) === new Date(startDate).toString().slice(0,10)
             });
@@ -72,8 +79,33 @@ export const CalendarPsico = ({idPsycho}) => {
         //     dispatch(postDateTime());
         // }
         
-    
-        
+        const send = (e) => {
+            switch(e.target.value){
+                case "añadirDia":
+                    dispatch(añadirDia(idPsico, postDates().date))
+                    setStartDate(psychologistDays.formatoDias[0])
+                    //dispatch(getCalendarioPsicologoRuta(idPsico))
+                    break
+                case "borrarDia":
+                    dispatch(eliminarDia(idPsico, postDates().date))
+                    setStartDate(psychologistDays.formatoDias[0])
+                    //dispatch(getCalendarioPsicologoRuta(idPsico))
+                    break
+                case "borrarHorario":
+                    dispatch(añadirHorario(idPsico, postDates()))
+                    dispatch(getCalendarioPsicologoRuta(idPsico))
+                    getTimeExcludes()
+                    setStartDate(psychologistDays.formatoDias[0])
+                    break
+                default:
+                    let time = document.getElementById("hora").value
+                    dispatch(eliminarHorario(idPsico, postDates().date, time))
+                    dispatch(getCalendarioPsicologoRuta(idPsico))
+                    getTimeExcludes()
+                    setStartDate(psychologistDays.formatoDias[0])
+            }
+        }
+
         const postDates = () => {
             let date = startDate.toString().split(" ");
             let mes = getMonth(date[1]) <= 10 ? ("0" + getMonth(date[1])) : getMonth([date[1]]);
@@ -85,28 +117,36 @@ export const CalendarPsico = ({idPsycho}) => {
             return {date, time};
         }
 
-        //console.log(psychologist);
+        const getDiasSelect = () => {
+            const dayPsico = psychologistDays?.dia.filter(d => {
+                let dia = d.fecha.split("-");
+                return new Date(dia[0],dia[1]-1,dia[2]).toString().slice(0,10) === new Date(startDate).toString().slice(0,10)
+            });
+            const horarios = dayPsico[0]?.horarios ? dayPsico[0].horarios : [];
+            return horarios
+        }
+
         return (
             <> 
                 <h1 className='font-bold text-white mt-2.5'>CALENDARIO</h1>
                 {
-                    psychologist.formatoHorarios?.min 
+                    psychologistDays.formatoDias
                     ? <div className='flex flex-col'>
                     <div className='mt-2.5 mb-5'>
                         <label className='text-white'>Selecciona una fecha</label>
+                        <p>Los días marcados en verde son los disponibles para los pacientes.</p>
                         <DatePicker
                         selected={startDate}
                         onChange={(date) => {
                             setStartDate(date);
                             dispatch(postDateTime(postDates()));
                         }}
-                        includeDates={psychologist.formatoDias}
+                        //includeDates={psychologistDays.formatoDias}
                         showWeekNumbers
                         minDate={new Date()}
                         monthsShown={1}
                         dateFormat="yyyy/MM/dd"
-                        withPortal
-                        // inline
+                        highlightDates={psychologistDays.formatoDias}
                         />
                     </div>
                     <div className='mb-5'>
@@ -117,19 +157,29 @@ export const CalendarPsico = ({idPsycho}) => {
                         onChange={(date) => setStartTime(date)}
                         showTimeSelect
                         showTimeSelectOnly
-                        timeIntervals={psychologist.intervaloSesion}
+                        timeIntervals={psychologistDays.intervaloSesion}
                         timeCaption="Time"
                         dateFormat="hh:mm aa"
-                        minTime={psychologist.formatoHorarios.min}
-                        maxTime={psychologist.formatoHorarios.max}
-                        withPortal
-                        // inline
+                        minTime={psychologistDays.formatoHorarios.min}
+                        maxTime={psychologistDays.formatoHorarios.max}
                         />
+
                     </div>
+                    <select id="hora">
+                        <option>Horarios no disponibles</option>
+                        {getDiasSelect().length > 0 ? getDiasSelect().map((d) => {
+                            return(<option value={d.hora}>{d.hora}</option>)
+                        }) : null}
+                    </select>
+                    <button value="borrarDia" onClick={(e) => send(e)}>Eliminar Día disponible</button>
+                    <button value="añadirDia" onClick={(e) => send(e)}>Agregar Día disponible</button>
+                    <button value="borrarHorario" onClick={(e) => send(e)}>Eliminar Horario disponible</button>
+                    <button value="añadirHorario" onClick={(e) => send(e)}>Agregar Horario disponible</button>
                 </div> : <div>
                     <Loading/>
                 </div>
-                }
+                    }
+                
             </>
         );
 }

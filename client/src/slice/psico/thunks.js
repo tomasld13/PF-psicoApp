@@ -14,9 +14,13 @@ import { getPsychos,
         getPsychologistFavs,
         getPsicologoFacturas,
         getSaldoTotalPsicologo,
+        getCalendarioPsicologo,
         postMercadoPsicologo,
         getFacturas} from './psicologySlice.js';
 
+import Swal from 'sweetalert2';
+
+        
 export const getPsicology = () => {
     return async (dispatch) => {
 
@@ -116,14 +120,14 @@ export const getPacientID = (id) => {//Consigue Paciente por ID
     }
 }
 
-const getDiasPsicologos = (dias) => {
+export const getDiasPsicologos = (dias) => {
     return dias.map(m => {
         const dia = m.fecha.split("-")
         return new Date(dia[0],dia[1]-1,dia[2])
     });
 }
 
-const minMaxTime = (finHorario, inicioHorario) => {
+export const minMaxTime = (finHorario, inicioHorario) => {
     let [maxH, maxM] = finHorario.split(":");
     maxH = parseInt(maxH);
     maxM = parseInt(maxM);
@@ -291,6 +295,28 @@ export const activarPsico = (id, token) => {
     }
 }
 
+export const getCalendarioPsicologoRuta = (id) => {
+    return async (dispatch) => {
+        const rs = await fetch(`${process.env.REACT_APP_API}/api/dia/${id}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+
+        const data = await rs.json();
+        const dias = getDiasPsicologos(data.dia);
+            
+        const horarios = minMaxTime(data.finHorario , data.inicioHorario);
+        data.formatoDias = dias;
+        data.formatoHorarios = horarios;
+        dispatch(getCalendarioPsicologo(data))
+
+        console.log(data);
+    }
+}
+
+
 export const uploadImage = (id, img) => {
 
     return async () => {
@@ -324,6 +350,105 @@ export const uploadImage = (id, img) => {
     }
 }
 
+export const eliminarDia = (id,date) => {
+    return async (dispatch) => {
+        const rs = await fetch(`${process.env.REACT_APP_API}/api/dia/${id}`, {
+            method: 'DELETE',
+            body: JSON.stringify({date: date}),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+
+        const data = await rs.json();
+        if(data.error){
+            Swal.fire(
+                data.error,
+                '',
+                'error'
+            );
+        }else{
+            const dias = getDiasPsicologos(data.dia);
+            
+            const horarios = minMaxTime(data.finHorario , data.inicioHorario);
+            data.formatoDias = dias;
+            data.formatoHorarios = horarios;
+            dispatch(getCalendarioPsicologo(data))
+        }
+        
+        console.log(data);
+    }
+}
+
+export const añadirDia = (id,date) => {
+    return async (dispatch) => {
+        const rs = await fetch(`${process.env.REACT_APP_API}/api/dia/${id}`, {
+            method: 'POST',
+            body: JSON.stringify({date: date}),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+        
+        const data = await rs.json();
+        const dias = getDiasPsicologos(data.dia);
+
+        const horarios = minMaxTime(data.finHorario , data.inicioHorario);
+        data.formatoDias = dias;
+        data.formatoHorarios = horarios;
+        dispatch(getCalendarioPsicologo(data))
+
+        console.log(data);
+    }
+}
+
+export const añadirHorario = (id,{date, time}) => {
+    return async (dispatch) => {
+        const rs = await fetch(`${process.env.REACT_APP_API}/api/horarios/psicologo/${id}`, {
+            method: 'POST',
+            body: JSON.stringify({date, time}),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+
+        const data = await rs.json();
+        if(data.error){
+            Swal.fire(
+                data.error,
+                '',
+                'error'
+            );
+        }else{
+            Swal.fire(
+                "Horario eliminado",
+                '',
+                'success'
+            );
+        }
+        console.log(data);
+    }
+}
+
+export const eliminarHorario = (id,date,time) => {
+    return async () => {
+        const rs = await fetch(`${process.env.REACT_APP_API}/api/horarios/${id}`, {
+            method: 'DELETE',
+            body: JSON.stringify({date, time}),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+
+        const data = await rs.json();
+        Swal.fire(
+            "Horario añadido",
+            '',
+            'success'
+        );
+        console.log(data);
+    }
+}
 export const psicologoFacturas = (id) => {
     return async (dispatch) => {
         const rs = await fetch(`${process.env.REACT_APP_API}/api/factura/psicologo/${id}`);
