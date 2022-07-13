@@ -11,7 +11,10 @@ import { getPsychos,
         sortByExpPsycho,
         getPacientByID,
         getPatients,
-        getPsychologistFavs  } from './psicologySlice.js';
+        getPsychologistFavs,
+        getPsicologoFacturas,
+        getSaldoTotalPsicologo,
+        postMercadoPsicologo} from './psicologySlice.js';
 
 export const getPsicology = () => {
     return async (dispatch) => {
@@ -317,7 +320,35 @@ export const uploadImage = (id, img) => {
             const data = await rs.json();
             console.log(data);
         }
+    }
+}
 
+export const psicologoFacturas = (id) => {
+    return async (dispatch) => {
+        const rs = await fetch(`${process.env.REACT_APP_API}/api/factura/psicologo/${id}`);
+        const data = await rs.json();
+        dispatch(getPsicologoFacturas(data));
+    }
+}
 
+export const getSaldoTotal = (id) => {
+    return async (dispatch) => {
+        const rs = await fetch(`${process.env.REACT_APP_API}/api/psicologo/saldoTotal/${id}`);
+        const data = await rs.json();
+        dispatch(getSaldoTotalPsicologo(data));
+    }
+}
+
+export const postSaldoTotal = (data) => {
+    return async (dispatch) => {
+        try {
+            const rs = await axios.post(`${process.env.REACT_APP_API}/api/mercadopagoPsicologo`, {
+                method: 'POST',
+                body: data
+            });
+            dispatch(postMercadoPsicologo(rs.data));
+        } catch (error) {
+            return (error);
+        }
     }
 }

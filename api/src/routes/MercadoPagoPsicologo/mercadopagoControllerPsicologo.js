@@ -1,4 +1,4 @@
-const { Factura, MetodoPago, Psicologo } = require("../../db")
+const { Factura, MetodoPago, Psicologo, Usuario } = require("../../db")
 
 const {URL_BACK, URL_FRONT} = process.env;
 
@@ -31,22 +31,22 @@ const transporter = nodemailer.createTransport({
 //ruta que genera la URL a mercado pago
 const postMP = async (req, res) => {
     const data = req.body.body;
-    const psicoId = data.psicoId.id;
+    const id = data.psicoId;
     const items = [
-        { servicio: data.servicio, precio: data.precio, quantity: 1 },
+        { cuota: data.cuota, precio: data.precio, quantity: 1 },
     ]
-    const external_reference = psicoId + "*" + data.email + "*" + data.precio;
+    const external_reference = id + "*" + data.email + "*" + data.precio + "*" + data.fecha;
     const items_md = items.map(item => ({
-        title: item.servicio,
+        title: item.cuota,
         quantity: item.quantity,
         unit_price: item.precio,
     }))
     let preference = {
         items: items_md,
         back_urls: {
-            success: `${URL_BACK === "localhost" ? "http://localhost:3001" : URL_BACK}/api/mercadopago/pagos`,
-            failure: `${URL_BACK === "localhost" ? "http://localhost:3001" : URL_BACK}/api/mercadopago/pagos`,
-            pending: `${URL_BACK === "localhost" ? "http://localhost:3001" : URL_BACK}/api/mercadopago/pagos`
+            success: `${URL_BACK === "localhost" ? "http://localhost:3001" : URL_BACK}/api/mercadopagoPsicologo/pagos`,
+            failure: `${URL_BACK === "localhost" ? "http://localhost:3001" : URL_BACK}/api/mercadopagoPsicologo/pagos`,
+            pending: `${URL_BACK === "localhost" ? "http://localhost:3001" : URL_BACK}/api/mercadopagoPsicologo/pagos`
         },
         auto_return: "approved",
         payment_methods: {
@@ -85,19 +85,13 @@ const getPayments = async (req, res) => {
         const payment_status = req.query.status;
         const merchant_order_id = req.query.merchant_order_id;
         const external_reference = req.query.external_reference;
-        const [psicoId, email, precio] = external_reference.split("*")
-        /*const factura = await Factura.create({
-            payment_id: payment_id,
-            payment_status: payment_status,
-            merchant_order_id: merchant_order_id,
-            status: "paid",
-            fecha: fecha,
-            precio: parseInt(precio),
-            saldado: false
-        })*/
-        const psicologo = await Psicologo.findByPk(Number(psicoId), {include:{model:Factura}})
+        const [id, email, precio, fecha] = external_reference.split("*");
+
+        const usuario = await Usuario.findByPk(Number(id), {include: {model: Psicologo, attributes: ["id"] } });
+        console.log("USUARIO", usuario);
+        const psicologo = await Psicologo.findByPk(usuario.psicologo.id, {include:{model:Factura}})
+        console.log("PSICOLOGO", psicologo);
         psicologo.facturas.map(async(f) => await f.update({saldado:true}))
-        console.log("PACIENTE EXISTENTE", pacienteExistente)
         let info = await transporter.sendMail({
             from: `${process.env.EMAIL}`, // sender address
             to: email, // list of receivers
@@ -107,10 +101,10 @@ const getPayments = async (req, res) => {
         });
         console.log(info);
         console.info("redirect success");
-        res.redirect(`${URL_FRONT}`);
+        res.redirect(`${URL_FRONT}/perfil`);
     } catch (error) {
         console.error("error al actualizar la factura", error);
-        return res.redirect(`${URL_FRONT}?error${error}&where=al+buscar`);
+        return res.redirect(`${URL_FRONT}/perfil?error${error}&where=al+buscar`);
     }
 }
 
