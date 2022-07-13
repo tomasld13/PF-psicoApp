@@ -24,7 +24,7 @@ const SubsectionItemStyles = styled.div`
        display: flex;
        align-items: center;
        margin-left: -2rem;
-        margin-top: -5rem;
+        margin-top: 5rem;
         margin-bottom: 5rem;
         gap: 5rem;
     }
