@@ -1,5 +1,5 @@
 
-const { getPacientes, grabarMensaje, getPsicologos, usuarioConectado, usuarioDesconectado } = require('./socketController');
+const { getPacientes, grabarMensaje, getPsicologos, usuarioConectado, usuarioDesconectado, getUsuarios } = require('./socketController');
 const { Usuario } = require('../../db')
 const {comprobarJWT} = require('../../helpers/generar-JWT');
 class Sockets {
@@ -35,6 +35,9 @@ class Sockets {
             if(user.rolId===1){
                 this.io.emit('lista-usuarios', await getPsicologos())//Aca va a emitir un arreglo con todos los usuarios,
                 //Lo que yo quiero en mi server que estos usuarios sean los contactos paciente-psicologo. 
+            }
+            if(user.rolId === 3){
+                this.io.emit('lista-usuarios', await getUsuarios())
             }
             
 

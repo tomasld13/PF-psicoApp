@@ -8,7 +8,7 @@ import Sidebar from '../Sidebar';
 import { getPsicology, deleteUser, suspenderPsico } from '../../../slice/psico/thunks.js';
 
 
-export default function PsychoList() {
+export default function PsicoList() {
 
   const psicologos = useSelector(state => state.psicology.psychologists);
   const {token} = useSelector(state => state.auth.authBack);
