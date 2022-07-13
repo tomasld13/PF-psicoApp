@@ -1,12 +1,10 @@
 import React from "react"
-
+import {Calendar} from "../../../CalendarPsico/Calendar"
 export default function Calendario() {
-
+  
   return (
     <>
-        <div>
-            Hola Calendario
-        </div>
+        <Calendar/>
     </>
   )
 
