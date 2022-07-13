@@ -26,9 +26,7 @@ const actualizarImagenCloudinary = async(req,res=response)=>{
             cloudinary.uploader.destroy(public_id);
         }
         const {tempFilePath} = req.files.archivo;
-        const {secure_url} =  await cloudinary.uploader.upload(tempFilePath);
-    
-        
+        const {secure_url} =  await cloudinary.uploader.upload(tempFilePath);        
         user.avatar = secure_url;
         await user.save();
         res.json(user)
