@@ -11,7 +11,8 @@ import { getPsychos,
         getPacientByID,
         getPatients,
         getPsychologistFavs,
-        getPsicologoFacturas } from './psicologySlice.js';
+        getPsicologoFacturas,
+        getSaldoTotalPsicologo } from './psicologySlice.js';
 
 export const getPsicology = () => {
     return async (dispatch) => {
@@ -286,5 +287,13 @@ export const psicologoFacturas = (id) => {
         const rs = await fetch(`${process.env.REACT_APP_API}/api/factura/psicologo/${id}`);
         const data = await rs.json();
         dispatch(getPsicologoFacturas(data));
+    }
+}
+
+export const getSaldoTotal = (id) => {
+    return async (dispatch) => {
+        const rs = await fetch(`${process.env.REACT_APP_API}/api/psicologo/saldoTotal/${id}`);
+        const data = await rs.json();
+        dispatch(getSaldoTotalPsicologo(data));
     }
 }

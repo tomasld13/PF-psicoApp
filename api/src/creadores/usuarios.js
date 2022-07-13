@@ -384,7 +384,7 @@ while(dia < 31){
 
 const generePsicologos = async () => {
 	const servicios = await Servicio.findAll();
-		let preciosServicios = 1000
+		let preciosServicios = 3000
 		servicios.map(async s => {
 			preciosServicios= preciosServicios + 500
 			const p = await Precio.create({costo: preciosServicios})

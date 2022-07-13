@@ -22,7 +22,7 @@ import UserAdmin from '../../Admin/Componentes/UserPage/UserAdmin.jsx';
 import PsicoAdmin from '../../Admin/Componentes/PsicoPage/PsicoAdmin.jsx'
 import ForPsicos from "../ForPsicos/ForPsicos"
 import ReportsHome from "../../Admin/Componentes/Reports/ReportsHome";
-import PsicoList from "../../Admin/Componentes/Psicologos/PsicoList";
+import PsicoList from "../../Admin/Componentes/Psicologos/PsychoList";
 import { AuthContext } from '../../context/authContext/AuthContext';
 
 
