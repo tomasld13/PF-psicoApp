@@ -43,6 +43,10 @@ const getPsicologos = async() => {
 
     return usuarios;
 }
+const getUsuarios = async ()=>{
+    const usuarios = await Usuario.findAll();
+    return usuarios;
+}
 
 const grabarMensaje = async( payload ) => {
     
@@ -66,6 +70,7 @@ module.exports = {
     getPacientes,
     grabarMensaje,
     usuarioConectado,
-    usuarioDesconectado
+    usuarioDesconectado,
+    getUsuarios
 }
 
