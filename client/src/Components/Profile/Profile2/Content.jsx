@@ -10,9 +10,10 @@ import Historial from './ParaPsicologo/Historial.jsx'
 
 const Content = () => {
   const { rolId }  = useSelector(state => state.auth.authBack);
+  const userGoogle  = useSelector(state => state.auth.authGoogle);
 
-  const tabs = (rolId===1)?
-    ['Ajustes', 'Favoritos', 'Notificaciones',]
+  const tabs = (rolId===1 || userGoogle.rolId === 1)?
+    ['Ajustes', 'Favoritos', 'Historial']
     :['Ajustes', 'Suscripción','Calendario', 'Historial'];
 
   return (
@@ -49,7 +50,7 @@ const Content = () => {
         </TabList>
 
           {//Para el Perfil del paciente
-            (rolId===1)?
+            (rolId===1 || userGoogle.rolId === 1)?
             <TabPanels px={3} mt={5}>
               <TabPanel>
                 <AccountSettings />
@@ -57,9 +58,12 @@ const Content = () => {
               <TabPanel>
                 <Favorites />
               </TabPanel>
-              <TabPanel>
+              {/* <TabPanel>
                 <Notificationes />
-              </TabPanel>
+              </TabPanel> */}
+              {/* <TabPanel>
+                <Historial/> 
+              </TabPanel> */}
             </TabPanels>
             
             ://Para el perfil del Psicologo

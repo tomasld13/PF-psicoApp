@@ -16,7 +16,6 @@ export default function PsicoDetails() {
 
     useEffect(() => {
         dispatch(getPsychologyID(id));
-        console.log("contador")
     },[]);
 
     return (

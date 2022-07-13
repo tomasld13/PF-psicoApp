@@ -25,14 +25,12 @@ export default function PsicoAdmin() {
     <Sidebar />
     <div className='user-admin-profile'>
         <div className="user-title-container">
-          <h1 className="edit-user">Editar Psicologo</h1>
-          <button className="userAddButton">Crear Nuevo</button>
+          <h1 className="edit-user text-4xl font-bold">Psicologo</h1>
         </div>
         <div className="user-container">
           <div className="user-show">
             <div className="user-show-title">
-              <span className="show-username">Nombre del psicologo</span>
-              <span className="show-title">Algun título</span>
+              <span className="show-username">{psicologo.usuario ? psicologo.usuario.name : 'Nombre'}</span>
             </div>
             <div className="user-show-bottom">
               {
@@ -61,54 +59,6 @@ export default function PsicoAdmin() {
                 </>
               }
             </div>
-          </div>
-          <div className="user-update">
-            <span className="userUpdateTitle">Editar</span>
-            <form  className="userUpdateForm">
-              <div className="form-left-info">
-                <div className="userUpdateItem">
-                  <label>Nombre completo</label>
-                  <input 
-                  type="text" 
-                  placeholder='nombrecompleto'
-                  className='userUpdateInputs'
-                  />
-                </div>
-                <div className="userUpdateItem">
-                  <label>Email</label>
-                  <input 
-                  type="text" 
-                  placeholder='nombrecompleto'
-                  className='userUpdateInputs'
-                  />
-                </div>
-                <div className="userUpdateItem">
-                  <label>Contraseña</label>
-                  <input 
-                  type="text" 
-                  placeholder='nombrecompleto'
-                  className='userUpdateInputs'
-                  />
-                </div>
-                <div className="userUpdateItem">
-                  <label>Status</label>
-                  <select
-                  className='userUpdateInputs'>
-                    <option selected>Activo</option>
-                    <option>Inactivo</option>
-                    <option>Suspendido</option>
-                  </select>
-                </div>
-              </div>
-              <div className="formRightInfo">
-                <div className="userupdate-upload">
-                  <img 
-                  src={imageavatar} 
-                  alt="imagen de perfil admin" />
-                </div>
-                <button className="userUpdateButton">Actualizar</button>
-              </div>
-            </form>
           </div>
         </div>
     </div>
