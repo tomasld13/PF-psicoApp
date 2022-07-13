@@ -336,11 +336,13 @@ export const uploadImage = (id, img) => {
 
             if (JSON.parse( localStorage.getItem('usuario') )) {
                 const usuarioBack = JSON.parse( localStorage.getItem('usuario') );
-                usuarioBack.avatar = data.avatar;
+                if (usuarioBack.user) usuarioBack.user.avatar = data.avatar;
+                else usuarioBack.avatar = data.avatar;
                 localStorage.setItem('usuario', JSON.stringify(usuarioBack));
             } else {
                 const usuarioGoogle = JSON.parse( localStorage.getItem('usuarioGoogle') );
-                usuarioGoogle.user.avatar = data.avatar;
+                if (usuarioGoogle.user) usuarioGoogle.user.avatar = data.avatar;
+                else usuarioGoogle.avatar = data.avatar;
                 localStorage.setItem('usuarioGoogle', JSON.stringify(usuarioGoogle));
             }
 
