@@ -18,8 +18,8 @@ function Sidebar() {
       style={{ transform: 'translateY(-100px)' }}
     >
       <Profile />
-      <Data />
-      <Actions />
+      {/* <Data /> */}
+      {/* <Actions /> */}
     </Box>
   )
 }

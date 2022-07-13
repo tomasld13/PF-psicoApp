@@ -8,7 +8,10 @@ let psicologos = [
 		"telephone": 1133445566,
 		"address": "Ap #336-9930 Lobortis Rd.",
 		"birth": "2023/36/24",
-		"password" : "123456789"
+		"password" : "123456789",
+		"dni": 20000000,
+		"matriculaProfesional": "MP Nº 6056",
+		"cbu": "01702046600000087865"
 	},
 	{
 		"name": "Adrian Guerra",
@@ -17,7 +20,10 @@ let psicologos = [
 		"telephone": 1133445566,
 		"address": "Ap #638-5964 Est/Rd.",
 		"birth": "2021/23/12",
-		"password" : "123456789"
+		"password" : "123456789",
+		"dni": 20047258,
+		"matriculaProfesional": "MP Nº 6432",
+		"cbu": "01702046600000049578"
 	},
 	{
 		"name": "Hector Stephens",
@@ -26,7 +32,10 @@ let psicologos = [
 		"telephone": 1133445566,
 		"address": "930-3702 Massa. Road",
 		"birth": "2022/50/08",
-		"password" : "123456789"
+		"password" : "123456789",
+		"dni": 42149875,
+		"matriculaProfesional": "MP Nº 1579",
+		"cbu": "01702046600000033333"
 	},
 	{
 		"name": "Talon Harper",
@@ -35,7 +44,10 @@ let psicologos = [
 		"telephone":1133445566,
 		"address": "Ap #653-8569 Laoreet Rd.",
 		"birth": "2022/14/24",
-		"password" : "123456789"
+		"password" : "123456789",
+		"dni": 32569841,
+		"matriculaProfesional": "MP Nº 1793",
+		"cbu": "01702046600000074589"
 	},
 	{
 		"name": "Kasimir Mcguire",
@@ -44,7 +56,10 @@ let psicologos = [
 		"telephone": 1133445566,
 		"address": "926-1212 Purus Ave",
 		"birth": "2021/50/15",
-		"password" : "123456789"
+		"password" : "123456789",
+		"dni": 24987632,
+		"matriculaProfesional": "MP Nº 6579",
+		"cbu": "017020466000000425964"
 	},
 	{
 		"name": "Carol Stafford",
@@ -53,7 +68,10 @@ let psicologos = [
 		"telephone": 1133445566,
 		"address": "Ap #730-7194 Lectus St.",
 		"birth": "2003/44/01",
-		"password" : "123456789"
+		"password" : "123456789",
+		"dni": 21498653,
+		"matriculaProfesional": "MP Nº 4875",
+		"cbu": "01702046600000088888"
 	},
 	{
 		"name": "Inez Johnston",
@@ -62,7 +80,10 @@ let psicologos = [
 		"telephone": 1133445566,
 		"address": "Ap #340-4256 Vitae, Rd.",
 		"birth": "2002/46/03",
-		"password" : "123456789"
+		"password" : "123456789",
+		"dni": 24698531,
+		"matriculaProfesional": "MP Nº 2014",
+		"cbu": "017020466000000478333"
 	},
 	{
 		"name": "Alfonso Raymond",
@@ -71,7 +92,10 @@ let psicologos = [
 		"telephone": 1133445566,
 		"address": "440-3788 Erat, Avenue",
 		"birth": "2019/05/13",
-		"password" : "123456789"
+		"password" : "123456789",
+		"dni": 44269587,
+		"matriculaProfesional": "MP Nº 3245",
+		"cbu": "01702046600000072589"
 	},
 	{
 		"name": "Finn Nixon",
@@ -80,7 +104,10 @@ let psicologos = [
 		"telephone": 1133445566,
 		"address": "Ap #740-5332 Curabitur Road",
 		"birth": "2001/41/21",
-		"password" : "123456789"
+		"password" : "123456789",
+		"dni": 14523698,
+		"matriculaProfesional": "MP Nº 5047",
+		"cbu": "01702046600000084593"
 	},
 	{
 		"name": "Blythe Fitzgerald",
@@ -89,7 +116,10 @@ let psicologos = [
 		"telephone": 1164632737,
 		"address": "Ap #932-7481 Donec Road",
 		"birth": "2015/44/07",
-		"password" : "123456789"
+		"password" : "123456789",
+		"dni": 12547956,
+		"matriculaProfesional": "MP Nº 4025",
+		"cbu": "01002046600000047652"
 	},
 	{
 		"name": "Neville Odom",
@@ -98,7 +128,10 @@ let psicologos = [
 		"telephone": 1133445566,
 		"address": "896-9537 Lectus Rd.",
 		"birth": "2015/55/17",
-		"password" : "123456789"
+		"password" : "123456789",
+		"dni": 19875264,
+		"matriculaProfesional": "MP Nº 4068",
+		"cbu": "04802046600000084125"
 	},
 	{
 		"name": "Dominic Smith",
@@ -107,7 +140,10 @@ let psicologos = [
 		"telephone": 1133445566,
 		"address": "P.O. Box 156, 8525 Dui Avenue",
 		"birth": "2017/02/11",
-		"password" : "123456789"
+		"password" : "123456789",
+		"dni": 41658749,
+		"matriculaProfesional": "MP Nº 5014",
+		"cbu": "01702046600000048569"
 	},
 	{
 		"name": "Leonard Ballard",
@@ -116,7 +152,10 @@ let psicologos = [
 		"telephone": 1133445566,
 		"address": "914-5733 Sit Street",
 		"birth": "2007/44/10",
-		"password" : "123456789"
+		"password" : "123456789",
+		"dni": 40254789,
+		"matriculaProfesional": "MP Nº 6014",
+		"cbu": "01702046600004852367"
 	},
 	{
 		"name": "Shea Torres",
@@ -125,7 +164,10 @@ let psicologos = [
 		"telephone": 1133445566,
 		"address": "Ap #594-6552 Pharetra Rd.",
 		"birth": "2009/19/28",
-		"password" : "123456789"
+		"password" : "123456789",
+		"dni": 34589657,
+		"matriculaProfesional": "MP Nº 4862",
+		"cbu": "01702046600000087865"
 	},
 	{
 		"name": "Octavia Donovan",
@@ -134,7 +176,10 @@ let psicologos = [
 		"telephone": 1133445566,
 		"address": "Ap #658-5072 Rutrum, Ave",
 		"birth": "2015/04/11",
-		"password" : "123456789"
+		"password" : "123456789",
+		"dni": 40658954,
+		"matriculaProfesional": "MP Nº 4567",
+		"cbu": "01702046600000042897"
 	}
 ]
 
@@ -339,7 +384,7 @@ while(dia < 31){
 
 const generePsicologos = async () => {
 	const servicios = await Servicio.findAll();
-		let preciosServicios = 1000
+		let preciosServicios = 3000
 		servicios.map(async s => {
 			preciosServicios= preciosServicios + 500
 			const p = await Precio.create({costo: preciosServicios})
@@ -353,15 +398,15 @@ const generePsicologos = async () => {
             telephone: p.telephone,
             address: p.address,
             birth: p.birth,
-			password : bcrypt.hashSync(p.password, 10)
+			password : bcrypt.hashSync(p.password, 10),
         })
-        const actualPsicologo = await Psicologo.create({yearsExperience: 10, inicioHorario: "08:00:00", finHorario: "16:00:00", intervaloSesion: 60})
+        const actualPsicologo = await Psicologo.create({yearsExperience: 10, inicioHorario: "08:00:00", finHorario: "16:00:00", intervaloSesion: 60, pacientesAtendidos : [5,4,1,2], dni: p.dni,cbu: p.cbu, matriculaProfesional: p.matriculaProfesional})
 		const dias = await Dia.bulkCreate(fechas)
 		dias.map(async (d) => await actualPsicologo.addDia(d))
 		actualPS.setPsicologo(actualPsicologo)
 		const rol = await Rol.findOne({where:{id:2}})
 		actualPS.setRol(rol)
-		const generoNumber = Math.ceil(Math.random()*3)
+		const generoNumber = Math.ceil(Math.random()*4)
 		const genero = await Genero.findOne({where:{id:generoNumber}})
 		actualPS.setGenero(genero)
 		const number = Math.ceil(Math.random()*5)
@@ -391,7 +436,7 @@ const generePacientes = () => {
 		actualP.setPaciente(actualPaciente)
 		const rol = await Rol.findOne({where:{id:1}})
 		actualP.setRol(rol)
-		const generoNumber = Math.ceil(Math.random()*3)
+		const generoNumber = Math.ceil(Math.random()*4)
 		const genero = await Genero.findOne({where:{id:generoNumber}})
 		actualP.setGenero(genero)
 		const ciudadNumber = Math.ceil(Math.random()*4142)
@@ -413,7 +458,7 @@ const generarAdmin = async()=>{
 	actual.setAdministrador(actualAdministrador)
 	const rol = await Rol.findOne({where:{id:3}})
 	actual.setRol(rol)
-	const generoNumber = Math.ceil(Math.random()*3)
+	const generoNumber = Math.ceil(Math.random()*4)
 	const genero = await Genero.findOne({where:{id:generoNumber}})
 	actual.setGenero(genero)
 	const ciudadNumber = Math.ceil(Math.random()*4142)

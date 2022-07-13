@@ -1,11 +1,10 @@
-import { useEffect, useMemo, useState} from "react";
-import { useNavigate } from 'react-router-dom'
+import { useEffect, useMemo, useState, useContext} from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from "../../hooks/useForm";
 import { startCreatingUserWithEmailPasswordPatient } from '../../slice/auth/thunks.js';
 import { getProvincias, getCiudades, cleanCiudades } from '../../slice/psico/thunks.js';
-import Swal from "sweetalert2";
-
+import {AuthContext} from '../../context/authContext/AuthContext'
+import { async } from "@firebase/util";
 const emailRegex = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
 
 
@@ -41,15 +40,13 @@ const formValidations = {
 export const RegisterPatient = ({rol}) => {
 
     formData.rol = rol;
-
+    const { login } = useContext( AuthContext );
     const dispatch = useDispatch();
-    const navigate = useNavigate();
 
     const [formSubmitted, setFormSubmitted] = useState(false);
     const [idProvincia, setIdProvincia] = useState(0);
 
     const { status } = useSelector(state => state.auth.authBack);
-    const errorRegister = useSelector(state => state.auth.error);
     const provincias = useSelector(state => state.psicology.provincias);
     const ciudades = useSelector(state => state.psicology.ciudades);
 
@@ -60,17 +57,16 @@ export const RegisterPatient = ({rol}) => {
             telephone, telephoneValid, address, addressValid, birth, birthValid,
             generValid, ciudadValid, provinciaValid} = useForm(formData, formValidations);
 
-    const onSubmit = (e) => {
+    
+    const onSubmit = async(e) => {
         e.preventDefault();
         setFormSubmitted(true);
+        
         if(!isFormValid) return;
-        dispatch( startCreatingUserWithEmailPasswordPatient(formState) );
-        Swal.fire(
-            'La cuenta fue creada exitosamente',
-            'success'
-        )
-        navigate('/')
+        dispatch(startCreatingUserWithEmailPasswordPatient(formState) );
+        const ok = await login( formState.email, formState.password );
     }
+
     
     useEffect(() => {
         dispatch(getProvincias());
@@ -119,7 +115,8 @@ export const RegisterPatient = ({rol}) => {
                         <option  selected value="0"> Genero </option>
                         <option value="Masculino">Masculino</option>
                         <option value="Femenino">Femenino</option>
-                        <option value="No binario">No binario</option>
+                        <option value="No Binario">No Binario</option>
+                        <option value="Otro">Otro</option>
                     </select>
                     {!!generValid && formSubmitted ? <span style={{color:'red'}}>{generValid}</span> : null}
                 </div>
@@ -143,7 +140,7 @@ export const RegisterPatient = ({rol}) => {
                         <select className='border border-gray-300 my-2.5 px-3 py-1 rounded-lg shadow-sm focus:outline-none focus:border-primary' name="ciudad" id="ciudad" onChange={onInputChange}>
                             <option  selected value="0">Ciudad</option>
                             {
-                                ciudades.length > 0 ? ciudades.map((ciudad) => {
+                                ciudades?.length > 0 ? ciudades.map((ciudad) => {
                                     return <option value={ciudad.name} key={ciudad.id}>
                                                 {ciudad.name}</option>
                                 }) : null
@@ -157,9 +154,7 @@ export const RegisterPatient = ({rol}) => {
                     <button 
                     className='bg-primary text-white border border-primary font-bold py-2 px-4 rounded hover:bg-white hover:text-primary my-2.5 h-12 ' 
                     disabled={isCheckingAuthentication}
-                    type="submit"
                     >Crear cuenta</button>
-                    {errorRegister !== '' ? <span style={{color:'red'}}>{errorRegister}</span> : null}
                 </div>
             </form>
         </div>

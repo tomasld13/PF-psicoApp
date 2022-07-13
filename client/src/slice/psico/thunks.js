@@ -1,6 +1,19 @@
-import { async } from '@firebase/util';
-import { getPsychos, filterSpatiality, sortByNamePsycho, getPsychoByID, postMercadopago, calendar, getProvinciasSelect, getCiudadesSelect, sortByExpPsycho  } from './psicologySlice.js';
 import axios from 'axios';
+import { getPsychos,
+        filterSpatiality,
+        sortByNamePsycho,
+        getPsychoByID,
+        postMercadopago,
+        calendar,
+        getProvinciasSelect,
+        getCiudadesSelect,
+        sortByExpPsycho,
+        getPacientByID,
+        getPatients,
+        getPsychologistFavs,
+        getPsicologoFacturas,
+        getSaldoTotalPsicologo,
+        postMercadoPsicologo} from './psicologySlice.js';
 
 export const getPsicology = () => {
     return async (dispatch) => {
@@ -18,6 +31,23 @@ export const getPsicology = () => {
 
     }
 }
+
+export const getPatient = () => {
+    return async (dispatch) => {
+
+        try {
+            const response = await fetch(`${process.env.REACT_APP_API}/api/paciente`);
+
+            const dataPaciente = await response.json();
+
+            dispatch(getPatients(dataPaciente));
+
+        } catch (error) {
+            return error
+        }
+    }
+}
+
 
 export const filterPsicology = (spatiality) => {
     return async (dispatch) => {
@@ -67,6 +97,17 @@ export const getPsychologyID = (id) => {//Consigue Psicologos por ID
 
             dispatch(getPsychoByID(data));
             
+        } catch (error) {
+            return (error)           
+        }
+    }
+}
+
+export const getPacientID = (id) => {//Consigue Paciente por ID
+    return async (dispatch)=> {
+        try {
+            const data = await axios(`${process.env.REACT_APP_API}/api/paciente/${id}`);
+            dispatch(getPacientByID(data.data));
         } catch (error) {
             return (error)           
         }
@@ -123,10 +164,26 @@ export const postDateTime = (dateTime) => {
     }
 }
 
-export const postMP = (data) => {
+// export const postMP = (data) => {
+//     return async (dispatch) => {
+//         try {
+//             const resp = await axios.post(`${process.env.REACT_APP_API}/api/mercadopago`, data);
+//             dispatch(postMercadopago(resp.data));
+//         } catch (error) {
+//             return (error)
+//         }
+//     }
+// }
+export const postMP = (data, token) => {
     return async (dispatch) => {
         try {
-            const resp = await axios.post(`${process.env.REACT_APP_API}/api/mercadopago`, data);
+            const resp = await axios.post(`${process.env.REACT_APP_API}/api/mercadopago`, {
+                method: 'POST',
+                body: data,
+                headers: {
+                    'x-token': `${token}`
+                }
+            });
             dispatch(postMercadopago(resp.data));
         } catch (error) {
             return (error)
@@ -157,10 +214,10 @@ export const getCiudades = (id) => {
         try {
             const resp = await fetch(`${process.env.REACT_APP_API}/api/provincias/${id}`);
             const data = await resp.json();
-
-            dispatch(getCiudadesSelect(data.ciudads));
-        } catch (error) {
             
+            dispatch(getCiudadesSelect(data));
+        } catch (error) {
+            console.log(error)
         }
     }
 }
@@ -168,5 +225,90 @@ export const getCiudades = (id) => {
 export const cleanCiudades = () => {
     return (dispatch) => {
         dispatch(getCiudadesSelect([]));
+    }
+}
+
+export const psychoFavs = (method, idUser, idPsycho) => {
+
+    return async () => {
+        const rs = await fetch(`${process.env.REACT_APP_API}/api/favoritos/${idPsycho}`, {
+            method: method,
+            body: JSON.stringify({pacienteID: idUser}),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+        const data = await rs.json();
+        console.log(data);
+    }
+}
+
+export const getPsychoFavs = (id) => {
+    return async (dispatch) => {
+        const rs = await fetch(`${process.env.REACT_APP_API}/api/favoritos/${id}`);
+        const data = await rs.json();
+        dispatch(getPsychologistFavs(data));
+    }
+}
+
+export const deleteUser = (id, user, token) => {
+    return async () => {
+        const rs = await fetch(`${process.env.REACT_APP_API}/api/${user}/${id}`,{
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                'x-token': token
+            }
+        });
+
+        const data = await rs.json();
+
+        console.log(data);
+    }
+}
+
+export const suspenderPsico = (id, token) => {
+    return async () => {
+        const rs = await fetch(`${process.env.REACT_APP_API}/api/psicologo/suspender/${id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'x-token': token
+            }
+        });
+
+        const data = await rs.json();
+
+        console.log(data);
+    }
+}
+
+export const psicologoFacturas = (id) => {
+    return async (dispatch) => {
+        const rs = await fetch(`${process.env.REACT_APP_API}/api/factura/psicologo/${id}`);
+        const data = await rs.json();
+        dispatch(getPsicologoFacturas(data));
+    }
+}
+
+export const getSaldoTotal = (id) => {
+    return async (dispatch) => {
+        const rs = await fetch(`${process.env.REACT_APP_API}/api/psicologo/saldoTotal/${id}`);
+        const data = await rs.json();
+        dispatch(getSaldoTotalPsicologo(data));
+    }
+}
+
+export const postSaldoTotal = (data) => {
+    return async (dispatch) => {
+        try {
+            const rs = await axios.post(`${process.env.REACT_APP_API}/api/mercadopagoPsicologo`, {
+                method: 'POST',
+                body: data
+            });
+            dispatch(postMercadoPsicologo(rs.data));
+        } catch (error) {
+            return (error);
+        }
     }
 }

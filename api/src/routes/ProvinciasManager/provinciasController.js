@@ -13,8 +13,13 @@ const getProvincias = async (req, res, next) => {
 const getProvinciasByID = async (req, res, next) => {
     try {
         const { id } = req.params;
-        const provincia = await Provincia.findByPk(id, {include:{model: Ciudad}});
+        let provincia = await Provincia.findByPk(id, {include:{model: Ciudad}});
         if(!provincia) return res.status(404).send("No se encontró una provincia con ese id")
+        provincia = provincia.ciudads.sort((a,b) => {
+            if(a.name > b.name) return 1
+            else if(a.name < b.name) return -1
+            return 0
+        })
         return res.send(provincia)
     } catch (error) {
         next(error)

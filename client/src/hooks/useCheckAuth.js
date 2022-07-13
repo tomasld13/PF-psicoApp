@@ -2,20 +2,20 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { onAuthStateChanged } from 'firebase/auth';
 import { FirebaseAuth } from "../firebase/config";
-import { login, logout } from "../slice/auth/authSlice";
+import { loginGoogle, logoutGoogle  } from "../slice/auth/authSlice.js";
+
 
 export const useCheckAuth = () => {
-    const {status} = useSelector(state => state.auth.authFirebase);
+    const {status} = useSelector(state => state.auth.authGoogle);
     const dispatch = useDispatch();
-
+    const usuarioStorage = (localStorage.getItem('usuarioGoogle')) ? JSON.parse( localStorage.getItem('usuarioGoogle') ) : {};
     useEffect(() => {
-        onAuthStateChanged(FirebaseAuth, async (user) => {
+        onAuthStateChanged(FirebaseAuth, (user) => {
 
-        if( !user ) return dispatch(logout());
-        const { uid, email, displayName, photoURL } = user;
-
-        dispatch(login({ uid, email, displayName, photoURL }));
-
+            if( !usuarioStorage.user?.name && !usuarioStorage.name ) return dispatch(logoutGoogle());
+            const {photoURL} = user;
+            usuarioStorage.photo = photoURL;
+            dispatch(loginGoogle(usuarioStorage));
         });
 
     }, []);

@@ -1,18 +1,32 @@
 const Router = require("express");
-const psicologoRoutes = require("./PsicologoManager/psicologoRoutes");
-const pacienteRoutes = require("./PacienteManager/pacienteRoutes");
-const ciudadesRoutes = require("./CiudadesManager/ciudadesRoutes");
-const provinciasRoutes = require("./ProvinciasManager/provinciaRoutes");
-const especialidadesRoutes = require("./EspecialidadesManager/EspecialidadesRoutes");
-const AuthRoutes = require('./LoginManager/AuthRoutes');
-const horariosRoutes = require("./HorariosManager/horariosRoutes")
-const diaRoutes = require("./DiaManager/diaRoutes")
-const AdministradorRoutes = require('./AdminManager/AdminRoutes')
-const mercadopagoRoutes = require('./MercadoPago/mercadopagoRoutes');
-const mensajesRoutes = require('./MensajesManager/mensajesRoutes')
+const Favoritos = require("../models/Favoritos");
+const { route } = require("./MensajesManager/mensajesRoutes");
+
+const {
+    AuthRoutes,
+    psicologoRoutes,
+    pacienteRoutes,
+    ciudadesRoutes,
+    provinciasRoutes,
+    especialidadesRoutes,
+    diaRoutes,
+    horariosRoutes,
+    administradorRoutes,
+    mercadopagoRoutes,
+    mensajesRoutes,
+    uploadRoutes,
+    facturaRoutes,
+    blogRoutes,
+    reviewRoutes,
+    usuarioRoutes,
+    newsletterRoutes,
+    favoritosRoutes,
+    gananciasRoutes,
+    testimonioRoutes,
+    mercadoPagoPsicologoRoutes
+} = require('./routesIndex');
 
 const router = Router();
-
 
 router.use('/auth', AuthRoutes)
 router.use('/psicologo', psicologoRoutes);
@@ -22,8 +36,17 @@ router.use('/provincias', provinciasRoutes)
 router.use('/especialidades', especialidadesRoutes)
 router.use("/dia", diaRoutes)
 router.use("/horarios", horariosRoutes)
-router.use('/administrador', AdministradorRoutes)
-
+router.use('/administrador', administradorRoutes)
+router.use("/usuario", usuarioRoutes)
 router.use('/mercadopago', mercadopagoRoutes)
+router.use('/mercadopagoPsicologo', mercadoPagoPsicologoRoutes)
 router.use('/mensajes', mensajesRoutes)
+router.use('/upload', uploadRoutes)
+router.use('/ganancias', gananciasRoutes);
+router.use('/Factura', facturaRoutes)
+router.use('/blog', blogRoutes)
+router.use('/reviews',reviewRoutes)
+router.use('/newsletter', newsletterRoutes)
+router.use('/favoritos', favoritosRoutes)
+router.use('/testimonio', testimonioRoutes)
 module.exports = router;

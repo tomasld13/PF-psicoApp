@@ -1,9 +1,7 @@
 
-const { usuarioConectado,
-    usuarioDesconectado,
-    grabarMensaje,
-    getUsuarios } = require('./socketController');
-
+const { getPacientes, grabarMensaje, getPsicologos, usuarioConectado, usuarioDesconectado, getUsuarios } = require('./socketController');
+const { Usuario } = require('../../db')
+const {comprobarJWT} = require('../../helpers/generar-JWT');
 class Sockets {
 
     constructor(io) {
@@ -15,21 +13,34 @@ class Sockets {
 
     socketEvents() {
 
-        
+
         this.io.on('connection', async (socket) => {
 
             const [valido, id] = comprobarJWT(socket.handshake.query['x-token']);
-
+            
             if (!valido) {
                 console.log('socket no identificado');
                 return socket.disconnect();
             }
 
             await usuarioConectado(id);
-
+            const user = await Usuario.findByPk(id)
+            
             // Unir al usuario a una sala de socket.io
             socket.join(id);
+            if(user.rolId === 2){
+                this.io.emit('lista-usuarios', await getPacientes())//Aca va a emitir un arreglo con todos los usuarios,
+            //Lo que yo quiero en mi server que estos usuarios sean los contactos paciente-psicologo. 
+            }
+            if(user.rolId===1){
+                this.io.emit('lista-usuarios', await getPsicologos())//Aca va a emitir un arreglo con todos los usuarios,
+                //Lo que yo quiero en mi server que estos usuarios sean los contactos paciente-psicologo. 
+            }
+            if(user.rolId === 3){
+                this.io.emit('lista-usuarios', await getUsuarios())
+            }
             
+
 
             // TODO: Escuchar cuando el cliente manda un mensaje
             socket.on('mensaje-personal', async (payload) => {
@@ -44,7 +55,17 @@ class Sockets {
             // TODO: Emitir todos los usuarios conectados
             socket.on('disconnect', async () => {
                 await usuarioDesconectado(id);
-                this.io.emit('lista-usuarios', await getUsuarios())
+                if(user.rolId === 2){
+                    this.io.emit('lista-usuarios', await getPacientes())//Aca va a emitir un arreglo con todos los usuarios,
+                //Lo que yo quiero en mi server que estos usuarios sean los contactos paciente-psicologo. 
+                }
+                if(user.rolId===1){
+                    this.io.emit('lista-usuarios', await getPsicologos())//Aca va a emitir un arreglo con todos los usuarios,
+                    //Lo que yo quiero en mi server que estos usuarios sean los contactos paciente-psicologo. 
+                }
+                if(user.rolId===3){
+                    this.io.emit('lista-usuarios', await getUsuarios())
+                }
             })
 
 

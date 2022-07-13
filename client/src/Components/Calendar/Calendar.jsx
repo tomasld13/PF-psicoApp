@@ -5,6 +5,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { useSelector, useDispatch } from 'react-redux';
 import { getPsychologyID, postDateTime } from '../../slice/psico/thunks.js';
 import Loading from '../Loading/Loading.jsx';
+import './calendar.css'
 
 export const Calendar = ({idPsycho}) => {
     
@@ -20,7 +21,7 @@ export const Calendar = ({idPsycho}) => {
         if (psychologist.id) {
             setExcludes(getTimeExcludes(startDate));
         }
-        dispatch(getPsychologyID(idPsycho));
+        // dispatch(getPsychologyID(idPsycho));
         dispatch(postDateTime(postDates()))
     },[startDate, startTime]);
     
@@ -74,6 +75,7 @@ export const Calendar = ({idPsycho}) => {
         //     let dateTime = postDates();
         //     dispatch(postDateTime());
         // }
+        
     
         
         const postDates = () => {
@@ -87,44 +89,46 @@ export const Calendar = ({idPsycho}) => {
             return {date, time};
         }
 
-        console.log(psychologist);
+        //console.log(psychologist);
         return (
-            <>
-                <h1 className='text-white font-bold'>CALENDARIO</h1>
+            <> 
+                <h1 className='font-bold text-white mt-2.5'>CALENDARIO</h1>
                 {
                     psychologist.formatoHorarios?.min 
                     ? <div className='flex flex-col'>
                     <div className='mt-2.5 mb-5'>
-                    <DatePicker
-                    selected={startDate}
-                    onChange={(date) => {
-                        setStartDate(date);
-                        dispatch(postDateTime(postDates()));
-                    }}
-                    includeDates={psychologist.formatoDias}
-                    showWeekNumbers
-                    minDate={new Date()}
-                    monthsShown={1}
-                    dateFormat="yyyy/MM/dd"
-                    withPortal
-                    // inline
-                    />
+                        <label className='text-white'>Selecciona una fecha</label>
+                        <DatePicker
+                        selected={startDate}
+                        onChange={(date) => {
+                            setStartDate(date);
+                            dispatch(postDateTime(postDates()));
+                        }}
+                        includeDates={psychologist.formatoDias}
+                        showWeekNumbers
+                        minDate={new Date()}
+                        monthsShown={1}
+                        dateFormat="yyyy/MM/dd"
+                        withPortal
+                        // inline
+                        />
                     </div>
                     <div className='mb-5'>
-                    <DatePicker
-                    selected={startTime}
-                    excludeTimes={excludes}
-                    onChange={(date) => setStartTime(date)}
-                    showTimeSelect
-                    showTimeSelectOnly
-                    timeIntervals={psychologist.intervaloSesion}
-                    timeCaption="Time"
-                    dateFormat="hh:mm aa"
-                    minTime={psychologist.formatoHorarios.min}
-                    maxTime={psychologist.formatoHorarios.max}
-                    withPortal
-                    // inline
-                    />
+                        <label className='text-white'>Selecciona una Hora</label>
+                        <DatePicker
+                        selected={startTime}
+                        excludeTimes={excludes}
+                        onChange={(date) => setStartTime(date)}
+                        showTimeSelect
+                        showTimeSelectOnly
+                        timeIntervals={psychologist.intervaloSesion}
+                        timeCaption="Time"
+                        dateFormat="hh:mm aa"
+                        minTime={psychologist.formatoHorarios.min}
+                        maxTime={psychologist.formatoHorarios.max}
+                        withPortal
+                        // inline
+                        />
                     </div>
                 </div> : <div>
                     <Loading/>

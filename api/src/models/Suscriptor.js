@@ -1,10 +1,11 @@
+const sequelize = require('sequelize');
 const {DataTypes} = require('sequelize');
 
 module.exports = (sequelize)=>{
-    sequelize.define('HistoriasClinicas',{
-        comentarios: {
+    sequelize.define('suscriptor',{
+        mail : {
             type : DataTypes.STRING,
-            allowNull : false,
+            allowNull : false
         }
     },
     {
