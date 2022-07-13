@@ -11,7 +11,10 @@ export const startGoogleSignIn = () => {
 
         const result  = await signInWithGoogle();
 
-        if (!result.ok) return dispatch(logout(result.errorMessage));
+        if (!result.ok) {
+            console.log(result.errorMessage);
+            return dispatch(logoutGoogle(result.errorMessage));
+        }
 
         try {
             const rsPaciente = await fetch(`${process.env.REACT_APP_API}/api/usuario/${result.email}`);
@@ -29,7 +32,6 @@ export const startGoogleSignIn = () => {
         }
     }
 }
-let a = 0;
 
 export const startCreatingUserWithEmailPasswordPatient = (paciente) => {
 
@@ -49,7 +51,7 @@ export const startCreatingUserWithEmailPasswordPatient = (paciente) => {
             const data = await result.json();
             
             if (data.error) {
-
+                dispatch( logoutGoogle() );
                 return dispatch(logoutBack());
             }
 
