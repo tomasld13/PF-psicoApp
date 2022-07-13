@@ -22,7 +22,10 @@ const formData = {
     password: '',
     inicioHorario: '',
     finHorario: '',
-    intervaloSesion: ''
+    intervaloSesion: '',
+    cbu: '',
+    dni: '',
+    matriculaProfesional: ''
 }
 
 const formValidations = {
@@ -41,6 +44,9 @@ const formValidations = {
     inicioHorario: [(value) => value !== '0' && value, 'Debe elegir un horario inicial'],
     finHorario: [(value) => value !== '0' && value, 'Debe elegit un horario final'],
     intervaloSesion: [(value) => (value*1) >= 30, 'La sesion minima es de 30 minutos'],
+    cbu: [(value) => value.length >= 22, 'CBU invalido'],
+    dni: [(value) => value.length >= 8, 'DNI invalido'],
+    matriculaProfesional: [(value) => value.length >= 1, 'Debe agregar matricula profesional']
 }
 
 
@@ -66,7 +72,8 @@ export const RegisterPsycho = ({rol}) => {
             telephone, telephoneValid, address, addressValid, birth, birthValid,
             generValid, ciudadValid, provinciaValid, yearsExperience, yearsExperienceValid,
             especialidadValid, inicioHorarioValid,finHorarioValid, intervaloSesion,
-            intervaloSesionValid} = useForm(formData, formValidations);
+            intervaloSesionValid, cbu, cbuValid, dni, dniValid, matriculaProfesional,
+            matriculaProfesionalValid } = useForm(formData, formValidations);
 
 
     const onSubmit = async(e) => {
@@ -113,6 +120,18 @@ export const RegisterPsycho = ({rol}) => {
                 <div className="flex flex-col content-center items-center">
                     <input className='border border-gray-300 my-2.5 px-3 py-1 rounded-lg shadow-sm focus:outline-none focus:border-primary' type="number" placeholder="Número de Telefono" name="telephone" value={telephone} onChange={onInputChange}/>
                     {!!telephoneValid && formSubmitted ? <span style={{color:'red'}}>{telephoneValid}</span> : null}
+                </div>
+                <div className="flex flex-col content-center items-center">
+                    <input className='border border-gray-300 my-2.5 px-3 py-1 rounded-lg shadow-sm focus:outline-none focus:border-primary' type="number" placeholder="DNI" name="dni" value={dni} onChange={onInputChange}/>
+                    {!!dniValid && formSubmitted ? <span style={{color:'red'}}>{dniValid}</span> : null}
+                </div>
+                <div className="flex flex-col content-center items-center">
+                    <input className='border border-gray-300 my-2.5 px-3 py-1 rounded-lg shadow-sm focus:outline-none focus:border-primary' type="number" placeholder="CBU" name="cbu" value={cbu} onChange={onInputChange}/>
+                    {!!cbuValid && formSubmitted ? <span style={{color:'red'}}>{cbuValid}</span> : null}
+                </div>
+                <div className="flex flex-col content-center items-center">
+                    <input className='border border-gray-300 my-2.5 px-3 py-1 rounded-lg shadow-sm focus:outline-none focus:border-primary' type="text" placeholder="Matricula profesional" name="matriculaProfesional" value={matriculaProfesional} onChange={onInputChange}/>
+                    {!!matriculaProfesionalValid && formSubmitted ? <span style={{color:'red'}}>{matriculaProfesionalValid}</span> : null}
                 </div>
                 <div className="flex flex-col content-center items-center">
                     <input className='border border-gray-300 my-2.5 px-3 py-1 rounded-lg shadow-sm focus:outline-none focus:border-primary' type="text" placeholder="Dirección" name="address" value={address} onChange={onInputChange}/>

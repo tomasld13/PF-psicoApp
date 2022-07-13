@@ -8,11 +8,11 @@ import { loginGoogle, logoutGoogle  } from "../slice/auth/authSlice.js";
 export const useCheckAuth = () => {
     const {status} = useSelector(state => state.auth.authGoogle);
     const dispatch = useDispatch();
-    const usuarioStorage = (localStorage.getItem('usuarioGoogle')) ? JSON.parse( localStorage.getItem('usuarioGoogle') ) : {};
+    const usuarioStorage = JSON.parse( localStorage.getItem('usuarioGoogle') ) ? JSON.parse( localStorage.getItem('usuarioGoogle') ) : null;
     useEffect(() => {
         onAuthStateChanged(FirebaseAuth, (user) => {
 
-            if( !usuarioStorage.user?.name && !usuarioStorage.name ) return dispatch(logoutGoogle());
+            if( !usuarioStorage ) return dispatch(logoutGoogle());
             const {photoURL} = user;
             usuarioStorage.photo = photoURL;
             dispatch(loginGoogle(usuarioStorage));
