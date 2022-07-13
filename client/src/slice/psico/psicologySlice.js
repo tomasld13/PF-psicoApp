@@ -15,7 +15,10 @@ export const psicologySlice = createSlice({
         calendar: {},
         provincias: [],
         ciudades: [],
-        psychologiFavs: []
+        psychologiFavs: [],
+        psychoCalendar: [],
+        psicoFacturas: [],
+        saldoTotal: []
     },
     reducers: {
         getPsychos: (state, {payload}) => {
@@ -124,6 +127,19 @@ export const psicologySlice = createSlice({
         },
         getPsychologistFavs: (state, {payload}) => {
             state.psychologiFavs = payload;
+        },
+        getCalendarioPsicologo: (state, {payload}) => {
+            state.psychoCalendar = payload;
+        },
+        getPsicologoFacturas: (state, {payload}) => {
+            state.psicoFacturas = payload;
+        },
+        getSaldoTotalPsicologo: (state, {payload}) => {
+            state.saldoTotal = payload;
+        },
+        postMercadoPsicologo: (state, {payload}) => {
+            state.initPoint = payload;
+
         }
     },
     
@@ -140,4 +156,8 @@ export const {getPsychos,
         sortByExpPsycho,
         getPacientByID,
         getPatients,
-        getPsychologistFavs} = psicologySlice.actions; 
+        getPsychologistFavs,
+        getCalendarioPsicologo,
+        getPsicologoFacturas,
+        getSaldoTotalPsicologo,
+        postMercadoPsicologo} = psicologySlice.actions; 

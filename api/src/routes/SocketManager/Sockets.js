@@ -63,6 +63,9 @@ class Sockets {
                     this.io.emit('lista-usuarios', await getPsicologos())//Aca va a emitir un arreglo con todos los usuarios,
                     //Lo que yo quiero en mi server que estos usuarios sean los contactos paciente-psicologo. 
                 }
+                if(user.rolId===3){
+                    this.io.emit('lista-usuarios', await getUsuarios())
+                }
             })
 
 
