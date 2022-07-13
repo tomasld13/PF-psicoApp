@@ -369,6 +369,11 @@ export const eliminarDia = (id,date) => {
                 'error'
             );
         }else{
+            Swal.fire(
+                "Dia añadido",
+                '',
+                'success'
+            );
             const dias = getDiasPsicologos(data.dia);
             
             const horarios = minMaxTime(data.finHorario , data.inicioHorario);
@@ -390,10 +395,13 @@ export const añadirDia = (id,date) => {
                 'Content-Type': 'application/json'
             }
         });
-        
+        Swal.fire(
+            "Dia eliminado",
+            '',
+            'succes'
+        );
         const data = await rs.json();
         const dias = getDiasPsicologos(data.dia);
-
         const horarios = minMaxTime(data.finHorario , data.inicioHorario);
         data.formatoDias = dias;
         data.formatoHorarios = horarios;

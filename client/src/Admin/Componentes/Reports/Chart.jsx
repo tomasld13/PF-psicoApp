@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { hoverEffect } from '../../Utils/index'
-
+import { useSelector } from 'react-redux';
 import {
     LineChart,
     Line,
@@ -10,6 +10,7 @@ import {
     Tooltip,
     ResponsiveContainer,
   } from "recharts";
+
 
 
 function Chart({title, data, dataKey, grid}) {
