@@ -14,7 +14,8 @@ import { getPsychos,
         getPsychologistFavs,
         getPsicologoFacturas,
         getSaldoTotalPsicologo,
-        postMercadoPsicologo} from './psicologySlice.js';
+        postMercadoPsicologo,
+        getFacturas} from './psicologySlice.js';
 
 export const getPsicology = () => {
     return async (dispatch) => {
@@ -350,5 +351,15 @@ export const postSaldoTotal = (data) => {
         } catch (error) {
             return (error);
         }
+    }
+}
+
+export const saldoTotalFacturas = () => {
+    return async (dispatch) => {
+        const rs = await fetch(`${process.env.REACT_APP_API}/api/factura`);
+
+        const data = await rs.json();
+
+        dispatch(getFacturas(data[0].sumaFacturas));
     }
 }

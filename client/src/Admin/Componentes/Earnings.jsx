@@ -1,10 +1,19 @@
-import React from 'react'
-import { themeColor, hoverEffect } from "../Utils/index";
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
 import styled from "styled-components";
+import { themeColor, hoverEffect } from "../Utils/index";
 import { IoStatsChart } from "react-icons/io5";
+import { saldoTotalFacturas } from '../../slice/psico/thunks.js';
 
 function Earnings() {
 
+  const saldoTotal = useSelector(state => state.psicology.saldoTotalFacturas)
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(saldoTotalFacturas());
+  }, [])
+  
     return (
       <EarningsCard>
         <CardContent>
@@ -12,7 +21,7 @@ function Earnings() {
             <IoStatsChart />
           </Chart>
           <EarningsText>Ingresos</EarningsText>
-          <Earning>$300.000</Earning>
+          <Earning>{saldoTotal ? saldoTotal : '$0'}</Earning>
           {/* <EarningsIncrease>+ 10% del último mes</EarningsIncrease> */}
         </CardContent>
       </EarningsCard>
