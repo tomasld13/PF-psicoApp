@@ -112,10 +112,10 @@ export default function Cards() {
     ">
       <div 
       //className={styles.btn_container}
-      className="container my-16 ml-2.5 py-10 w-64 px-2.5 bg-secundary border border-primary rounded-lg"
+      className="container my-16 ml-2.5 py-10 w-70 px-2.5 h-25 bg-secundary border border-primary rounded-lg"
       >
 
-        <div className="flex flex-col content-center items-center">
+        <div className="flex flex-col content-center items-center mt-10">
           <input className='border border-gray-300 my-2.5 px-3 py-1 rounded-lg shadow-sm focus:outline-none focus:border-primary' type="text" placeholder="Psicologo..." onChange={e => handlerChange(e)} value={inputFind}/>
           <button className='bg-primary text-white border border-primary font-bold py-2 px-4 rounded hover:bg-white hover:text-primary my-2.5' onClick={(e) => {
             handlerChange(e)
@@ -126,7 +126,7 @@ export default function Cards() {
           }}>Buscar</button>
           {/* <button onClick={() => cleanFind()}>X</button> */}
         </div>
-        <select className='border border-gray-300 my-2.5 px-3 py-1 rounded-lg shadow-sm focus:outline-none focus:border-primary' 
+        <select className='border border-gray-300 my-2.5 px-3 py-1 mr-2 rounded-lg shadow-sm focus:outline-none focus:border-primary' 
         name="especialidad" 
         id="orden" 
         onChange={handlerClick}>
@@ -167,7 +167,7 @@ export default function Cards() {
           name="especialidad" 
           id="especialidad" 
           onChange={onChangeFilter}>
-            <option selected disabled value=" "> Elige una especialidad </option>
+            <option selected disabled value=" ">Especialidad </option>
             <option value="Clinica">Psicologia Clinica</option>
             <option value="Educacional">Psicologia Educacional</option>
             <option value="Deportiva">Psicologia Deportiva</option>

@@ -38,14 +38,16 @@ function Nav() {
     <>
       <nav className='navbar'>
         <div className='navbar-container'>
-          <a href='/' className='navbar-logo' onClick={closeMobileMenu}>
+          <a href='/' className='LogoNavBar' onClick={closeMobileMenu}>
             <img src={logoImage} alt="logo image" />
           </a>
-          {
+        <div> 
+        {
             storeGoogle.status === 'authenticated' || storeAuthBack.status === 'authenticated' 
             ? <div className='text-user'>Hola, {!storeGoogle.name ? storeAuthBack.name : storeGoogle.name}!</div> 
             : null
           }
+        </div>
           <div className='menu-icon' onClick={handleClick}>
             <i className={click ? 'fas fa-times' : 'fas fa-bars'} />
           </div>
@@ -78,7 +80,7 @@ function Nav() {
                 className='nav-links'
                 onClick={closeMobileMenu}
               >
-                Para Psicólogos
+                Soy Psicólogo
               </a>
             </li>
             <li className='nav-item'>
@@ -106,7 +108,7 @@ function Nav() {
             ?  button && <Dropdown >Logout</Dropdown>
             : button && <a href='/auth/login'>
               {/* <Button buttonStyle='btn--outline'>Login</Button> */}
-              <Button buttonStyle='btn--outline' link='/auth/login'>Ingresar</Button>
+              <Button className='mr-1' buttonStyle='btn--outline' link='/auth/login'>Ingresar</Button>
             </a> 
           }
         </div>
