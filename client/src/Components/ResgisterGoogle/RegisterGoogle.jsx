@@ -91,6 +91,7 @@ export const RegisterGoogle = () => {
                         <option value="Masculino">Masculino</option>
                         <option value="Femenino">Femenino</option>
                         <option value="No binario">No binario</option>
+                        <option value="Otro">Otro</option>
                     </select>
                     {!!generValid && formSubmitted ? <span style={{color:'red'}}>{generValid}</span> : null}
                 </div>

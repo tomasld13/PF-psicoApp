@@ -11,7 +11,7 @@ export default function Card({nombreCompleto, experiencia, especialidad, ciudad,
   const idUserGoogle = useSelector(state => state.auth.authGoogle.id);
   const psicologoFavs = useSelector(state => state.psicology.psychologiFavs);
 
-  const [check, setCheck] = useState(false);
+  // const [check, setCheck] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -24,16 +24,16 @@ export default function Card({nombreCompleto, experiencia, especialidad, ciudad,
     
     if (e.target.checked) {
       dispatch(psychoFavs('POST',idUser,id));
-      setCheck(e.target.checked);
+      // setCheck(e.target.checked);
     } else {
       dispatch(psychoFavs('DELETE',idUser,id));
     }
   }
 
-  let find;
-  if (psicologoFavs.favoritos) {
-    find = psicologoFavs?.favoritos.find(p => p.psicofavorito === nombreCompleto);
-  }
+  // let find;
+  // if (psicologoFavs.favoritos) {
+  //   find = psicologoFavs?.favoritos.find(p => p.psicofavorito === nombreCompleto);
+  // }
   
   return (
     <div 
@@ -41,8 +41,8 @@ export default function Card({nombreCompleto, experiencia, especialidad, ciudad,
     >
         <div className='flex justify-around items-center'>
           {
-            find ? null :
-            check ? null :
+            // find ? null :
+            // check ? null :
             !idUserBack && !idUserGoogle ? null : <div className={style.fav}>
               <input id="toggle-heart" type="checkbox" onClick={onClick} value={id}/>
               <label for="toggle-heart" aria-label="like">❤</label>

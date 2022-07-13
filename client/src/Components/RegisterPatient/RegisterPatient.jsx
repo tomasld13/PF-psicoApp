@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from "../../hooks/useForm";
 import { startCreatingUserWithEmailPasswordPatient } from '../../slice/auth/thunks.js';
 import { getProvincias, getCiudades, cleanCiudades } from '../../slice/psico/thunks.js';
-
 const emailRegex = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
 
 
@@ -65,7 +64,6 @@ export const RegisterPatient = ({rol}) => {
         dispatch(startCreatingUserWithEmailPasswordPatient(formState) );
     }
 
-    
     useEffect(() => {
         dispatch(getProvincias());
     }, []);

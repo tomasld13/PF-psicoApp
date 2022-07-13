@@ -30,6 +30,7 @@ import {ChatPage} from '../../pages/ChatPage'
 export default function PsicoApp() {
 
     const { rolId }  = useSelector(state => state.auth.authBack);
+    const userGoogle  = useSelector(state => state.auth.authGoogle);
 
     const { auth, verificaToken } = useContext( AuthContext );
 
@@ -37,11 +38,11 @@ export default function PsicoApp() {
         verificaToken();
     },[verificaToken])
 
-
+    const rol = rolId ? rolId : userGoogle.rolId;
     return (
         <>
             {
-                rolId === 1 || rolId === null 
+                rol === 1 || rol === null 
                 ? <>
                     <Nav/>
                     <ScrollToTop />
@@ -70,7 +71,7 @@ export default function PsicoApp() {
                     </Routes>
                     <Footer/>
                 </>
-                : rolId === 2 ? <> 
+                : rol === 2 ? <> 
                     <Nav/>
                     <Routes>
                         <Route path="/" element={<ForPsicos />}/>
@@ -100,7 +101,7 @@ export default function PsicoApp() {
                         <Route path='/psicologos/:id' element={<PsychoAdmin />} />
                         <Route path="/*" element={ <Navigate to="/" /> } />
                     </Routes>
-                </>
+                </> 
             }
         </>
     );

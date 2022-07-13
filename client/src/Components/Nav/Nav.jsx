@@ -11,7 +11,6 @@ function Nav() {
   const [click, setClick] = useState(false);
   const [button, setButton] = useState(true);
 
-  const {displayName, status} = useSelector(state => state.auth.authFirebase);
   const storeAuthBack = useSelector(state => state.auth.authBack);
   const storeGoogle = useSelector(state => state.auth.authGoogle); 
   
