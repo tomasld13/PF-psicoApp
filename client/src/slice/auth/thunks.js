@@ -36,7 +36,7 @@ export const startCreatingUserWithEmailPasswordPatient = (paciente) => {
     return async (dispatch) => {
         dispatch( checkingCredentials() );
         dispatch( logout() );
-        dispatch(logoutGoogle());
+        dispatch( logoutGoogle() );
 
             const result = await fetch(`${process.env.REACT_APP_API}/api/paciente`, {
                 method: 'POST',
@@ -49,16 +49,7 @@ export const startCreatingUserWithEmailPasswordPatient = (paciente) => {
             const data = await result.json();
             
             if (data.error) {
-                console.log("ENTRASTE AQUI",a = a + 1)
-                if (a === 1) {
-                    Swal.fire({
-                        title: 'El email ya ha sido registrado',
-                        text: data.error,
-                        icon: 'error',
-                        confirmButtonText: 'Ok'
-                    })
-                }
-                a = 0;
+
                 return dispatch(logoutBack());
             }
 
@@ -201,8 +192,8 @@ export const startLogout = () => {
         dispatch(logout());
         dispatch(logoutBack());
         dispatch(logoutGoogle());
-        localStorage.setItem('usuario', JSON.stringify({}));
-        localStorage.setItem('usuarioGoogle', JSON.stringify({}));
+        localStorage.setItem('usuario', null);
+        localStorage.setItem('usuarioGoogle', null);
     }
 }
 
@@ -211,8 +202,7 @@ export const updatePaciente = (id, data) => {
         try {
             const resp = await axios.put(`${process.env.REACT_APP_API}/api/paciente/${id}`, data);
 
-
-            const usuarioStorage = (localStorage.getItem('usuario')) ? JSON.parse( localStorage.getItem('usuario') ) : JSON.parse( localStorage.getItem('usuarioGoogle') );
+            const usuarioStorage = JSON.parse( localStorage.getItem('usuario') ) ? JSON.parse( localStorage.getItem('usuario') ) : JSON.parse( localStorage.getItem('usuarioGoogle') );
             
             if(usuarioStorage.user) {
                 usuarioStorage.user.name = resp.data.name;
@@ -221,8 +211,7 @@ export const updatePaciente = (id, data) => {
                 usuarioStorage.user.email = resp.data.email;
                 usuarioStorage.user.address = resp.data.address;
 
-                if ((localStorage.getItem('usuario'))) {
-                    
+                if (JSON.parse( localStorage.getItem('usuario') )) {
                     localStorage.setItem('usuario', JSON.stringify(usuarioStorage));
                 } else {
                     localStorage.setItem('usuarioGoogle', JSON.stringify(usuarioStorage));
@@ -235,8 +224,8 @@ export const updatePaciente = (id, data) => {
                 usuarioStorage.email = resp.data.email;
                 usuarioStorage.address = resp.data.address;
 
-                if ((localStorage.getItem('usuario'))) {
-                    
+                if (JSON.parse( localStorage.getItem('usuario') )) {
+
                     localStorage.setItem('usuario', JSON.stringify(usuarioStorage));
                 } else {
                     localStorage.setItem('usuarioGoogle', JSON.stringify(usuarioStorage));

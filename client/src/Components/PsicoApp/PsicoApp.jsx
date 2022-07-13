@@ -20,10 +20,10 @@ import AdminApp from '../../Admin/AdminApp';
 import UserList from "../../Admin/Componentes/Users/UserList";
 import UserAdmin from '../../Admin/Componentes/UserPage/UserAdmin.jsx';
 import PsicoAdmin from '../../Admin/Componentes/PsicoPage/PsicoAdmin.jsx'
+import PsicoList from '../../Admin/Componentes/Psicologos/PsicoList.jsx';
 
 import ForPsicos from "../ForPsicos/ForPsicos"
 import ReportsHome from "../../Admin/Componentes/Reports/ReportsHome";
-import PsicoList from "../../Admin/Componentes/Psicologos/PsicoList";
 import { AuthContext } from '../../context/authContext/AuthContext';
 
 import {ChatPage} from '../../pages/ChatPage'
@@ -33,6 +33,7 @@ import Documentation from '../../Admin/Componentes/Documentation/Documentation';
 export default function PsicoApp() {
 
     const { rolId }  = useSelector(state => state.auth.authBack);
+    const userGoogle  = useSelector(state => state.auth.authGoogle);
 
     const { auth, verificaToken } = useContext( AuthContext );
     
@@ -41,11 +42,11 @@ export default function PsicoApp() {
         
     },[verificaToken])
 
-
+    const rol = rolId ? rolId : userGoogle.rolId;
     return (
         <>
             {
-                rolId === 1 || rolId === null 
+                rol === 1 || rol === null 
                 ? <>
                     <Nav/>
                     <ScrollToTop />
@@ -74,12 +75,12 @@ export default function PsicoApp() {
                     </Routes>
                     <Footer/>
                 </>
-                : rolId === 2 ? <> 
-                    <PsicoNav />
+                : rol === 2 ? <> 
+                    <Nav/>
                     <Routes>
                         <Route path="/" element={<ForPsicos />}/>
                         <Route path='/contacto' element={ <ContactSection/>} />  
-                         <Route path='/paciente/:id' element={
+                        <Route path='/paciente/:id' element={
                             <ChakraProvider theme={theme}>
                                 <PacientDetails/>
                             </ChakraProvider>
@@ -108,7 +109,7 @@ export default function PsicoApp() {
                         <Route path='/documentacion' element = {<Documentation />} />
                         <Route path="/*" element={ <Navigate to="/" /> } />
                     </Routes>
-                </>
+                </> 
             }
         </>
     );

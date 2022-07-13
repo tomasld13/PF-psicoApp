@@ -47,48 +47,17 @@ import { Link } from 'react-router-dom';
             {
               psicologoFavs.favoritos.map(fav => {
                 return <>
-                  <FormControl id="companyId">
-                  <FormLabel>ID</FormLabel>
-                  <InputGroup>
-                    <InputLeftAddon color="gray.500">
-                      <svg width="1em" fill="currentColor" viewBox="0 0 20 20">
-                        <path
-                          fillRule="evenodd"
-                          d="M14.243 5.757a6 6 0 10-.986 9.284 1 1 0 111.087 1.678A8 8 0 1118 10a3 3 0 01-4.8 2.401A4 4 0 1114 10a1 1 0 102 0c0-1.537-.586-3.07-1.757-4.243zM12 10a2 2 0 10-4 0 2 2 0 004 0z"
-                          clipRule="evenodd"
-                        />
-                      </svg>
-                    </InputLeftAddon>
-                    <Input
-                      focusBorderColor="brand.blue"
-                      type="text"
-                      placeholder="ID del psicologo"
-                    />
-                  </InputGroup>
-                </FormControl>
-                <FormControl id="companyName">
-                  <FormLabel>Nombre</FormLabel>
+                <FormControl className='flex' id="companyName" key={fav.id}>
                   <Link to={`/psico/${fav.idPsico}`}>
-                    <Input focusBorderColor="brand.blue" type="text" placeholder="Nombre del psicologo" value={fav.psicofavorito}/>
+                    <FormLabel className='cursor-pointer'>Nombre: <span className='font-bold'>{fav.psicofavorito}</span></FormLabel>
                   </Link>
+                  <button className='text-red-600 font-bold' onClick={() => deleteFavs(fav.idPsico)}>Eliminar</button>
                 </FormControl>
-                <button onClick={() => deleteFavs(fav.idPsico)}>Eliminar</button>
                 </> 
               })
             }
           </div> : <>Ningún psicologo en favoritos</>
         }
-
-        {/* <FormControl>
-          <FormLabel>Size</FormLabel>
-          <NumberInput>
-            <NumberInputField placeholder="6000" />
-            <NumberInputStepper>
-              <NumberIncrementStepper />
-              <NumberDecrementStepper />
-            </NumberInputStepper>
-          </NumberInput>
-        </FormControl> */}
       </Grid>
     )
   }

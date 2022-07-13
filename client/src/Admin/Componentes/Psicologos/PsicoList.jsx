@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { DataGrid } from '@mui/x-data-grid';
-import { AiOutlineDelete } from 'react-icons/ai'
+import { BsFillPauseCircleFill } from 'react-icons/bs'
 import { Link } from 'react-router-dom'
 import './PsicoList.css'
 import Swal from 'sweetalert2'
 import Sidebar from '../Sidebar';
-import { getPsicology, deleteUser, suspenderPsico } from '../../../slice/psico/thunks.js';
+import { getPsicology, suspenderPsico, activarPsico } from '../../../slice/psico/thunks.js';
 
 
 export default function PsicoList() {
@@ -27,7 +27,12 @@ export default function PsicoList() {
 
       if(result.isConfirmed) {
         Swal.fire('El usuario fue suspendido correctamente', "", 'success')
-        dispatch(suspenderPsico(id,token));
+        const psicologo = psicologos.find(psico => id === psico.id);
+        if (psicologo.state) {
+          dispatch(suspenderPsico(id,token));
+        } else {
+          dispatch(activarPsico(id,token));
+        }
         dispatch(getPsicology());
       } else if (result.isDenied) {
         Swal.fire('Los datos no se han guardado.','', 'info')
@@ -40,7 +45,8 @@ export default function PsicoList() {
     dispatch(getPsicology());
   }, []);
 
-const columns = [
+
+  const columns = [
   { field: 'id', headerName: 'ID', width: 70 },
   { field: 'name', headerName: 'Nombre', width: 130 },
   { field: 'lastname', headerName: 'Apellido', width: 130 },
@@ -71,9 +77,9 @@ const columns = [
       return (
         <> 
           <Link to={'/psicologos/'+params.row.psicologo.id}>
-          <button className="userListEdit">Editar</button>
+          <button className="userListEdit">Detalle</button>
           </Link>
-          <AiOutlineDelete 
+          <BsFillPauseCircleFill 
           size='25' 
           className='userListDelete'
           onClick={() => handleDelete(params.row.id)}
