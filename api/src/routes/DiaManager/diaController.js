@@ -4,7 +4,8 @@ const getDias = async (req, res, next) => {
     const {id} = req.params
     console.log(id)
     try {
-        const usuario = await Usuario.findByPk(Number(id), {include:{model:Psicologo}})
+        const usuario = await Usuario.findByPk(id, {include:{model:Psicologo}})
+        if(!usuario || !usuario.psicologo) return res.status(404).send({ error: "Usuario no encontrado" });
         const psicologo = await Psicologo.findByPk(usuario.psicologo.id, {include:{model:Dia, include:{model:Horarios}}})
         if(!psicologo) return res.status(404).send("No se encontro ningun psicologo con ese id")
         res.send(psicologo)
@@ -18,6 +19,7 @@ const postDias = async (req, res, next) => {
     const {date} = req.body
     try {
         const usuario = await Usuario.findByPk(id, {include:{model:Psicologo}})
+        if(!usuario || !usuario.psicologo) return res.status(404).send({ error: "Usuario no encontrado" });
         const psicologo = await Psicologo.findByPk(usuario.psicologo.id, {include:{model:Dia, include:{model:Horarios}}})
         if(!psicologo) return res.status(404).send("No se encontro ningun psicologo con ese id") 
         console.log(date)

@@ -22,14 +22,21 @@ export default function Login() {
     
     //Este componente memoriza el valor que retorna la funcion y se vuelve a evaluar cada vez que el valor status cambia
     const isAuthenticating = useMemo(() => status === 'checking', [status]);
+    const funcionLogin=async()=>{
+
+    }
     const handlerSubmit = async (e) => {
         e.preventDefault();
         const ok = await login( email, password );
         dispatch(startLoginWithEmailPassword(email, password));
+        //Sesion google: email, password. La idea es que cuando haga sesion,
+        //Yo agarre esa info, y se la pase al login(email,password);
+        //stateUsuariodeGoogle...
     }
 
     const onGoogleSignIn = () => {
         dispatch(startGoogleSignIn());
+
     }
 
     return (

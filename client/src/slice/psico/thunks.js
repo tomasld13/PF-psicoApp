@@ -11,8 +11,14 @@ import { getPsychos,
         getPacientByID,
         getPatients,
         getPsychologistFavs,
-        getCalendarioPsicologo } from './psicologySlice.js';
+        getPsicologoFacturas,
+        getSaldoTotalPsicologo,
+        getCalendarioPsicologo,
+        postMercadoPsicologo} from './psicologySlice.js';
+
 import Swal from 'sweetalert2';
+
+        
 export const getPsicology = () => {
     return async (dispatch) => {
 
@@ -385,5 +391,34 @@ export const eliminarHorario = (id,date) => {
         const data = await rs.json();
 
         console.log(data);
+    }
+}
+export const psicologoFacturas = (id) => {
+    return async (dispatch) => {
+        const rs = await fetch(`${process.env.REACT_APP_API}/api/factura/psicologo/${id}`);
+        const data = await rs.json();
+        dispatch(getPsicologoFacturas(data));
+    }
+}
+
+export const getSaldoTotal = (id) => {
+    return async (dispatch) => {
+        const rs = await fetch(`${process.env.REACT_APP_API}/api/psicologo/saldoTotal/${id}`);
+        const data = await rs.json();
+        dispatch(getSaldoTotalPsicologo(data));
+    }
+}
+
+export const postSaldoTotal = (data) => {
+    return async (dispatch) => {
+        try {
+            const rs = await axios.post(`${process.env.REACT_APP_API}/api/mercadopagoPsicologo`, {
+                method: 'POST',
+                body: data
+            });
+            dispatch(postMercadoPsicologo(rs.data));
+        } catch (error) {
+            return (error);
+        }
     }
 }

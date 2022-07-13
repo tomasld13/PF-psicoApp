@@ -18,7 +18,7 @@ const usuarioRoutes = require("./UsuarioManager/UsuarioRoutes")
 const favoritosRoutes = require('./FavoritosManager/favoritoRoutes')
 const gananciasRoutes = require("./GananciasManager/gananciasRoutes")
 const testimonioRoutes = require('./TestimonioManager/testimonioRoutes');
-
+const mercadoPagoPsicologoRoutes = require("./MercadoPagoPsicologo/mercadopagoRoutesPsicologo")
 module.exports ={
     psicologoRoutes,
     pacienteRoutes,
@@ -39,5 +39,6 @@ module.exports ={
     usuarioRoutes,
     favoritosRoutes,
     gananciasRoutes,
-    testimonioRoutes
+    testimonioRoutes,
+    mercadoPagoPsicologoRoutes
 }
