@@ -17,7 +17,7 @@ function Invoices() {
     dispatch(getPsicology());
   }, []);
 
-
+  console.log(psicologos[1]);
   return (
     <InvoicesContainer>
       <CardContent>
