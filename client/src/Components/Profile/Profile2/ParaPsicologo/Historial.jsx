@@ -34,6 +34,7 @@ export default function Historial() {
         <Th isNumeric>Precio</Th>
         <Th>Servicio</Th>
         <Th>Fecha</Th>
+        <Th>Saldado</Th>
       </Tr>
     </Thead>
     <Tbody>
@@ -44,6 +45,7 @@ export default function Historial() {
           <Td>{factura.precio}</Td>
           <Td>{factura.servicio}</Td>
           <Td>{factura.fecha}</Td>
+          <Td>{factura.saldado.toString()}</Td>
         </Tr>
       ))}
     </Tbody>

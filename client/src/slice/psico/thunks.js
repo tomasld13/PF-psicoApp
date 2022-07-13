@@ -12,7 +12,8 @@ import { getPsychos,
         getPatients,
         getPsychologistFavs,
         getPsicologoFacturas,
-        getSaldoTotalPsicologo } from './psicologySlice.js';
+        getSaldoTotalPsicologo,
+        postMercadoPsicologo} from './psicologySlice.js';
 
 export const getPsicology = () => {
     return async (dispatch) => {
@@ -295,5 +296,19 @@ export const getSaldoTotal = (id) => {
         const rs = await fetch(`${process.env.REACT_APP_API}/api/psicologo/saldoTotal/${id}`);
         const data = await rs.json();
         dispatch(getSaldoTotalPsicologo(data));
+    }
+}
+
+export const postSaldoTotal = (data) => {
+    return async (dispatch) => {
+        try {
+            const rs = await axios.post(`${process.env.REACT_APP_API}/api/mercadopagoPsicologo`, {
+                method: 'POST',
+                body: data
+            });
+            dispatch(postMercadoPsicologo(rs.data));
+        } catch (error) {
+            return (error);
+        }
     }
 }

@@ -5,7 +5,7 @@ import AccountSettings from './AccountSettings'
 import Favorites from './Favorites'
 import Notificationes from './Notificationes'
 import Suscripcion from './ParaPsicologo/Suscripcion.jsx'
-import Calendario from './ParaPsicologo/Suscripcion.jsx'
+import Calendario from './ParaPsicologo/Calendario.jsx'
 import Historial from './ParaPsicologo/Historial.jsx'
 
 const Content = () => {

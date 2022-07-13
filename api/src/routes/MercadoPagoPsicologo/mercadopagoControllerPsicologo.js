@@ -31,11 +31,11 @@ const transporter = nodemailer.createTransport({
 //ruta que genera la URL a mercado pago
 const postMP = async (req, res) => {
     const data = req.body.body;
-    const id = data.psicoId.id;
+    const id = data.psicoId;
     const items = [
         { cuota: data.cuota, precio: data.precio, quantity: 1 },
     ]
-    const external_reference = id + "*" + data.email + "*" + data.precio;
+    const external_reference = id + "*" + data.email + "*" + data.precio + "*" + data.fecha;
     const items_md = items.map(item => ({
         title: item.cuota,
         quantity: item.quantity,
@@ -85,20 +85,13 @@ const getPayments = async (req, res) => {
         const payment_status = req.query.status;
         const merchant_order_id = req.query.merchant_order_id;
         const external_reference = req.query.external_reference;
-        const [id, email, precio] = external_reference.split("*")
-        /*const factura = await Factura.create({
-            payment_id: payment_id,
-            payment_status: payment_status,
-            merchant_order_id: merchant_order_id,
-            status: "paid",
-            fecha: fecha,
-            precio: parseInt(precio),
-            saldado: false
-        })*/
+        const [id, email, precio, fecha] = external_reference.split("*");
+
         const usuario = await Usuario.findByPk(Number(id), {include: {model: Psicologo, attributes: ["id"] } });
+        console.log("USUARIO", usuario);
         const psicologo = await Psicologo.findByPk(usuario.psicologo.id, {include:{model:Factura}})
+        console.log("PSICOLOGO", psicologo);
         psicologo.facturas.map(async(f) => await f.update({saldado:true}))
-        console.log("PACIENTE EXISTENTE", pacienteExistente)
         let info = await transporter.sendMail({
             from: `${process.env.EMAIL}`, // sender address
             to: email, // list of receivers
