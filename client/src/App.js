@@ -23,7 +23,6 @@ function App() {
     return <RegisterGoogle />
   }
 
-  
 
   return (
     <div className="App">

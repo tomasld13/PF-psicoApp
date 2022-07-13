@@ -35,16 +35,22 @@ const postHorarioPsicologo = async(req, res, next) => {
     try {
         const usuario = await Usuario.findByPk(id, {include:{model:Psicologo}})
         if(!usuario || !usuario.psicologo) return res.status(404).send({ error: "Usuario no encontrado" });
-        const psicologo = await Psicologo.findByPk(usuario.psicologo.id)
+        const psicologo = await Psicologo.findByPk(usuario.psicologo.id, {include:{model: Dia ,include: {model: Horarios}}})
         if(!psicologo) return res.status(404).send({ error: "Psicologo no encontrado" });
-        let dia = await Dia.findOne({where:{fecha:date}})
+        let dia = psicologo.dia.find((d) => d.fecha == date)
         if(!dia) dia = await Dia.create({fecha: date})
-        const horario = await Horarios.create({hora: time})
-        dia.addHorarios(horario)
+        let existeHorario
+        if(dia.horarios){
+            existeHorario = dia.horarios.find((d) => d.hora == time)
+        }
+        if(!existeHorario) {var horario = await Horarios.create({hora: time})}
+        else return res.send({error: "Ese horario no se encuentra disponible"})
+        await dia.addHorarios(horario)
         await psicologo.addHorarios(horario)
-        await psicologo.addDia(dia)
-        const psicologoRes = await Psicologo.findByPk(usuario.psicologo.id, {include:{model: Dia ,include: {model: Horarios}}})
-        res.send(psicologoRes)
+        await psicologo.addDia(dia).then(async() => {
+            const psicologoRes = await Psicologo.findByPk(usuario.psicologo.id, {include:{model: Dia ,include: {model: Horarios}}})
+            return res.send(psicologoRes)
+        })
     } catch (error) {
         next(error)
     }
@@ -87,18 +93,20 @@ const updateHorario = async(req, res, next) => {
 
 const deleteHorario = async(req, res, next) => {
     const {id} = req.params
-    const {horarioID} = req.body
+    const {date, time} = req.body
     //Formato Date: "date": "2022-06-30T22:15:00.000Z"
     try {
         const usuario = await Usuario.findByPk(id, {include:{model:Psicologo}})
-        if(!usuario || !usuario.psicologo) return res.status(404).send({ error: "Usuario no encontrado" });
-        const psicologo = await Psicologo.findByPk(usuario.psicologo.id)
-        if(!psicologo) return res.status(404).send({ error: "Psicologo no encontrado" });
-        const horario = await Horarios.findByPk(horarioID)
-        if(!horario) return res.status(404).send({ error: "Horario no encontrado" });
-        await horario.destroy()
-        const psicologoRes = await Psicologo.findByPk(usuario.psicologo.id, {include:{model: Dia, include: {model: Horarios}}})
-        res.send(psicologoRes)
+        if(!usuario || !usuario.psicologo) return res.status(400).send({ error: "Usuario no encontrado" });
+        const psicologo = await Psicologo.findByPk(usuario.psicologo.id, {include:{model:Dia, include:{model:Horarios}}})
+        if(!psicologo) return res.status(400).send({ error: "Psicologo no encontrado" });
+        const dia = psicologo.dia.find((d) => d.fecha == date)
+        const horario = dia.horarios.find((h) => h.hora == time)
+        if(!horario) return res.status(400).send({ error: "Horario no encontrado" });
+        await horario.destroy().then(async() => {
+            const psicologoRes = await Psicologo.findByPk(usuario.psicologo.id, {include:{model: Dia, include: {model: Horarios}}})
+            return res.send(psicologoRes)
+        })
     } catch (error) {
         next(error)
     }

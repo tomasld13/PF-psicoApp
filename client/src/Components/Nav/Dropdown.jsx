@@ -4,18 +4,17 @@ import { startLogout } from '../../slice/auth/thunks';
 
 function Dropdown() {
 
-  const [showOptions, setShowOptions] = useState(false)
+    const [showOptions, setShowOptions] = useState(false)
 
-  const dispatch = useDispatch()
+    const dispatch = useDispatch()
 
-  const handleClick = (e) => {
-    e.preventDefault();
-    setShowOptions(!showOptions);
-  }
+    const handleClick = () => {
+        setShowOptions(!showOptions)
+    }
 
-  const onLogout = () => {
-    dispatch(startLogout());
-  }
+    const onLogout = () => {
+        dispatch(startLogout());
+    }
 
   return (
 
@@ -44,15 +43,14 @@ function Dropdown() {
                 tabindex="-1"
                 id="menu-item-3"
                 onClick={onLogout}
-              >
-                Cerrar Sesión
-              </button>
-            </form>
+                >
+                    Cerrar Sesión
+                </button>
+              </form>
+            </div>
           </div>
-        </div>
-      )}
-    </div>
-  )
-}
+    )}
+  </div> 
+  )}
 
 export default Dropdown
