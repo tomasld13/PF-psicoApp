@@ -1,5 +1,7 @@
 .user-show-bottom {
     margin-top: 20px;
+    display: flex;
+    justify-content: center;
 }
 
 .user-show-tittle-bottom {
