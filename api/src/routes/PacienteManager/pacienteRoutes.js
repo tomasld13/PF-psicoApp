@@ -31,4 +31,6 @@ router.delete('/:id',[
     check('id', 'No es un is valido').custom(verificarId),
     validarCampos
 ],deletePaciente)
+
+
 module.exports = router;
