@@ -103,6 +103,7 @@ export default function PsicoApp() {
                         <Route path='/pacientes/:id' element={<UserAdmin />} />
                         <Route path='/psicologos' element={<PsicoList />} />
                         <Route path='/psicologos/:id' element={<PsicoAdmin />} />
+                        <Route path='/mensajes' element = {<ChatPage/>}/>
                         <Route path="/*" element={ <Navigate to="/" /> } />
                     </Routes>
                 </>
