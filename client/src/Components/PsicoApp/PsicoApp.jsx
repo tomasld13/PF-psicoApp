@@ -19,6 +19,7 @@ import SectionTitle from "../SectionTitle/SectionTitle";
 import AdminApp from '../../Admin/AdminApp';
 import UserList from "../../Admin/Componentes/Users/UserList";
 import UserAdmin from '../../Admin/Componentes/UserPage/UserAdmin.jsx';
+import PsicoAdmin from '../../Admin/Componentes/PsicoPage/PsicoAdmin.jsx'
 
 import ForPsicos from "../ForPsicos/ForPsicos"
 import ReportsHome from "../../Admin/Componentes/Reports/ReportsHome";
@@ -28,6 +29,7 @@ import { AuthContext } from '../../context/authContext/AuthContext';
 
 import {ChatPage} from '../../pages/ChatPage'
 import { login } from '../../slice/auth/authSlice';
+import Documentation from '../../Admin/Componentes/Documentation/Documentation';
 
 export default function PsicoApp() {
 
@@ -102,8 +104,10 @@ export default function PsicoApp() {
                         <Route path="/reportes" element={<ReportsHome />}/>
                         <Route path='/pacientes' element={<UserList />} />
                         <Route path='/pacientes/:id' element={<UserAdmin />} />
-                        <Route path='/psicologos' element={<PsychoList />} />
-                        <Route path='/psicologos/:id' element={<PsychoAdmin />} />
+                        <Route path='/psicologos' element={<PsicoList />} />
+                        <Route path='/psicologos/:id' element={<PsicoAdmin />} />
+                        <Route path='/mensajes' element = {<ChatPage/>}/>
+                        <Route path='/documentacion' element = {<Documentation />} />
                         <Route path="/*" element={ <Navigate to="/" /> } />
                     </Routes>
                 </> 
