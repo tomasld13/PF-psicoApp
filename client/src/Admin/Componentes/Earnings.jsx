@@ -12,7 +12,7 @@ function Earnings() {
           </Chart>
           <EarningsText>Ingresos</EarningsText>
           <Earning>$300.000</Earning>
-          <EarningsIncrease>+ 10% del último mes</EarningsIncrease>
+          {/* <EarningsIncrease>+ 10% del último mes</EarningsIncrease> */}
         </CardContent>
       </EarningsCard>
     );
