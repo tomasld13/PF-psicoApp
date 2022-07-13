@@ -21,7 +21,7 @@ export default function Card({nombreCompleto, experiencia, especialidad, ciudad,
 
   const idUser = idUserBack ? idUserBack : idUserGoogle;
   const onClick = (e) => {
-    let corazon = document.getElementById("heart");
+    let corazon = document.getElementById(`${e.target.value}`);
     if (e.target.checked) {
       dispatch(psychoFavs('POST',idUser,id));
       corazon.style.color = "red";
@@ -49,7 +49,7 @@ export default function Card({nombreCompleto, experiencia, especialidad, ciudad,
             // check ? null :
             !idUserBack && !idUserGoogle ? null : <div className={style.fav}>
               <input id="toggle-heart" type="checkbox" onClick={onClick} value={id}/>
-              <label for="toggle-heart" aria-label="like" id='heart'>❤</label>
+              <label for="toggle-heart" aria-label="like" id={id}>❤</label>
             </div>
           }
             <img className='rounded-full w-1/2' src={img}/>
