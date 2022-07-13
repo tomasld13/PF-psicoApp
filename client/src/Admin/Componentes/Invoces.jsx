@@ -34,7 +34,10 @@ function Invoices() {
                 </TextContainer>
               </Info>
               <Container>
-                <Badge content="activo" activo />
+                {
+                  psicologos[0].state ? <Badge content="activo" activo />
+                  : <Badge content="inhabilitado" inhabilitado />
+                }
               </Container>
             </Invoice>
             <Invoice>
@@ -48,7 +51,10 @@ function Invoices() {
                 </TextContainer>
               </Info>
               <Container>
-                <Badge content="inhabilitado" inhabilitado />
+                {
+                  psicologos[1].state ? <Badge content="activo" activo />
+                  : <Badge content="inhabilitado" inhabilitado />
+                }
               </Container>
             </Invoice>
           </> : <Invoice>
