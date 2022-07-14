@@ -21,11 +21,15 @@ export default function Card({nombreCompleto, experiencia, especialidad, ciudad,
 
   const idUser = idUserBack ? idUserBack : idUserGoogle;
   const onClick = (e) => {
-    
+    let corazon = document.getElementById(`${e.target.value}`);
     if (e.target.checked) {
       dispatch(psychoFavs('POST',idUser,id));
+      corazon.style.color = "red";
+      corazon.style.fontSize = "30px";
       // setCheck(e.target.checked);
     } else {
+      corazon.style.color = "white"
+      corazon.style.fontSize = "20px";
       dispatch(psychoFavs('DELETE',idUser,id));
     }
   }
@@ -45,7 +49,7 @@ export default function Card({nombreCompleto, experiencia, especialidad, ciudad,
             // check ? null :
             !idUserBack && !idUserGoogle ? null : <div className={style.fav}>
               <input id="toggle-heart" type="checkbox" onClick={onClick} value={id}/>
-              <label for="toggle-heart" aria-label="like">❤</label>
+              <label for="toggle-heart" aria-label="like" id={id}>❤</label>
             </div>
           }
             <img className='rounded-full w-1/2' src={img}/>
@@ -56,7 +60,7 @@ export default function Card({nombreCompleto, experiencia, especialidad, ciudad,
                 </Link>
             </div>
         </div>
-        <input className='py-1' type="range" />
+        
         <h3 className='text-start text-md md:text-lg'><b>Ciudad:</b> {ciudad?ciudad[0]+ciudad.slice(1).toLowerCase():ciudad}</h3>
         <h3 className='text-start text-md md:text-lg'><b>Especialidad:</b> {especialidad}</h3>
         <h3 className='text-start text-md md:text-lg'><b>Experiencia:</b> {experiencia} años</h3>
