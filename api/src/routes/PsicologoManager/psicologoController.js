@@ -340,7 +340,7 @@ const totalAPagar = async (req, res, next) => {
             { model: Genero, attributes: ["genero"] },
             { model: Rol, attributes: ["name"] }]
           });
-        if(!user.psicologo) res.status(404).send("No existe un psicologo con ese id")
+        if(!user && !user.psicologo ) res.status(404).send("No existe un psicologo con ese id")
         facturas = facturas.filter((f) => {
             if(f.psicologoId == user.psicologo.id && !f.saldado){
                 saldo += f.precio
