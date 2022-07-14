@@ -1,5 +1,5 @@
-import { Box, Tab, TabList, TabPanel, TabPanels, Tabs } from '@chakra-ui/react'
-import { useParams } from 'react-router-dom'
+import { Box, Tab, TabList, TabPanel, TabPanels, Tabs, Button } from '@chakra-ui/react'
+import { useParams, useNavigate } from 'react-router-dom'
 import Informacion from './Informacion.jsx'
 // import Actions from './Actions'
 // import Favorites from './Favorites'
@@ -7,7 +7,8 @@ import Informacion from './Informacion.jsx'
 import Checkout from '../../PruebaMercadoPago/Checkout'
 const Content = () => {
   const tabs = ['Información','Agendar cita',/* 'Notificaciones'*/]
-  const {id} = useParams()
+  const {id} = useParams();
+  let navigate = useNavigate();
   return (
     <Box
       as="main"
@@ -55,6 +56,7 @@ const Content = () => {
       </Tabs>
 
       {/* <Actions /> */}
+            <Button className="mb-4" onClick={()=>navigate(-1)}>Volver</Button>
     </Box>
   )
 }

@@ -16,7 +16,13 @@ import { getPsychos,
         getSaldoTotalPsicologo,
         getCalendarioPsicologo,
         postMercadoPsicologo,
-        getFacturas} from './psicologySlice.js';
+        getPacienteFacturas,
+        getFacturas,
+        getSobreMi,
+        postSobreMi,
+        postServicios} from './psicologySlice.js';
+        
+
 
 import Swal from 'sweetalert2';
 
@@ -351,6 +357,15 @@ export const uploadImage = (id, img) => {
     }
 }
 
+
+export const pacienteFacturas = (id) => {
+    return async (dispatch) => {
+        const rs = await fetch(`${process.env.REACT_APP_API}/api/factura/${id}`);
+        const data = await rs.json();
+        dispatch(getPacienteFacturas(data));
+    }
+}
+
 export const eliminarDia = (id,date) => {
     return async (dispatch) => {
         const rs = await fetch(`${process.env.REACT_APP_API}/api/dia/${id}`, {
@@ -370,9 +385,9 @@ export const eliminarDia = (id,date) => {
             );
         }else{
             Swal.fire(
-                "Dia añadido",
+                "Dia eliminado",
                 '',
-                'success'
+                'info'
             );
             const dias = getDiasPsicologos(data.dia);
             
@@ -396,9 +411,9 @@ export const añadirDia = (id,date) => {
             }
         });
         Swal.fire(
-            "Dia eliminado",
+            "Dia agregado",
             '',
-            'succes'
+            'info'
         );
         const data = await rs.json();
         const dias = getDiasPsicologos(data.dia);
@@ -496,5 +511,63 @@ export const saldoTotalFacturas = () => {
         const data = await rs.json();
 
         dispatch(getFacturas(data[0].sumaFacturas));
+
     }
 }
+
+export const getSobreMiPsicologo = (id) => {
+    return async (dispatch) => {
+        const rs = await axios.get(`${process.env.REACT_APP_API}/api/psicologo/sobreMi/${id}`);
+        dispatch(getSobreMi(rs.data));
+    }
+}
+
+export const postSobreMiPsicologo = (id, sobreMi) => {
+    return async (dispatch) => {
+        try {
+            const rs = await axios.post(`${process.env.REACT_APP_API}/api/psicologo/sobreMi/${id}`, {
+                method: 'POST',
+                body: sobreMi
+            });
+            dispatch(postSobreMi(rs.data));
+
+            localStorage.getItem('usuario') 
+            const local = JSON.parse(localStorage.getItem('usuario'));
+            if(local.user){
+                local.user.sobreMi = rs.data;
+                localStorage.setItem('usuario', JSON.stringify(local));
+            }else{
+                local.sobreMi = rs.data;
+                localStorage.setItem('usuario', JSON.stringify(local));
+            }
+            Swal.fire(
+                "Sobre mi actualizado",
+                '',
+                'info'
+            )
+        } catch (error) {
+            return (error);
+        }
+    }
+}
+
+export const postServiciosPsicologo = (id, data) => {
+    return async (dispatch) => {
+        try {
+           
+            const rs = await axios.post(`${process.env.REACT_APP_API}/api/psicologo/servicio/${id}`, {
+                method: 'POST',
+                body: data
+            });
+            dispatch(postServicios(rs.data));
+            Swal.fire(
+                "Servicios actualizados",
+                '',
+                'info'
+            )
+        } catch (error) {
+            return (error);
+        }
+    }
+}
+
