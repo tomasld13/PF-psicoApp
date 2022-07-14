@@ -6,6 +6,7 @@ import Swal from 'sweetalert2'
 import './Footer.css'
 
 function Footer() {
+
   return (
     <div className='footer-container'>
         <section className="footer-subscription">
@@ -21,7 +22,7 @@ function Footer() {
                     <input type="email" name='email' placeholder='Su email...' className="footer-input" />
                     <Button type='submit' buttonStyle='btn--outline'
                     onClick={() => 
-                    Swal.fire(
+                      Swal.fire(
                       '¡Gracias por suscribirte!',
                       '',
                       'success'

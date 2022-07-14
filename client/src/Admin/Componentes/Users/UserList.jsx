@@ -61,11 +61,6 @@ export default function UserList() {
     valueGetter: (params) =>
       `${params.row.name || ''} ${params.row.lastname || ''}`,
   }, 
-  { 
-    field: 'state',
-    headerName: 'Status',
-    width: 120
-  },
   {
     field: 'action',
     headerName: 'Acciones',

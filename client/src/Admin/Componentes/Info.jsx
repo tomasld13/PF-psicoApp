@@ -40,7 +40,7 @@ function Info() {
 }
 
 const InfoCard = styled.div`
-  height: 107%;
+  height: 110%;
   width: 14rem;
   background-color: white;
   border-radius: 1rem;
@@ -52,14 +52,15 @@ const InfoCard = styled.div`
     box-shadow: ${hoverEffect};
   }
   @media screen and (min-width: 320px) and (max-width: 960px) {
-    width: 95%;
+    margin-top: 2rem;
+    width: 80%;
   }
 `;
 
 const Card = styled.div`
   background-color: rgba(183, 194, 243, 0.3);
   border-radius: 1rem;
-  margin-top: 1rem;
+  margin-top: 0rem;
   margin-bottom: 2rem;
 `;
 

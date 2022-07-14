@@ -70,9 +70,9 @@ const getOnePacienteAndUsers = async (req, res, next) => {
     const paciente = await Usuario.findByPk(id, {
       where: { state: true }, include: [
         { model: Paciente, include : [
-          {model: Favoritos, attributes: ["psicofavorito"]},
-          {model: Factura, attributes: ["status", "payment_id", "payment_status", "merchant_order_id" ]},
-          {model: Favoritos, attributes: ["psicofavorito"]}], attributes: { exclude: ["fk_usuarioID", "fk_especialidadId"] } },
+          {model: Favoritos, attributes: ["idPsico"]},
+          {model: Factura, attributes: ["status", "payment_id", "payment_status", "merchant_order_id" ]}
+          ], attributes: { exclude: ["fk_usuarioID", "fk_especialidadId"] } },
       { model: Ciudad, include: { model: Provincia, attributes: ['name'] }, attributes: ['name'] },
       { model: Genero, attributes: ["genero"] },
       { model: Rol, attributes: ["name"] }]
