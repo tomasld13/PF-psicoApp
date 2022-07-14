@@ -42,11 +42,12 @@ function MainContent() {
 }
 
 const Container = styled.div`
-  width: 90%;
-  background: linear-gradient(to bottom right, white 0%, #e6e4ff 70%);
-  border-bottom-right-radius: 2rem;
-  border-top-right-radius: 2rem;
-  margin: 1rem 8rem 1rem 4rem;
+  width: 100%;
+  background: linear-gradient(to bottom right, white 0%, #e6e4ff 100%);
+  border-bottom-right-radius: 1rem;
+  border-top-right-radius: 1rem;
+  margin: 0rem -0rem 1rem 2rem;
+  margin-bottom: 3rem;
   @media screen and (min-width: 320px) and (max-width: 960px) {
     display: flex;
     flex-direction: column;

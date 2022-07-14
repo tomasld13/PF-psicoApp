@@ -2,7 +2,7 @@ import React from 'react'
 
 const BenefitCard = (props) => {
   return (
-    <div className='flex flex-col border text-left rounded-2xl py-12 px-8'>
+    <div className='flex flex-col border-4 border-white  text-left rounded-2xl py-12 px-8'>
     <div>
       <div className='bg-[#00d8ff] inline-flex p-2 rounded-full'>
         {props.icon}

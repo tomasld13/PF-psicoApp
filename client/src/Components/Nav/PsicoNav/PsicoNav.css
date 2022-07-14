@@ -80,14 +80,20 @@
     display: none;
   }
 
-.text-user {
-    font-size: 30px;
+  .textUserPsicoDiv {
     display: flex;
     justify-content: center;
-    margin-right: 6rem ;
-    margin-top: 1rem;
-    align-items: center;
+    margin-right: 10rem;
+    margin-top: 0rem;
+    width: 30%;
+  }
+  
+  .textUser {
+    font-size: 30px; 
+    display: flex;
+    flex-direction: column;
     font-family: 'Montserrat';
+    /* margin-bottom: 24px; */
   }
   
   @media screen and (max-width: 960px) {
@@ -95,6 +101,9 @@
       position: relative;
     }
   
+    .textUser {
+      display: none;
+    }
     .nav-menu {
       display: flex;
       flex-direction: column;
@@ -138,11 +147,7 @@
       top: 0;
       left: 0;
       width: 60%;
-      transform: translate(30%, 10%);
-    }
-
-    .text-user {
-       display: none;
+      transform: translate(30%, 0%);
     }
   
     .menu-icon {

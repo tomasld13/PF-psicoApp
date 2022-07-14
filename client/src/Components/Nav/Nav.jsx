@@ -41,10 +41,10 @@ function Nav() {
           <a href='/' className='LogoNavBar' onClick={closeMobileMenu}>
             <img src={logoImage} alt="logo image" />
           </a>
-        <div> 
+        <div className='textUserDiv'> 
         {
             storeGoogle.status === 'authenticated' || storeAuthBack.status === 'authenticated' 
-            ? <div className='text-user'>Hola, {!storeGoogle.name ? storeAuthBack.name : storeGoogle.name}!</div> 
+            ? <div className='textUser'>Hola, {!storeGoogle.name ? storeAuthBack.name : storeGoogle.name}!</div> 
             : null
           }
         </div>
