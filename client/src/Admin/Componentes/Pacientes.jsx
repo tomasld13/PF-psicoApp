@@ -63,7 +63,7 @@ const YourProjects = styled.div`
   @media screen and (min-width: 320px) and (max-width: 960px) {
     height: max-content;
     width: 80%;
-    margin-top: 1rem;
+    margin-top: 0rem;
   }
 `;
 

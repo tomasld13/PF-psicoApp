@@ -83,13 +83,14 @@
   .textUserPsicoDiv {
     display: flex;
     justify-content: center;
+    margin-right: 10rem;
+    margin-top: 1.5rem;
   }
   
   .textUser {
     font-size: 30px; 
     display: flex;
     flex-direction: column;
-    width: 25%;
     font-family: 'Montserrat';
     /* margin-bottom: 24px; */
   }
@@ -143,10 +144,6 @@
       left: 0;
       width: 60%;
       transform: translate(30%, 10%);
-    }
-
-    .text-user {
-       display: none;
     }
   
     .menu-icon {

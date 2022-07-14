@@ -142,8 +142,8 @@
     transform: translate(10%, 10%);
   }
 
-  .text-user {
-  display: none;
+  .textUser {
+  margin-left: 10rem;
   }
 
   .IconMenuFirst {

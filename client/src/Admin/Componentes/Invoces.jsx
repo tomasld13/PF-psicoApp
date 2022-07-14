@@ -110,6 +110,7 @@ const Info = styled.div`
   @media screen and (min-width: 320px) and (max-width: 960px) {
     flex-direction: column;
     width: 100%;
+    margin-top: 1rem;
     text-align: center;
   }
 `;

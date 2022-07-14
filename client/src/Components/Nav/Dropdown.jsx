@@ -7,7 +7,6 @@ function Dropdown() {
     const [showOptions, setShowOptions] = useState(false)
 
     const dispatch = useDispatch()
-
     const handleClick = () => {
         setShowOptions(!showOptions)
     }
