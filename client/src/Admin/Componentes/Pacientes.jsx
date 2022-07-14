@@ -23,7 +23,7 @@ function Pacientes() {
         pacientes.length > 0 ? <>
           <Project>
         <Avatar>
-          <img src={AvatarImage} alt="" />
+          <img src={pacientes[0].avatar ? pacientes[0].avatar : AvatarImage} alt="" />
         </Avatar>
         <Detail>
           <Title>{pacientes[0].name}</Title>
@@ -32,7 +32,7 @@ function Pacientes() {
       </Project>
       <Project>
         <Avatar>
-          <img src={AvatarImage} alt="" />
+          <img src={pacientes[1].avatar ? pacientes[1].avatar : AvatarImage} alt="" />
         </Avatar>
         <Detail>
           <Title>{pacientes[1].name}</Title>
@@ -49,7 +49,7 @@ function Pacientes() {
 }
 
 const YourProjects = styled.div`
-  margin-top: -3rem !important;
+  margin-top: -2rem !important;
   height: 80%;
   width: 90%;
   background-color: white;
@@ -63,7 +63,7 @@ const YourProjects = styled.div`
   @media screen and (min-width: 320px) and (max-width: 960px) {
     height: max-content;
     width: 80%;
-    margin-top: 1rem;
+    margin-top: 0rem;
   }
 `;
 
@@ -80,7 +80,7 @@ const Avatar = styled.div`
   }
 `;
 const Detail = styled.div`
-  margin-left: 1rem;
+  margin-left: 2rem
 `;
 const Title = styled.h3`
   font-weight: 500;

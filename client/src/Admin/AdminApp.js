@@ -12,9 +12,9 @@ function AdminApp() {
 }
 
 const Container = styled.div`
-    display: flex;
-    height: 100vh;
-    background: linear-gradient(to bottom right, white 0, #e6e4ff 100%);
+   display: flex;
+   height: 100vh;
+   background: linear-gradient(to bottom right, white 0, #e6e4ff 100%);
 `
 
 

@@ -1,6 +1,6 @@
 .navFirstContainer {
   background: #fff;
-  height: 80px;
+  height: 95px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -14,16 +14,15 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 80px;
+  height: 90px;
   max-width: 1500px;
 }
 
 .LogoNavBar {
   color: #575989;
   justify-self: start;
-  margin-left: 20px;
-  /* margin-top: 2rem; */
-  width: 20%;
+  margin-left: 22px;
+  width: 25%;
   cursor: pointer;
   text-decoration: none;
   font-size: 2rem;
@@ -79,15 +78,21 @@
   display: none;
 }
 
-.text-user {
-  /* color: black;
+.textUserDivisioon {
+  display: flex;
+  justify-content: center;
+}
+
+.textUser {
   font-size: 30px;
-  margin-top: 3.5rem;
-  margin-left: 9rem; */
+  margin-left: 9rem; 
+  display: flex;
+  flex-direction: column;
   /* width: 25%; */
   font-family: 'Montserrat';
   /* margin-bottom: 24px; */
 }
+
 
 @media screen and (max-width: 960px) {
   .NavbarItems {
@@ -131,17 +136,14 @@
 
   .LogoNavBar {
     position: absolute;
-    top: 1rem;
-    left: -2rem;
-    width: 50%;
-    transform: translate(20%, -20%);
+    top: 0;
+    left: 0;
+    width: 60%;
+    transform: translate(10%, 10%);
   }
 
-  .text-user {
-    text-align: center;
-    margin-top: -5rem;
-    margin-left: 6rem;
-    text-transform: uppercase;
+  .textUser {
+  display: none;
   }
 
   .IconMenuFirst {

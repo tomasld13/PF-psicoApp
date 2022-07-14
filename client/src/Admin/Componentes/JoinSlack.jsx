@@ -40,7 +40,7 @@ const JoinChannel = styled.div`
     justify-content: center;
     margin-bottom: 2rem;
     height: max-content;
-    width: 90%;
+    width: 80%;
   }
 `;
 

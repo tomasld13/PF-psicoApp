@@ -16,7 +16,13 @@ import { getPsychos,
         getSaldoTotalPsicologo,
         getCalendarioPsicologo,
         postMercadoPsicologo,
-        getFacturas} from './psicologySlice.js';
+        getPacienteFacturas,
+        getFacturas,
+        getSobreMi,
+        postSobreMi,
+        postServicios} from './psicologySlice.js';
+        
+
 
 import Swal from 'sweetalert2';
 
@@ -334,11 +340,13 @@ export const uploadImage = (id, img) => {
 
             if (JSON.parse( localStorage.getItem('usuario') )) {
                 const usuarioBack = JSON.parse( localStorage.getItem('usuario') );
-                usuarioBack.avatar = data.avatar;
+                if (usuarioBack.user) usuarioBack.user.avatar = data.avatar;
+                else usuarioBack.avatar = data.avatar;
                 localStorage.setItem('usuario', JSON.stringify(usuarioBack));
             } else {
                 const usuarioGoogle = JSON.parse( localStorage.getItem('usuarioGoogle') );
-                usuarioGoogle.user.avatar = data.avatar;
+                if (usuarioGoogle.user) usuarioGoogle.user.avatar = data.avatar;
+                else usuarioGoogle.avatar = data.avatar;
                 localStorage.setItem('usuarioGoogle', JSON.stringify(usuarioGoogle));
             }
 
@@ -346,6 +354,15 @@ export const uploadImage = (id, img) => {
             const data = await rs.json();
             console.log(data);
         }
+    }
+}
+
+
+export const pacienteFacturas = (id) => {
+    return async (dispatch) => {
+        const rs = await fetch(`${process.env.REACT_APP_API}/api/factura/${id}`);
+        const data = await rs.json();
+        dispatch(getPacienteFacturas(data));
     }
 }
 
@@ -367,6 +384,11 @@ export const eliminarDia = (id,date) => {
                 'error'
             );
         }else{
+            Swal.fire(
+                "Dia eliminado",
+                '',
+                'info'
+            );
             const dias = getDiasPsicologos(data.dia);
             
             const horarios = minMaxTime(data.finHorario , data.inicioHorario);
@@ -388,10 +410,13 @@ export const añadirDia = (id,date) => {
                 'Content-Type': 'application/json'
             }
         });
-        
+        Swal.fire(
+            "Dia agregado",
+            '',
+            'info'
+        );
         const data = await rs.json();
         const dias = getDiasPsicologos(data.dia);
-
         const horarios = minMaxTime(data.finHorario , data.inicioHorario);
         data.formatoDias = dias;
         data.formatoHorarios = horarios;
@@ -486,5 +511,63 @@ export const saldoTotalFacturas = () => {
         const data = await rs.json();
 
         dispatch(getFacturas(data[0].sumaFacturas));
+
     }
 }
+
+export const getSobreMiPsicologo = (id) => {
+    return async (dispatch) => {
+        const rs = await axios.get(`${process.env.REACT_APP_API}/api/psicologo/sobreMi/${id}`);
+        dispatch(getSobreMi(rs.data));
+    }
+}
+
+export const postSobreMiPsicologo = (id, sobreMi) => {
+    return async (dispatch) => {
+        try {
+            const rs = await axios.post(`${process.env.REACT_APP_API}/api/psicologo/sobreMi/${id}`, {
+                method: 'POST',
+                body: sobreMi
+            });
+            dispatch(postSobreMi(rs.data));
+
+            localStorage.getItem('usuario') 
+            const local = JSON.parse(localStorage.getItem('usuario'));
+            if(local.user){
+                local.user.sobreMi = rs.data;
+                localStorage.setItem('usuario', JSON.stringify(local));
+            }else{
+                local.sobreMi = rs.data;
+                localStorage.setItem('usuario', JSON.stringify(local));
+            }
+            Swal.fire(
+                "Sobre mi actualizado",
+                '',
+                'info'
+            )
+        } catch (error) {
+            return (error);
+        }
+    }
+}
+
+export const postServiciosPsicologo = (id, data) => {
+    return async (dispatch) => {
+        try {
+           
+            const rs = await axios.post(`${process.env.REACT_APP_API}/api/psicologo/servicio/${id}`, {
+                method: 'POST',
+                body: data
+            });
+            dispatch(postServicios(rs.data));
+            Swal.fire(
+                "Servicios actualizados",
+                '',
+                'info'
+            )
+        } catch (error) {
+            return (error);
+        }
+    }
+}
+

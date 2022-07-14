@@ -1,6 +1,78 @@
 const { Psicologo, Usuario, Paciente, Ciudad, Provincia, Genero, Rol, Especialidades, Servicio, Dia, Precio, Horarios, Factura } = require("../../db");
 const bcrypt = require('bcryptjs');
 
+const getMonth = (month) => {
+    switch(month){
+    case "Jan":
+        return 1
+    case "Feb":
+        return 2
+    case "Mar":
+        return 3
+    case "Apr":
+        return 4
+    case "May":
+        return 5
+    case "Jun":
+        return 6
+    case "Jul":
+        return 7
+    case "Aug":
+        return 8
+    case "Sep":
+        return 9
+    case "Oct":
+        return 10
+    case "Nov":
+        return 11
+    default:
+        return 12                       
+    }
+}
+
+const checkDia = async (id) => {
+    let diaActual = new Date().toString().split(" ")
+    diaActual =[diaActual[3],getMonth(diaActual[1]) > 10 ? getMonth(diaActual[1]) : "0" + getMonth(diaActual[1]),diaActual[2]]
+    /*let dias = await Dia.findAll()
+    dias = await dias.map( async (d) => {
+        let dia = d.fecha.split("-")
+        dia = new Date(dia[0],dia[1]-1,dia[2])
+        if(dia < new Date()) await d.destroy()
+    })*/
+    let diaMesProximo = parseInt(diaActual[1])+1
+    diaMesProximo = [diaActual[0], diaMesProximo.toString(), diaActual[2]]
+    const psicologo = await Psicologo.findByPk(id, {includes: {model: Dia}})
+    let año = diaActual[0]
+    let mes = diaActual[1]
+    let dia = diaActual[2]
+    let diasACrear = []
+    
+    while(new Date(`${año}-${mes < 10 ? "0" + mes : mes}-${dia}`) <= new Date(`${diaMesProximo[0]}-${diaMesProximo[1]}-${diaMesProximo[2]}`)){
+        if(parseInt(dia) === 31){
+            mes = parseInt(mes) + 1
+            mes.toString()
+        }
+        if(parseInt(mes) === 12){
+            año = parseInt(año) + 1
+            año.toString()
+            mes = "0"
+        }
+        else{
+            if(parseInt(dia) === 31) {
+                dia = "1"
+            }
+            else{
+                dia = parseInt(dia) + 1
+                dia.toString()
+            }
+        }
+        let diaWhile = await Dia.create({fecha: `${año}-${mes}-${dia}`})
+        diasACrear.push(diaWhile)
+    }
+    diasACrear.map( async (d) => {
+        psicologo.addDia(d)
+    })
+}
 const getPsicologo = async (req, res, next) => {
     Usuario.findAll({
         where: { rolId: 2 },
@@ -29,7 +101,7 @@ const postPsicologo = async (req, res, next) => {
         newUSuario.setGenero(genero);
         newUSuario.setCiudad(city);
         newPsicologo.setEspecialidades(espe);
-        
+        await checkDia(newPsicologo.id);
         
         res.status(200).send([newUSuario, newPsicologo]);
     } catch (error) {
@@ -39,21 +111,26 @@ const postPsicologo = async (req, res, next) => {
 }
 
 const postServicioPsicologo = async (req, res, next) => {
+
     const { id } = req.params;
-    const { servicio, precio } = req.body;
+    const { servicio, precio } = req.body.body;
+    console.log(req.body)
     try {
-        const psicologo = await Psicologo.findByPk(id);
-        if (!psicologo) {
-            return res.status(404).send({ error: "Psicologo no encontrado" });
-        }
-        const newServicio = await Servicio.create({ servicio: servicio });
-        //if(!newServicio) return res.status(404).send({ error: "Servicio no encontrado" });
+    
+        const usuario = await Usuario.findByPk(id, { include: [{ model: Psicologo, attributes: ['id'] }] });
+        const psicologo = await Psicologo.findByPk(usuario.psicologo.id, { include: [{ model: Servicio }] });
+        const newServicio = await Servicio.findOne({ where: { servicio : servicio } });
         const newPrecio = await Precio.create({ costo: precio });
+        const servicioPsico = psicologo.servicios.find(s => s.servicio === newServicio.servicio);
+        if(servicioPsico){
+            servicioPsico.setPrecios(newPrecio);
+            return res.send([servicioPsico, newPrecio]);
+        }
         newServicio.setPrecios(newPrecio);
         psicologo.addServicio(newServicio);
         res.send([newServicio, newPrecio]);
     } catch (error) {
-        res.status(404).send({ error: error.message })
+    next(error);
     }
 }
 
@@ -263,7 +340,7 @@ const totalAPagar = async (req, res, next) => {
             { model: Genero, attributes: ["genero"] },
             { model: Rol, attributes: ["name"] }]
           });
-        if(!user.psicologo) res.status(404).send("No existe un psicologo con ese id")
+        if(!user && !user.psicologo ) res.status(404).send("No existe un psicologo con ese id")
         facturas = facturas.filter((f) => {
             if(f.psicologoId == user.psicologo.id && !f.saldado){
                 saldo += f.precio
@@ -275,6 +352,36 @@ const totalAPagar = async (req, res, next) => {
         next(error)
     }
 }
+
+const getSobreMiPsicologo = async (req, res, next) => {
+    const {id} = req.params
+    try {
+        const psicologo = await Psicologo.findByPk(id, {attributes: ['sobreMi']})
+        if(!psicologo) res.status(404).send("No existe un psicologo con ese id")
+        res.send(psicologo)
+    } catch (error) {
+        next(error)
+    }
+}
+
+const postSobreMiPsicologo = async (req, res, next) => {
+    const {id} = req.params
+    const {sobreMi} = req.body.body
+    try {
+        const user = await Usuario.findOne({
+            where: { id: id }, include: [{ model: Psicologo, attributes: { exclude: ["fk_usuarioID", "fk_especialidadId"] } },
+            { model: Ciudad, include: { model: Provincia, attributes: ['name'] }, attributes: ['name'] },
+            { model: Genero, attributes: ["genero"] },
+            { model: Rol, attributes: ["name"] }]
+          });
+        if(!user.psicologo) res.status(404).send("No existe un psicologo con ese id")
+        await user.psicologo.update({sobreMi: sobreMi})
+        res.send(user.psicologo.sobreMi)
+    } catch (error) {
+        next(error)
+    }
+}
+
 
 module.exports = {
     getPsicologo,
@@ -288,5 +395,7 @@ module.exports = {
     updatePsicologo,
     suspenderPsicologo,
     activarPsicologo,
-    totalAPagar
+    totalAPagar,
+    getSobreMiPsicologo,
+    postSobreMiPsicologo
 }
