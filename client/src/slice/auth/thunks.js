@@ -1,5 +1,5 @@
 import { signInWithGoogle, loginWithEmailPassword, logoutFirebase } from '../../firebase/providers.js';
-import { checkingCredentials, logout, login, loginBack, logoutBack, errorRegisterBack, logoutGoogle, checkingGoogle, loginGoogle } from './authSlice.js';
+import { checkingCredentials, logout, login, loginBack, logoutBack, errorRegisterBack, allFacturas, logoutGoogle, checkingGoogle, loginGoogle, facturasByMes } from './authSlice.js';
 import axios from 'axios';
 import Swal from "sweetalert2";
 
@@ -132,6 +132,8 @@ export const startLoginWithEmailPassword = (email, password) => {
         dispatch( logout() );
         dispatch( logoutGoogle() );
 
+
+
         const result = await fetch(`${process.env.REACT_APP_API}/api/auth/login`, {
             method: 'POST',
             body: JSON.stringify(login),
@@ -141,7 +143,7 @@ export const startLoginWithEmailPassword = (email, password) => {
         });
 
         if (!result.ok) {
-            dispatch(errorRegisterBack('Usuario / Password no son correctos'));
+            dispatch(errorRegisterBack('Usuario / Password no son correctos o usuario inactivo'));
             dispatch(logoutGoogle());
             return dispatch(logoutBack());
         }
@@ -238,5 +240,31 @@ export const updatePaciente = (id, data) => {
         } catch (error) {
             console.log(error)
         }
+    }
+}
+
+export const getFacturasByMes = (mes) => {
+    return async (dispatch) => {
+        const rs = await fetch(`${process.env.REACT_APP_API}/api/ganancias/${mes}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+        let data = await rs.json();
+        dispatch(facturasByMes({mes, data}))
+    }
+}
+
+export const getAllFacturas = () => {
+    return async (dispatch) => {
+        const rs = await fetch(`${process.env.REACT_APP_API}/api/Factura/`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+        let data = await rs.json();
+        dispatch(allFacturas(data))
     }
 }

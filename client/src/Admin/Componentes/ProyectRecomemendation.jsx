@@ -1,39 +1,55 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 import Badge from "./Badge";
 import AvatarImage from '../Assets/face1.jpg';
 import { cardShadow, hoverEffect } from "../Utils/index";
-
-
+import { getPsychologyID } from '../../slice/psico/thunks.js';
+import Loading from "../../Components/Loading/Loading";
 
 function ProjectRecommendation() {
 
+  const psicologo = useSelector(state => state.psicology.pychoId);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getPsychologyID(15));
+  }, [])
+  
+  
   return (
     <RecommendProject>
-      <CardContent>
-        <Detail>
-          <InfoContainer>
-            <Avatar>
-              <img src={AvatarImage} alt="" />
-            </Avatar>
-            <Info>
-              <InfoName>Leonard Ballard</InfoName>
-              <InfoUpdate>Profesional del mes</InfoUpdate>
-            </Info>
-          </InfoContainer>
-          <Badge content="Premiado" />
-        </Detail>
-        <Title>
-          Especialista en psicología deportiva.
-        </Title>
-        <ProjectInfo>
-         Premiamos al mejor psicologo por mes dandole regalos exclusivos.
-        </ProjectInfo>
-        <PriceContainer>
-          <Price>$80.000/Mes</Price>
-          <Badge content="Full Time" clean />
-        </PriceContainer>
-      </CardContent>
+      {
+        psicologo.id ? 
+        <CardContent>
+          <Detail>
+            <InfoContainer>
+              <Avatar>
+                <img src={psicologo.usuario.avatar ? psicologo.usuario.avatar : AvatarImage} alt="" />
+              </Avatar>
+              <Info>
+                <InfoName>{`${psicologo.usuario.name} ${psicologo.usuario.lastname}`}</InfoName>
+                <InfoUpdate>Profesional del mes</InfoUpdate>
+              </Info>
+            </InfoContainer>
+            <Badge content="Premiado" />
+          </Detail>
+          <Title>
+            {psicologo.especialidades[0]?.especialidad}
+          </Title>
+          <ProjectInfo>
+          Premiamos al mejor psicologo por mes dandole regalos exclusivos.
+          </ProjectInfo>
+          <PriceContainer>
+            <Price>$80.000/Mes</Price>
+            <Badge content="Full Time" clean />
+          </PriceContainer>
+        </CardContent>
+        : <>
+          <Loading />
+        </>
+      }
     </RecommendProject>
   );
 }

@@ -12,11 +12,12 @@ import ScrollToTop from '../ScrollToTop/ScrollToTop'
 
 const ContactSectionStyle = styled.div`
   padding: 10rem 0;
+  margin-top: -7rem;
   font-family: 'Montserrat';
   .contactSection-wrapper {
     display: flex;
     gap: 5rem;
-    margin-top: 7rem;
+    margin-top: 2rem;
     justify-content: space-evenly;
     position: relative;
   }
