@@ -197,7 +197,8 @@ export default function Cards() {
                       nombreCompleto={`${psycho.name} ${psycho.lastname}`}
                       experiencia={psycho.psicologo.yearsExperience}
                       especialidad={psycho.psicologo.especialidades[0]?.especialidad}
-                      ciudad={psycho.ciudad?.name}/>
+                      ciudad={psycho.ciudad?.name}
+                      avatar={psycho.avatar}/>
             }) :
 
             gender.length > 0 ? [...gender].splice(
@@ -209,7 +210,8 @@ export default function Cards() {
                       nombreCompleto={`${psycho.name} ${psycho.lastname}`}
                       experiencia={psycho.psicologo.yearsExperience}
                       especialidad={psycho.psicologo.especialidades[0]?.especialidad}
-                      ciudad={psycho.ciudad?.name}/>
+                      ciudad={psycho.ciudad?.name}
+                      avatar={psycho.avatar}/>
             }) :
 
 
@@ -223,7 +225,8 @@ export default function Cards() {
                       nombreCompleto={`${psycho.name} ${psycho.lastname}`}
                       experiencia={psycho.psicologo.yearsExperience}
                       especialidad={psycho.psicologo.especialidades[0]?.especialidad}
-                      ciudad={psycho.ciudad?.name}/>
+                      ciudad={psycho.ciudad?.name}
+                      avatar={psycho.avatar}/>
             }) : psychologists.length > 0 ? [...psychologists].splice(
               firstIndex,itemsPerPage
             ).filter(p => p.state === true).map(psycho => {
@@ -233,7 +236,8 @@ export default function Cards() {
                       nombreCompleto={`${psycho.name} ${psycho.lastname}`}
                       experiencia={psycho.psicologo.yearsExperience}
                       especialidad={psycho.psicologo.especialidades[0]?.especialidad}
-                      ciudad={psycho.ciudad?.name}/>
+                      ciudad={psycho.ciudad?.name}
+                      avatar={psycho.avatar}/>
             }) :
                 (<div>
                   <Loading/>

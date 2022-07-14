@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux';
 import { psychoFavs, getPsychoFavs } from '../../slice/psico/thunks';
 
-export default function Card({nombreCompleto, experiencia, especialidad, ciudad, id}) {
+export default function Card({nombreCompleto, experiencia, especialidad, ciudad, id, avatar}) {
 
   const idUserBack = useSelector(state => state.auth.authBack.id);
   const idUserGoogle = useSelector(state => state.auth.authGoogle.id);
@@ -48,7 +48,7 @@ export default function Card({nombreCompleto, experiencia, especialidad, ciudad,
               <label for="toggle-heart" aria-label="like">❤</label>
             </div>
           }
-            <img className='rounded-full w-1/2' src={img}/>
+            <img className='rounded-full w-1/2' src={avatar ? avatar : img}/>
             <div> 
                 <Link to={`/psico/${id}`}>
                   <h2 className='text-lg font-bold md:text-2xl'>{nombreCompleto?nombreCompleto.split(" ")[0]:nombreCompleto}</h2>
