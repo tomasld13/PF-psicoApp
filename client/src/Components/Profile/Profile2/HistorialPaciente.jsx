@@ -1,6 +1,6 @@
 import React, { useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux"
-import { psicologoFacturas } from "../../../../slice/psico/thunks"
+import { pacienteFacturas } from "../../../slice/psico/thunks"
 import { Link } from "react-router-dom"
 import {
   Table,
@@ -14,12 +14,14 @@ import {
   TableContainer,
 } from '@chakra-ui/react'
 
-export default function Historial() {
-  const { id } = useSelector(state => state.auth.authBack)
+export default function HistorialPaciente() {
+  const idBack = useSelector(state => state.auth.authBack.id)
+  const idGoogle = useSelector(state => state.auth.authGoogle.id)
+  const id =  idBack ? idBack : idGoogle
   const facturas = useSelector(state => state.psicology.facturas)
   const dispatch = useDispatch()
   useEffect(() => {
-    dispatch(psicologoFacturas(id))
+    dispatch(pacienteFacturas(id))
   },[dispatch])
 
   return (
@@ -34,18 +36,16 @@ export default function Historial() {
         <Th isNumeric>Precio</Th>
         <Th>Servicio</Th>
         <Th>Fecha</Th>
-        <Th>Saldado</Th>
       </Tr>
     </Thead>
     <Tbody>
       {facturas?.map(factura => (
         <Tr>
-          <Td><Link to={`/paciente/${factura.pacienteId}`} >{factura.paciente.usuario.name}</Link></Td>
-          <Td><Link to={`/paciente/${factura.pacienteId}`} >{factura.paciente.usuario.lastname}</Link></Td>
+          <Td><Link to={`/psico/${factura.psicologoId}`} >{factura.psicologo.usuario.name}</Link></Td>
+          <Td><Link to={`/psico/${factura.psicologoId}`} >{factura.psicologo.usuario.lastname}</Link></Td>
           <Td>{factura.precio}</Td>
           <Td>{factura.servicio}</Td>
           <Td>{factura.fecha}</Td>
-          <Td>{factura.saldado.toString()}</Td>
         </Tr>
       ))}
     </Tbody>

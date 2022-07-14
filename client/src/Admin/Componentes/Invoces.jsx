@@ -26,7 +26,7 @@ function Invoices() {
             <Invoice>
               <Info>
                 <Avatar>
-                  <img src={AvatarImage} alt="" />
+                  <img src={psicologos[0].avatar ? psicologos[0].avatar : AvatarImage} alt="" />
                 </Avatar>
                 <TextContainer>
                   <Title>{psicologos[0].name}</Title>
@@ -43,7 +43,7 @@ function Invoices() {
             <Invoice>
               <Info>
                 <Avatar>
-                  <img src={AvatarImage2} alt="" />
+                  <img src={psicologos[1].avatar ? psicologos[1].avatar : AvatarImage2} alt="" />
                 </Avatar>
                 <TextContainer>
                   <Title>{psicologos[1].name}</Title>
