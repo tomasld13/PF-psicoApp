@@ -16,7 +16,11 @@ import { getPsychos,
         getSaldoTotalPsicologo,
         getCalendarioPsicologo,
         postMercadoPsicologo,
-        getPacienteFacturas} from './psicologySlice.js';
+        getPacienteFacturas,
+        getFacturas,
+        getSobreMi,
+        postSobreMi,
+        putSobreMi} from './psicologySlice.js';
         
 
 
@@ -502,3 +506,35 @@ export const saldoTotalFacturas = () => {
 
     }
 }
+
+export const getSobreMiPsicologo = (id) => {
+    return async (dispatch) => {
+        const rs = await axios.get(`${process.env.REACT_APP_API}/api/psicologo/sobreMi/${id}`);
+        dispatch(getSobreMi(rs.data));
+    }
+}
+
+export const postSobreMiPsicologo = (id, sobreMi) => {
+    return async (dispatch) => {
+        try {
+            const rs = await axios.post(`${process.env.REACT_APP_API}/api/psicologo/sobreMi/${id}`, {
+                method: 'POST',
+                body: sobreMi
+            });
+            dispatch(postSobreMi(rs.data));
+
+            localStorage.getItem('usuario') 
+            const local = JSON.parse(localStorage.getItem('usuario'));
+            if(local.user){
+                local.user.sobreMi = rs.data;
+                localStorage.setItem('usuario', JSON.stringify(local));
+            }else{
+                local.sobreMi = rs.data;
+                localStorage.setItem('usuario', JSON.stringify(local));
+            }
+        } catch (error) {
+            return (error);
+        }
+    }
+}
+

@@ -276,6 +276,41 @@ const totalAPagar = async (req, res, next) => {
     }
 }
 
+const getSobreMiPsicologo = async (req, res, next) => {
+    const {id} = req.params
+    try {
+        const user = await Usuario.findOne({
+            where: { id: id }, include: [{ model: Psicologo, attributes: { exclude: ["fk_usuarioID", "fk_especialidadId"] } },
+            { model: Ciudad, include: { model: Provincia, attributes: ['name'] }, attributes: ['name'] },
+            { model: Genero, attributes: ["genero"] },
+            { model: Rol, attributes: ["name"] }]
+          });
+        if(!user.psicologo) res.status(404).send("No existe un psicologo con ese id")
+        res.send(user.psicologo.sobreMi)
+    } catch (error) {
+        next(error)
+    }
+}
+
+const postSobreMiPsicologo = async (req, res, next) => {
+    const {id} = req.params
+    const {sobreMi} = req.body.body
+    try {
+        const user = await Usuario.findOne({
+            where: { id: id }, include: [{ model: Psicologo, attributes: { exclude: ["fk_usuarioID", "fk_especialidadId"] } },
+            { model: Ciudad, include: { model: Provincia, attributes: ['name'] }, attributes: ['name'] },
+            { model: Genero, attributes: ["genero"] },
+            { model: Rol, attributes: ["name"] }]
+          });
+        if(!user.psicologo) res.status(404).send("No existe un psicologo con ese id")
+        await user.psicologo.update({sobreMi: sobreMi})
+        res.send(user.psicologo.sobreMi)
+    } catch (error) {
+        next(error)
+    }
+}
+
+
 module.exports = {
     getPsicologo,
     postPsicologo,
@@ -288,5 +323,7 @@ module.exports = {
     updatePsicologo,
     suspenderPsicologo,
     activarPsicologo,
-    totalAPagar
+    totalAPagar,
+    getSobreMiPsicologo,
+    postSobreMiPsicologo
 }

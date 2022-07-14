@@ -15,7 +15,9 @@ import {
 } from '@chakra-ui/react'
 
 export default function HistorialPaciente() {
-  const { id } = useSelector(state => state.auth.authBack)
+  const idBack = useSelector(state => state.auth.authBack.id)
+  const idGoogle = useSelector(state => state.auth.authGoogle.id)
+  const id =  idBack ? idBack : idGoogle
   const facturas = useSelector(state => state.psicology.facturas)
   const dispatch = useDispatch()
   useEffect(() => {
