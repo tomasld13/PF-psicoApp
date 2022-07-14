@@ -56,7 +56,7 @@ const Content = () => {
       </Tabs>
 
       {/* <Actions /> */}
-            <Button onClick={()=>navigate(-1)}>Volver</Button>
+            <Button className="mb-4" onClick={()=>navigate(-1)}>Volver</Button>
     </Box>
   )
 }

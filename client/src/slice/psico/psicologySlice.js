@@ -21,6 +21,7 @@ export const psicologySlice = createSlice({
         psychoCalendar: [],
         saldoTotalFacturas: null,
         sobreMi: [],
+        servicios: []
     },
     reducers: {
         getPsychos: (state, {payload}) => {
@@ -153,6 +154,8 @@ export const psicologySlice = createSlice({
         },
         postSobreMi: (state, {payload}) => {
             state.sobreMi = payload;
+        },postServicios: (state, {payload}) => {
+            state.servicios = payload;
         }
     },
     
@@ -178,7 +181,7 @@ export const {getPsychos,
         getFacturas,
         getSobreMi,
         postSobreMi,
-        putSobreMi} = psicologySlice.actions; 
+        postServicios} = psicologySlice.actions; 
 
         
 

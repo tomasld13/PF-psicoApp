@@ -8,6 +8,7 @@ import Suscripcion from './ParaPsicologo/Suscripcion.jsx'
 import Calendario from './ParaPsicologo/Calendario.jsx'
 import Historial from './ParaPsicologo/Historial.jsx'
 import HistorialPaciente from './HistorialPaciente'
+import Servicio from './ParaPsicologo/Servicio.jsx'
 
 const Content = () => {
   const { rolId }  = useSelector(state => state.auth.authBack);
@@ -15,7 +16,7 @@ const Content = () => {
 
   const tabs = (rolId===1 || userGoogle.rolId === 1)?
     ['Ajustes', 'Favoritos', 'Historial']
-    :['Ajustes', 'Suscripción','Calendario', 'Historial'];
+    :['Ajustes', 'Suscripción','Calendario', 'Historial', 'Servicio'];
 
   return (
     <Box
@@ -80,6 +81,9 @@ const Content = () => {
               </TabPanel>
               <TabPanel>
                 <Historial/> 
+              </TabPanel>
+              <TabPanel>
+                <Servicio/> 
               </TabPanel>
             </TabPanels>
           }

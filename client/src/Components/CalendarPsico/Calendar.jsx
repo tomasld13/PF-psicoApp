@@ -108,11 +108,11 @@ export const Calendar = ({idPsycho}) => {
         }
 
         const postDates = () => {
-            let date = startDate.toString().split(" ");
+            let date = startDate ? startDate.toString().split(" ") : new Date().toString().split(" ");
             let mes = getMonth(date[1]) <= 10 ? ("0" + getMonth(date[1])) : getMonth([date[1]]);
             date = date[3] + "-" + mes + "-" + date[2];
 
-            let time = startTime.toString().split(" ");
+            let time = startTime?.toString().split(" ");
             time = time[4];
 
             return {date, time};
@@ -149,6 +149,7 @@ export const Calendar = ({idPsycho}) => {
                         monthsShown={1}
                         dateFormat="yyyy/MM/dd"
                         highlightDates={psychologistDays.formatoDias}
+                        withPortal
                         />
                     </div>
                     <div className='mb-5'>
@@ -165,6 +166,7 @@ export const Calendar = ({idPsycho}) => {
                         dateFormat="hh:mm aa"
                         minTime={psychologistDays.formatoHorarios.min}
                         maxTime={psychologistDays.formatoHorarios.max}
+                        withPortal
                         />
 
                     </div>

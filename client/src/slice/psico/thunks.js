@@ -20,7 +20,7 @@ import { getPsychos,
         getFacturas,
         getSobreMi,
         postSobreMi,
-        putSobreMi} from './psicologySlice.js';
+        postServicios} from './psicologySlice.js';
         
 
 
@@ -385,9 +385,9 @@ export const eliminarDia = (id,date) => {
             );
         }else{
             Swal.fire(
-                "Dia añadido",
+                "Dia eliminado",
                 '',
-                'success'
+                'info'
             );
             const dias = getDiasPsicologos(data.dia);
             
@@ -411,9 +411,9 @@ export const añadirDia = (id,date) => {
             }
         });
         Swal.fire(
-            "Dia eliminado",
+            "Dia agregado",
             '',
-            'succes'
+            'info'
         );
         const data = await rs.json();
         const dias = getDiasPsicologos(data.dia);
@@ -540,6 +540,31 @@ export const postSobreMiPsicologo = (id, sobreMi) => {
                 local.sobreMi = rs.data;
                 localStorage.setItem('usuario', JSON.stringify(local));
             }
+            Swal.fire(
+                "Sobre mi actualizado",
+                '',
+                'info'
+            )
+        } catch (error) {
+            return (error);
+        }
+    }
+}
+
+export const postServiciosPsicologo = (id, data) => {
+    return async (dispatch) => {
+        try {
+           
+            const rs = await axios.post(`${process.env.REACT_APP_API}/api/psicologo/servicio/${id}`, {
+                method: 'POST',
+                body: data
+            });
+            dispatch(postServicios(rs.data));
+            Swal.fire(
+                "Servicios actualizados",
+                '',
+                'info'
+            )
         } catch (error) {
             return (error);
         }
