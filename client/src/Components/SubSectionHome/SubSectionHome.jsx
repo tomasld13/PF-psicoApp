@@ -6,7 +6,7 @@ import SubSectionItem from './SubSectionItem'
 
 const SubsectionItemStyles = styled.div`
   padding: 10rem 0 0 0;
-  margin-left: 10rem;
+  margin-left: 7rem;
   .subsection__allitems {
     display: flex;
     gap: 10rem; 
@@ -24,7 +24,7 @@ const SubsectionItemStyles = styled.div`
        display: flex;
        align-items: center;
        margin-left: -2rem;
-        margin-top: -5rem;
+        margin-top: 5rem;
         margin-bottom: 5rem;
         gap: 5rem;
     }

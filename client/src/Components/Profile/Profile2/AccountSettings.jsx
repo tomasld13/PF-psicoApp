@@ -173,7 +173,7 @@ function AccountSettings() {
           placeholder={password}
         />
       </FormControl> */}
-  <Button disabled={!isEnabled} type='submit'>Actualizar</Button>
+  <Button className='mt-3' disabled={!isEnabled} type='submit'>Actualizar</Button>
   </form>
     </Grid>
   )

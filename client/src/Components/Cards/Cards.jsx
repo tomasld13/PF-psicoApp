@@ -6,6 +6,7 @@ import { Button } from '../Button/Button'
 import styles from '../Cards/cards.module.css';
 import Loading from '../Loading/Loading.jsx'
 import SectionTitle from '../SectionTitle/SectionTitle'
+import Swal from "sweetalert2";
 
 const itemsPerPage = 6;
 
@@ -30,7 +31,7 @@ export default function Cards() {
 
   
   const { psychologists, spatiality } = useSelector(state => state.psicology)
-  //console.log(psychologists)
+
   // Crea el indice siguiente para pasar al siguiente grupo de 6 psicologos
     const nextHandler = () => {
         const nextPage = currentPage + 1;
@@ -73,19 +74,11 @@ export default function Cards() {
     setInputFind(e.target.value);
   }
 
-  // const handlerChangeGender = (e)=> {
-  //   setInputGender(`${e.target.value}`)
-  // }
 
   const onChangeFilter = (e) => {
     dispatch(filterPsicology(e.target.value));
   }
   
-
-
-  // const cleanFind = () => {
-  //   setFind([])
-  // }
 
   const handleRemove = (e) => {
     e.preventDefault()
@@ -112,25 +105,33 @@ export default function Cards() {
     ">
       <div 
       //className={styles.btn_container}
-      className="container my-16 ml-2.5 py-10 w-64 px-2.5 bg-secundary border border-primary rounded-lg"
+      className="container my-16 ml-2.5 py-10 w-70 px-2.5 h-25 bg-secundary border border-primary rounded-lg"
       >
 
-        <div className="flex flex-col content-center items-center">
+        <div className="flex flex-col content-center items-center mt-10">
           <input className='border border-gray-300 my-2.5 px-3 py-1 rounded-lg shadow-sm focus:outline-none focus:border-primary' type="text" placeholder="Psicologo..." onChange={e => handlerChange(e)} value={inputFind}/>
           <button className='bg-primary text-white border border-primary font-bold py-2 px-4 rounded hover:bg-white hover:text-primary my-2.5' onClick={(e) => {
             handlerChange(e)
             const findInput = psychologists.filter(psycho => {
-              return psycho.name.toLowerCase().includes(inputFind.toLowerCase()) || psycho.lastname.toLowerCase().includes(inputFind.toLowerCase())
+              return  psycho.state === true && (psycho.name.toLowerCase().includes(inputFind.toLowerCase()) || psycho.lastname.toLowerCase().includes(inputFind.toLowerCase()));
             });
+            if (findInput.length === 0 || inputFind === '') {
+              Swal.fire(
+                'Psicologo no encontrado',
+                '',
+                'info'
+              );
+              return
+            }
             setFind(findInput)
           }}>Buscar</button>
-          {/* <button onClick={() => cleanFind()}>X</button> */}
+
         </div>
-        <select className='border border-gray-300 my-2.5 px-3 py-1 rounded-lg shadow-sm focus:outline-none focus:border-primary' 
+        <select className='border border-gray-300 my-2.5 px-3 py-1 mr-2 rounded-lg shadow-sm focus:outline-none focus:border-primary' 
         name="especialidad" 
         id="orden" 
         onChange={handlerClick}>
-            <option selected disabled value=" "> Orden... </option>
+            <option selected disabled value=" "> Orden alfabetico </option>
             <option value="asc">Ascendente</option>
             <option value="desc">Descendente</option>
         </select>
@@ -167,7 +168,7 @@ export default function Cards() {
           name="especialidad" 
           id="especialidad" 
           onChange={onChangeFilter}>
-            <option selected disabled value=" "> Elige una especialidad </option>
+            <option selected disabled value=" ">Especialidad </option>
             <option value="Clinica">Psicologia Clinica</option>
             <option value="Educacional">Psicologia Educacional</option>
             <option value="Deportiva">Psicologia Deportiva</option>
@@ -184,7 +185,7 @@ export default function Cards() {
         <SectionTitle heading='¿Cuál psicólogo puede ayudarte?' subheading=""/>
         <div 
         className={styles.cards_container}
-        //className='flex flex-wrap justify-center justify-evenly w-full'
+
         >
           {
             find.length > 0 ? [...find].splice(
@@ -195,37 +196,37 @@ export default function Cards() {
                       key={psycho.id} 
                       nombreCompleto={`${psycho.name} ${psycho.lastname}`}
                       experiencia={psycho.psicologo.yearsExperience}
-                      especialidad={psycho.psicologo.especialidades[0].especialidad}
-                      ciudad={psycho.ciudad.name}/>
+                      especialidad={psycho.psicologo.especialidades[0]?.especialidad}
+                      ciudad={psycho.ciudad?.name}/>
             }) :
 
             gender.length > 0 ? [...gender].splice(
               firstIndex,itemsPerPage
-            ).map(psycho => {
+            ).filter(p => p.state === true).map(psycho => {
               return <Card
                       id={psycho.psicologo.id}
                       key={psycho.id} 
                       nombreCompleto={`${psycho.name} ${psycho.lastname}`}
                       experiencia={psycho.psicologo.yearsExperience}
-                      especialidad={psycho.psicologo.especialidades[0].especialidad}
-                      ciudad={psycho.ciudad.name}/>
+                      especialidad={psycho.psicologo.especialidades[0]?.especialidad}
+                      ciudad={psycho.ciudad?.name}/>
             }) :
 
 
             spatiality.length !== 0 ? [...spatiality].splice(
               firstIndex,itemsPerPage
-            ).map(psycho => {
+            ).filter(p => p.state === true).map(psycho => {
               
               return <Card 
                       id={psycho.psicologo.id}
                       key={psycho.id} 
                       nombreCompleto={`${psycho.name} ${psycho.lastname}`}
                       experiencia={psycho.psicologo.yearsExperience}
-                      especialidad={psycho.psicologo.especialidades[0].especialidad}
+                      especialidad={psycho.psicologo.especialidades[0]?.especialidad}
                       ciudad={psycho.ciudad?.name}/>
             }) : psychologists.length > 0 ? [...psychologists].splice(
               firstIndex,itemsPerPage
-            ).map(psycho => {
+            ).filter(p => p.state === true).map(psycho => {
               return <Card
                       id={psycho.psicologo.id}
                       key={psycho.id} 

@@ -26,7 +26,7 @@ function Invoices() {
             <Invoice>
               <Info>
                 <Avatar>
-                  <img src={AvatarImage} alt="" />
+                  <img src={psicologos[0].avatar ? psicologos[0].avatar : AvatarImage} alt="" />
                 </Avatar>
                 <TextContainer>
                   <Title>{psicologos[0].name}</Title>
@@ -43,7 +43,7 @@ function Invoices() {
             <Invoice>
               <Info>
                 <Avatar>
-                  <img src={AvatarImage2} alt="" />
+                  <img src={psicologos[1].avatar ? psicologos[1].avatar : AvatarImage2} alt="" />
                 </Avatar>
                 <TextContainer>
                   <Title>{psicologos[1].name}</Title>
@@ -68,11 +68,11 @@ function Invoices() {
 }
 
 const InvoicesContainer = styled.div`
-  width: 35rem;
+  width: 36rem;
   border-radius: 1rem;
   margin-top: 1rem;
   background-color: white;
-  height: 145%;
+  height: 160%;
   box-shadow: ${cardShadow};
   transition: 0.4s ease-in-out;
   &:hover {
@@ -94,9 +94,10 @@ const CardContent = styled.div`
 const Invoice = styled.div`
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: center;
   margin: 0.4rem;
   padding-top: 0.6rem;
+  margin-right: 1rem;
   @media screen and (min-width: 320px) and (max-width: 960px) {
     flex-direction: column;
     gap: 1rem;
@@ -109,6 +110,7 @@ const Info = styled.div`
   @media screen and (min-width: 320px) and (max-width: 960px) {
     flex-direction: column;
     width: 100%;
+    margin-top: 1rem;
     text-align: center;
   }
 `;
@@ -130,7 +132,7 @@ const SubTitle = styled.h5`
 const Container = styled.div`
   display: flex;
   justify-content: space-between;
-  width: 30%;
+  width: 40%;
   align-items: center;
   @media screen and (min-width: 320px) and (max-width: 960px) {
     width: 100%;
@@ -141,7 +143,8 @@ const Container = styled.div`
 `;
 
 const AllProjects = styled.a`
-  text-align: end;
+  margin-left: 15rem;
+  text-align: center;
   color: ${themeColor};
   cursor: pointer;
 `;
