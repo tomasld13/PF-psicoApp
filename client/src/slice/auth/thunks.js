@@ -132,6 +132,8 @@ export const startLoginWithEmailPassword = (email, password) => {
         dispatch( logout() );
         dispatch( logoutGoogle() );
 
+
+
         const result = await fetch(`${process.env.REACT_APP_API}/api/auth/login`, {
             method: 'POST',
             body: JSON.stringify(login),
