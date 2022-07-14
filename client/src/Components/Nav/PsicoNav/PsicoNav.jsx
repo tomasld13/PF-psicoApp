@@ -48,7 +48,7 @@ function PsicoNav() {
            <div className='textUserPsicoDiv'>
           {
             status === 'authenticated' || storeAuthBack.status === 'authenticated' 
-            ? <div className='textUser'>Hola, {!displayName ? storeAuthBack.name : displayName}!</div> 
+            ? <div className='textUser'>{!displayName ? storeAuthBack.name : displayName}!</div> 
             : null
           }
           </div>

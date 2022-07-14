@@ -84,7 +84,8 @@
     display: flex;
     justify-content: center;
     margin-right: 10rem;
-    margin-top: 1.5rem;
+    margin-top: 0rem;
+    width: 30%;
   }
   
   .textUser {
@@ -100,6 +101,9 @@
       position: relative;
     }
   
+    .textUser {
+      display: none;
+    }
     .nav-menu {
       display: flex;
       flex-direction: column;
@@ -143,7 +147,7 @@
       top: 0;
       left: 0;
       width: 60%;
-      transform: translate(30%, 10%);
+      transform: translate(30%, 0%);
     }
   
     .menu-icon {
