@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useSelector, useDispatch } from 'react-redux';
+import styled from 'styled-components';
 import { getPsychologyID, postDateTime, getCalendarioPsicologoRuta, getDiasPsicologos, minMaxTime, añadirDia, eliminarDia, añadirHorario, eliminarHorario } from '../../slice/psico/thunks.js';
 import Loading from '../Loading/Loading.jsx';
 import './calendar.css'
@@ -107,11 +108,11 @@ export const Calendar = ({idPsycho}) => {
         }
 
         const postDates = () => {
-            let date = startDate.toString().split(" ");
+            let date = startDate ? startDate.toString().split(" ") : new Date().toString().split(" ");
             let mes = getMonth(date[1]) <= 10 ? ("0" + getMonth(date[1])) : getMonth([date[1]]);
             date = date[3] + "-" + mes + "-" + date[2];
 
-            let time = startTime.toString().split(" ");
+            let time = startTime?.toString().split(" ");
             time = time[4];
 
             return {date, time};
@@ -132,10 +133,11 @@ export const Calendar = ({idPsycho}) => {
                 {
                     psychologistDays.formatoDias
                     ? <div className='flex flex-col'>
-                    <div className='mt-2.5 mb-5'>
-                        <label className='text-white'>Selecciona una fecha</label>
+                    <div className='mt-4 mb-5'>
+                        <label className='text-white mb-1'>Selecciona una fecha:</label>
                         <p>Los días marcados en verde son los disponibles para los pacientes.</p>
                         <DatePicker
+                        className='mt-5'
                         selected={startDate}
                         onChange={(date) => {
                             setStartDate(date);
@@ -147,13 +149,15 @@ export const Calendar = ({idPsycho}) => {
                         monthsShown={1}
                         dateFormat="yyyy/MM/dd"
                         highlightDates={psychologistDays.formatoDias}
+                        withPortal
                         />
                     </div>
                     <div className='mb-5'>
-                        <label className='text-white'>Selecciona una Hora</label>
+                        <label className='text-white'>Selecciona una Hora:</label>
                         <DatePicker
                         selected={startTime}
                         excludeTimes={excludes}
+                        className='mt-4'
                         onChange={(date) => setStartTime(date)}
                         showTimeSelect
                         showTimeSelectOnly
@@ -162,19 +166,24 @@ export const Calendar = ({idPsycho}) => {
                         dateFormat="hh:mm aa"
                         minTime={psychologistDays.formatoHorarios.min}
                         maxTime={psychologistDays.formatoHorarios.max}
+                        withPortal
                         />
 
                     </div>
-                    <select id="hora">
+                    <Select id="hora">
                         <option>Horarios no disponibles</option>
                         {getDiasSelect().length > 0 ? getDiasSelect().map((d) => {
                             return(<option value={d.hora}>{d.hora}</option>)
                         }) : null}
-                    </select>
-                    <button value="borrarDia" onClick={(e) => send(e)}>Eliminar Día disponible</button>
+
+                    </Select>
+                    <Botones>
+                    <BotonNegativo value="borrarDia" onClick={(e) => send(e)}>Eliminar Día disponible</BotonNegativo>
+                    <BotonNegativo value="borrarHorario" onClick={(e) => send(e)}>Eliminar Horario disponible</BotonNegativo>
                     <button value="añadirDia" onClick={(e) => send(e)}>Agregar Día disponible</button>
-                    <button value="borrarHorario" onClick={(e) => send(e)}>Eliminar Horario disponible</button>
                     <button value="añadirHorario" onClick={(e) => send(e)}>Agregar Horario disponible</button>
+                    </Botones>
+                    
                 </div> : <div>
                     <Loading/>
                 </div>
@@ -183,3 +192,22 @@ export const Calendar = ({idPsycho}) => {
             </>
         );
 }
+
+const Botones = styled.div`
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 3rem;
+`
+const BotonNegativo = styled.button`
+    color: red;
+`
+
+const Select = styled.select`
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2rem;
+    margin-left: 12rem;
+`

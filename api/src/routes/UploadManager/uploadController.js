@@ -30,7 +30,6 @@ const actualizarImagenCloudinary = async(req,res=response)=>{
         user.avatar = secure_url;
         await user.save();
         res.json(user)
-        
     } catch (error) {
         console.log(error);
         res.send(error)

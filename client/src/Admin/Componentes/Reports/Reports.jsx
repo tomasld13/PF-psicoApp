@@ -2,31 +2,55 @@ import React from 'react'
 import styled from 'styled-components'
 import { AiOutlineArrowDown, AiOutlineArrowUp } from 'react-icons/ai'
 import { hoverEffect } from '../../Utils/index'
+import { useDispatch, useSelector } from 'react-redux'
+import { useEffect } from 'react'
+import { getAllFacturas } from '../../../slice/auth/thunks'
 
 function Reports() {
+    const ganancias = useSelector(state => state.auth.facturas)
+    const facturas = useSelector(state => state.auth.allFacturas)
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        dispatch(getAllFacturas())
+    },[])
+    let total = ganancias["2022-01"] 
+              + ganancias["2022-02"]
+              + ganancias["2022-03"]
+              + ganancias["2022-04"]
+              + ganancias["2022-05"]
+              + ganancias["2022-06"]
+              + ganancias["2022-07"]
+              + ganancias["2022-08"]
+              + ganancias["2022-09"]
+              + ganancias["2022-10"]
+              + ganancias["2022-11"]
+              + ganancias["2022-12"]
+    console.log(total)
+    //ganancias.flat((f) => f.ganancias += total)
   return (
     <Container>
         <FeaturedItem>
-            <FeaturedTitle>Ganancias</FeaturedTitle>
+            <FeaturedTitle>Sesiones Totales</FeaturedTitle>
             <Money>
-                <FeaturedMoney>$3.000</FeaturedMoney>
+                <FeaturedMoney>{ facturas && facturas[2]}</FeaturedMoney>
                 <FeaturedMoneyRate>
-                    +11.4 <AiOutlineArrowUp color='green'/>
+                    +100 <AiOutlineArrowUp color='green'/>
                 </FeaturedMoneyRate>
             </Money>
-            <ComparedTo>Comparado con el mes anterior</ComparedTo>
+            <ComparedTo>Comparado con el año anterior</ComparedTo>
         </FeaturedItem>
         <FeaturedItem>
-            <FeaturedTitle>Egresos</FeaturedTitle>
+            <FeaturedTitle>Ganancias Totales</FeaturedTitle>
             <Money>
-                <FeaturedMoney>$1.000</FeaturedMoney>
+                <FeaturedMoney>{total}</FeaturedMoney>
                 <FeaturedMoneyRate>
-                    +4.2 <AiOutlineArrowDown color='red'/>
+                    +100 <AiOutlineArrowUp color='green'/>
                 </FeaturedMoneyRate>
             </Money>
-            <ComparedTo>Comparado con el mes anterior</ComparedTo>
+            <ComparedTo>Comparado con el año anterior</ComparedTo>
         </FeaturedItem>
-        <FeaturedItem>
+        {/*<FeaturedItem>
             <FeaturedTitle>Precio sesión promedio</FeaturedTitle>
             <Money>
                 <FeaturedMoney>$3.000</FeaturedMoney>
@@ -35,7 +59,7 @@ function Reports() {
                 </FeaturedMoneyRate>
             </Money>
             <ComparedTo>Comparado con el mes anterior</ComparedTo>
-        </FeaturedItem>
+        </FeaturedItem>*/}
     </Container>
   )
 }

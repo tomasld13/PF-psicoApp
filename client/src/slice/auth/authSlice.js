@@ -25,7 +25,8 @@ export const authSlice = createSlice({
             ciudadId: null,
             error: null,
             token: null,
-            avatar: null
+            avatar: null,
+            sobreMi: null,
         },
         authGoogle: {
             status: 'checking',
@@ -42,9 +43,12 @@ export const authSlice = createSlice({
             error: null,
             token: null,
             uid: null,
-            avatar: null
+            avatar: null,
+            errorMessage: null
         },
-        error: null
+        error: null,
+        facturas: {},
+        allFacturas:null
     },
     reducers: {
         login: (state, {payload}) => {
@@ -89,6 +93,7 @@ export const authSlice = createSlice({
             state.authBack.ciudadId = payload.user ? payload.user.ciudadId : payload.ciudadId;
             state.authBack.token = payload.user ? payload.token : null; 
             state.authBack.avatar = payload.user ? payload.user.avatar : payload.avatar;
+            state.authBack.sobreMi = payload.user ? payload.user.sobreMi : payload.sobreMi;
         },
         logoutBack: (state) => {
             state.authBack.status = 'no-authenticated';
@@ -121,7 +126,7 @@ export const authSlice = createSlice({
             state.authGoogle.uid = payload.user ? payload.user.uid : payload.uid; 
             state.authGoogle.avatar = payload.user ? payload.user.avatar : payload.avatar;
         },
-        logoutGoogle: (state) => {
+        logoutGoogle: (state, {payload}) => {
             state.authGoogle.status = 'no-authenticated';
             state.authGoogle.id = null;
             state.authGoogle.name = null;
@@ -134,11 +139,18 @@ export const authSlice = createSlice({
             state.authGoogle.generoId = null;
             state.authGoogle.ciudadId = null;
             state.authGoogle.token = null;
+            state.authGoogle.errorMessage = payload?.errorMessage;
         },
         errorRegisterBack: (state, {payload}) => {
             state.error = payload;
         },
+        facturasByMes: (state, {payload}) => {
+            state.facturas[payload.mes] = payload.data.ganancia;
+        },
+        allFacturas: (state, {payload}) => {
+            state.allFacturas = payload;
+        },
     }
 });
 
-export const {login, logout, checkingCredentials, loginBack, logoutBack, errorRegisterBack, loginGoogle, logoutGoogle, checkingGoogle} = authSlice.actions; 
+export const { facturasByMes, login, allFacturas, logout, checkingCredentials, loginBack, logoutBack, errorRegisterBack, loginGoogle, logoutGoogle, checkingGoogle} = authSlice.actions; 

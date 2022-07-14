@@ -84,3 +84,8 @@
         max-width: 125px;
     }
 }
+
+.fav{
+    display: flex;
+    flex-direction: column;
+}
