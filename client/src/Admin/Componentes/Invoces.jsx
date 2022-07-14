@@ -68,11 +68,11 @@ function Invoices() {
 }
 
 const InvoicesContainer = styled.div`
-  width: 35rem;
+  width: 36rem;
   border-radius: 1rem;
   margin-top: 1rem;
   background-color: white;
-  height: 145%;
+  height: 160%;
   box-shadow: ${cardShadow};
   transition: 0.4s ease-in-out;
   &:hover {
@@ -94,9 +94,10 @@ const CardContent = styled.div`
 const Invoice = styled.div`
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: center;
   margin: 0.4rem;
   padding-top: 0.6rem;
+  margin-right: 1rem;
   @media screen and (min-width: 320px) and (max-width: 960px) {
     flex-direction: column;
     gap: 1rem;
@@ -130,7 +131,7 @@ const SubTitle = styled.h5`
 const Container = styled.div`
   display: flex;
   justify-content: space-between;
-  width: 30%;
+  width: 40%;
   align-items: center;
   @media screen and (min-width: 320px) and (max-width: 960px) {
     width: 100%;
@@ -141,7 +142,8 @@ const Container = styled.div`
 `;
 
 const AllProjects = styled.a`
-  text-align: end;
+  margin-left: 15rem;
+  text-align: center;
   color: ${themeColor};
   cursor: pointer;
 `;

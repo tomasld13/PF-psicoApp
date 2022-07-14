@@ -80,14 +80,18 @@
     display: none;
   }
 
-.text-user {
-    font-size: 30px;
+  .textUserPsicoDiv {
     display: flex;
     justify-content: center;
-    margin-right: 6rem ;
-    margin-top: 1rem;
-    align-items: center;
+  }
+  
+  .textUser {
+    font-size: 30px; 
+    display: flex;
+    flex-direction: column;
+    width: 25%;
     font-family: 'Montserrat';
+    /* margin-bottom: 24px; */
   }
   
   @media screen and (max-width: 960px) {

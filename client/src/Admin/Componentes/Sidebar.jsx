@@ -57,14 +57,14 @@ function Sidebar() {
 }
 const Container = styled.div`
   width: 20%;
-  height: 60%;
-  margin-top: 8rem;
+  height: 50%;
+  margin-top: 2.5rem;
   border-radius: 2rem;
   background-color: #575989;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 3rem;
+  gap: 1rem;
   @media screen and (min-width: 320px) and (max-width: 960px) {
     display: none;
   }
@@ -130,8 +130,8 @@ const ContactContainer = styled.div`
   width: 70%;
   background-color: #575989;
   color: #c4c4c4;
+  margin-bottom: 5rem;
   height: 15%;
-  margin: auto auto;
   border-radius: 1rem;
   display: flex;
   flex-direction: column;

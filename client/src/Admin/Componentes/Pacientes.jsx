@@ -49,7 +49,7 @@ function Pacientes() {
 }
 
 const YourProjects = styled.div`
-  margin-top: -3rem !important;
+  margin-top: -2rem !important;
   height: 80%;
   width: 90%;
   background-color: white;
@@ -80,7 +80,7 @@ const Avatar = styled.div`
   }
 `;
 const Detail = styled.div`
-  margin-left: 1rem;
+  margin-left: 2rem
 `;
 const Title = styled.h3`
   font-weight: 500;

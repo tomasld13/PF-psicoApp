@@ -78,13 +78,21 @@
   display: none;
 }
 
+.textUserDiv {
+  display: flex;
+  justify-content: center;
+}
+
 .text-user {
   font-size: 30px;
   margin-left: 9rem; 
+  display: flex;
+  flex-direction: column;
   /* width: 25%; */
   font-family: 'Montserrat';
   /* margin-bottom: 24px; */
 }
+
 
 @media screen and (max-width: 960px) {
   .NavbarItems {

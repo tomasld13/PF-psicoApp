@@ -45,10 +45,10 @@ function PsicoNav() {
             <i className={click ? 'fas fa-times' : 'fas fa-bars'} />
           </div>
           <ul className={click ? 'nav-menu active' : 'nav-menu'}>
-           <div>
+           <div className='textUserPsicoDiv'>
           {
             status === 'authenticated' || storeAuthBack.status === 'authenticated' 
-            ? <div className='text-user'>Hola, {!displayName ? storeAuthBack.name : displayName}!</div> 
+            ? <div className='textUser'>Hola, {!displayName ? storeAuthBack.name : displayName}!</div> 
             : null
           }
           </div>
