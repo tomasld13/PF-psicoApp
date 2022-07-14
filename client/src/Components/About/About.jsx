@@ -5,7 +5,7 @@ const About = () => {
     <div name='about' className='w-full my-32'>
         <div className='max-w-[1240px] mx-auto'>
             <div className='text-center'>
-                <h2 className='text-5xl font-bold font-mont' >Somos la web líder en el sector de la psicología y del bienestar emocional.</h2>
+                <h2 className='text-5xl font-bold font-mont text-[#fff]' >Somos la web líder en el sector de la psicología y del bienestar emocional.</h2>
                 <p className='text-3xl py-6 text-gray-500 font-mont'>El servicio de PsicoApp es brindado por profesionales con formación clínica, que trabajan desde diferentes enfoques psicoterapéuticos reconocidos en el ámbito de la Psicología nacional e internacional.</p>
             </div>
 
