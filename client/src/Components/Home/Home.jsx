@@ -7,10 +7,11 @@ import Testimonials from '../Testimonials/Testimonials.jsx';
 import PricingH from '../Pricing/PricingH'
 import About from '../About/About.jsx';
 import Benefits from '../Benefits/Benefits.jsx';
+import styled from 'styled-components'
 
 export function Home() {
   return (
-    <div>
+    <Container>
       <Landing />
       <SubSectionHome />
       <About />
@@ -19,6 +20,11 @@ export function Home() {
       <PricingH />
       <Questions />
       <Testimonials />
-    </div>
+    </Container>
   );
 }
+
+const Container = styled.div`
+  background-color: #212329;
+
+`

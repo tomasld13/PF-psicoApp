@@ -1,5 +1,5 @@
 .navFirstContainer {
-  background: #fff;
+  background: #212329;
   height: 95px;
   display: flex;
   justify-content: center;
@@ -19,7 +19,7 @@
 }
 
 .LogoNavBar {
-  color: #575989;
+  color: #fff;
   justify-self: start;
   margin-left: 22px;
   width: 25%;

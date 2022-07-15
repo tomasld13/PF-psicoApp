@@ -14,6 +14,7 @@ const ContactSectionStyle = styled.div`
   padding: 10rem 0;
   margin-top: -7rem;
   font-family: 'Montserrat';
+  background-color: #212329;
   .contactSection-wrapper {
     display: flex;
     gap: 5rem;
