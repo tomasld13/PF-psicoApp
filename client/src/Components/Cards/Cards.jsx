@@ -102,13 +102,15 @@ export default function Cards() {
     md:flex-nowrap
     lg:flex-nowrap
     xl:flex-nowrap
+    bg-darkgray
+    mb-12
     ">
       <div 
       //className={styles.btn_container}
-      className="container my-16 ml-2.5 py-10 w-70 px-2.5 h-25 bg-secundary border border-primary rounded-lg"
+      className="container my-16 ml-2.5 py-10 w-70 px-2.5 h-25 bg-darkgray border border-primary rounded-lg"
       >
 
-        <div className="flex flex-col content-center items-center mt-10">
+        <div className="flex flex-col content-center items-center mt-10 bg-darkgray">
           <input className='border border-gray-300 my-2.5 px-3 py-1 rounded-lg shadow-sm focus:outline-none focus:border-primary' type="text" placeholder="Psicologo..." onChange={e => handlerChange(e)} value={inputFind}/>
           <button className='bg-primary text-white border border-primary font-bold py-2 px-4 rounded hover:bg-white hover:text-primary my-2.5' onClick={(e) => {
             handlerChange(e)
