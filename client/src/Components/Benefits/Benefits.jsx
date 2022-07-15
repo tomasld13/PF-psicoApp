@@ -8,7 +8,7 @@ import SectionTitle from '../SectionTitle/SectionTitle'
 
 const Benefits = () => {
   return (
-    <div className='w-full bg-[#f0efff] text-white text-center'>
+    <div className='w-full bg-[#575989] text-white text-center'>
       <div className='max-w-[1240px] mx-auto px-4 py-16 '>
         <div>
           <SectionTitle heading='Beneficios de la psicología online' subheading=''/>

@@ -6,7 +6,7 @@
 }
 
 .content {
-    background-color: var(--secondary);
+    background-color: var(--primary);
     display: flex;
     flex-direction: row;
     width: 100%;
@@ -37,16 +37,16 @@
 }
 
 .content hr {
-    border-color: var(--secondary)
+    border-color: var(--white)
 }
 
 @media screen and (max-width: 960px) {
     .content {
     height: 100%;
-    width: 90%;
+    width: 100%;
     }
     .content hr {
-        border-color: var(--secondary);
+        border-color: var(--white);
         display: flex;
         align-items: center;
     }

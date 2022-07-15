@@ -10,16 +10,16 @@
     grid-template-columns: 1fr 1fr;
     align-items: center;
     justify-self: center;
-    width: 80%;
+    width: 100%;
     margin: 0 auto 3rem;
     height: 98vh;
-    background-color: var(--white);
+    background-color: var(--darkgrey);
 }
 
 .main-content {
     justify-self: start;
     margin-left: 20px;
-    color: var(--darkgrey);
+    color: var(--white);
     width: 80%;
 }
 
@@ -96,11 +96,11 @@
         width: 90%;
         margin: 0 auto;
         height: 90vh;
-        background-color: var(--white);
+        background-color: var(--darkgrey);
     }
     .main-content {
         justify-self: center;
-        color: var(--darkgrey);
+        color: var(--white);
         width: 80%;
         margin: 0;
     }
