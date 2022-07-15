@@ -108,7 +108,7 @@ function Nav() {
             ?  button && <Dropdown >Logout</Dropdown>
             : button && <a href='/auth/login'>
               {/* <Button buttonStyle='btn--outline'>Login</Button> */}
-              <Button className='mr-1' buttonStyle='btn--outline' link='/auth/login'>Ingresar</Button>
+              <Button className='' buttonStyle='btn--outline' link='/auth/login'>Ingresar</Button>
             </a> 
           }
         </div>

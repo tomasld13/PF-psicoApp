@@ -53,7 +53,8 @@
   .nav-item {
     height: 80px;
     cursor: pointer;
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
+    margin-right: 1rem;
   }
   
   .nav-links {
