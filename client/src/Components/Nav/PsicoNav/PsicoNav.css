@@ -92,6 +92,7 @@
   }
   
   .textUser {
+    color: white;
     font-size: 30px; 
     display: flex;
     flex-direction: column;

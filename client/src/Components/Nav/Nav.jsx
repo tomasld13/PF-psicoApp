@@ -71,7 +71,7 @@ function Nav() {
               to='questions' 
               className='nav-links' 
               onClick={closeMobileMenu}>
-                Preguntas Frecuentes
+                FAQs
               </Link>
             </li>
             <li className='nav-item'>

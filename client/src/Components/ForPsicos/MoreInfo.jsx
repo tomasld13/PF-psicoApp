@@ -24,7 +24,7 @@ const MoreInfo = () => {
                   <div className='p-8 bg-darkgray'>
                       <AiOutlinePhone className='w-16 bg-indigo-600 text-white rounded-lg h-16  mt-[-4rem]' />
                       <h3 className='font-bold text-2xl my-6 text-white'>Clientes</h3>
-                      <p className='text-white text-xl '>Con más de 3000 pacientes mensuales, hay oportunidades de sobra para usted! Te brindamos las siguientes herramientas:
+                      <p className='text-white text-xl text-start'>Con más de 3000 pacientes mensuales, hay oportunidades de sobra para usted! Te brindamos las siguientes herramientas:
                        mensajería privada con el paciente, calendario para agendar los turnos y tu disponibilidad horaria, posibilidad de tener un perfil online. </p>
                   </div>
               </div>
@@ -32,7 +32,7 @@ const MoreInfo = () => {
                   <div className='p-8'>
                       <FcCustomerSupport className='w-16 bg-indigo-600 text-white rounded-lg h-16  mt-[-4rem]' />
                       <h3 className='font-bold text-2xl my-6 text-white'>Soporte técnico</h3>
-                      <p className='text-white text-xl'>Ante cualquier inconveniente, brindamos soporte las 24 hs. Podes contactarnos vía telefono o correo electrónico.
+                      <p className='text-white text-xl text-start'>Ante cualquier inconveniente, brindamos soporte las 24 hs. Podes contactarnos vía telefono o correo electrónico.
                       Los únicos requisitos excluyentes para comenzar es
                       la matrícula validada por el colegio de psicologos y el documento de identidad (DNI). </p>
                   </div>
@@ -41,7 +41,7 @@ const MoreInfo = () => {
                   <div className='p-8'>
                       <FcMoneyTransfer className='w-16 bg-indigo-600 text-white rounded-lg h-16  mt-[-4rem]' />
                       <h3 className='font-bold text-2xl my-6 text-white'>Cobros y pagos</h3>
-                      <p className='text-white text-xl'>Los pagos se realizan directamente entre el cliente y la cuenta del profesional. El costo de los servicios de la página es un único pago mensual que se mantiene en un 
+                      <p className='text-white text-xl text-start'>Los pagos se realizan directamente entre el cliente y la cuenta del profesional. El costo de los servicios de la página es un único pago mensual que se mantiene en un 
                       10% de la totalidad de sesiones realizadas por el profesional. Aceptamos cobros vía mercadopago, tarjeta de crédito y transferencia bancaria. </p>
                   </div>
               </div>
