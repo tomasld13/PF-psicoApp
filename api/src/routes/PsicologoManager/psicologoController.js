@@ -90,8 +90,23 @@ const getPsicologo = async (req, res, next) => {
 const postPsicologo = async (req, res, next) => {
     const { name, lastname, email, telephone, address, birth, rol, gener, ciudad, yearsExperience, especialidad, password, inicioHorario, finHorario, intervaloSesion, cbu, matriculaProfesional, dni, sobreMi } = req.body;
     try {
-        const newUSuario = await Usuario.create({ name, lastname, email, telephone, address, birth, password: bcrypt.hashSync(password, 10) });
-        const newPsicologo = await Psicologo.create({ yearsExperience, inicioHorario, finHorario, dni, intervaloSesion, cbu, matriculaProfesional, sobreMi });
+        let errorPsico = false
+        let newUSuario;
+        try {
+            newUSuario = await Usuario.create({ name, lastname, email, telephone, address, birth, password: bcrypt.hashSync(password, 10) });
+        } catch (error) {
+            if(error.message === "llave duplicada viola restricción de unicidad «usuarios_email_key»") throw new Error("Ya existe una cuenta registrada con ese email.")
+            throw new Error("Ha habido un error en su registro, vuelva a intentarlo.")
+        }
+        let newPsicologo;
+        try {
+            newPsicologo = await Psicologo.create({ yearsExperience, inicioHorario, finHorario, dni, intervaloSesion, cbu, matriculaProfesional, sobreMi })
+        } catch (error) {
+            await newUSuario.destroy()
+            if(error.message === "llave duplicada viola restricción de unicidad «psicologos_dni_key»") throw new Error("Ya existe un psicologo registrado con ese DNI")
+            else if(error.message === "llave duplicada viola restricción de unicidad «psicologos_matriculaProfesional_key»") throw new Error("Ya existe un psicologo registrado con esa matricula profesional.")
+            throw new Error("error en el registro psicologo")
+        }
         const role = await Rol.findOne({ where: { name: rol } });
         const genero = await Genero.findOne({ where: { genero: gener } });
         const city = await Ciudad.findOne({ where: { name: ciudad } });
@@ -102,10 +117,9 @@ const postPsicologo = async (req, res, next) => {
         newUSuario.setCiudad(city);
         newPsicologo.setEspecialidades(espe);
         await checkDia(newPsicologo.id);
-        
         res.status(200).send([newUSuario, newPsicologo]);
     } catch (error) {
-        res.status(404).send({ error: error.message })
+        res.status(400).send({ error: error.message })
     }
 
 }
@@ -130,7 +144,7 @@ const postServicioPsicologo = async (req, res, next) => {
         psicologo.addServicio(newServicio);
         res.send([newServicio, newPrecio]);
     } catch (error) {
-    next(error);
+        next(error);
     }
 }
 
