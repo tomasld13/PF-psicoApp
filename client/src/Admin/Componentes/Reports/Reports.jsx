@@ -33,7 +33,7 @@ function Reports() {
         <FeaturedItem>
             <FeaturedTitle>Sesiones Totales</FeaturedTitle>
             <Money>
-                <FeaturedMoney>{facturas[2]}</FeaturedMoney>
+                <FeaturedMoney>{ facturas && facturas[2]}</FeaturedMoney>
                 <FeaturedMoneyRate>
                     +100 <AiOutlineArrowUp color='green'/>
                 </FeaturedMoneyRate>

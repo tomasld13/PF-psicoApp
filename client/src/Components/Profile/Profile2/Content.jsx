@@ -33,9 +33,9 @@ const Content = () => {
       style={{ transform: 'translateY(-100px)' }}
     >
       <Tabs>
-        <TabList px={5}>
+        <TabList px={5}  className='flex flex-wrap'>
           {tabs.map(tab => (
-            <Tab
+            <Tab 
               key={tab}
               mx={3}
               px={0}
