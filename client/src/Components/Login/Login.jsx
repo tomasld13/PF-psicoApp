@@ -4,8 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from "../../hooks/useForm";
 import { startGoogleSignIn, startLoginWithEmailPassword } from '../../slice/auth/thunks.js';
 import imgGoogle from "./google_icon-icons.com_62736.ico"
-import Nav from "../Nav/Nav.jsx"
 import { AuthContext } from '../../context/authContext/AuthContext';
+import styled from 'styled-components';
 
 export default function Login() {
 
@@ -40,9 +40,9 @@ export default function Login() {
     }
 
     return (
-    <>
-        <div className='container h-full w-full mx-auto mt-auto bg-secundary rounded'>
-            <h1 className='text-3xl py-5'>Iniciar Sesion</h1>
+        <Container> 
+        <div className='container h-full w-full mx-auto mt-auto bg-darkgray rounded'>
+            <h1 className='text-3xl py-5 text-white'>Iniciar Sesion</h1>
             <form onSubmit={handlerSubmit}>
                 <div>
                     <input className='border border-gray-300 my-2.5 px-3 py-1 rounded-lg shadow-sm focus:outline-none focus:border-primary' type="email" placeholder="Correo" name="email" value={email} onChange={onInputChange}/>
@@ -56,15 +56,20 @@ export default function Login() {
                     </div>
                 </div>
                 <a href='/auth/register'>
-                    <p className="my-2 hover:text-primary">Crear una cuenta</p>
+                    <p className="my-2 text-white hover:text-primary">Crear una cuenta</p>
                 </a>
-                <div className="mt-2 pb-5 hover:text-primary">
+                <div className="mt-2 text-white pb-5 hover:text-primary">
                     <Link to='/'>
                         Regresar
                     </Link>
                 </div>
             </form>
         </div>
-    </>    
+    </Container>
     );
 }
+
+const Container = styled.div`
+    background-color: #212329;
+    height: 100vh;
+`

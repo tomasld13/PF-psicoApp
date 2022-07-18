@@ -15,7 +15,6 @@ import {
   Text,
   useDisclosure,
 } from '@chakra-ui/react'
-import SectionTitle from '../SectionTitle/SectionTitle'
 
 export default function Cover() {
   const [coverImage, setCoverImage] = useState(null)
