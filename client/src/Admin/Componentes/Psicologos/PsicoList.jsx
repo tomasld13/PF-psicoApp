@@ -19,14 +19,14 @@ export default function PsicoList() {
 
   const handleDelete = (id) => {
     Swal.fire({
-      title: '¿Estas seguro que querés suspender al usuario?',
+      title: '¿Estas seguro que querés cambiar estado al psicologo?',
       showDenyButton: true,
       denyButtonText: 'Cancelar',
       confirmButtonText: 'Eliminar'
     }).then((result) => {
 
       if(result.isConfirmed) {
-        Swal.fire('El usuario fue suspendido correctamente', "", 'success')
+        Swal.fire('El psicologo ha cambiado de estado', "", 'success')
         const psicologo = psicologos.find(psico => id === psico.id);
         if (psicologo.state) {
           dispatch(suspenderPsico(id,token));
