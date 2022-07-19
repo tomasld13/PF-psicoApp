@@ -16,5 +16,5 @@ export default function Main() {
 
 
 const Background = styled.div`
-  background-color: #212329;
+  background-color: #f0efff;
 `

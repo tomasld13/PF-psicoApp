@@ -23,7 +23,7 @@ export default function Loading() {
 }
 
 const Container = styled.div`
-background-color: #212329;
+background-color: #fff;
 width: 100%;
 height: 100%;
 `

@@ -58,7 +58,7 @@ export const SendMessage = () => {
                     />
                 </div>
                 <div className="col-sm-3 text-center">
-                    <button className="msg_send_btn mt-3" type="submit">
+                    <button className="msg_send_btn mb-15" type="submit">
                         enviar
                     </button>
                 </div>

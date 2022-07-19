@@ -1,5 +1,5 @@
 .navbar {
-    background: #212329;
+    background: white;
     height: 95px;
     display: flex;
     justify-content: center;
@@ -58,12 +58,13 @@
   }
   
   .nav-links {
-    color: #fff;
+    color: #575989;
     display: flex;
     align-items: center;
     text-decoration: none;
     padding: 0.5rem 1rem;
     height: 100%;
+    font-weight: bold;
   }
   
   .nav-links:hover {
@@ -72,7 +73,7 @@
   }
   
   .fa-bars {
-    color: #fff;
+    color: #575989;
   }
   
   .nav-links-mobile {
@@ -92,12 +93,15 @@
   }
   
   .textUser {
-    color: white;
+    color: #575989;
     font-size: 30px; 
     display: flex;
     flex-direction: column;
     font-family: 'Montserrat';
     /* margin-bottom: 24px; */
+    margin-left: 0;
+    width: 10rem;
+    display: flex;
   }
   
   @media screen and (max-width: 960px) {
@@ -122,7 +126,7 @@
     }
   
     .nav-menu.active {
-      background: #575989;
+      background:  #f0efff;
       display: flex;
       justify-content: center;
       left: -12rem;
@@ -165,7 +169,7 @@
     }
   
     .fa-times {
-      color: #fff;
+      color: #575989;
       font-size: 2rem;
     }
   
@@ -179,9 +183,9 @@
       text-decoration: none;
       font-size: 1.5rem;
       background-color: transparent;
-      color: #fff;
+      color:#575989;
       padding: 18px 20px;
-      border: 1px solid #fff;
+      border: 1px solid #575989;
       transition: all 0.3s ease-out;
     }
   
