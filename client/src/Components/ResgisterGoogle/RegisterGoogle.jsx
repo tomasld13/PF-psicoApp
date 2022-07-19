@@ -59,8 +59,8 @@ export const RegisterGoogle = () => {
         setFormSubmitted(true);
         if(!isFormValid) return;
         formState.google = true;
-        await login(formState.email, formState.password);
         dispatch(startCreatingUserWithEmailPasswordPatient(formState) );
+        await login(formState.email, formState.password);
     }
 
     useEffect(() => {
