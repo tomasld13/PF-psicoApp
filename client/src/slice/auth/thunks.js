@@ -3,7 +3,7 @@ import { checkingCredentials, logout, login, loginBack, logoutBack, errorRegiste
 import axios from 'axios';
 import Swal from "sweetalert2";
 
-export const startGoogleSignIn = () => {
+export const startGoogleSignIn = (login) => {
     return async (dispatch) => {
         dispatch(checkingCredentials());
         dispatch(logout());
@@ -12,7 +12,7 @@ export const startGoogleSignIn = () => {
         const result  = await signInWithGoogle();
 
         if (!result.ok) {
-            console.log(result.errorMessage);
+
             return dispatch(logoutGoogle(result.errorMessage));
         }
 
@@ -23,6 +23,7 @@ export const startGoogleSignIn = () => {
                 dispatch(checkingGoogle(result));
             } else {
                 dispatch(loginEmailPasswordGoogle(result.email, result.uid, result.photoURL));
+                await login(result.email, result.uid);
             }
 
 

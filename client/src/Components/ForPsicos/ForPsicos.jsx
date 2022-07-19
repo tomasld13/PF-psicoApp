@@ -20,7 +20,7 @@ function ForPsicos() {
 }
 
 const Container = styled.div`
-  background-color: #212329;
+  background-color: #fff;
 `
 
 export default ForPsicos
