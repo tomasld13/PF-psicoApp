@@ -1,6 +1,5 @@
-import { useState, useRef } from 'react'
-import { useDispatch, useSelector } from 'react-redux' 
-import imagetemplate from '../../Profile/team-male.jpg'
+import { useState, useRef } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   Avatar,
   AvatarBadge,
@@ -19,7 +18,7 @@ import {
   useDisclosure,
   VStack,
 } from '@chakra-ui/react'
-import { getPsicology, uploadImage } from '../../../slice/psico/thunks';
+import { uploadImage } from '../../../slice/psico/thunks';
 
 function Profile() {
 
