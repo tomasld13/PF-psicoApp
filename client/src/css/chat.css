@@ -5,7 +5,7 @@ html, body {
 .messaging{
     padding: 10px 200px 10px 200px;
     margin-bottom: 3rem;
-    background-color: #212329;
+    background-color: #f1faee;
 }
 img {
     max-width: 100%;
@@ -189,7 +189,7 @@ img {
 .input_msg_write input {
     background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
     border: medium none;
-    color: #fff;
+    color: #000;
     font-size: 15px;
     min-height: 30px;
     width: 100%;
@@ -209,7 +209,6 @@ img {
     font-size: 17px;
     height: 30px;
     width: 70px;
-    
 }
 
 

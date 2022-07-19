@@ -41,8 +41,8 @@ export default function Login() {
 
     return (
         <Container> 
-        <div className='container h-full w-full mx-auto mt-auto bg-darkgray rounded'>
-            <h1 className='text-3xl py-5 text-white'>Iniciar Sesion</h1>
+        <div className='container h-full w-full flex flex-col justify-center items-center mx-auto mt-auto bg-secundary rounded'>
+            <h1 className='text-3xl py-5 text-black'>Iniciar Sesion</h1>
             <form onSubmit={handlerSubmit}>
                 <div>
                     <input className='border border-gray-300 my-2.5 px-3 py-1 rounded-lg shadow-sm focus:outline-none focus:border-primary' type="email" placeholder="Correo" name="email" value={email} onChange={onInputChange}/>
@@ -56,9 +56,9 @@ export default function Login() {
                     </div>
                 </div>
                 <a href='/auth/register'>
-                    <p className="my-2 text-white hover:text-primary">Crear una cuenta</p>
+                    <p className="my-2 text-black hover:text-primary">Crear una cuenta</p>
                 </a>
-                <div className="mt-2 text-white pb-5 hover:text-primary">
+                <div className="mt-2 text-black pb-5 hover:text-primary">
                     <Link to='/'>
                         Regresar
                     </Link>

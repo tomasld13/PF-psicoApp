@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux'
 import { startLogout } from '../../slice/auth/thunks';
+import "./Dropdown.css"
 
 function Dropdown() {
 
@@ -19,7 +20,7 @@ function Dropdown() {
 
   return (
 
-    <div class="relative inline-block text-left bg-darkgray">
+    <div class=" dropdown relative inline-block text-left bg-primary">
       <div>
         <button
           onClick={handleClick}
@@ -32,7 +33,7 @@ function Dropdown() {
         </button>
       </div>
       {showOptions && (
-        <div class="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-darkgray ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
+        <div class="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-primary ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
           <div class="py-1" role="none" >
             <a href="/perfil" class="text-white block px-4  py-2 text-sm" role="menuitem" tabindex="-1" id="menu-item-0">Perfil</a>
             <a href="/mensajes" class="text-white block px-4 py-2 text-sm " role="menuitem" tabindex="-1" id="menu-item-1">Mensajes</a>

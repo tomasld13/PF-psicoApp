@@ -6,7 +6,7 @@ export const PricingSection = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background: #212329;
+  background: #fff;
   border-radius: 2rem;
 `;
 
@@ -24,7 +24,7 @@ export const PricingWrapper = styled.div`
 `;
 
 export const PricingHeading = styled.h1`
-  color: #fff;
+  color: #000;
   font-size: 48px;
   font-family: 'Montserrat';
   margin-bottom: 24px;
@@ -44,7 +44,7 @@ export const PricingContainer = styled.div`
 `;
 
 export const PricingCard = styled.div`
-  background: #242424;
+  background: #575989;
   box-shadow: 0 6px 20px rgba(56, 125, 255, 0.2);
   width: 280px;
   height: 550px;

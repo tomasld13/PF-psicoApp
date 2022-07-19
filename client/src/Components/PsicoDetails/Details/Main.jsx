@@ -15,6 +15,5 @@ export default function Main() {
   )
 }
 
-const SuperCont = styled.div`
-  background-color: #212329;
+const SuperCont = styled.div`background-color: #f0efff;
 `

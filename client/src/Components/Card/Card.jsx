@@ -5,51 +5,55 @@ import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux';
 import { psychoFavs, getPsychoFavs } from '../../slice/psico/thunks';
 
+  
 export default function Card({nombreCompleto, experiencia, especialidad, ciudad, id, avatar}) {
 
   const idUserBack = useSelector(state => state.auth.authBack.id);
   const idUserGoogle = useSelector(state => state.auth.authGoogle.id);
-  const psicologoFavs = useSelector(state => state.psicology.psychologiFavs);
-
-  // const [check, setCheck] = useState(false);
-
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(getPsychoFavs(idUser));
-  }, []);
-
   const idUser = idUserBack ? idUserBack : idUserGoogle;
-  const onClick = (e) => {
-    let corazon = document.getElementById(`${e.target.value}`);
-    if (e.target.checked) {
-      dispatch(psychoFavs('POST',idUser,id));
-      corazon.style.color = "red";
-      corazon.style.fontSize = "30px";
-      // setCheck(e.target.checked);
-    } else {
-      corazon.style.color = "white"
-      corazon.style.fontSize = "20px";
-      dispatch(psychoFavs('DELETE',idUser,id));
-    }
-  }
-
-  // let find;
-  // if (psicologoFavs.favoritos) {
-  //   find = psicologoFavs?.favoritos.find(p => p.psicofavorito === nombreCompleto);
-  // }
+  const psicologoFavs = useSelector(state => state.psicology.psychologiFavs);
   
+  const dispatch = useDispatch();
+  let btnvar1 = document.getElementById(id);
+  if(btnvar1){
+    let a = document.createAttribute("style")
+    a.value = "color: grey";
+    btnvar1.setAttributeNode(a);
+  }else{
+    console.log("no existe el elemento");
+  }
+  let find;
+  if (psicologoFavs.favoritos) {
+    find = psicologoFavs?.favoritos.find(p => p.psicofavorito === nombreCompleto);
+  }
+  useEffect(() => {
+    if(btnvar1 && find){
+      btnvar1.style.color = "red";
+    }
+    if(btnvar1 && !find){
+      btnvar1.style.color = "grey";
+    }
+  })
+
+  const onClick = (e) => {
+    e.preventDefault();
+    if (btnvar1.style.color === "red") {
+      dispatch(psychoFavs('DELETE',idUser,id));
+      btnvar1.style.color = "grey";
+    } else {
+      dispatch(psychoFavs('POST',idUser,id));
+      btnvar1.style.color = "red";
+  } 
+    }
+
   return (
     <div 
     className="container flex flex-col h-200 w-64  p-4 m-2.5 bg-secundary rounded-lg border border-primary xl:w-1/4 lg:w-1/3"
     >
         <div className='flex justify-around items-center'>
           {
-            // find ? null :
-            // check ? null :
-            !idUserBack && !idUserGoogle ? null : <div className={style.fav}>
-              <input id="toggle-heart" type="checkbox" onClick={onClick} value={id}/>
-              <label for="toggle-heart" aria-label="like" id={id}>❤</label>
+            !idUserBack && !idUserGoogle ? null : <div >
+              <button aria-label='like' id={id} className={style.boton} onClick={onClick}  ><i class="fa-solid fa-heart"></i></button>
             </div>
           }
             <img className='rounded-full w-1/2' src={avatar ? avatar : img}/>

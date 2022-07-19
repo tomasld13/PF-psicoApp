@@ -25,7 +25,7 @@ export default function Checkout({idpsycho}) {
 
     return (
         <>
-            <div className='bg-primary'>
+            <div className='bg-secundary'>
                 <Calendar idPsycho={id}/>
             </div>
             <Pricing idpsycho={params}/>

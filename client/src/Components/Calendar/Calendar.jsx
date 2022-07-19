@@ -85,12 +85,12 @@ export const Calendar = () => {
 
         return (
             <> 
-                <h1 className='font-bold text-white mt-2.5'>CALENDARIO</h1>
+                <h1 className='font-bold text-black mt-2.5 pt-2.5'>CALENDARIO</h1>
                 {
                     psychologist.formatoHorarios?.min 
                     ? <div className='flex flex-col'>
                     <div className='mt-2.5 mb-5'>
-                        <label className='text-white'>Selecciona una fecha</label>
+                        <label className='text-black'>Selecciona una fecha</label>
                         <DatePicker
                         selected={startDate}
                         onChange={(date) => {
@@ -107,7 +107,7 @@ export const Calendar = () => {
                         />
                     </div>
                     <div className='mb-5'>
-                        <label className='text-white'>Selecciona una Hora</label>
+                        <label className='text-black'>Selecciona una Hora</label>
                         <DatePicker
                         selected={startTime}
                         excludeTimes={excludes}
