@@ -1,7 +1,9 @@
 import React from 'react'
+import styled from 'styled-components';
 import "./Loading.css"
 export default function Loading() {
   return (
+    <Container> 
         <div className="circulo">
             <div className="circulo1 circulo-hijo"></div>
             <div className="circulo2 circulo-hijo"></div>
@@ -16,5 +18,12 @@ export default function Loading() {
             <div className="circulo11 circulo-hijo"></div>
             <div className="circulo12 circulo-hijo"></div>
           </div>
+       </Container>
   );
 }
+
+const Container = styled.div`
+background-color: #fff;
+width: 100%;
+height: 100%;
+`

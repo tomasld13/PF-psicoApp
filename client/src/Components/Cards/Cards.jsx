@@ -7,6 +7,8 @@ import styles from '../Cards/cards.module.css';
 import Loading from '../Loading/Loading.jsx'
 import SectionTitle from '../SectionTitle/SectionTitle'
 import Swal from "sweetalert2";
+import { getPsychoFavs } from '../../slice/psico/thunks';
+
 
 const itemsPerPage = 6;
 
@@ -18,7 +20,10 @@ export default function Cards() {
   const [inputFind, setInputFind] = useState('');
   const [find, setFind] = useState([]);
   const [sort, setSort] = useState('');
-
+  const psicologoFavs = useSelector(state => state.psicology.psychologiFavs.favoritos);
+  const idUserBack = useSelector(state => state.auth.authBack.id);
+  const idUserGoogle = useSelector(state => state.auth.authGoogle.id);
+  const idUser = idUserBack ? idUserBack : idUserGoogle;
   //const [inputGender,setInputGender] = useState('')
   const [gender, setGender] = useState([]);
   
@@ -26,6 +31,7 @@ export default function Cards() {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    dispatch(getPsychoFavs(idUser));
     dispatch(getPsicology());
   }, []);
 
@@ -79,6 +85,9 @@ export default function Cards() {
     dispatch(filterPsicology(e.target.value));
   }
   
+  useEffect(() => {
+    dispatch(getPsicology());
+  }, []);
 
   const handleRemove = (e) => {
     e.preventDefault()
@@ -93,22 +102,20 @@ export default function Cards() {
     document.getElementById("exp").value= " "
   }
 
-  useEffect(() => {
-    dispatch(getPsicology());
-  }, []);
-
   return (
     <section /*className={styles.section_cards}*/ className="flex justify-around flex-wrap sm:flex-nowrap
     md:flex-nowrap
     lg:flex-nowrap
     xl:flex-nowrap
+    bg-white
+    mb-12
     ">
       <div 
       //className={styles.btn_container}
       className="container my-16 ml-2.5 py-10 w-70 px-2.5 h-25 bg-secundary border border-primary rounded-lg"
       >
 
-        <div className="flex flex-col content-center items-center mt-10">
+        <div className="flex flex-col content-center items-center mt-10 bg-secundary">
           <input className='border border-gray-300 my-2.5 px-3 py-1 rounded-lg shadow-sm focus:outline-none focus:border-primary' type="text" placeholder="Psicologo..." onChange={e => handlerChange(e)} value={inputFind}/>
           <button className='bg-primary text-white border border-primary font-bold py-2 px-4 rounded hover:bg-white hover:text-primary my-2.5' onClick={(e) => {
             handlerChange(e)
@@ -182,7 +189,7 @@ export default function Cards() {
       </div>
 
       <div>
-        <SectionTitle heading='¿Cuál psicólogo puede ayudarte?' subheading=""/>
+        <h1 className="text-3xl py-8">¿Cuál psicólogo puede ayudarte?</h1>
         <div 
         className={styles.cards_container}
 
@@ -192,6 +199,7 @@ export default function Cards() {
               firstIndex,itemsPerPage
             ).map(psycho => {
               return <Card
+                      style = "grey"
                       id={psycho.psicologo.id}
                       key={psycho.id} 
                       nombreCompleto={`${psycho.name} ${psycho.lastname}`}

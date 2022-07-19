@@ -7,18 +7,18 @@ const ItemStyles = styled.div`
   .subsectionItem_icon {
     svg {
         width: 100%;
-        color: white;
+        color: black;
     }
   } 
     .subsectionItem_title {
         font-size: 1.5rem;
-        color: white;
+        color: black;
         font-family: 'Tenor-sans';
         margin-bottom: -2rem;
     }
     .para {
         margin-top: 2rem;
-        color: white;
+        color: black;
     }
 `;
 

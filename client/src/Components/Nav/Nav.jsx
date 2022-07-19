@@ -71,7 +71,7 @@ function Nav() {
               to='questions' 
               className='nav-links' 
               onClick={closeMobileMenu}>
-                Preguntas Frecuentes
+                FAQs
               </Link>
             </li>
             <li className='nav-item'>
@@ -93,7 +93,8 @@ function Nav() {
               </a>
             </li>
 
-            <li>
+            {storeAuthBack.status === 'authenticated' || storeGoogle.status === 'authenticated' ? null : (
+              <li>
               <a
                 href='/auth/login'
                 className='nav-links-mobile'
@@ -102,13 +103,14 @@ function Nav() {
                 Registrarse
               </a>
             </li>
+            )}
           </ul>
           {
             storeAuthBack.status === 'authenticated' || storeGoogle.status === 'authenticated'
             ?  button && <Dropdown >Logout</Dropdown>
             : button && <a href='/auth/login'>
               {/* <Button buttonStyle='btn--outline'>Login</Button> */}
-              <Button className='mr-1' buttonStyle='btn--outline' link='/auth/login'>Ingresar</Button>
+              <button className='bg-primary ing' link='/auth/login'>Ingresar</button>
             </a> 
           }
         </div>

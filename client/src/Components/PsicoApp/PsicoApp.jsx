@@ -66,7 +66,7 @@ export default function PsicoApp() {
                         <Route path="/*" element={ <Navigate to="/" /> } />
                         <Route path='/perfil' element={
                         <ChakraProvider theme={theme}>  
-                            <SectionTitle heading="Bienvenido a tu perfil" subheading=""/>
+                            {/* <SectionTitle heading="Bienvenido a tu perfil" subheading=""/> */}
                             <Cover />
                             <Main />           
                         </ChakraProvider> } />
@@ -87,7 +87,7 @@ export default function PsicoApp() {
                         }/>
                         <Route path='/perfil' element={
                             <ChakraProvider theme={theme}>  
-                                <SectionTitle heading="Bienvenido a tu perfil" subheading=""/>
+                                {/* <SectionTitle heading="Bienvenido a tu perfil" subheading=""/> */}
                                 <Cover />
                                 <Main />           
                             </ChakraProvider> }         

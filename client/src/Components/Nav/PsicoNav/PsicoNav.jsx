@@ -48,7 +48,7 @@ function PsicoNav() {
            <div className='textUserPsicoDiv'>
           {
             status === 'authenticated' || storeAuthBack.status === 'authenticated' 
-            ? <div className='textUser'>{!displayName ? storeAuthBack.name : displayName}</div> 
+            ? <div className='text-primary text-2xl font-bold'>{!displayName ? storeAuthBack.name : displayName}</div> 
             : null
           }
           </div>
@@ -80,8 +80,8 @@ function PsicoNav() {
                 Contacto
               </a>
             </li>
-
-            <li>
+            {storeAuthBack.status === 'authenticated' || storeGoogle.status === 'authenticated' ? null : (
+              <li>
               <a
                 href='/auth/login'
                 className='nav-links-mobile'
@@ -90,6 +90,8 @@ function PsicoNav() {
                 Registrarse
               </a>
             </li>
+            )}
+            
           </ul>
           {
             storeAuthBack.status === 'authenticated' || storeGoogle.status === 'authenticated'
