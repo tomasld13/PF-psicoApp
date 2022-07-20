@@ -34,7 +34,7 @@ export const startGoogleSignIn = (login) => {
     }
 }
 
-export const startCreatingUserWithEmailPasswordPatient = (paciente) => {
+export const startCreatingUserWithEmailPasswordPatient = (paciente, login) => {
 
     return async (dispatch) => {
         dispatch( checkingCredentials() );
@@ -75,6 +75,8 @@ export const startCreatingUserWithEmailPasswordPatient = (paciente) => {
                 dispatch(loginBack(data[0]));
             }
             
+            await login(paciente.email, paciente.password);
+
                 Swal.fire(
                     'La cuenta fue creada exitosamente',
                     '',
@@ -198,6 +200,7 @@ export const startLogout = () => {
         dispatch(logoutGoogle());
         localStorage.setItem('usuario', null);
         localStorage.setItem('usuarioGoogle', null);
+        localStorage.removeItem('token');
     }
 }
 
