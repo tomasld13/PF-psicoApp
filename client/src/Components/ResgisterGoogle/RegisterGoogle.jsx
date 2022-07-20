@@ -1,5 +1,6 @@
-import { useEffect, useMemo, useState} from "react";
+import { useContext, useEffect, useMemo, useState} from "react";
 import { useDispatch, useSelector } from 'react-redux';
+import { AuthContext } from "../../context/authContext/AuthContext";
 import { useForm } from "../../hooks/useForm";
 import { startCreatingUserWithEmailPasswordPatient, startLogout } from '../../slice/auth/thunks.js';
 import { getProvincias, getCiudades, cleanCiudades } from '../../slice/psico/thunks.js';
@@ -39,6 +40,8 @@ export const RegisterGoogle = () => {
     const provincias = useSelector(state => state.psicology.provincias);
     const ciudades = useSelector(state => state.psicology.ciudades);
 
+    const { login } = useContext( AuthContext );
+
     formData.rol = 'Paciente';
     formData.email = email;
     if (name) {
@@ -51,12 +54,12 @@ export const RegisterGoogle = () => {
     const { onInputChange, formState,isFormValid,telephone, telephoneValid, address, addressValid,
             birth, birthValid, generValid, ciudadValid, provinciaValid} = useForm(formData, formValidations);
 
-    const onSubmit = (e) => {
+    const onSubmit = async (e) => {
         e.preventDefault();
         setFormSubmitted(true);
         if(!isFormValid) return;
         formState.google = true;
-        dispatch(startCreatingUserWithEmailPasswordPatient(formState) );
+        dispatch(startCreatingUserWithEmailPasswordPatient(formState, login) );
     }
 
     useEffect(() => {
