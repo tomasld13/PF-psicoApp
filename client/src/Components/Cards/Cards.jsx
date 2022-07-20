@@ -50,6 +50,7 @@ export default function Cards() {
         
         setFirstIndex(firstIndex);
         setCurrentPage(nextPage);
+        dispatch(getPsicology());
     }
 
     // Crea el indice anterior para devolver al anterior grupo de 6 psicologos
@@ -62,6 +63,7 @@ export default function Cards() {
 
         setFirstIndex(firstIndex);
         setCurrentPage(prevPage);
+        dispatch(getPsicology());
     }
 
   const handlerClick = (e) => {
@@ -107,12 +109,13 @@ export default function Cards() {
     md:flex-nowrap
     lg:flex-nowrap
     xl:flex-nowrap
+    2xl:flex-nowrap
     bg-white
     mb-12
     ">
       <div 
       //className={styles.btn_container}
-      className="container my-16 ml-2.5 py-10 w-70 px-2.5 h-25 bg-secundary border border-primary rounded-lg"
+      className="container  my-16 ml-2.5 py-10 w-70 px-2.5 h-25 bg-secundary border border-primary rounded-lg"
       >
 
         <div className="flex flex-col content-center items-center mt-10 bg-secundary">
