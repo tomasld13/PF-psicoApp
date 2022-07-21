@@ -3,7 +3,7 @@ import style from "./Card.module.css"
 import img from "../Testimonials/face1.jpg"
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux';
-import { psychoFavs, getPsychoFavs } from '../../slice/psico/thunks';
+import { psychoFavs, getPsicology, getPsychoFavs} from '../../slice/psico/thunks';
 
   
 export default function Card({nombreCompleto, experiencia, especialidad, ciudad, id, avatar}) {
@@ -34,6 +34,7 @@ export default function Card({nombreCompleto, experiencia, especialidad, ciudad,
       btnvar1.style.color = "grey";
     }
   })
+
 
   const onClick = (e) => {
     e.preventDefault();
