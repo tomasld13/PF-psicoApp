@@ -62,8 +62,7 @@ export const RegisterPatient = ({rol}) => {
         setFormSubmitted(true);
         
         if(!isFormValid) return;
-        dispatch(startCreatingUserWithEmailPasswordPatient(formState) );
-        const ok = await login( formState.email, formState.password );
+        dispatch(startCreatingUserWithEmailPasswordPatient(formState, login) );
     }
 
     useEffect(() => {

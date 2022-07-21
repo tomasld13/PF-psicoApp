@@ -10,7 +10,7 @@ const Documentation = () => {
   return (
     <> 
     <Button><a href='/dashboard'><BsArrow90DegLeft size={50} /></a></Button>
-    <div className='w-full bg-[#f0efff] text-white text-center'>
+    <div className='w-full bg-darkgray text-white text-center'>
       <div className='max-w-[1240px] mx-auto px-4 py-16 '>
         <div>
           <SectionTitle heading='Funcionalidades del administrador' subheading=''/>

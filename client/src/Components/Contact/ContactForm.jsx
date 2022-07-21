@@ -11,7 +11,7 @@ const FormStyle = styled.form`
   }
   label {
     font-size: 1.8rem;
-    color: #fff;
+    color: #000;
   }
   input,
   textarea {
@@ -19,10 +19,10 @@ const FormStyle = styled.form`
     height: 80%;
     font-size: 1.2rem;
     padding: 1.2rem;
-    color: #fff;
-    background-color: #575989;
+    color: #000;
+    background-color: #fff;
     outline: none;
-    border: none;
+    border: 2px solid #575989;
     border-radius: 8px;
     margin-top: 1rem;
   }
