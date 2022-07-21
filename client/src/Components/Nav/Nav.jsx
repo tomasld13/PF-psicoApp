@@ -37,7 +37,7 @@ function Nav() {
     <>
       <nav className='navbar'>
         <div className='navbar-container'>
-          <a href='/' className='LogoNavBar' onClick={closeMobileMenu}>
+          <a href='/' className='LogoNavBar pt-3' onClick={closeMobileMenu}>
             <img src={logoImage} alt="logo image" />
           </a>
         <div className='textUserDiv'> 

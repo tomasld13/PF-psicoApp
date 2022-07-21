@@ -13,9 +13,9 @@ export default function Register() {
     }
 
     return (
-    <Container> 
-        <div className="container mx-auto mt-auto bg-darkgray rounded">
-            <h1 className="text-3xl py-5 text-white">Crear cuenta</h1>
+       
+        <div className="container h-screen w-screen flex flex-col justify-center items-center mx-auto mt-auto bg-secundary rounded">
+            <h1 className="text-3xl py-5 text-black font-bold">Crear cuenta</h1>
             <div>
                 <div className="flex flex-col content-center items-center">
                     <select className='border border-gray-300 my-2.5 px-3 py-1 rounded-lg shadow-sm focus:outline-none focus:border-primary' name="rol" id="rol" onChange={onChange}>
@@ -28,14 +28,14 @@ export default function Register() {
                     rol === 'Paciente' ? <RegisterPatient rol={rol} /> 
                     : rol === 'Psicologo' ? <RegisterPsycho rol={rol} /> : null 
                 }
-                <div className="mt-2 pb-5 text-white">
-                    <p classname= 'text-white'>
-                    ¿Ya tienes cuenta?<a href='/auth/login' className=" text-white hover:text-primary"> Ingresar</a>
+                <div className="mt-2 pb-5 text-black font-bold">
+                    <p classname= 'text-black font-bold'>
+                    ¿Ya tienes cuenta?<a href='/auth/login' className=" text-black font-bold hover:text-primary"> Ingresar</a>
                     </p>
                 </div>
             </div>
         </div>
-    </Container>
+  
 
     );
 }
