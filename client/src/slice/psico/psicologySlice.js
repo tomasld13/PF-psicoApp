@@ -83,13 +83,13 @@ export const psicologySlice = createSlice({
                 return {
                     ...state,
                     psychologists: state.sortPsycho?.slice().sort((a,b) => {
-                        if(a.yearsExperience > b.yearsExperience) return 1;
-                        else if (a.yearsExperience < b.yearsExperience) return -1;
+                        if(a.psicologo.yearsExperience > b.psicologo.yearsExperience) return 1;
+                        else if (a.psicologo.yearsExperience < b.psicologo.yearsExperience) return -1;
                         return 0;
                     }),
                     spatiality: state.copyPsycho?.slice().sort((a,b) => {
-                        if(a.yearsExperience > b.yearsExperience) return 1;
-                        else if (a.yearsExperience < b.yearsExperience) return -1;
+                        if(a.psicologo.yearsExperience > b.psicologo.yearsExperience) return 1;
+                        else if (a.psicologo.yearsExperience < b.psicologo.yearsExperience) return -1;
                         return 0;
                     }),
                 }
@@ -97,13 +97,13 @@ export const psicologySlice = createSlice({
                 return {
                     ...state,
                     psychologists: state.sortPsycho?.slice().sort((a,b) => {
-                        if(a.yearsExperience < b.yearsExperience) return 1;
-                        else if (a.yearsExperience > b.yearsExperience) return -1;
+                        if(a.psicologo.yearsExperience < b.psicologo.yearsExperience) return 1;
+                        else if (a.psicologo.yearsExperience > b.psicologo.yearsExperience) return -1;
                         return 0;
                     }),
                     spatiality: state.copyPsycho?.slice().sort((a,b) => {
-                        if(a.yearsExperience < b.yearsExperience) return 1;
-                        else if (a.yearsExperience > b.yearsExperience) return -1;
+                        if(a.psicologo.yearsExperience < b.psicologo.yearsExperience) return 1;
+                        else if (a.psicologo.yearsExperience > b.psicologo.yearsExperience) return -1;
                         return 0;
                     }),
                 }
