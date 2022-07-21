@@ -5,7 +5,10 @@ export default function Psychologists() {
   return (
     <>
         <hr/>
+        <div className="">
         <Cards/>
+        </div>
+       
         <hr />
     </>
   )

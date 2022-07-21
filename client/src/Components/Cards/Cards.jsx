@@ -109,7 +109,6 @@ export default function Cards() {
     md:flex-nowrap
     lg:flex-nowrap
     xl:flex-nowrap
-    2xl:flex-nowrap
     bg-white
     mb-12
     ">
