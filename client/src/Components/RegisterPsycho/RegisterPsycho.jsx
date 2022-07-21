@@ -100,9 +100,9 @@ export const RegisterPsycho = ({rol}) => {
     }
 
   return (
-    <div>
-      <form onSubmit={onSubmit}>
-                <div className="flex flex-col content-center items-center">
+    <div >
+      <form className=" grid grid-cols-2" onSubmit={onSubmit}>
+                <div className="flex flex-col content-center items-center ">
                     <input className='border border-gray-300 my-2.5 px-3 py-1 rounded-lg shadow-sm focus:outline-none focus:border-primary' type="text" placeholder="Nombre" name="name" value={name} onChange={onInputChange}/>
                     {!!nameValid && formSubmitted ? <span style={{color:'red'}}>{nameValid}</span> : null}
                 </div>
