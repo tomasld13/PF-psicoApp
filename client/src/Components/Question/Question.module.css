@@ -1,0 +1,27 @@
+
+
+.content  {
+    display: flex;
+    flex-direction: column;
+    width: 60vw;
+    padding: 10px 0;
+}
+
+.question {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    color: #000;
+    font-weight: bold;
+}
+
+.desc {
+    padding-top: 0px;
+    margin:0;
+    text-align: start;
+    color: #000;
+    font-weight: bold;
+}
+
+

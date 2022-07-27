@@ -1,0 +1,32 @@
+.section_cards {
+    display: flex;
+    justify-content: space-around;
+}
+
+.btn_container {
+    width: 20%;
+    border: 1px solid red;
+}
+
+.cards_container {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: center;
+    justify-content: space-evenly;
+}
+
+.card {
+    border: 1px solid black;
+    padding: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 30%;
+}
+
+@media (min-width:1280px) {
+    .cards_container {
+        width: 1080px
+    }
+
+}

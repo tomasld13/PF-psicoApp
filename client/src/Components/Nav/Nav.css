@@ -1,0 +1,205 @@
+.navFirstContainer {
+  background: #212329;
+  height: 95px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2rem;
+  position: sticky;
+  top: 0;
+  z-index: 999;
+}
+
+.navContainerFirst {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 90px;
+  max-width: 1500px;
+}
+
+.LogoNavBar {
+  color: #fff;
+  justify-self: start;
+  margin-left: 22px;
+  width: 25%;
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 2rem;
+  display: flex;
+  align-items: center;
+}
+
+.fa-typo3 {
+  margin-left: 0.5rem;
+  font-size: 1.8rem;
+}
+
+.MenuNavBar {
+  display: grid;
+  grid-template-columns: repeat(4, auto);
+  grid-gap: 10px;
+  list-style: none;
+  text-align: center;
+  width: 70vw;
+  justify-content: end;
+  margin-right: 2rem;
+}
+
+.ItemNav {
+  height: 80px;
+  cursor: pointer;
+  margin-bottom: -1rem;
+}
+
+.LinksForNav {
+  color: #212329;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  height: 100%;
+}
+
+.LinksForNav:hover {
+  border-bottom: 4px solid #575989;
+  transition: all 0.2s ease-out;
+}
+
+.fa-bars {
+  color: #212329;
+}
+
+.LinksForNav-mobile {
+  display: none;
+}
+
+.IconMenuFirst {
+  display: none;
+}
+
+.textUserDivisioon {
+  display: flex;
+  justify-content: center;
+}
+
+.textUser {
+  font-size: 30px;
+  margin-left: 9rem; 
+  display: flex;
+  flex-direction: column;
+  /* width: 25%; */
+  font-family: 'Montserrat';
+  /* margin-bottom: 24px; */
+}
+
+.ing{
+  margin: auto;
+  color: #fff;
+  width: 7rem;
+  height: 3rem;
+}
+
+.ing:hover{
+  cursor: pointer;
+  color: #575989;
+  background-color: #f0efff;
+}
+
+
+@media screen and (max-width: 960px) {
+  .NavbarItems {
+    position: relative;
+  }
+
+  .MenuNavBar {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 90vh;
+    position: absolute;
+    top: 80px;
+    left: -100%;
+    opacity: 1;
+    transition: all 0.5s ease;
+  }
+
+  .MenuNavBar.active {
+    background: #575989;
+    left: 0;
+    opacity: 1;
+    transition: all 0.5s ease;
+    z-index: 1;
+  }
+
+  .LinksForNav {
+    text-align: center;
+    padding: 2rem;
+    margin-bottom: 3rem;
+    width: 100%;
+    height: 50%;
+    display: table;
+  }
+
+  .LinksForNav:hover {
+    background-color: #fff;
+    color: #242424;
+    border-radius: 0;
+  }
+
+  .LogoNavBar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 60%;
+    transform: translate(10%, 10%);
+  }
+
+  .textUser {
+  display: none;
+  }
+
+  .IconMenuFirst {
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    transform: translate(-100%, 60%);
+    font-size: 1.8rem;
+    cursor: pointer;
+  }
+
+  .fa-times {
+    color: #212329;
+    font-size: 2rem;
+  }
+
+  .LinksForNav-mobile {
+    display: block;
+    text-align: center;
+    margin: 3rem auto;
+    margin-bottom: 6rem;
+    border-radius: 4px;
+    width: 80%;
+    text-decoration: none;
+    font-size: 1.5rem;
+    background-color: transparent;
+    color: #fff;
+    padding: 18px 20px;
+    border: 1px solid #fff;
+    transition: all 0.3s ease-out;
+  }
+
+  .LinksForNav-mobile:hover {
+    background: #fff;
+    color: #242424;
+    transition: 250ms;
+  }
+
+  .ing{
+    margin-left: 14.5rem;
+    color: #fff;
+    height: 2.5rem;
+    width: 5.5rem;
+  }
+}

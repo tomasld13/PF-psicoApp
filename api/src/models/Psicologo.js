@@ -4,16 +4,39 @@ const { DataTypes } = require('sequelize');
 module.exports = (sequelize) => {
   // defino el modelo
   sequelize.define('psicologo', {
-    id: {
+    yearsExperience: {
       type: DataTypes.INTEGER,
-      primaryKey: true,
-      unique: true,
-      allowNull: false
-    },
-    name: {
-      type: DataTypes.STRING,
       allowNull: false,
-    }},
+    },
+    inicioHorario: {
+      type: DataTypes.TIME
+    },
+    finHorario: {
+      type: DataTypes.TIME
+    },
+    intervaloSesion: {
+      type: DataTypes.INTEGER
+    },
+    cbu:{
+      type: DataTypes.STRING
+    },
+    matriculaProfesional:{
+      type: DataTypes.STRING,
+      unique: true
+    },
+    sobreMi:{
+      type: DataTypes.STRING(1234)
+    },
+    pacientesAtendidos : {
+      type : DataTypes.ARRAY(DataTypes.INTEGER),
+      defaultValue : []
+    },
+    dni: {
+        type: DataTypes.BIGINT,
+        unique: true
+    }
+  },
+    
     {
       timestamps: false
     });
