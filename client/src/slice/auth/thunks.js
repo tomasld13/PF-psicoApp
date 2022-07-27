@@ -3,7 +3,7 @@ import { checkingCredentials, logout, login, loginBack, logoutBack, errorRegiste
 import axios from 'axios';
 import Swal from "sweetalert2";
 
-export const startGoogleSignIn = () => {
+export const startGoogleSignIn = (login) => {
     return async (dispatch) => {
         dispatch(checkingCredentials());
         dispatch(logout());
@@ -12,7 +12,7 @@ export const startGoogleSignIn = () => {
         const result  = await signInWithGoogle();
 
         if (!result.ok) {
-            console.log(result.errorMessage);
+
             return dispatch(logoutGoogle(result.errorMessage));
         }
 
@@ -23,6 +23,7 @@ export const startGoogleSignIn = () => {
                 dispatch(checkingGoogle(result));
             } else {
                 dispatch(loginEmailPasswordGoogle(result.email, result.uid, result.photoURL));
+                await login(result.email, result.uid);
             }
 
 
@@ -33,7 +34,7 @@ export const startGoogleSignIn = () => {
     }
 }
 
-export const startCreatingUserWithEmailPasswordPatient = (paciente) => {
+export const startCreatingUserWithEmailPasswordPatient = (paciente, login) => {
 
     return async (dispatch) => {
         dispatch( checkingCredentials() );
@@ -74,6 +75,8 @@ export const startCreatingUserWithEmailPasswordPatient = (paciente) => {
                 dispatch(loginBack(data[0]));
             }
             
+            await login(paciente.email, paciente.password);
+
                 Swal.fire(
                     'La cuenta fue creada exitosamente',
                     '',
@@ -130,9 +133,7 @@ export const startLoginWithEmailPassword = (email, password) => {
     return async (dispatch) => {
         dispatch( checkingCredentials() );
         dispatch( logout() );
-        dispatch( logoutGoogle() );
-
-
+        dispatch(logoutGoogle());
 
         const result = await fetch(`${process.env.REACT_APP_API}/api/auth/login`, {
             method: 'POST',
@@ -199,6 +200,7 @@ export const startLogout = () => {
         dispatch(logoutGoogle());
         localStorage.setItem('usuario', null);
         localStorage.setItem('usuarioGoogle', null);
+        localStorage.removeItem('token');
     }
 }
 

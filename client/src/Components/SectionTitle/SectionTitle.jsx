@@ -5,11 +5,12 @@ const SectionTitleStyle = styled.div`
   text-align: center;
   p {
     font-family: 'Montserrat';
+    color: #000;
     font-size: 2rem;
     margin-top: 2rem;
   }
   h1 {
-  color: black;
+  color: #fff;
   font-size: 48px;
   font-family: 'Montserrat';
   margin-top: 5rem;

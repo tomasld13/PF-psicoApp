@@ -1,5 +1,5 @@
 .navFirstContainer {
-  background: #fff;
+  background: #212329;
   height: 95px;
   display: flex;
   justify-content: center;
@@ -19,7 +19,7 @@
 }
 
 .LogoNavBar {
-  color: #575989;
+  color: #fff;
   justify-self: start;
   margin-left: 22px;
   width: 25%;
@@ -91,6 +91,19 @@
   /* width: 25%; */
   font-family: 'Montserrat';
   /* margin-bottom: 24px; */
+}
+
+.ing{
+  margin: auto;
+  color: #fff;
+  width: 7rem;
+  height: 3rem;
+}
+
+.ing:hover{
+  cursor: pointer;
+  color: #575989;
+  background-color: #f0efff;
 }
 
 
@@ -181,5 +194,12 @@
     background: #fff;
     color: #242424;
     transition: 250ms;
+  }
+
+  .ing{
+    margin-left: 14.5rem;
+    color: #fff;
+    height: 2.5rem;
+    width: 5.5rem;
   }
 }

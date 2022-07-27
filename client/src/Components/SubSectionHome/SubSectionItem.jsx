@@ -7,6 +7,7 @@ const ItemStyles = styled.div`
   .subsectionItem_icon {
     svg {
         width: 100%;
+        color: black;
     }
   } 
     .subsectionItem_title {
@@ -17,7 +18,7 @@ const ItemStyles = styled.div`
     }
     .para {
         margin-top: 2rem;
-        color: gray;
+        color: black;
     }
 `;
 

@@ -1,9 +1,11 @@
 html, body {
     height: 100vh;
-    margin: 0;
+    margin-bottom: 5rem;
 }
 .messaging{
     padding: 10px 200px 10px 200px;
+    margin-bottom: 3rem;
+    background-color: #f1faee;
 }
 img {
     max-width: 100%;
@@ -77,7 +79,7 @@ img {
 
 .chat_ib h5 {
     font-size: 15px;
-    color: #464646;
+    color: #212329;
     margin: 0 0 8px 0;
 }
 
@@ -88,7 +90,7 @@ img {
 
 .chat_ib p {
     font-size: 14px;
-    color: #989898;
+    color: #fff;
     margin: auto
 }
 
@@ -137,7 +139,7 @@ img {
 }
 
 .received_withd_msg p {
-    background: #ebebeb none repeat scroll 0 0;
+    background: #fff none repeat scroll 0 0;
     border-radius: 3px;
     color: #646464;
     font-size: 14px;
@@ -187,7 +189,7 @@ img {
 .input_msg_write input {
     background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
     border: medium none;
-    color: #4c4c4c;
+    color: #000;
     font-size: 15px;
     min-height: 30px;
     width: 100%;
@@ -207,7 +209,6 @@ img {
     font-size: 17px;
     height: 30px;
     width: 70px;
-    
 }
 
 

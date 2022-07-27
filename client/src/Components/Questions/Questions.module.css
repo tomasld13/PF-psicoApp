@@ -6,7 +6,7 @@
 }
 
 .content {
-    background-color: var(--secondary);
+    background-color: var(--white);
     display: flex;
     flex-direction: row;
     width: 100%;
@@ -34,19 +34,20 @@
 
 .contentQuestions {
     margin: 0 20px;
+
 }
 
 .content hr {
-    border-color: var(--secondary)
+    border-color: var(--darkgrey)
 }
 
 @media screen and (max-width: 960px) {
     .content {
     height: 100%;
-    width: 90%;
+    width: 100%;
     }
     .content hr {
-        border-color: var(--secondary);
+        border-color: var(--darkgrey);
         display: flex;
         align-items: center;
     }

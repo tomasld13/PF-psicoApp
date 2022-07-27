@@ -1,0 +1,12 @@
+-Primero clonar.
+-Despues hacer git checkout.
+-Crear rama con git branch nombreRama.
+- git push origin nombreRama (esto pushea la rama al main.)
+-
+
+-Crear Rama: git branch nombreRama
+-Switchear a Rama: git checkout nombreRama
+-Pushear Rama local al Repo :  git push origin nombreRama
+-Listar las Ramas remotas: git branch -r
+-Listar TODAS las Ramas, locales y remotas: git branch --all
+-Actualizar el listado de Ramas Remotas : git remote update origin --prune.

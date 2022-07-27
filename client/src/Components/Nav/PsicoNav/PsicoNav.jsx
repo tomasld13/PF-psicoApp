@@ -38,7 +38,7 @@ function PsicoNav() {
     <>
       <nav className='navbar'>
         <div className='navbar-container'>
-          <a href='/' className='navbar-logo' onClick={closeMobileMenu}>
+          <a href='/' className='navbar-logo pl-14' onClick={closeMobileMenu}>
             <img src={logoImage} alt="logo image" />
           </a>
           <div className='menu-icon' onClick={handleClick}>
@@ -48,7 +48,7 @@ function PsicoNav() {
            <div className='textUserPsicoDiv'>
           {
             status === 'authenticated' || storeAuthBack.status === 'authenticated' 
-            ? <div className='textUser'>{!displayName ? storeAuthBack.name : displayName}</div> 
+            ? <div className='text-black font-bold text-2xl font-bold pt-5'>{!displayName ? (<span >{storeAuthBack.name.slice(0, 8)} </span>) : (<p >{displayName}</p>) }</div> 
             : null
           }
           </div>
@@ -80,8 +80,8 @@ function PsicoNav() {
                 Contacto
               </a>
             </li>
-
-            <li>
+            {storeAuthBack.status === 'authenticated' || storeGoogle.status === 'authenticated' ? null : (
+              <li>
               <a
                 href='/auth/login'
                 className='nav-links-mobile'
@@ -90,6 +90,8 @@ function PsicoNav() {
                 Registrarse
               </a>
             </li>
+            )}
+            
           </ul>
           {
             storeAuthBack.status === 'authenticated' || storeGoogle.status === 'authenticated'

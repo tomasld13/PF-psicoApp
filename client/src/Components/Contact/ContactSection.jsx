@@ -14,6 +14,7 @@ const ContactSectionStyle = styled.div`
   padding: 10rem 0;
   margin-top: -7rem;
   font-family: 'Montserrat';
+  background-color: #fff;
   .contactSection-wrapper {
     display: flex;
     gap: 5rem;
@@ -72,7 +73,7 @@ function ContactSection() {
     <ScrollToTop />
     <ContactSectionStyle>
         <div className="contact-container">
-          <SectionTitle heading='Contactanos' subheading='' />
+          <h1 className="text-5xl  " subheading=''> CONTACTANOS </h1>
             <div className="contactSection-wrapper">
 
                 <div className="contact-left text-lg text-white font-bold">

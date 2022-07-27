@@ -10,7 +10,7 @@
     grid-template-columns: 1fr 1fr;
     align-items: center;
     justify-self: center;
-    width: 80%;
+    width: 100%;
     margin: 0 auto 3rem;
     height: 98vh;
     background-color: var(--white);
