@@ -50,7 +50,7 @@ const checkDia = async () => {
     let dia = diasDB[diasDB.length-1].split("-")[2]
     let diasACrear = []
     const psicologos = await Psicologo.findAll()
-    while(new Date(`${año}-${(parseInt(mes) - 1).toString()}-${dia}`,"YYYY-MM-DD") <= new Date(`${diaMesProximo[0]}-${diaMesProximo[1]-1}-${diaMesProximo[2]}`,"YYYY-MM-DD")){
+    while(new Date(`${año}-${mes < 10 ? "0" + mes : mes}-${dia}`) <= new Date(`${diaMesProximo[0]}-${diaMesProximo[1]}-${diaMesProximo[2]}`)){
         if(parseInt(dia) === 31){
             mes = parseInt(mes) + 1
             mes.toString()
@@ -73,8 +73,8 @@ const checkDia = async () => {
         diasACrear.push(diaWhile)
     }
     await psicologos.map( async (p) => {
-        await diasACrear.map( async (d) => {
-            p.addDia(d)
+        diasACrear.map( async (d) => {
+           await p.addDia(d)
         })
     })
 }

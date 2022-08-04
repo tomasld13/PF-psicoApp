@@ -59,6 +59,7 @@ const Container = styled.div`
   width: 20%;
   height: 50%;
   margin-top: 2.5rem;
+  margin-left: 2.5rem;
   border-radius: 2rem;
   background-color: #575989;
   display: flex;

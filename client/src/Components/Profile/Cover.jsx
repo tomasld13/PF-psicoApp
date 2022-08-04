@@ -15,7 +15,6 @@ import {
   Text,
   useDisclosure,
 } from '@chakra-ui/react'
-import SectionTitle from '../SectionTitle/SectionTitle'
 
 export default function Cover() {
   const [coverImage, setCoverImage] = useState(null)
@@ -45,7 +44,7 @@ export default function Cover() {
         w="full"
         h="full"
         objectFit="cover"
-        src={coverImage ? coverImage : '/img/cover.jpg'}
+        src={coverImage ? coverImage : '/img/ñ.webp'}
         alt="Cover"
       />
       <Button

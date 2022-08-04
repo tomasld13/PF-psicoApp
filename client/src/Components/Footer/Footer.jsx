@@ -78,11 +78,11 @@ function Footer() {
       <section class='social-media'>
         <div class='social-media-wrap'>
           <div class='footer-logo'>
-            <a href='/' className='social-logo'>
+            {/* <a href='/' className='social-logo'>
               <img src={logoImage} alt="logo image" width='250rem' />
-            </a>
+            </a> */}
           </div>
-          <small class='website-rights'>PSICOAPP © 2020</small>
+          <small class='website-rights'>Copyright © 2022 PsicoApp - Todos los derechos reservados.</small>
           <div class='social-icons'>
             <a
               class='social-icon-link facebook'

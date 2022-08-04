@@ -4,6 +4,7 @@ import { useForm } from "../../hooks/useForm";
 import { startCreatingUserWithEmailPasswordPsycho } from '../../slice/auth/thunks.js';
 import { getProvincias, getCiudades, cleanCiudades } from '../../slice/psico/thunks.js';
 import {AuthContext} from '../../context/authContext/AuthContext'
+import styled from "styled-components";
 const emailRegex = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
 
 const formData = {
@@ -99,9 +100,9 @@ export const RegisterPsycho = ({rol}) => {
     }
 
   return (
-    <div>
-      <form onSubmit={onSubmit}>
-                <div className="flex flex-col content-center items-center">
+    <div >
+      <form className=" grid grid-cols-2" onSubmit={onSubmit}>
+                <div className="flex flex-col content-center items-center ">
                     <input className='border border-gray-300 my-2.5 px-3 py-1 rounded-lg shadow-sm focus:outline-none focus:border-primary' type="text" placeholder="Nombre" name="name" value={name} onChange={onInputChange}/>
                     {!!nameValid && formSubmitted ? <span style={{color:'red'}}>{nameValid}</span> : null}
                 </div>
@@ -152,7 +153,7 @@ export const RegisterPsycho = ({rol}) => {
                     {!!generValid && formSubmitted ? <span style={{color:'red'}}>{generValid}</span> : null}
                 </div>
                 <div className="flex flex-col content-center items-center">
-                    <select className='border border-gray-300 my-2.5 px-3 py-1 rounded-lg shadow-sm focus:outline-none focus:border-primary' name="provincia" id="provincia"  onChange={(e) => {
+                    <select className='border border-gray-300 my-2.5 px-3 py-1 rounded-lg shadow-sm  w-40 focus:outline-none focus:border-primary' name="provincia" id="provincia"  onChange={(e) => {
                         validarProvincia(e);
                         onInputChange(e);
                     }}>
@@ -235,3 +236,10 @@ export const RegisterPsycho = ({rol}) => {
     </div>
   )
 }
+
+const Container = styled.div`
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+`

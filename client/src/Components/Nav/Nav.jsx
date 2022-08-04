@@ -11,7 +11,6 @@ function Nav() {
   const [click, setClick] = useState(false);
   const [button, setButton] = useState(true);
 
-  const {displayName, status} = useSelector(state => state.auth.authFirebase);
   const storeAuthBack = useSelector(state => state.auth.authBack);
   const storeGoogle = useSelector(state => state.auth.authGoogle); 
   
@@ -38,7 +37,7 @@ function Nav() {
     <>
       <nav className='navbar'>
         <div className='navbar-container'>
-          <a href='/' className='LogoNavBar' onClick={closeMobileMenu}>
+          <a href='/' className='LogoNavBar pt-3' onClick={closeMobileMenu}>
             <img src={logoImage} alt="logo image" />
           </a>
         <div className='textUserDiv'> 
@@ -71,7 +70,7 @@ function Nav() {
               to='questions' 
               className='nav-links' 
               onClick={closeMobileMenu}>
-                Preguntas Frecuentes
+                FAQs
               </Link>
             </li>
             <li className='nav-item'>
@@ -93,7 +92,8 @@ function Nav() {
               </a>
             </li>
 
-            <li>
+            {storeAuthBack.status === 'authenticated' || storeGoogle.status === 'authenticated' ? null : (
+              <li>
               <a
                 href='/auth/login'
                 className='nav-links-mobile'
@@ -102,13 +102,14 @@ function Nav() {
                 Registrarse
               </a>
             </li>
+            )}
           </ul>
           {
             storeAuthBack.status === 'authenticated' || storeGoogle.status === 'authenticated'
             ?  button && <Dropdown >Logout</Dropdown>
             : button && <a href='/auth/login'>
               {/* <Button buttonStyle='btn--outline'>Login</Button> */}
-              <Button className='mr-1' buttonStyle='btn--outline' link='/auth/login'>Ingresar</Button>
+              <button className='bg-primary ing' link='/auth/login'>Ingresar</button>
             </a> 
           }
         </div>
