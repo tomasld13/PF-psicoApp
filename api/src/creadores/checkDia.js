@@ -1,4 +1,4 @@
-const {Dia, Psicologo} = require("../db")
+const {Dia, Psicologo, Factura} = require("../db")
 
 const getMonth = (month) => {
     switch(month){
@@ -32,11 +32,12 @@ const getMonth = (month) => {
 const checkDia = async () => {
     let diaActual = new Date().toString().split(" ")
     diaActual =[diaActual[3],getMonth(diaActual[1]) > 10 ? getMonth(diaActual[1]) : "0" + getMonth(diaActual[1]),diaActual[2]]
-    /*let dias = await Dia.findAll()
-    dias = await dias.map( async (d) => {
+    /*let diasBorrar = await Dia.findAll()
+    console.log(facturas[0])
+    diasBorrar = await diasBorrar.map( async (d) => {
         let dia = d.fecha.split("-")
         dia = new Date(dia[0],dia[1]-1,dia[2])
-        if(dia < new Date()) await d.destroy()
+        //if(dia < new Date()) console.log(d)
     })*/
     let diaMesProximo = parseInt(diaActual[1])+1
     diaMesProximo = [diaActual[0], diaMesProximo.toString(), diaActual[2]]
@@ -50,7 +51,7 @@ const checkDia = async () => {
     let dia = diasDB[diasDB.length-1].split("-")[2]
     let diasACrear = []
     const psicologos = await Psicologo.findAll()
-    while(new Date(`${año}-${mes < 10 ? "0" + mes : mes}-${dia}`) <= new Date(`${diaMesProximo[0]}-${diaMesProximo[1]}-${diaMesProximo[2]}`)){
+    while(new Date(`${año}-${mes < 10 ? "0" + mes-1 : mes-1}-${dia}`) <= new Date(`${diaMesProximo[0]}-${diaMesProximo[1]}-${diaMesProximo[2]}`)){
         if(parseInt(dia) === 31){
             mes = parseInt(mes) + 1
             mes.toString()
@@ -69,7 +70,7 @@ const checkDia = async () => {
                 dia.toString()
             }
         }
-        let diaWhile = await Dia.create({fecha: `${año}-${mes}-${dia}`})
+        let diaWhile = await Dia.create({fecha: `${año}-${mes-1}-${dia}`})
         diasACrear.push(diaWhile)
     }
     await psicologos.map( async (p) => {
