@@ -32,13 +32,14 @@ const getMonth = (month) => {
 const checkDia = async () => {
     let diaActual = new Date().toString().split(" ")
     diaActual =[diaActual[3],getMonth(diaActual[1]) > 10 ? getMonth(diaActual[1]) : "0" + getMonth(diaActual[1]),diaActual[2]]
-    /*let diasBorrar = await Dia.findAll()
-    console.log(facturas[0])
+    let diasBorrar = await Dia.findAll()
     diasBorrar = await diasBorrar.map( async (d) => {
         let dia = d.fecha.split("-")
         dia = new Date(dia[0],dia[1]-1,dia[2])
-        //if(dia < new Date()) console.log(d)
-    })*/
+        if(dia < new Date()){
+            d.destroy();
+        }
+    })
     let diaMesProximo = parseInt(diaActual[1])+1
     diaMesProximo = [diaActual[0], diaMesProximo.toString(), diaActual[2]]
     let dias = await Dia.findAll()
