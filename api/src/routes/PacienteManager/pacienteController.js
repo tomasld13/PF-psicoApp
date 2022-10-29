@@ -36,7 +36,13 @@ const postPaciente = async (req, res, next) => {
 
   try {
     //Creacion de usuario
-    const newUSuario = await Usuario.create({ name, lastname, email, telephone, address, birth, password: bcrypt.hashSync(password, 10) });
+    let newUSuario;
+    try {
+      newUSuario = await Usuario.create({ name, lastname, email, telephone, address, birth, password: bcrypt.hashSync(password, 10) });
+    } catch (error) {
+      if(error.message === error.message === "llave duplicada viola restricción de unicidad «usuarios_email_key»") throw new Error("Ya existe una cuenta registrada con ese email.")
+      throw new Error("Ha habido un error en su registro, vuelva a intentarlo.")
+    }
     const newPaciente = await Paciente.create();
     const role = await Rol.findOne({ where: { name: rol } });
     const genero = await Genero.findOne({ where: { genero: gener } });
@@ -56,11 +62,9 @@ const postPaciente = async (req, res, next) => {
       html: "<b>Hello world?</b>", // html body
     });
     console.log(info.messageId);
-
-
     res.send([newUSuario, newPaciente]);
   } catch (error) {
-    res.status(404).send({ error: error.message })
+    res.status(400).send({ error: error.message })
   }
 }
 
