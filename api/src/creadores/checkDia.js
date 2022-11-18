@@ -39,9 +39,8 @@ const checkDia = async () => {
     dias = await dias.map( async (d) => {
         if(!diasDB.includes(d.fecha)) diasDB.push(d.fecha)
     })
-    if(diasDB.length > 0){
+    if(diasDB.length <= 0){
         diasDB.push(`${diaActual[0]}-${diaActual[1]}-${diaActual[2]}`)
-        console.log(`${diaActual[0]}-${diaActual[1]}-${diaActual[2]}`)
     }
     let año = diasDB[diasDB.length-1].split("-")[0]
     let mes = diasDB[diasDB.length-1].split("-")[1]
@@ -77,7 +76,6 @@ const checkDia = async () => {
             }
         }
         diaCreate = año + "-" + mes + "-" + (dia < 10 ? "0" + dia : dia)
-        console.log(año + "-" + mes + "-" + (dia < 10 ? "0" + dia : dia))
         diaCreate.toString().trim()
         let diaWhile = await Dia.create({fecha: diaCreate})
         diasACrear.push(diaWhile)
