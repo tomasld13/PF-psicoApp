@@ -30,6 +30,7 @@ const getMonth = (month) => {
 }
 
 const checkDia = async () => {
+    
     let diaActual = new Date().toString().split(" ")
     diaActual =[diaActual[3],getMonth(diaActual[1]) >= 10 ? getMonth(diaActual[1]).toString() : "0" + getMonth(diaActual[1]),diaActual[2]]
     let diaMesProximo = parseInt(diaActual[1])+1

@@ -38,7 +38,7 @@ conn.sync({force: false, logging: false}).then(async () => {
     if(psicologos.length < 1) generePsicologos();
     const admins = await Administrador.findAll()
     if(admins.length < 1) await generarAdmin();
-    await checkDia()
+    //await checkDia()
     createMessage();
     console.log(`App is listening on port ${process.env.PORT}!`);
     configurarSockets();
